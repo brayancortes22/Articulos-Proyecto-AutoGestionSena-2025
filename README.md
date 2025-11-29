@@ -128,4 +128,27 @@ Esto crea archivos PDF optimizados para LaTeX en `graphics/` y archivos PNG para
 
 ---
 
+## Sobre este artículo
+
+Este repositorio contiene el artículo "Autogestión SENA: Desarrollo Full-Stack Acelerado mediante Colaboración Humano-IA" en los formatos IEEE, ACM y APA7. El eje central del trabajo es el uso de la IA como herramienta de aprendizaje colaborativo durante el desarrollo de software; el repositorio incluye el caso de estudio, resultados cualitativos y consideraciones éticas. Los contenidos del artículo se encuentran en `sections/` y pueden personalizarse: actualice `sections/` y los metadatos en los archivos `main_*.tex` para poner autores y afiliaciones.
+
+Si quieres compilar sólo la versión IEEE, ejecuta:
+
+```powershell
+latexmk -pdf -outdir=build -f main_ieee.tex
+```
+
+Para la versión APA7 (usa `biber`):
+
+```powershell
+latexmk -pdf -outdir=build -f main_apa7.tex
+```
+
+Y para ACM (BibTeX):
+
+```powershell
+latexmk -pdf -outdir=build -f main_acm.tex
+```
+
+
 > Este repositorio fue generado automáticamente por ChatGPT a partir del **Prompt Maestro v2** incluido en `PROMPT.md`.

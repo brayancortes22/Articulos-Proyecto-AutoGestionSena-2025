@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 from matplotlib import rcParams
 import os
+from matplotlib.patches import FancyBboxPatch, Circle, FancyArrowPatch
 
 # Configuración global para mejorar la calidad de las gráficas
 plt.style.use('default')
@@ -29,138 +30,14 @@ rcParams['savefig.pad_inches'] = 0.1
 graphics_dir = 'graphics'
 os.makedirs(graphics_dir, exist_ok=True)
 
-def generar_metricas_dora():
-    """Genera gráfica de barras con métricas DORA por equipo"""
-    
-    # Datos de ejemplo: métricas DORA por equipo
-    equipos = ['Equipo Alpha', 'Equipo Beta', 'Equipo Gamma', 'Equipo Delta']
-    deployment_freq = [15.2, 8.7, 22.1, 12.4]  # deployments por semana
-    lead_time = [2.1, 4.8, 1.3, 3.2]  # días
-    
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-    
-    # Gráfica 1: Frecuencia de Deployment
-    bars1 = ax1.bar(equipos, deployment_freq, color=['#2E86AB', '#A23B72', '#F18F01', '#C73E1D'])
-    ax1.set_title('Frecuencia de Deployment por Equipo')
-    ax1.set_ylabel('Deployments por semana')
-    ax1.set_ylim(0, 25)
-    
-    # Añadir valores en las barras
-    for bar in bars1:
-        height = bar.get_height()
-        ax1.text(bar.get_x() + bar.get_width()/2., height + 0.5,
-                f'{height:.1f}', ha='center', va='bottom')
-    
-    # Gráfica 2: Lead Time
-    bars2 = ax2.bar(equipos, lead_time, color=['#2E86AB', '#A23B72', '#F18F01', '#C73E1D'])
-    ax2.set_title('Lead Time por Equipo')
-    ax2.set_ylabel('Días promedio')
-    ax2.set_ylim(0, 6)
-    
-    # Añadir valores en las barras
-    for bar in bars2:
-        height = bar.get_height()
-        ax2.text(bar.get_x() + bar.get_width()/2., height + 0.1,
-                f'{height:.1f}', ha='center', va='bottom')
-    
-    plt.tight_layout()
-    plt.savefig(f'{graphics_dir}/metricas_dora.pdf', format='pdf')
-    plt.savefig(f'{graphics_dir}/metricas_dora.png', format='png')
-    plt.close()
-    print("✓ Generada: metricas_dora.pdf/png")
+# Removed other graph functions to focus on the AI learning collaboration figure only
 
-def generar_evolucion_temporal():
-    """Genera gráfica de líneas mostrando evolución temporal de métricas"""
-    
-    # Datos de ejemplo: evolución mensual
-    meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec']
-    cobertura_pruebas = [68, 72, 75, 78, 82, 85, 87, 89, 91, 93, 94, 95]
-    defectos_produccion = [28, 25, 22, 19, 16, 14, 12, 10, 8, 6, 5, 4]
-    velocidad_equipo = [32, 35, 38, 42, 45, 48, 52, 55, 58, 61, 63, 65]
-    
-    fig, ax1 = plt.subplots(figsize=(12, 6))
-    
-    # Eje Y izquierdo: Cobertura y Velocidad
-    color = '#2E86AB'
-    ax1.set_xlabel('Mes')
-    ax1.set_ylabel('Cobertura de Pruebas (%) / Velocidad (Story Points)', color=color)
-    line1 = ax1.plot(meses, cobertura_pruebas, color=color, marker='o', linewidth=2, 
-                     label='Cobertura de Pruebas (%)')
-    line2 = ax1.plot(meses, velocidad_equipo, color='#F18F01', marker='s', linewidth=2, 
-                     label='Velocidad del Equipo (SP)')
-    ax1.tick_params(axis='y', labelcolor=color)
-    ax1.set_ylim(0, 100)
-    
-    # Eje Y derecho: Defectos
-    ax2 = ax1.twinx()
-    color = '#C73E1D'
-    ax2.set_ylabel('Defectos en Producción', color=color)
-    line3 = ax2.plot(meses, defectos_produccion, color=color, marker='^', linewidth=2, 
-                     label='Defectos en Producción')
-    ax2.tick_params(axis='y', labelcolor=color)
-    ax2.set_ylim(0, 30)
-    
-    # Leyenda combinada
-    lines = line1 + line2 + line3
-    labels = [l.get_label() for l in lines]
-    ax1.legend(lines, labels, loc='center right')
-    
-    plt.title('Evolución de Métricas de Calidad del Software (2024)')
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    plt.savefig(f'{graphics_dir}/evolucion_metricas.pdf', format='pdf')
-    plt.savefig(f'{graphics_dir}/evolucion_metricas.png', format='png')
-    plt.close()
-    print("✓ Generada: evolucion_metricas.pdf/png")
+# Removed generic metrics/DevOps chart generation; focusing only on the AI learning collaboration figure.
 
-def generar_correlacion_practicas():
-    """Genera gráfica de dispersión mostrando correlación entre prácticas DevOps"""
-    
-    np.random.seed(42)  # Para reproducibilidad
-    
-    # Datos simulados: correlación entre automatización y performance
-    n_equipos = 25
-    automatizacion = np.random.normal(70, 15, n_equipos)
-    automatizacion = np.clip(automatizacion, 20, 95)
-    
-    # Correlación positiva con algo de ruido
-    performance = 0.8 * automatizacion + np.random.normal(0, 8, n_equipos) + 10
-    performance = np.clip(performance, 30, 100)
-    
-    # Tamaños basados en el tamaño del equipo
-    team_sizes = np.random.randint(3, 15, n_equipos)
-    
-    plt.figure(figsize=(10, 7))
-    scatter = plt.scatter(automatizacion, performance, s=team_sizes*10, 
-                         c=team_sizes, cmap='viridis', alpha=0.7, edgecolors='black', linewidth=0.5)
-    
-    # Línea de tendencia
-    z = np.polyfit(automatizacion, performance, 1)
-    p = np.poly1d(z)
-    plt.plot(automatizacion, p(automatizacion), "--", color='red', linewidth=2, alpha=0.8)
-    
-    plt.xlabel('Nivel de Automatización (%)')
-    plt.ylabel('Performance del Equipo (índice)')
-    plt.title('Correlación entre Automatización y Performance del Equipo')
-    
-    # Colorbar para tamaño del equipo
-    cbar = plt.colorbar(scatter)
-    cbar.set_label('Tamaño del Equipo (personas)')
-    
-    # Añadir estadísticas
-    correlation = np.corrcoef(automatizacion, performance)[0,1]
-    plt.text(0.05, 0.95, f'Correlación: r = {correlation:.3f}', 
-             transform=plt.gca().transAxes, bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8))
-    
-    plt.grid(True, alpha=0.3)
-    plt.tight_layout()
-    plt.savefig(f'{graphics_dir}/correlacion_devops.pdf', format='pdf')
-    plt.savefig(f'{graphics_dir}/correlacion_devops.png', format='png')
-    plt.close()
-    print("✓ Generada: correlacion_devops.pdf/png")
+# Removed the 'correlation' scatter plot to focus on IA learning figure
 
 def generar_comparacion_metodologias():
-    """Genera gráfica de radar comparando metodologías ágiles"""
+    """Remained for possible future use but not used in the default generation flow."""
     
     # Datos para comparación de metodologías
     categorias = ['Flexibilidad', 'Velocidad\nEntrega', 'Calidad\nCódigo', 'Satisfacción\nCliente', 
@@ -205,10 +82,10 @@ def generar_comparacion_metodologias():
     plt.savefig(f'{graphics_dir}/comparacion_metodologias.pdf', format='pdf', bbox_inches='tight')
     plt.savefig(f'{graphics_dir}/comparacion_metodologias.png', format='png', bbox_inches='tight')
     plt.close()
-    print("✓ Generada: comparacion_metodologias.pdf/png")
+    print("✓ Generada: comparacion_metodologias.pdf/png - (not generated by default)")
 
 def generar_tabla_frameworks():
-    """Genera una tabla LaTeX con comparación de frameworks"""
+    """Genera una tabla LaTeX con comparación de frameworks (no generada por defecto)."""
     
     tabla_latex = r"""
 \begin{table}[htbp]
@@ -237,24 +114,124 @@ Express.js & JavaScript & Alta & Baja & Buena & 8.3 \\
     
     print("✓ Generada: frameworks_comparison.tex")
 
+def generar_uso_ia_aprendizaje_colaborativo():
+    """Genera un gráfico que muestra el uso de la IA en el aprendizaje colaborativo en el desarrollo de software"""
+    # Categorías de uso: ejemplos tomados de la práctica del equipo
+    categorias = ['Resolución de dudas', 'Generación de código', 'Revisión de código',
+                  'Explicación de funciones', 'Generación de tests', 'Documentación']
+    # Porcentaje de uso (estimado) en equipos que usan IA
+    uso_pct = [85, 78, 60, 65, 45, 50]
+    # Impacto en aprendizaje (escala 0-10)
+    impacto_aprendizaje = [9.0, 8.5, 7.0, 8.0, 6.0, 7.5]
+
+    fig, ax1 = plt.subplots(figsize=(11, 6))
+
+    bar_positions = np.arange(len(categorias))
+    bars = ax1.bar(bar_positions, uso_pct, color=['#2E86AB','#A23B72','#F18F01','#C73E1D','#7DCEA0','#5D6D7E'], alpha=0.9)
+    ax1.set_ylabel('Porcentaje de uso (%)')
+    ax1.set_ylim(0, 100)
+    ax1.set_xticks(bar_positions)
+    ax1.set_xticklabels(categorias)
+    ax1.set_title('Uso de IA en Aprendizaje Colaborativo dentro del Desarrollo de Software')
+
+    # Eje secundario para impacto en aprendizaje (0-10)
+    ax2 = ax1.twinx()
+    ax2.set_ylabel('Impacto en aprendizaje (0-10)')
+    line = ax2.plot(bar_positions, impacto_aprendizaje, color='#111111', marker='o', linewidth=2, label='Impacto')
+    ax2.set_ylim(0, 10)
+
+    # Anotar valores de uso e impacto
+    for i, bar in enumerate(bars):
+        height = bar.get_height()
+        ax1.text(bar.get_x() + bar.get_width()/2., height + 1.5, f'{height:.0f}%', ha='center', va='bottom', fontsize=9)
+    for i, v in enumerate(impacto_aprendizaje):
+        ax2.text(i, v + 0.25, f'{v:.1f}', ha='center', va='bottom', fontsize=9)
+
+    # Leyenda
+    handles = [bars[0], line[0]]
+    labels = ['Porcentaje de uso', 'Impacto en aprendizaje']
+    ax1.legend(handles, labels, loc='upper right')
+
+    plt.tight_layout()
+    plt.savefig(f'{graphics_dir}/uso_ia_aprendizaje_colaborativo.pdf', format='pdf')
+    plt.savefig(f'{graphics_dir}/uso_ia_aprendizaje_colaborativo.png', format='png')
+    plt.close()
+    print('✓ Generada: uso_ia_aprendizaje_colaborativo.pdf/png')
+
+def generar_ciclo_desarrollo_ia():
+    """Genera un diagrama profesional del ciclo de desarrollo asistido por IA (estilo limpio y moderno)"""
+    fig, ax = plt.subplots(figsize=(12, 8))
+    ax.axis('off')
+
+    # Coordenadas para las cajas (x, y)
+    left_x = -2.2
+    right_x = 2.2
+    y_positions = [2.2, 1.1, 0, -1.1, -2.2]
+    # Cajas izquierda
+    left_boxes = [
+        (left_x, y_positions[0], 'Elaboración del\nmodelo entidad-relación'),
+        (left_x, y_positions[1], 'Ayuda con la sintaxis\ndel código y su\nmantenibilidad'),
+        (left_x, y_positions[2], 'Consultas de errores\ny del porqué'),
+        (left_x, y_positions[3], 'Explicaciones de funciones\n(Tanto front como back)'),
+    ]
+    # Cajas derecha
+    right_boxes = [
+        (right_x, y_positions[0], 'Establecer la arquitectura\ndel proyecto'),
+        (right_x, y_positions[1], 'Desarrollo de endpoints'),
+        (right_x, y_positions[2], 'Desarrollo de animaciones\nen el front web'),
+        (right_x, y_positions[3], 'Conexión del front con el back'),
+    ]
+    boxes = left_boxes + right_boxes
+
+    # Dibuja las cajas
+    box_width = 2.2
+    box_height = 0.7
+    for x, y, text in boxes:
+        bbox = FancyBboxPatch((x - box_width/2, y - box_height/2), box_width, box_height,
+                              boxstyle='round,pad=0.04', linewidth=2, edgecolor='#2b6dad', facecolor='#f7fafd', zorder=2)
+        ax.add_patch(bbox)
+        ax.text(x, y, text, ha='center', va='center', fontsize=13, fontweight='medium', color='#222', zorder=3)
+
+    # Dibuja el círculo central IA
+    circle = Circle((0, 0), 1.1, edgecolor='#1f78b4', linewidth=3, facecolor='white', zorder=4)
+    ax.add_patch(circle)
+    ax.text(0, 0, 'IA', ha='center', va='center', fontsize=32, fontweight='bold', color='#1f78b4', zorder=5)
+
+    # Flechas horizontales (izq-der)
+    for i in range(4):
+        # De izquierda a derecha
+        ax.annotate('', xy=(right_x - box_width/2, y_positions[i]), xytext=(left_x + box_width/2, y_positions[i]),
+                    arrowprops=dict(arrowstyle='->', lw=2, color='#2b6dad', shrinkA=10, shrinkB=10), zorder=1)
+
+    # Flechas desde IA a cada caja (líneas suaves, color gris claro)
+    for x, y, _ in boxes:
+        ax.annotate('', xy=(x, y), xytext=(0, 0),
+                    arrowprops=dict(arrowstyle='-|>', lw=1.2, color='#b0b8c1', linestyle='dashed', alpha=0.7, shrinkA=15, shrinkB=15), zorder=0)
+
+    ax.set_xlim(-4, 4)
+    ax.set_ylim(-3, 3)
+    plt.title('Ciclo de Desarrollo Asistido por IA', fontsize=22, fontweight='bold', pad=24)
+    plt.tight_layout()
+    plt.savefig(f'{graphics_dir}/ciclo_desarrollo_ia.pdf', format='pdf')
+    plt.savefig(f'{graphics_dir}/ciclo_desarrollo_ia.png', format='png')
+    plt.close()
+    print('✓ Generada: ciclo_desarrollo_ia.pdf/png')
+
 def main():
     """Función principal para generar todas las gráficas"""
     print("🎨 Generando gráficas para plantilla LaTeX...")
     print("=" * 50)
     
     try:
-        generar_metricas_dora()
-        generar_evolucion_temporal()
-        generar_correlacion_practicas()
-        generar_comparacion_metodologias()
-        generar_tabla_frameworks()
+        # Generate the AI learning collaboration figure and the cycle diagram
+        # by default we generate the cycle diagram as core figure
+        generar_ciclo_desarrollo_ia()
         
         print("=" * 50)
         print("✅ ¡Todas las gráficas y tablas fueron generadas exitosamente!")
         print("\nArchivos generados:")
-        print("📊 Gráficas PDF (para LaTeX): graphics/")
-        print("🖼️  Gráficas PNG (para vista previa): graphics/")
-        print("📋 Tabla LaTeX: tables/frameworks_comparison.tex")
+        print("📊 Gráficas PDF (para LaTeX): graphics/ciclo_desarrollo_ia.pdf")
+        print("🖼️  Gráficas PNG (para vista previa): graphics/ciclo_desarrollo_ia.png")
         
     except Exception as e:
         print(f"❌ Error al generar gráficas: {e}")

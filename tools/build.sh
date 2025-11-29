@@ -20,3 +20,5 @@ latexmk -silent -file-line-error -outdir=build -xelatex main_apa7.tex
 
 echo "[build] PDFs available in build/"
 
+exit 0
+
