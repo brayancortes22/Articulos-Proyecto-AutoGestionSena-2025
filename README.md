@@ -55,7 +55,28 @@ Por defecto, **CC BY 4.0** (ajuste si lo desea).
 ## Reproducibilidad
 Incluimos una **plantilla de checklist** en `sections/A1_apendices.tex` y rutas para guardar scripts/datasets en `code/`, `tables/`, `graphics/`.
 
-## Solución de problemas comunes
+
+## Compilación manual de PDFs (ACM y APA7)
+Si el comando estándar no genera los archivos `main_acm.pdf` o `main_apa7.pdf` en la carpeta `build/`, puedes generarlos manualmente así:
+
+1. **Para ACM:**
+   - Compila normalmente (`docker compose run --rm latex`).
+   - Si solo aparece `main_acm.xdv` pero no el PDF, ejecuta:
+     ```powershell
+     docker compose run --rm latex xdvipdfmx -o build/main_acm.pdf build/main_acm.xdv
+     ```
+
+2. **Para APA7:**
+   - Ejecuta:
+     ```powershell
+     docker compose run --rm latex xelatex -output-directory=build main_apa7.tex
+     ```
+   - Si solo aparece `main_apa7.xdv` pero no el PDF, ejecuta:
+     ```powershell
+     docker compose run --rm latex xdvipdfmx -o build/main_apa7.pdf build/main_apa7.xdv
+     ```
+
+Esto asegura que los tres PDFs (`main_ieee.pdf`, `main_acm.pdf`, `main_apa7.pdf`) se generen correctamente en `build/`.
 
 
 ### Errores de compilación
