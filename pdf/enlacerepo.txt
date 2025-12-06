@@ -1,0 +1,3 @@
+el siguiente enlace es para visualizar el repositorio donde se contrullo el articulo
+
+https://github.com/brayancortes22/Articulos-Proyecto-AutoGestionSena-2025.git
