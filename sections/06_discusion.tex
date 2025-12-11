@@ -19,3 +19,13 @@ Código repetitivo que normalmente toma mucho tiempo
 Gracias a eso escribimos el código mucho más rápido. Tuvimos más tiempo para lo realmente importante: hablar de cómo hacer la app fácil de usar, cómo organizar bien la información y cómo mejorar la experiencia del usuario. Esas cosas sí las tiene que hacer una persona, y con la IA pudimos dedicarles más tiempo y energía.
 En resumen: la IA no reemplazó al equipo, sino que nos quitó el trabajo aburrido y nos dejó enfocarnos en lo que de verdad importa.
 
+\subsection{Complicaciones detectadas y mitigaciones}
+\begin{itemize}
+	\item \textbf{Integración entre componentes}: Hubo discrepancias en contratos API y manejo de errores; se mitigó con definición clara de contratos, pruebas de integración y versionado de API.
+	\item \textbf{Diferencias de entornos}: Discrepancias entre desarrollo local y producción (variables de entorno, dependencias). Se mitigó con Docker, plantillas .env y automatización de despliegue.
+	\item \textbf{Limitaciones de IA y recomendaciones incompletas}: Se detectaron propuestas erróneas o parciales por parte de la IA; la mitigación fue la revisión humana exhaustiva y la creación de tests que validan las suposiciones.
+	\item \textbf{Seguridad y gestión de secretos}: Riesgo de exponer credenciales en scripts generados por IA; mitigación mediante almacenamiento seguro de secretos, auditoría de scripts y prácticas de revisión.
+\end{itemize}
+
+Esta reflexión muestra que, aunque la IA acelera tareas repetitivas, es necesario mantener controles y revisiones humanas para asegurar la integridad y seguridad del proyecto.
+

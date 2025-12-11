@@ -1,11 +1,13 @@
 \section{Introducción}
 
-Nuestro equipo desarrolló el proyecto “Autogestión SENA”, una aplicación completa que incluye versión web y móvil, con el objetivo principal de simplificar y agilizar el proceso de asignación de instructores en los centros de formación del SENA. Antes, este trámite se hacía con correos electrónicos, hojas de cálculo y muchas llamadas, lo que generaba errores, retrasos y bastante estrés tanto para coordinadores como para los mismos instructores.
+Nuestro equipo desarrolló el proyecto “Autogestión SENA”, una aplicación completa que incluye versión web y móvil, con el objetivo central de simplificar y agilizar el proceso de asignación de instructores en los centros de formación del SENA. El proceso tradicional dependía de correos, hojas de cálculo y llamadas telefónicas, lo que causaba errores, pérdida de trazabilidad y retrasos en las asignaciones. Frente a estas ineficiencias, diseñamos una solución que reduce la carga administrativa y mejora la experiencia de instructores y coordinadores.
 
-El desarrollo de la aplicación siguió un proceso organizado y por etapas.
-Comenzamos por entender y documentar lo que se necesitaba (los requisitos, usando documentos como el SRS y las Historias de Usuario). Luego, diseñamos la estructura de la aplicación.
+El desarrollo se llevó a cabo mediante un proceso por etapas: recolección de requisitos (SRS, historias de usuario), prototipado y pruebas de usabilidad, desarrollo del back-end y front-end y despliegue en un entorno reproducible (Docker). Para la implementación adoptamos tecnologías modernas:
+\begin{itemize}
+	\item Back-end: Python con Django.
+	\item Front-end: React con Vite y Tailwind CSS.
+	\item Móvil: .NET MAUI para generar una app multiplataforma (Android e iOS).
+	\item Base de datos: MySQL.
+\end{itemize}
 
-Para construir la solución completa (la parte interna y la externa), usamos herramientas tecnológicas modernas:
-Para la lógica interna (Back-end): Usamos el lenguaje Python con el sistema Django.
-Para la aplicación web (Front-end): Creamos la interfaz con React, vite y talwindcss.
-Para la aplicación móvil: Usamos .NET MAUI, lo que nos permitió construir una única aplicación que funciona en múltiples plataformas (iOS y Android).
+La Inteligencia Artificial (IA) se integró como herramienta de apoyo a lo largo del ciclo de desarrollo: generación de esqueletos y endpoints, sugerencias de diseño y accesibilidad para UI, asistencia en depuración, y apoyo en el diseño de pruebas y documentación.

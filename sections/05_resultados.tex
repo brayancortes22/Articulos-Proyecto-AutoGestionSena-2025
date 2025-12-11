@@ -1,8 +1,49 @@
 \section{Gráfico}
 \begin{center}
-	\includegraphics[width=0.5\textwidth]{graphics/ciclo_desarrollo_ia.pdf}
+	\includegraphics[width=0.9\textwidth]{graphics/ciclo_desarrollo_ia.pdf}
 \end{center}
-\vspace{2em}
-\noindent\textbf{Figura:} Ciclo de desarrollo asistido por IA (caso de estudio “Autogestión SENA”).
+\vspace{1em}
+\noindent\textbf{Figura 1:} Ciclo de desarrollo asistido por IA (caso de estudio “Autogestión SENA”).
+\label{fig:ciclo_desarrollo_ia}
+\vspace{1em}
+
+\subsection{Métricas y visualizaciones}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.48\textwidth]{graphics/uso_ia_barras.png}
+	\includegraphics[width=0.48\textwidth]{graphics/distribucion_tareas.png}
+	\caption{Izquierda: Uso de IA por tipo de tarea (número de prompts/consultas). Derecha: Distribución del esfuerzo por tipo de tarea durante el proyecto.}
+	\label{fig:uso_ia_distribucion}
+\end{figure}
+
+\vspace{1em}
+\input{tables/frameworks_comparison}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.48\textwidth]{graphics/sprint_timeline.png}
+	\includegraphics[width=0.48\textwidth]{graphics/complicaciones_reportadas.png}
+	\caption{Cronograma de sprints (izquierda) y número de incidencias reportadas por categoría (derecha).}
+	\label{fig:sprints_complicaciones}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{graphics/comparacion_metodologias.png}
+	\caption{Comparación de metodologías ágiles en factores como flexibilidad, velocidad de entrega y calidad de código.}
+	\label{fig:comparacion_metodologias}
+\end{figure}
+
+\subsection{Resumen de resultados}
+El uso de IA contribuyó a acelerar la construcción de esqueletos y endpoints, reducir tiempos de bloqueo en debugging y mejorar la documentación base. Las figuras muestran que el uso de IA fue predominante en generación de código y explicación de funciones, mientras que la distribución de esfuerzo refleja una carga mayor en la implementación y pruebas.
+
+Algunas métricas cualitativas y ejemplos de mejora observada:
+\begin{itemize}
+	\item Aceleración de tareas repetitivas (plantillas, validaciones) en fases tempranas.
+	\item Reducción del tiempo de bloqueo por errores gracias a sugerencias de debugging.
+	\item Mejora en la documentación y ejemplos de pruebas generados inicialmente por la IA.
+	\item Recomendaciones de UI y accesibilidad que mejoraron la experiencia de usuario.
+\end{itemize}
+
 \vspace{3em}
 

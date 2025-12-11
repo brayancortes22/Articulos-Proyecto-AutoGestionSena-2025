@@ -1,6 +1,6 @@
 \section{Desarrollo}
 
-La fase de desarrollo del proyecto "Autogestión SENA" se caracterizó por la inplementacion constante de herramientas de Inteligencia Artificial (IA) para mejorar la eficiencia y la colaboración del equipo. A continuación, se detallan los pasos clave y la participación de la IA durante los proceso del desarrollo del proyecto:
+La fase de desarrollo del proyecto "Autogestión SENA" se caracterizó por la implementación constante de herramientas de Inteligencia Artificial (IA) para mejorar la eficiencia y la colaboración del equipo. A continuación, se detallan los pasos clave y la participación de la IA durante los procesos del desarrollo del proyecto:
 
 1. Fase de Diseño y Planificación en Equipo
 En esta primera etapa, usamos la inteligencia artificial como un apoyo para planear el proyecto :
@@ -31,4 +31,24 @@ Resolución de Problemas: Se utilizó la IA para consultas de errores y el porqu
 Explicación de Funciones: Para acelerar el proceso de conocimiento interno, la IA proporcionó explicaciones de funciones tanto en el Front-end como en el Back-end, facilitando la comprensión de partes complejas del código entre los miembros del equipo.
 
 Este enfoque demostró cómo la IA no solo aceleró la entrega del proyecto sino que también sirvió como una plataforma de aprendizaje continuo para el equipo, elevando las habilidades técnicas de todos los participantes de este proyecto.
+
+\subsection{Implementación y generación de código asistida por IA}
+\begin{itemize}
+	\item \textbf{Generación de esqueletos y endpoints}: la IA se empleó para crear plantillas de endpoints en Django (por ejemplo, POST /api/instructores, GET /api/rol), validaciones y serializadores básicos. Estas plantillas se adaptaron y ampliaron por el equipo.
+	\item \textbf{Refactorización y patrones}: la IA ayudó a identificar oportunidades de refactorización, proponiendo la extracción de servicios y la organización por capas (Repository, Service Layer) para separar la lógica de negocio de la persistencia.
+	\item \textbf{Explicación de funciones y mapeo de flujos}: la IA generó descripciones y pseudocódigo para funciones complejas y ayudó a mapear interacciones entre UI y API, acelerando la transferencia de conocimiento entre miembros del equipo.
+	\item \textbf{Front-end y accesibilidad}: en la parte visual, la IA sugirió componentes, animaciones y estilos con Tailwind; el equipo supervisó las recomendaciones para asegurar accesibilidad y coherencia visual.
+	\item \textbf{Contratos API y pruebas}: se definieron requests y responses con ejemplos y casos de prueba generados por IA para validar integraciones y evitar discrepancias.
+	\item \textbf{Soporte para el aprendizaje y mantenimiento}: los participantes del proyecto adquirimos explicaciones y ejemplos explicativos que facilitaron su incorporación y la mantenibilidad del código a largo plazo.
+\end{itemize}
+
+\subsection{Generación de recursos y reproducibilidad}
+Todas las gráficas y tablas incluidas en este artículo se generan mediante el script \texttt{code/generate\_figures.py}. Para reproducir las gráficas:
+\begin{enumerate}
+	\item Instalar dependencias del proyecto: \texttt{pip install -r requirements.txt}.
+	\item Ejecutar: \texttt{python code/generate\_figures.py}.
+\end{enumerate}
+Los archivos se almacenan en la carpeta \texttt{graphics/} y la tabla en \texttt{tables/frameworks\_comparison.tex}.
+
+
 
