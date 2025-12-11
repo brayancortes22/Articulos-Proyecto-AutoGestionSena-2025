@@ -1,8 +1,40 @@
 \section{Implementación}
-Para construir la solución completa (la parte interna y la externa), usamos herramientas tecnológicas modernas:
+Para construir la solución completa (parte interna y externa) se emplearon herramientas y buenas prácticas que facilitaron la implementación y la entrega continua.
 
-Para la lógica interna (Back-end): Usamos el lenguaje Python con el sistema Django.
-Para la aplicación web (Front-end): Creamos la interfaz con React, Vite y Tailwind CSS.
-Para la aplicación móvil: Usamos .NET MAUI, lo que nos permitió construir una única aplicación que funciona en múltiples plataformas (iOS y Android).
+\subsection{Tecnologías principales}
+- \textbf{Back-end}: Python con Django y Django REST Framework para endpoints REST.
+- \textbf{Base de datos}: MySQL como motor de persistencia.
+- \textbf{Front-end web}: React, Vite y Tailwind CSS para componentes y estilos.
+- \textbf{Aplicación móvil}: .NET MAUI para aplicaciones iOS/Android; durante el desarrollo se priorizó la plataforma Android para pruebas y despliegue inicial.
+- \textbf{CI/CD y contenedores}: Docker y docker-compose para entornos reproducibles y plantillas de despliegue.
 
-Durante la implementación, la IA se integró de forma constante para apoyar la generación de código, la creación de componentes visuales y el debugging, acelerando la entrega y mejorando la calidad del código.
+\subsection{Contratos de API y pruebas}
+Se definieron contratos claros de API (requests/responses) y se implementaron pruebas de integración automáticas que verificaron campos obligatorios, validaciones y códigos de respuesta. La IA ayudó a generar ejemplos de payloads, tests unitarios y casos de prueba.
+
+\input{tables/frameworks_comparison}
+
+\subsection{Flujo de integración y despliegue}
+Se estableció un pipeline de CI que ejecuta pruebas unitarias y despliega en un entorno de staging con Docker Compose. Para el despliegue en producción se definieron scripts y una checklist que incluye variables de entorno, migraciones de base de datos y validación de servicios externos.
+
+\subsection{Aportes de la IA en la implementación}
+La IA fue usada como asistente para:
+\begin{itemize}
+	\item Generar esqueletos de endpoints con validaciones y serializadores {	tfamily (Django REST Framework)}.
+	\item Generar esqueletos de endpoints con validaciones y serializadores {\ttfamily Django REST Framework}.
+	\item Plantillas de pruebas unitarias y de integración para acelerar la cobertura de tests.
+	\item Generar comandos y scripts de despliegue (ej.: Dockerfile y docker-compose) que luego fueron revisados por humanos.
+\end{itemize}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.9\linewidth]{graphics/sprint_timeline.pdf}
+	\caption{Cronograma de sprints ejecutados durante el desarrollo (7 sprints en 4 meses).}
+	\label{fig:sprint_timeline}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.9\linewidth]{graphics/uso_ia_barras.pdf}
+	\caption{Distribución del uso de IA por tipo de tarea durante el proyecto.}
+	\label{fig:uso_ia}
+\end{figure}

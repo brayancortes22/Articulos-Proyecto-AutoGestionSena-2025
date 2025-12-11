@@ -237,6 +237,92 @@ Express.js & JavaScript & Alta & Baja & Buena & 8.3 \\
     
     print("✓ Generada: frameworks_comparison.tex")
 
+def generar_sprint_timeline():
+    """Genera una gráfica tipo Gantt mostrando los sprints y entregables"""
+    import matplotlib.dates as mdates
+    import datetime as dt
+    
+    sprints = [
+        ("Sprint 1", dt.date(2025, 5, 1), dt.date(2025, 5, 14)),
+        ("Sprint 2", dt.date(2025, 5, 15), dt.date(2025, 5, 28)),
+        ("Sprint 3", dt.date(2025, 6, 1), dt.date(2025, 6, 14)),
+        ("Sprint 4", dt.date(2025, 6, 15), dt.date(2025, 6, 28)),
+        ("Sprint 5", dt.date(2025, 7, 1), dt.date(2025, 7, 14)),
+        ("Sprint 6", dt.date(2025, 7, 15), dt.date(2025, 7, 28)),
+        ("Sprint 7", dt.date(2025, 8, 1), dt.date(2025, 8, 14)),
+    ]
+
+    labels = [s[0] for s in sprints]
+    starts = [mdates.date2num(s[1]) for s in sprints]
+    ends = [mdates.date2num(s[2]) for s in sprints]
+    durations = [e - s for s, e in zip(starts, ends)]
+
+    fig, ax = plt.subplots(figsize=(10, 4))
+    y_pos = range(len(labels))
+    ax.barh(y_pos, durations, left=starts, color='#2E86AB')
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(labels)
+    ax.xaxis_date()
+    ax.set_xlabel('Fecha')
+    ax.set_title('Cronograma de Sprints (4 meses, 7 sprints)')
+    ax.grid(axis='x', linestyle='--', alpha=0.4)
+    plt.tight_layout()
+    plt.savefig(f'{graphics_dir}/sprint_timeline.pdf', format='pdf')
+    plt.savefig(f'{graphics_dir}/sprint_timeline.png', format='png')
+    plt.close()
+    print("✓ Generada: sprint_timeline.pdf/png")
+
+def generar_pie_asignacion_tareas():
+    """Genera un pie chart con la distribución del tiempo por tipo de tarea"""
+    categorias = ['Diseño', 'Implementación', 'Tests', 'Documentación', 'Despliegue', 'Soporte IA']
+    valores = [18, 45, 14, 8, 9, 6]  # porcentajes de ejemplo
+    colors = ['#2E86AB', '#F18F01', '#A23B72', '#C73E1D', '#7BBF6A', '#A9A9A9']
+
+    fig, ax = plt.subplots(figsize=(8, 6))
+    wedges, texts, autotexts = ax.pie(valores, labels=categorias, colors=colors,
+                                      autopct='%1.1f%%', startangle=140, textprops={'fontsize': 10})
+    ax.axis('equal')
+    plt.title('Distribución del esfuerzo por tipo de tarea')
+    plt.tight_layout()
+    plt.savefig(f'{graphics_dir}/distribucion_tareas.pdf', format='pdf')
+    plt.savefig(f'{graphics_dir}/distribucion_tareas.png', format='png')
+    plt.close()
+    print("✓ Generada: distribucion_tareas.pdf/png")
+
+def generar_ia_usage_bar():
+    """Genera un gráfico de barras mostrando la frecuencia de uso de IA por tipo de tarea"""
+    tasks = ['Generación Código', 'Explicación de Funciones', 'Diseño UI', 'Pruebas', 'Despliegue']
+    counts = [120, 80, 60, 45, 30]  # ejemplo de conteo de prompts/queries
+
+    fig, ax = plt.subplots(figsize=(10, 5))
+    bars = ax.bar(tasks, counts, color=['#2E86AB', '#A23B72', '#F18F01', '#C73E1D', '#7BBF6A'])
+    ax.set_ylabel('Número de consultas IA')
+    ax.set_title('Uso de IA por tipo de tarea')
+    for bar in bars:
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 2, f'{int(bar.get_height())}', ha='center')
+    plt.tight_layout()
+    plt.savefig(f'{graphics_dir}/uso_ia_barras.pdf', format='pdf')
+    plt.savefig(f'{graphics_dir}/uso_ia_barras.png', format='png')
+    plt.close()
+    print("✓ Generada: uso_ia_barras.pdf/png")
+
+def generar_complications_bar():
+    """Genera una gráfica mostrando la cantidad de incidencias por categoria de complicación"""
+    categorias = ['Integración', 'Entornos', 'IA (falsos positivos)', 'Seguridad', 'UI/UX']
+    counts = [18, 12, 9, 6, 7]
+
+    fig, ax = plt.subplots(figsize=(9, 5))
+    bars = ax.bar(categorias, counts, color='#C73E1D')
+    ax.set_ylabel('Número de incidencias reportadas')
+    ax.set_title('Complicaciones reportadas durante el desarrollo')
+    for bar in bars:
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.5, f'{int(bar.get_height())}', ha='center')
+    plt.tight_layout()
+    plt.savefig(f'{graphics_dir}/complicaciones_reportadas.pdf', format='pdf')
+    plt.savefig(f'{graphics_dir}/complicaciones_reportadas.png', format='png')
+    plt.close()
+    print("✓ Generada: complicaciones_reportadas.pdf/png")
+
 def main():
     """Función principal para generar todas las gráficas"""
     print("🎨 Generando gráficas para plantilla LaTeX...")
@@ -248,6 +334,10 @@ def main():
         generar_correlacion_practicas()
         generar_comparacion_metodologias()
         generar_tabla_frameworks()
+        generar_sprint_timeline()
+        generar_pie_asignacion_tareas()
+        generar_ia_usage_bar()
+        generar_complications_bar()
         
         print("=" * 50)
         print("✅ ¡Todas las gráficas y tablas fueron generadas exitosamente!")

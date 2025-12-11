@@ -1,0 +1,23 @@
+\section{Complicaciones y mitigaciones}
+
+Durante el desarrollo del proyecto se identificaron varias complicaciones que exigieron atención y mitigación por parte del equipo. En esta sección se detallan las más relevantes y las acciones tomadas.
+
+\subsection{Integración Front-end / Back-end}
+\textbf{Problema}: Discrepancias en contratos JSON, problemas CORS y errores de validación durante la integración.
+\textbf{Mitigación}: Definición clara de contratos API, tests de integración automáticos y versionamiento de API.
+
+\subsection{Diferencias de entornos}
+\textbf{Problema}: Comportamiento distinto entre entornos locales, staging y producción (variables de entorno, dependencias de librerías).
+\textbf{Mitigación}: Uso de contenedores Docker, plantillas .env y pruebas de despliegue en entornos de staging reproducibles.
+
+\subsection{Limitaciones de la IA}
+\textbf{Problema}: Sugerencias incompletas, supuestos incorrectos o falta de contexto en prompts.
+\textbf{Mitigación}: Revisión humana de propuestas, anotación explícita de supuestos y creación de tests para validar outputs de IA.
+
+\subsection{Seguridad y exposición de credenciales}
+\textbf{Problema}: Riesgo de exponer secretos en scripts generados o en logs.
+\textbf{Mitigación}: Uso de almacenamiento seguro de secretos (p. ej., Azure Key Vault), auditoría de scripts y políticas para evitar la inclusión de credenciales en el repositorio.
+
+\subsection{Problemas de UX y accesibilidad}
+\textbf{Problema}: Propuestas de UI generadas por IA que no consideraban accesibilidad o la realidad del usuario final.
+\textbf{Mitigación}: Validación con usuarios reales e instructores, ajustes de diseño y aplicación de estándares de accesibilidad.

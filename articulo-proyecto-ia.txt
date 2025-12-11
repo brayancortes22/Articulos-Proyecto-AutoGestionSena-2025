@@ -1,80 +1,88 @@
 Titulo
 “Autogestión SENA”: Desarrollo Full-Stack Acelerado mediante Colaboración Humano-IA
-
-introduccion:
-
-Nuestro equipo desarrolló el proyecto “Autogestión SENA”, una aplicación completa que incluye versión web y móvil, con el objetivo principal de simplificar y agilizar el proceso de asignación de instructores en los centros de formación del SENA. Antes, este trámite se hacía con correos electrónicos, hojas de cálculo y muchas llamadas, lo que generaba errores, retrasos y bastante estrés tanto para coordinadores como para los mismos instructores.
-
-El desarrollo de la aplicación siguió un proceso organizado y por etapas.
-Comenzamos por entender y documentar lo que se necesitaba (los requisitos, usando documentos como el SRS y las Historias de Usuario). Luego, diseñamos la estructura de la aplicación.
-
+Resumen:
+En este documento presentamos el desarrollo y la experiencia de construcción del proyecto “Autogestión SENA”, una aplicación full-stack (web y móvil) creada para optimizar la asignación de instructores en centros de formación. El proceso incluyó la recolección de requisitos, diseño, implementación y despliegue, y se apoyó de manera significativa en herramientas de Inteligencia Artificial (IA) para acelerar fases de diseño, generación de código, refactorización, pruebas y despliegue. Además, incluimos un análisis de las dificultades encontradas, las estrategias aplicadas y las lecciones aprendidas.
 Para construir la solución completa (la parte interna y la externa), usamos herramientas tecnológicas modernas:
-Para la lógica interna (Back-end): Usamos el lenguaje Python con el sistema Django.
-Para la aplicación web (Front-end): Creamos la interfaz con React, vite y talwindcss.
-Para la aplicación móvil: Usamos .NET MAUI, lo que nos permitió construir una única aplicación que funciona en múltiples plataformas (iOS y Android).
+- Para la lógica interna (Back-end): Usamos el lenguaje Python con el framework Django.
+- Para la aplicación web o portal web(Front-end): Creamos la interfaz con React, Vite y Tailwind CSS.
+- Para la aplicación móvil: Usamos .NET MAUI, lo que nos permitió construir una única aplicación que funciona en múltiples plataformas (iOS y Android) mas sin embargo se enfoco únicamente en el apartado de dispositivos android.
+- Para la base de datos: se utilizó MySQL como motor de persistencia.
+- Para diagramas y prototipos: Draw.io (diagramas ER/arquitectura) y Figma (mockups y prototipado de UI).
+Introducción
+El proceso tradicional de asignación de instructores empleaba correos, hojas de cálculo y llamadas, lo que ocasionaba errores y retrasos significativos. Con “Autogestión SENA” buscamos reducir la carga administrativa, mejorar la trazabilidad y ofrecer una experiencia más confiable para instructores y coordinadores.
+La metodología de trabajo combinó prácticas ágiles con verificación constante por parte de instructores y usuarios finales. Tras definir el SRS y las historias de usuario, avanzamos con prototipado, implementación y pruebas. La IA se integró como facilitador para tareas concretas y repetitivas, siempre con revisión de nuestro equipo.
 
-Desarrollo
-La fase de desarrollo del proyecto "Autogestión SENA" se caracterizó por la inplementacion constante de herramientas de Inteligencia Artificial (IA) para mejorar la eficiencia y la colaboración del equipo. A continuación, se detallan los pasos clave y la participación de la IA durante los proceso del desarrollo del proyecto:
+Metodología: Diseño y Planificación
+1. Diseño de base de datos y modelo del dominio
+El equipo diseñó las entidades principales (Usuario, persona, rol, aprendiz, instructor etc..) y las relaciones entre ellas. Se utilizaron diagramas en Draw.io y la IA se consultó para detectar redundancias o sugerir índices y normalización de base de datos.
+2. Prototipado UX/UI
+En Figma se elaboraron mockups y flujos de navegación. La IA sirvió para generar variaciones visuales, recomendaciones de accesibilidad y sugerencias de interacción, lo cual sirvió de base para pruebas de usabilidad tempranas.
+3. Arquitectura y decisiones de diseño
+La IA ayudó a comparar opciones de arquitectura (monolito modular vs microservicios) y a documentar. Estas recomendaciones se contrastaron con los requisitos del SENA y con la disponibilidad del equipo.
+Metodología Ágil (Scrum)
+El proyecto se desarrolló bajo el marco de trabajo Scrum durante un periodo total de 4 meses. Se estableció un plan de trabajo con una cadencia objetivo de 2 sprints por mes. Sin embargo, durante el ciclo se ejecutaron 7 sprints en total (debido a ajustes de planificación y entregas intermedias). La organización del trabajo incluyó:
+- Sprint Planning: definición de objetivos de sprint y tareas a realizar.
+- Daily Standups: reuniones diarias (30 minutos) para seguimiento del avance y bloqueo.
+- Sprint Review y Retrospectiva: revisión de entregables, recepción de feedback y mejoras continuas.
+Esta metodología permitió priorizar funcionalidades críticas, ajustar el alcance por sprint y mantener una comunicación constante con el equipo de trabajo además de recibir retroalimentación de parte de los instructores que nos apoyaron durante el proyecto formativo.
+ 
+Implementación y generación de código asistida por IA
+1. Generación de esqueletos y endpoints
+La IA fue empleada para generar plantillas de endpoints en Django (por ejemplo, POST /api/instructores, GET /api/rol) con validaciones base y serializadores. Estas plantillas fueron adaptadas y ampliadas por el equipo.
+2. Refactorización y aplicación de patrones
+Con la ayuda de la IA, identificamos oportunidades de refactorización: extracción de servicios, organización de módulos y uso de patrones como Repository y Service Layer para separar persistencia y lógica.
+Explicaciones de funciones y mapeo de flujos
+La IA fue instrumental para explicar en lenguaje natural funciones con lógica compleja, crear diagramas de flujo y mapear interacciones entre UI y API. Esto aceleró el proceso de transferencia de conocimiento entre miembros del equipo y redujo errores al integrar componentes.
+Front-end y experiencia de usuario
+En el front-end, la IA ayudó a generar componentes visuales, sugerencias de animación y código CSS con Tailwind que facilitó la coherencia visual. Las propuestas de IA se revisaron para garantizar la accesibilidad y consistencia con la identidad visual del proyecto.
+Conexión y contratos API
+Se definieron contratos de API (requests y responses) con documentación clara. La IA ayudó a generar ejemplos y casos de prueba que validaron dichos contratos durante las integraciones.
+Aprendizaje en equipo y mantenibilidad
+El uso de IA aceleró la curva de aprendizaje: los miembros con menos experiencia en ciertos temas como por ejemplo el uso de general del lenguaje de Python recibimos explicaciones claras y ejemplos prácticos que les ayudaron a integrarse más rápido. Además, la IA generó código y test que se convirtieron en base para la refactorización sistemática del proyecto.
 
-1. Fase de Diseño y Planificación en Equipo
-En esta primera etapa, usamos la inteligencia artificial como un apoyo para planear el proyecto :
-Diseño de la Base de Datos: Entre todos creamos el modelo de base de datos usando Draw.io. Nos ayudamos para definir cómo organizaríamos la información de los usuarios y sus actividades.
-Diseño de la Interfaz (Mockup): Diseñamos el prototipo de la aplicación en Figma, usamos la IA para buscar inspiración y elegir entre todos un diseño moderno y fácil de entender para los usuarios.
-
-Planificación de la Arquitectura: se estructuro el proyecto (la parte Web, Móvil y el backend) con buenas practicas de desarrollo y pues se uso la IA para comparar opciones de estructuracion y parte del desarrollo del codigo y asi asegurarnos de crear una base sólida para el sistema del SENA.
-
-2. Desarollo y Programación con Apoyo Mutuo
-
-Utilizamos la IA como una herramienta más del equipo para programar y resolver problemas:
-
-Desarrollo del Back-end:
-La IA nos apoyó escribiendo la base del código en Django/Python, lo que nos permitió avanzar más rápido como equipo.
-
-Desarrollo de la Interfaz (Front-end): Al trabajar en la apariencia de la aplicación, usamos la IA entre varios para crear animaciones atractivas sin complicarnos demasiado, logrando un resultado profesional.
-
-Conexión entre Front-end y Back-end: Integramos la parte visual con el backend colaborando para que la comunicación y el paso de datos funcionaran correctamente.
-
-3. Aprendizaje en Grupo y Código Mantenible
-
-La IA nos sirvió para aprender y mejorar la calidad de nuestro trabajo:
-
-Soporte con el Código: La IA nos fue de gran ayuda para resolver dudas de sintaxis. Esto nos permitió escribir un código más limpio y comprensible para todo el equipo, facilitando el mantenimiento y flujo del sitema.
-
-Resolución de Problemas: Se utilizó la IA para consultas de errores y el porqué de los fallos (debugging). Esto ofreció soluciones rápidas, reduciendo el tiempo de bloqueo del equipo.
-
-Explicación de Funciones: Para acelerar el proceso de conocimiento interno, la IA proporcionó explicaciones de funciones tanto en el Front-end como en el Back-end, facilitando la comprensión de partes complejas del código entre los miembros del equipo.
-
-Este enfoque demostró cómo la IA no solo aceleró la entrega del proyecto sino que también sirvió como una plataforma de aprendizaje continuo para el equipo, elevando las habilidades técnicas de todos los participantes de este proyecto.
-
-Grafico
  
+Soporte para desarrolladores y revisión de código
+La IA sugirió correcciones de sintaxis, optimizaciones y detectó anti-patrones. Aun así, el equipo implementó una política de revisión humana y pruebas automatizadas para garantizar que cualquier cambio introducido por IA cumpliera con la calidad requerida.
+Debugging y resolución de errores
+En numerosas ocasiones la IA ayudó a diagnosticar errores y proponer soluciones. Para evitar dependencia, siempre se registró la causa raíz y se actualizó la documentación o el test correspondiente.
+Explicación de funciones y flujos complejos
+La IA generó descripciones de pasos, diagramas de flujo y pseudocódigo para funciones complejas (ej. asignación por parte de un coordinador a un aprendiz y asignarle a un instructor en específico). Estas explicaciones ayudaron a validar la lógica y a diseñar pruebas específicas.
+Complicaciones y reducción de errores
+1) Integración entre componentes
+- Problema: discrepancias en los contratos API y manejo de errores.
+- Mitigación: definición clara de contratos, pruebas de integración y versionado de API.
+2) Diferencias de entornos
+- Problema: discrepancias entre desarrollo local y producción (variables de entorno, dependencias).
+- Mitigación: uso de Docker para reproducir entornos, plantillas .env y automatización de despliegue.
+3) Limitaciones y revisión procesos generados por la IA
+- Problema: recomendaciones incompletas o con supuestos incorrectos.
+- Mitigación: revisión humana, anotación de supuestos y creación de tests que validen resultados sugeridos por la IA.
+4) Seguridad y gestión de secretos
+- Problema: riesgo de exponer credenciales en scripts generados.
+- Mitigación: almacenamiento seguro de secrets y auditoría de scripts antes de su uso.
  
- 
-Reflexion
-Al crear la app “Autogestión SENA” vimos claramente lo útil que es la Inteligencia Artificial. La IA nos ayudó mucho como herramienta y como compañero de aprendizaje. Tuvo dos grandes beneficios para el equipo:
-
-Resolver dudas rápido
-Hacer el trabajo más rápido
-Resolver dudas y bloqueos al instante
-
+Resultados y reflexión
+Los resultados fueron positivos en cuanto a reducción de tiempos y mejora de la calidad inicial del código:
+- Aceleración de tareas repetitivas y generación de esqueletos.
+- Reducción del tiempo de bloqueo por errores mediante soporte de Debugging.
+- Mejora en la documentación y en la capacidad de entender de manera más sencilla nuestro proyecto.
+No obstante, la IA no reemplaza la necesidad de revisión humana: las propuestas deben verificarse y adaptarse a la arquitectura y políticas del equipo.
 El mayor problema en los proyectos en equipo es quedarse atascado esperando que alguien te ayude con una duda técnica. Con la IA eso desapareció: teníamos un “experto” disponible 24 horas.
-
 Cuando teníamos un bug, una función difícil de escribir o queríamos un código de calidad, se lo preguntábamos a la IA.
 Ella nos daba la solución al instante. y nos explicaba como funcionaba y el porque era mejor hacerlo de esa manera.
+Ejemplos de tareas en las que la IA fue útil:
+- Generar endpoints y validaciones base.
+- Sugerir componentes visuales y estilos con Tailwind CSS.
+- Proponer pruebas unitarias y de integración para casos de uso comunes.
+Conclusión
+La colaboración humano-IA resultó en un proceso más eficiente, con un enfoque claro en la mejora continua de prácticas de desarrollo y el aprendizaje del equipo. Para proyectos similares, recomendamos integrar IA como herramienta de apoyo mientras se mantengan controles de calidad y revisión humana.
 
-La IA creó rápido cosas como:
-Estructuras básicas de las páginas web (endpoints en Django)
-Animaciones bonitas en la parte visible (front-end)
-Código repetitivo que normalmente toma mucho tiempo
-
-
-Gracias a eso escribimos el código mucho más rápido. Tuvimos más tiempo para lo realmente importante: hablar de cómo hacer la app fácil de usar, cómo organizar bien la información y cómo mejorar la experiencia del usuario. Esas cosas sí las tiene que hacer una persona, y con la IA pudimos dedicarles más tiempo y energía.
-En resumen: la IA no reemplazó al equipo, sino que nos quitó el trabajo aburrido y nos dejó enfocarnos en lo que de verdad importa.
-
-Bibliografia
  
- Cadena, O. A., & Juárez, I. A. (2023). La enseñanza de la programación mediante software educativo especializado y los agentes conversacionales. Interfases, (017), 170-186.
- 
- Terán, H. (2023). La implementación de la Inteligencia Artificial en la enseñanza de la programación. Un estudio sobre el uso ético de ChatGPT en el aula. Encuentro Internacional de Educación en Ingeniería.
- 
- Pincay, W. D. C. (2025). Aplicaciones de la Inteligencia Artificial en el campo de la programación. Journal TechInnovation, 4(1), 4-12.
+Bibliografía
+
+Cadena, O. A., & Juárez, I. A. (2023). La enseñanza de la programación mediante software educativo especializado y los agentes conversacionales. Interfases, (017), 170-186.
+
+Terán, H. (2023). La implementación de la Inteligencia Artificial en la enseñanza de la programación. Un estudio sobre el uso ético de ChatGPT en el aula. Encuentro Internacional de Educación en Ingeniería.
+
+Pincay, W. D. C. (2025). Aplicaciones de la Inteligencia Artificial en el campo de la programación. Journal TechInnovation, 4(1), 4-12.
+

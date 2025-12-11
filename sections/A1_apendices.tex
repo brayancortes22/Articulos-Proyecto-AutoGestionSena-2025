@@ -4,3 +4,28 @@ Herramientas y repositorio
 Durante el desarrollo del proyecto se emplearon asistentes de código y modelos conversacionales para apoyar tareas de generación de código, debugging y consultas técnicas, tal como se indica en el texto del artículo.
 
 Repositorio del proyecto: el código fuente y la documentación están disponibles en el repositorio del trabajo, que incluye el modelo entidad-relación, mockups en Figma, el back-end en Django/Python y el front-end web.
+
+\subsection{Ejemplo de endpoint (Django Rest Framework)}
+\begin{lstlisting}[language=python, caption={Ejemplo de endpoint para crear sesiones con validación básica}]
+from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import SesionSerializer
+
+class SesionViewSet(viewsets.ViewSet):
+	def create(self, request):
+		serializer = SesionSerializer(data=request.data)
+		if serializer.is_valid():
+			sesion = serializer.save()
+			return Response(SesionSerializer(sesion).data, status=status.HTTP_201_CREATED)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+\end{lstlisting}
+
+\subsection{Comando de ejemplo para despliegue con Docker Compose}
+\begin{lstlisting}
+docker-compose pull
+docker-compose up --build -d
+docker-compose exec web python manage.py migrate
+docker-compose exec web python manage.py collectstatic --no-input
+\end{lstlisting}
+
