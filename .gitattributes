@@ -1,0 +1,10 @@
+# Enforce LF on shell scripts and other Unix files to avoid CRLF errors in containers
+*.sh text eol=lf
+*.bash text eol=lf
+*.py text eol=lf
+tools/* text eol=lf
+code/* text eol=lf
+*.tex text eol=lf
+*.bib text eol=lf
+README.md text eol=lf
+.gitattributes text eol=lf
