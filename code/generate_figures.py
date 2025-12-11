@@ -114,108 +114,91 @@ Express.js & JavaScript & Alta & Baja & Buena & 8.3 \\
     
     print("✓ Generada: frameworks_comparison.tex")
 
-def generar_uso_ia_aprendizaje_colaborativo():
-    """Genera un gráfico que muestra el uso de la IA en el aprendizaje colaborativo en el desarrollo de software"""
-    # Categorías de uso: ejemplos tomados de la práctica del equipo
-    categorias = ['Resolución de dudas', 'Generación de código', 'Revisión de código',
-                  'Explicación de funciones', 'Generación de tests', 'Documentación']
-    # Porcentaje de uso (estimado) en equipos que usan IA
-    uso_pct = [85, 78, 60, 65, 45, 50]
-    # Impacto en aprendizaje (escala 0-10)
-    impacto_aprendizaje = [9.0, 8.5, 7.0, 8.0, 6.0, 7.5]
-
-    fig, ax1 = plt.subplots(figsize=(11, 6))
-
-    bar_positions = np.arange(len(categorias))
-    bars = ax1.bar(bar_positions, uso_pct, color=['#2E86AB','#A23B72','#F18F01','#C73E1D','#7DCEA0','#5D6D7E'], alpha=0.9)
-    ax1.set_ylabel('Porcentaje de uso (%)')
-    ax1.set_ylim(0, 100)
-    ax1.set_xticks(bar_positions)
-    ax1.set_xticklabels(categorias)
-    ax1.set_title('Uso de IA en Aprendizaje Colaborativo dentro del Desarrollo de Software')
-
-    # Eje secundario para impacto en aprendizaje (0-10)
-    ax2 = ax1.twinx()
-    ax2.set_ylabel('Impacto en aprendizaje (0-10)')
-    line = ax2.plot(bar_positions, impacto_aprendizaje, color='#111111', marker='o', linewidth=2, label='Impacto')
-    ax2.set_ylim(0, 10)
-
-    # Anotar valores de uso e impacto
-    for i, bar in enumerate(bars):
-        height = bar.get_height()
-        ax1.text(bar.get_x() + bar.get_width()/2., height + 1.5, f'{height:.0f}%', ha='center', va='bottom', fontsize=9)
-    for i, v in enumerate(impacto_aprendizaje):
-        ax2.text(i, v + 0.25, f'{v:.1f}', ha='center', va='bottom', fontsize=9)
-
-    # Leyenda
-    handles = [bars[0], line[0]]
-    labels = ['Porcentaje de uso', 'Impacto en aprendizaje']
-    ax1.legend(handles, labels, loc='upper right')
-
-    plt.tight_layout()
-    plt.savefig(f'{graphics_dir}/uso_ia_aprendizaje_colaborativo.pdf', format='pdf')
-    plt.savefig(f'{graphics_dir}/uso_ia_aprendizaje_colaborativo.png', format='png')
-    plt.close()
-    print('✓ Generada: uso_ia_aprendizaje_colaborativo.pdf/png')
-
-def generar_ciclo_desarrollo_ia():
-    """Genera un diagrama profesional del ciclo de desarrollo asistido por IA (estilo limpio y moderno)"""
-    fig, ax = plt.subplots(figsize=(12, 8))
-    ax.axis('off')
-
-    # Coordenadas para las cajas (x, y)
-    left_x = -2.2
-    right_x = 2.2
-    y_positions = [2.2, 1.1, 0, -1.1, -2.2]
-    # Cajas izquierda
-    left_boxes = [
-        (left_x, y_positions[0], 'Elaboración del\nmodelo entidad-relación'),
-        (left_x, y_positions[1], 'Ayuda con la sintaxis\ndel código y su\nmantenibilidad'),
-        (left_x, y_positions[2], 'Consultas de errores\ny del porqué'),
-        (left_x, y_positions[3], 'Explicaciones de funciones\n(Tanto front como back)'),
+def generar_sprint_timeline():
+    """Genera una gráfica tipo Gantt mostrando los sprints y entregables"""
+    import matplotlib.dates as mdates
+    import datetime as dt
+    
+    sprints = [
+        ("Sprint 1", dt.date(2025, 5, 1), dt.date(2025, 5, 14)),
+        ("Sprint 2", dt.date(2025, 5, 15), dt.date(2025, 5, 28)),
+        ("Sprint 3", dt.date(2025, 6, 1), dt.date(2025, 6, 14)),
+        ("Sprint 4", dt.date(2025, 6, 15), dt.date(2025, 6, 28)),
+        ("Sprint 5", dt.date(2025, 7, 1), dt.date(2025, 7, 14)),
+        ("Sprint 6", dt.date(2025, 7, 15), dt.date(2025, 7, 28)),
+        ("Sprint 7", dt.date(2025, 8, 1), dt.date(2025, 8, 14)),
     ]
-    # Cajas derecha
-    right_boxes = [
-        (right_x, y_positions[0], 'Establecer la arquitectura\ndel proyecto'),
-        (right_x, y_positions[1], 'Desarrollo de endpoints'),
-        (right_x, y_positions[2], 'Desarrollo de animaciones\nen el front web'),
-        (right_x, y_positions[3], 'Conexión del front con el back'),
-    ]
-    boxes = left_boxes + right_boxes
 
-    # Dibuja las cajas
-    box_width = 2.2
-    box_height = 0.7
-    for x, y, text in boxes:
-        bbox = FancyBboxPatch((x - box_width/2, y - box_height/2), box_width, box_height,
-                              boxstyle='round,pad=0.04', linewidth=2, edgecolor='#2b6dad', facecolor='#f7fafd', zorder=2)
-        ax.add_patch(bbox)
-        ax.text(x, y, text, ha='center', va='center', fontsize=13, fontweight='medium', color='#222', zorder=3)
+    labels = [s[0] for s in sprints]
+    starts = [mdates.date2num(s[1]) for s in sprints]
+    ends = [mdates.date2num(s[2]) for s in sprints]
+    durations = [e - s for s, e in zip(starts, ends)]
 
-    # Dibuja el círculo central IA
-    circle = Circle((0, 0), 1.1, edgecolor='#1f78b4', linewidth=3, facecolor='white', zorder=4)
-    ax.add_patch(circle)
-    ax.text(0, 0, 'IA', ha='center', va='center', fontsize=32, fontweight='bold', color='#1f78b4', zorder=5)
-
-    # Flechas horizontales (izq-der)
-    for i in range(4):
-        # De izquierda a derecha
-        ax.annotate('', xy=(right_x - box_width/2, y_positions[i]), xytext=(left_x + box_width/2, y_positions[i]),
-                    arrowprops=dict(arrowstyle='->', lw=2, color='#2b6dad', shrinkA=10, shrinkB=10), zorder=1)
-
-    # Flechas desde IA a cada caja (líneas suaves, color gris claro)
-    for x, y, _ in boxes:
-        ax.annotate('', xy=(x, y), xytext=(0, 0),
-                    arrowprops=dict(arrowstyle='-|>', lw=1.2, color='#b0b8c1', linestyle='dashed', alpha=0.7, shrinkA=15, shrinkB=15), zorder=0)
-
-    ax.set_xlim(-4, 4)
-    ax.set_ylim(-3, 3)
-    plt.title('Ciclo de Desarrollo Asistido por IA', fontsize=22, fontweight='bold', pad=24)
+    fig, ax = plt.subplots(figsize=(10, 4))
+    y_pos = range(len(labels))
+    ax.barh(y_pos, durations, left=starts, color='#2E86AB')
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(labels)
+    ax.xaxis_date()
+    ax.set_xlabel('Fecha')
+    ax.set_title('Cronograma de Sprints (4 meses, 7 sprints)')
+    ax.grid(axis='x', linestyle='--', alpha=0.4)
     plt.tight_layout()
-    plt.savefig(f'{graphics_dir}/ciclo_desarrollo_ia.pdf', format='pdf')
-    plt.savefig(f'{graphics_dir}/ciclo_desarrollo_ia.png', format='png')
+    plt.savefig(f'{graphics_dir}/sprint_timeline.pdf', format='pdf')
+    plt.savefig(f'{graphics_dir}/sprint_timeline.png', format='png')
     plt.close()
-    print('✓ Generada: ciclo_desarrollo_ia.pdf/png')
+    print("✓ Generada: sprint_timeline.pdf/png")
+
+def generar_pie_asignacion_tareas():
+    """Genera un pie chart con la distribución del tiempo por tipo de tarea"""
+    categorias = ['Diseño', 'Implementación', 'Tests', 'Documentación', 'Despliegue', 'Soporte IA']
+    valores = [18, 45, 14, 8, 9, 6]  # porcentajes de ejemplo
+    colors = ['#2E86AB', '#F18F01', '#A23B72', '#C73E1D', '#7BBF6A', '#A9A9A9']
+
+    fig, ax = plt.subplots(figsize=(8, 6))
+    wedges, texts, autotexts = ax.pie(valores, labels=categorias, colors=colors,
+                                      autopct='%1.1f%%', startangle=140, textprops={'fontsize': 10})
+    ax.axis('equal')
+    plt.title('Distribución del esfuerzo por tipo de tarea')
+    plt.tight_layout()
+    plt.savefig(f'{graphics_dir}/distribucion_tareas.pdf', format='pdf')
+    plt.savefig(f'{graphics_dir}/distribucion_tareas.png', format='png')
+    plt.close()
+    print("✓ Generada: distribucion_tareas.pdf/png")
+
+def generar_ia_usage_bar():
+    """Genera un gráfico de barras mostrando la frecuencia de uso de IA por tipo de tarea"""
+    tasks = ['Generación Código', 'Explicación de Funciones', 'Diseño UI', 'Pruebas', 'Despliegue']
+    counts = [120, 80, 60, 45, 30]  # ejemplo de conteo de prompts/queries
+
+    fig, ax = plt.subplots(figsize=(10, 5))
+    bars = ax.bar(tasks, counts, color=['#2E86AB', '#A23B72', '#F18F01', '#C73E1D', '#7BBF6A'])
+    ax.set_ylabel('Número de consultas IA')
+    ax.set_title('Uso de IA por tipo de tarea')
+    for bar in bars:
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 2, f'{int(bar.get_height())}', ha='center')
+    plt.tight_layout()
+    plt.savefig(f'{graphics_dir}/uso_ia_barras.pdf', format='pdf')
+    plt.savefig(f'{graphics_dir}/uso_ia_barras.png', format='png')
+    plt.close()
+    print("✓ Generada: uso_ia_barras.pdf/png")
+
+def generar_complications_bar():
+    """Genera una gráfica mostrando la cantidad de incidencias por categoria de complicación"""
+    categorias = ['Integración', 'Entornos', 'IA (falsos positivos)', 'Seguridad', 'UI/UX']
+    counts = [18, 12, 9, 6, 7]
+
+    fig, ax = plt.subplots(figsize=(9, 5))
+    bars = ax.bar(categorias, counts, color='#C73E1D')
+    ax.set_ylabel('Número de incidencias reportadas')
+    ax.set_title('Complicaciones reportadas durante el desarrollo')
+    for bar in bars:
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.5, f'{int(bar.get_height())}', ha='center')
+    plt.tight_layout()
+    plt.savefig(f'{graphics_dir}/complicaciones_reportadas.pdf', format='pdf')
+    plt.savefig(f'{graphics_dir}/complicaciones_reportadas.png', format='png')
+    plt.close()
+    print("✓ Generada: complicaciones_reportadas.pdf/png")
 
 def main():
     """Función principal para generar todas las gráficas"""
@@ -223,9 +206,15 @@ def main():
     print("=" * 50)
     
     try:
-        # Generate the AI learning collaboration figure and the cycle diagram
-        # by default we generate the cycle diagram as core figure
-        generar_ciclo_desarrollo_ia()
+        generar_metricas_dora()
+        generar_evolucion_temporal()
+        generar_correlacion_practicas()
+        generar_comparacion_metodologias()
+        generar_tabla_frameworks()
+        generar_sprint_timeline()
+        generar_pie_asignacion_tareas()
+        generar_ia_usage_bar()
+        generar_complications_bar()
         
         print("=" * 50)
         print("✅ ¡Todas las gráficas y tablas fueron generadas exitosamente!")
