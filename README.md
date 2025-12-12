@@ -1,167 +1,87 @@
-# Plantilla LaTeX — Investigación aplicada (IEEE + ACM + APA7)
+# "Autogestión SENA": Artículo de Investigación (LaTeX)
 
-Este repositorio genera **tres PDFs** desde el mismo contenido: **IEEE**, **ACM** y **APA7**.
+Este repositorio contiene el código fuente y los recursos para generar el artículo de investigación **"Autogestión SENA: Desarrollo Full-Stack Acelerado mediante Colaboración Humano-IA"** en tres formatos académicos estándar: **IEEE**, **ACM** y **APA7**.
 
-## Dependencias
-- Docker Desktop (Windows/macOS) o Docker Engine (Linux)
-- Conexión a internet (la primera vez se descargará la imagen `texlive-full`, ~6 GB)
+El proyecto utiliza **Docker** para encapsular todo el entorno de LaTeX, por lo que no necesitas instalar nada complejo en tu máquina local.
 
-No necesitas instalar LaTeX localmente: todo sucede dentro del contenedor.
+## 🚀 Guía Rápida de Generación (Windows)
 
-## Estructura
-```
-articulo-aplicada/
-  Dockerfile          docker-compose.yml   compile.bat
-  latexmkrc           README.md            tools/build.sh
-  main_*.tex          includes/            sections/
-  bibliography/       tables/              code/
-```
+Si estás en Windows y tienes Docker Desktop instalado y corriendo:
 
-Las secciones (`sections/*.tex`) se **comparten** entre formatos. Cada *main* define portada y estilo.
+1.  Abre una terminal (PowerShell o CMD) en la carpeta raíz del proyecto.
+2.  Ejecuta el siguiente comando:
+    ```powershell
+    .\compile.bat
+    ```
+3.  ¡Listo! Los archivos PDF generados aparecerán en la carpeta `build/`:
+    - `main_ieee.pdf`
+    - `main_acm.pdf`
+    - `main_apa7.pdf`
 
-## Uso rápido (Docker)
-```powershell
-# 1) Construir la imagen (solo la primera vez o tras cambios en Dockerfile)
-docker compose build latex
+> **Nota:** La primera vez que lo ejecutes, tardará unos minutos en descargar la imagen de Docker (~4-6 GB). Las siguientes veces será mucho más rápido.
 
-# 2) Compilar los tres formatos mediante Docker
-docker compose run --rm latex
+## 📋 Requisitos Previos
 
-# En Windows puedes usar el wrapper
-.\\compile.bat
+- **Docker Desktop**: Debe estar instalado y ejecutándose. [Descargar aquí](https://www.docker.com/products/docker-desktop/).
+- **Conexión a Internet**: Necesaria para descargar la imagen de Docker y paquetes LaTeX la primera vez.
 
-# Los PDFs quedan en build/
-```
+## 🛠️ Comandos Manuales (Docker Compose)
 
-Si necesitas una compilación limpia, elimina el contenido de `build/` y vuelve a ejecutar el comando.
+Si prefieres usar comandos de Docker directamente o estás en Linux/macOS:
 
-**Configuración de resaltado de código**:
-- Por defecto usa `listings` (`\mintedfalse` en `includes/preamble_common.tex`)
-- Para usar `minted`: cambie `\mintedfalse` → `\mintedtrue` (requiere Python + pygments)
+1.  **Construir la imagen** (solo necesario la primera vez):
+    ```bash
+    docker compose build latex
+    ```
 
-## Rellenar metadatos
-- **IEEE**: edite autores/afiliaciones en `main_ieee.tex`.
-- **ACM**: complete `\author`, `\affiliation`, `\email` en `main_acm.tex`.
-- **APA7**: complete `\shorttitle`, `\author`, `\affiliation` en `main_apa7.tex`.
+2.  **Compilar los documentos**:
+    ```bash
+    docker compose run --rm latex
+    ```
 
-## Bibliografía
-Agregue o edite referencias en `bibliography/references.bib`.
-- IEEE/APA: `biblatex` + `biber` → `\printbibliography`
-- ACM: `natbib`/`BibTeX` → `\bibliographystyle{ACM-Reference-Format}` + `\bibliography{bibliography/references}`
+3.  **Limpiar archivos temporales** (opcional):
+    Si quieres una compilación limpia desde cero, borra el contenido de la carpeta `build/` antes de compilar.
 
-## Licencia
-Por defecto, **CC BY 4.0** (ajuste si lo desea).
+## 📂 Estructura del Proyecto
 
-## Reproducibilidad
-Incluimos una **plantilla de checklist** en `sections/A1_apendices.tex` y rutas para guardar scripts/datasets en `code/`, `tables/`, `graphics/`.
+El contenido del artículo está separado del formato para facilitar la edición:
 
+- **`sections/`**: Aquí está el **texto del artículo**.
+  - `00_abstract.tex`: Resumen.
+  - `01_introduccion.tex` a `07_conclusiones.tex`: Capítulos del artículo.
+  - `A1_apendices.tex`: Apéndices (tablas extra, gráficas).
+- **`bibliography/references.bib`**: Archivo de referencias bibliográficas.
+- **`tables/`**: Archivos `.tex` que contienen tablas complejas.
+- **`graphics/`**: Imágenes y gráficas (PDF, PNG, JPG).
+- **`main_*.tex`**: Archivos principales que definen el formato (IEEE, ACM, APA). Aquí se editan el **título** y los **autores**.
 
-## Compilación automática de todos los PDFs
-Para compilar los tres PDFs (IEEE, ACM, APA7) y forzar la conversión manual si es necesario, usa el script correspondiente:
+## ✏️ Cómo Editar
 
-- **Windows:**
-  ```powershell
-  tools\build_all.bat
-  ```
-- **Linux/macOS:**
-  ```bash
-  bash tools/build_all.sh
-  ```
+1.  **Contenido**: Modifica los archivos en la carpeta `sections/`. Los cambios se reflejarán en los tres formatos (IEEE, ACM, APA) automáticamente al recompilar.
+2.  **Autores/Título**:
+    - Para **IEEE**: Edita `main_ieee.tex`.
+    - Para **ACM**: Edita `main_acm.tex`.
+    - Para **APA**: Edita `main_apa7.tex`.
+3.  **Referencias**: Agrega tus citas en formato BibTeX en `bibliography/references.bib`.
 
-Esto ejecuta todos los pasos necesarios y asegura que los tres archivos (`main_ieee.pdf`, `main_acm.pdf`, `main_apa7.pdf`) estén en la carpeta `build/`.
+## 📊 Gráficas y Tablas
 
-
-### Errores de compilación
-- **APA7**: Puede mostrar warnings sobre definiciones duplicadas, pero genera el PDF correctamente
-- **Bibliografía vacía**: Normal si no hay citas en el documento
-- **Minted no disponible**: La plantilla usa `listings` automáticamente como fallback
-
-### Forzar compilación
-Si hay errores menores que no impiden la generación del PDF:
-```bash
-latexmk -pdfxe -shell-escape -outdir=build -f main_apa7.tex
-```
-
-## Gráficas y tablas
-
-### Tamaños recomendados para gráficas
-Para evitar que las gráficas se salgan del formato, use estos tamaños **optimizados**:
-
-```latex
-% Gráficas simples (barras, scatter)
-\includegraphics[width=0.48\textwidth]{graphics/archivo.pdf}
-
-% Gráficas complejas (radar, correlaciones)
-\includegraphics[width=0.45\textwidth]{graphics/archivo.pdf}
-
-% Gráficas de evolución temporal (líneas múltiples)
-\includegraphics[width=0.5\textwidth]{graphics/archivo.pdf}
-
-% Para formato single-column (ACM, APA7) - pueden ser más grandes
-\includegraphics[width=0.7\textwidth]{graphics/archivo.pdf}
-
-% Para formato IEEE (columna doble) - máximo recomendado
-\includegraphics[width=0.48\textwidth]{graphics/archivo.pdf}
-```
-
-**Regla general**: Para IEEE (2 columnas) usar **máximo 0.5\textwidth**. Para formatos single-column (ACM/APA7) se puede usar hasta **0.7\textwidth**.
-
-### Tablas anchas
-Para tablas que exceden el ancho de página, **reduzca columnas** y use `\small`:
-
-```latex
-\begin{table}[htbp]
-\centering
-\caption{Título de la tabla}
-\label{tab:etiqueta}
-\small  % Hace el texto más pequeño
-\begin{tabular}{lccc}  % Menos columnas = mejor ajuste
-% contenido de la tabla
-\end{tabular}
-\end{table}
-```
-
-**Solo como último recurso** use `\resizebox` (puede hacer el texto ilegible):
-
-```latex
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lccccc}
-% contenido de la tabla
-\end{tabular}%
-}
-```
-
-### Generación automática de gráficas
-Las gráficas se generan ejecutando:
+### Generar Gráficas
+El proyecto incluye scripts en Python para generar gráficas vectoriales de alta calidad.
 ```bash
 python code/generate_figures.py
 ```
+Las gráficas resultantes se guardan en `graphics/`.
 
-Esto crea archivos PDF optimizados para LaTeX en `graphics/` y archivos PNG para vista previa.
+### Consejos de Formato
+- **IEEE (Doble columna)**: Las imágenes no deben superar `width=0.48\textwidth`.
+- **ACM/APA (Una columna)**: Las imágenes pueden ser más grandes, hasta `width=0.7\textwidth`.
+
+## ❓ Solución de Problemas
+
+- **Error "Docker daemon is not running"**: Asegúrate de haber abierto Docker Desktop.
+- **Errores de compilación**: Revisa el archivo `build/*.log` para ver detalles. A veces, borrar la carpeta `build` y recompilar soluciona problemas de caché.
+- **Bibliografía no aparece**: Asegúrate de haber citado las referencias en el texto usando `\cite{clave}`.
 
 ---
-
-## Sobre este artículo
-
-Este repositorio contiene el artículo "Autogestión SENA: Desarrollo Full-Stack Acelerado mediante Colaboración Humano-IA" en los formatos IEEE, ACM y APA7. El eje central del trabajo es el uso de la IA como herramienta de aprendizaje colaborativo durante el desarrollo de software; el repositorio incluye el caso de estudio, resultados cualitativos y consideraciones éticas. Los contenidos del artículo se encuentran en `sections/` y pueden personalizarse: actualice `sections/` y los metadatos en los archivos `main_*.tex` para poner autores y afiliaciones.
-
-Si quieres compilar sólo la versión IEEE, ejecuta:
-
-```powershell
-latexmk -pdf -outdir=build -f main_ieee.tex
-```
-
-Para la versión APA7 (usa `biber`):
-
-```powershell
-latexmk -pdf -outdir=build -f main_apa7.tex
-```
-
-Y para ACM (BibTeX):
-
-```powershell
-latexmk -pdf -outdir=build -f main_acm.tex
-```
-
-
-> Este repositorio fue generado automáticamente por ChatGPT a partir del **Prompt Maestro v2** incluido en `PROMPT.md`.
+*Repositorio generado para el proyecto de investigación Autogestión SENA - 2025.*
