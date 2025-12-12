@@ -1,110 +1,52 @@
 El proyecto se reestructuró siguiendo una metodología ágil llamada Scrum, durante 4 meses divididos en 7 sprints (ciclos de trabajo). Esta forma de trabajar nos dio flexibilidad para escuchar a los usuarios reales (instructores y coordinadores del SENA) y cambiar el proyecto según sus necesidades.
 
-\subsection{Análisis de Requisitos y Diseño del Sistema}
+\section{Análisis de Requisitos y Diseño del Sistema}
 
 Empezamos recopilando todo lo que el sistema debía hacer, identificando cinco tipos de usuarios: coordinadores, instructores, Aprendices, administradores y operadores de Sofia plus. Las funciones incluyeron manejar usuarios con seguridad, asignar instructores automática o manualmente, ver horarios, hacer reportes y tener interfaces que funcionen en cualquier dispositivo. La IA ayudó mucho aquí, creando diagramas complejos de relaciones entre datos, flujos de navegación y sugerencias de diseño que aceleraron el trabajo inicial.
 
 El modelo de datos se organizó alrededor de elementos clave como usuarios, roles, Aprendices, instructores, asignaciones y seguimientos, con diferentes tipos de conexiones entre ellos. La IA ayudó a organizar bien la base de datos MySQL, sugiriendo formas de guardar los datos de manera eficiente y segura.
 
-\subsection{Arquitectura Técnica}
+\section{Arquitectura Técnica}
 
 El sistema se rediseñó siguiendo reglas de organización clara y capacidad de crecer, usando un patrón de capas basado en módulos que hace fácil mantener y actualizar el software. Tomamos la estructura existente y la mejoramos completamente con tecnologías más modernas y mejores prácticas.
 
-\textbf{Parte back-end (API REST con Django/Python):}
-- Django 4.2 con Django REST Framework para crear APIs
-- Base de datos MySQL para guardar información estructurada
-- Autenticación JWT para seguridad en las conexiones
-- Arquitectura por capas: modelos, serializadores, vistas y servicios
-- La IA fue clave para crear modelos Django con relaciones complejas, validaciones personalizadas y documentación automática de las APIs
+Parte back-end (API REST con Django/Python):
+\begin{itemize}
+\item Django 4.2 con Django REST Framework para crear APIs
+\item Base de datos MySQL para guardar información estructurada
+\item Autenticación JWT para seguridad en las conexiones
+\item Arquitectura por capas: modelos, serializadores, vistas y servicios
+\item La IA fue clave para crear modelos Django con relaciones complejas, validaciones personalizadas y documentación automática de las APIs
+\end{itemize}
 
-\textbf{Parte web (SPA con React/TypeScript):}
-- React 18 con TypeScript para desarrollo seguro
-- Vite para compilar y empaquetar rápido
-- Tailwind CSS para estilos que se adaptan a cualquier pantalla
-- peticiones fetch para conectar con APIs y React Router para navegación
-- Patrón de diseño atómico con componentes reutilizables
-- La IA ayudó a crear componentes, formularios con validación, tablas con filtros y optimizaciones de rendimiento
+Parte web (SPA con React/TypeScript):
+\begin{itemize}
+\item React 18 con TypeScript para desarrollo seguro
+\item Vite para compilar y empaquetar rápido
+\item Tailwind CSS para estilos que se adaptan a cualquier pantalla
+\item peticiones fetch para conectar con APIs y React Router para navegación
+\item Patrón de diseño atómico con componentes reutilizables
+\item La IA ayudó a crear componentes, formularios con validación, tablas con filtros y optimizaciones de rendimiento
+\end{itemize}
 
-\textbf{Aplicación móvil (con .NET MAUI):}
-- .NET MAUI para desarrollo nativo en Android
-- Patrón MVVM con CommunityToolkit.Mvvm
-- Consumo de APIs REST 
-- La IA asistió en la generación de ViewModels observables, implementación de comandos para interacción UI, creación de layouts XAML responsivos y manejo de navegación entre páginas
+Aplicación móvil (con .NET MAUI):
+\begin{itemize}
+\item .NET MAUI para desarrollo nativo en Android
+\item Patrón MVVM con CommunityToolkit.Mvvm
+\item Consumo de APIs REST 
+\item La IA asistió en la generación de ViewModels observables, implementación de comandos para interacción UI, creación de layouts XAML responsivos y manejo de navegación entre páginas
+\end{itemize}
 
-\subsection{Desarrollo Ágil con Integración de IA}
+\section{Desarrollo Ágil con Integración de IA}
 
 El proceso de desarrollo se estructuró en sprints de 2 semanas, con reuniones diarias de 30-40 minutos, revisiones semanales y retrospectivas. La integración de IA se realizó de manera estratégica en las siguientes áreas:
-- Generación de código base para modelos Django y serializadores
-- Creación de componentes React reutilizables
-- Implementación de lógica de negocio compleja
-- Generación de pruebas unitarias y de integración
-- Documentación técnica y explicaciones de algoritmos
-- Resolución de bugs y optimización de código
+\begin{itemize}
+\item Generación de código base para modelos Django y serializadores
+\item Creación de componentes React reutilizables
+\item Implementación de lógica de negocio compleja
+\item Generación de pruebas unitarias y de integración
+\item Documentación técnica y explicaciones de algoritmos
+\item Resolución de bugs y optimización de código
+\end{itemize}
 
 La IA se utilizó en la gran mayoría del proyecto, desde la conceptualización inicial hasta el despliegue final, representando aproximadamente el 70\% de las tareas de desarrollo. Esto incluyó la generación automática de código, refactorización sistemática, debugging asistido y documentación técnica, permitiendo al equipo enfocarse en la lógica de negocio específica del SENA.
-\end{itemize}
-
-\subsection{Diseño Técnico}
-
-\subsubsection{Arquitectura del Sistema}
-Se adoptó una arquitectura de tres capas con separación clara de responsabilidades:
-
-\begin{enumerate}
-\item \textbf{Capa de Presentación}: Aplicaciones web y móvil como interfaces de usuario.
-\item \textbf{Capa de Aplicación}: API RESTful que implementa lógica de negocio.
-\item \textbf{Capa de Datos}: Base de datos relacional con diseño optimizado.
-\end{enumerate}
-
-\subsubsection{Selección Tecnológica}
-La selección de tecnologías se basó en criterios objetivos:
-
-\begin{itemize}
-\item \textbf{Madurez y Comunidad}: Tecnologías con amplio soporte y documentación.
-\item \textbf{Alineación Institucional}: Compatibilidad con infraestructura existente del SENA.
-\item \textbf{Curva de Aprendizaje}: Tecnologías accesibles para estudiantes en formación.
-\item \textbf{Escalabilidad}: Capacidad para crecer con las necesidades institucionales.
-\end{itemize}
-
-\subsection{Validación y Evaluación}
-
-\subsubsection{Estrategia de Testing}
-Se implementó una pirámide de testing completa:
-
-\begin{itemize}
-\item \textbf{Pruebas Unitarias}: Cobertura >80\% en código backend.
-\item \textbf{Pruebas de Integración}: Validación de flujos completos.
-\item \textbf{Pruebas de Aceptación}: Validación con usuarios finales.
-\item \textbf{Pruebas de Rendimiento}: Simulación de carga institucional.
-\end{itemize}
-
-\subsubsection{Métricas de Evaluación}
-Se definieron métricas cuantitativas y cualitativas:
-
-\begin{enumerate}
-\item \textbf{Eficiencia}: Reducción en tiempo de asignación (meta: 60\%).
-\item \textbf{Satisfacción}: Encuestas de usabilidad (escala Likert 1-5).
-\item \textbf{Calidad}: Tasa de errores en asignaciones (meta: <5\%).
-\item \textbf{Adopción}: Porcentaje de usuarios activos (meta: 80\%).
-\end{enumerate}
-
-\subsection{Consideraciones Éticas}
-
-El estudio siguió principios éticos de investigación:
-\begin{itemize}
-\item Consentimiento informado de todos los participantes.
-\item Anonimización de datos personales en reportes.
-\item Transparencia en el uso de datos para desarrollo.
-\item Confidencialidad en información institucional sensible.
-\end{itemize}
-
-\subsection{Limitaciones Metodológicas}
-
-Se reconocen las siguientes limitaciones:
-\begin{itemize}
-\item Alcance geográfico limitado a una regional del SENA.
-\item Tiempo de estudio restringido a 4 meses.
-\item Dependencia de disponibilidad de participantes.
-\item Posible sesgo de selección en participantes voluntarios.
-\end{itemize}
-
-Estas limitaciones se mitigaron mediante triangulación de métodos y validación cruzada de hallazgos.

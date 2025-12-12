@@ -1,214 +1,173 @@
-\subsection{Requisitos Técnicos del Sistema}
+\section{Requisitos Técnicos del Sistema}
 
 Para desarrollar el sistema usamos herramientas específicas con versiones controladas para asegurar que todo funcionara bien. Los requisitos se pensaron para seguir buenas prácticas y cubrir las necesidades del proyecto.
 
 \textbf{Requisitos de Hardware:}
-- Procesador: Intel Core i5/i7 o similar (mínimo Core i3)
-- Memoria RAM: 16 GB recomendado (mínimo 8 GB)
-- Almacenamiento: Disco SSD con 20 GB libres (mínimo 10 GB)
-- Conexión a internet estable para desarrollo y despliegue
+\begin{itemize}
+\item Procesador: Intel Core i5/i7 o similar (mínimo Core i3)
+\item Memoria RAM: 16 GB recomendado (mínimo 8 GB)
+\item Almacenamiento: Disco SSD con 20 GB libres (mínimo 10 GB)
+\item Conexión a internet estable para desarrollo y despliegue
+\end{itemize}
 
 \textbf{Requisitos de Software por Componente:}
 
 \textit{Parte back-end (Python/Django):}
-- Python 3.10 o superior
-- Django 4.2.23
-- MySQL 8.x / MariaDB 10.x
-- Redis 6.x o superior
-- Celery 5.x con django-celery-beat 2.x
-- Git 2.49.0 para control de versiones
+\begin{itemize}
+\item Python 3.10 o superior
+\item Django 4.2.23
+\item MySQL 8.x / MariaDB 10.x
+\item Redis 6.x o superior
+\item Celery 5.x con django-celery-beat 2.x
+\item Git 2.49.0 para control de versiones
+\end{itemize}
 
 \textit{Parte web (React/TypeScript):}
-- Node.js 20.19.0
-- TypeScript 5.8.3
-- React 18.3.1
-- Tailwind CSS 3.4.17
-- Vite 5.4.19
-- Navegador moderno (Chrome/Edge/Firefox última versión)
+\begin{itemize}
+\item Node.js 20.19.0
+\item TypeScript 5.8.3
+\item React 18.3.1
+\item Tailwind CSS 3.4.17
+\item Vite 5.4.19
+\item Navegador moderno (Chrome/Edge/Firefox última versión)
+\end{itemize}
 
 \textit{Aplicación móvil (.NET MAUI):}
-- .NET SDK 9.0
-- Visual Studio 2022 17.8+
-- Paquete .NET MAUI
-- Android SDK API 29+ (recomendado), mínimo API 23
+\begin{itemize}
+\item .NET SDK 9.0
+\item Visual Studio 2022 17.8+
+\item Paquete .NET MAUI
+\item Android SDK API 29+ (recomendado), mínimo API 23
+\end{itemize}
 
 \textbf{Compatibilidad de Dispositivos Móviles:}
-- Android: Versión mínima 6.0 (API 23), recomendado 10+ (API 29)
-- Pantallas soportadas: 320x480 hasta 1440x3040 píxeles
-- Arquitecturas: ARM64, ARM32, x86\_64
+\begin{itemize}
+\item Android: Versión mínima 6.0 (API 23), recomendado 10+ (API 29)
+\item Pantallas soportadas: 320x480 hasta 1440x3040 píxeles
+\item Arquitecturas: ARM64, ARM32, x86\_64
+\end{itemize}
 
 Estos requisitos técnicos se probaron durante el desarrollo para asegurar que el sistema funcionara bien en diferentes entornos y dispositivos.
 
-\subsection{Desarrollo del Backend con Django}
+\section{Desarrollo del Backend con Django}
 
 La parte back-end se reestructuró usando Django 4.2.23 con Django REST Framework 3.16.0, siguiendo una arquitectura de capas basada en módulos donde cada parte del sistema tiene sus propias capas de datos, lógica y presentación. Esto ayuda a separar responsabilidades, mantener el código organizado y hacer fácil actualizar el sistema. Tomamos el Backend existente y lo modernizamos completamente con mejores prácticas y tecnologías actualizadas.
 
-\textbf{Tecnologías de la parte back-end:}
-- Python 3.10 como lenguaje principal
-- Django 4.2.23 como framework principal con base de datos integrada
-- Django REST Framework 3.16.0 para crear APIs REST
-- MySQL 8.x como base de datos para guardar información
-- Redis 5.2.1 como sistema de cache y mensajes
-- Celery 5.5.3 para tareas en segundo plano
-- Documentación automática con Swagger/drf-yasg 1.21.10
-- Autenticación JWT con djangorestframework-simplejwt
+Tecnologías de la parte back-end:
+\begin{itemize}
+\item Python 3.10 como lenguaje principal
+\item Django 4.2.23 como framework principal con base de datos integrada
+\item Django REST Framework 3.16.0 para crear APIs REST
+\item MySQL 8.x como base de datos para guardar información
+\item Redis 5.2.1 como sistema de cache y mensajes
+\item Celery 5.5.3 para tareas en segundo plano
+\item Documentación automática con Swagger/drf-yasg 1.21.10
+\item Autenticación JWT con djangorestframework-simplejwt
+\end{itemize}
 
 La arquitectura back-end se organiza en módulos independientes (seguridad, general, asignación) con conexiones expuestas bajo /api/. Cada módulo usa ViewSets y routers de DRF, con autenticación JWT disponible en POST /api/token/ y POST /api/token/refresh/.
 
 La IA ayudó mucho en la parte back-end, siendo responsable de aproximadamente el 60\% del código. Específicamente, la IA ayudó en:
-- Crear modelos Django con relaciones complejas (ForeignKey, ManyToMany) entre usuarios, roles, estudiantes e instructores
-- Hacer validaciones personalizadas y reglas para mantener la calidad de los datos
-- Crear serializadores anidados para respuestas API complejas con relaciones
-- Desarrollar ViewSets genéricos y personalizados con control de permisos
-- Implementar algoritmos de asignación automática usando optimización
-- Configurar autenticación JWT con tokens de refresh y middleware de seguridad
-- Generar documentación OpenAPI automática con ejemplos de uso
-- Crear tareas asíncronas con Celery para procesamiento en background
+\begin{itemize}
+\item Crear modelos Django con relaciones complejas (ForeignKey, ManyToMany) entre usuarios, roles, estudiantes e instructores
+\item Hacer validaciones personalizadas y reglas para mantener la calidad de los datos
+\item Crear serializadores anidados para respuestas API complejas con relaciones
+\item Desarrollar ViewSets genéricos y personalizados con control de permisos
+\item Implementar algoritmos de asignación automática usando optimización
+\item Configurar autenticación JWT con tokens de refresh y middleware de seguridad
+\item Generar documentación OpenAPI automática con ejemplos de uso
+\item Crear tareas asíncronas con Celery para procesamiento en background
+\end{itemize}
 
 Esta ayuda permitió reducir mucho el tiempo de desarrollo de la parte back-end, pasando de meses estimados a semanas, manteniendo calidad y siguiendo buenas prácticas de Django y DRF.
 
-\subsection{Desarrollo del Frontend Web con React}
+\section{Desarrollo del Frontend Web con React}
 
 El frontend se reestructuró completamente como una Single Page Application utilizando React 18.3.1 con TypeScript 5.8.3, siguiendo una arquitectura modular y organizada por funcionalidades (feature-based). La aplicación está estructurada con separación clara entre vista, lógica y comunicación, utilizando componentes reutilizables, hooks personalizados y servicios centralizados. Tomamos la interfaz existente y la rediseñamos desde cero con tecnologías modernas.
 
-\textbf{Stack Tecnológico Frontend:}
-- React 18.3.1 como librería principal para interfaces dinámicas basadas en componentes
-- TypeScript 5.8.3 para tipado estático y detección temprana de errores
-- Tailwind CSS 3.4.17 como framework CSS utilitario para diseño responsivo
-- Vite 5.4.19 como herramienta de desarrollo rápida para compilación y optimización
-- Node.js 20.19.0 como entorno de ejecución para desarrollo y gestión de dependencias
-- Fetch API nativa para comunicación HTTP con el backend
-- LocalStorage/SessionStorage para persistencia de sesión y datos temporales
-- JSON como formato estándar de intercambio de datos
+Stack Tecnológico Frontend:
+\begin{itemize}
+\item React 18.3.1 como librería principal para interfaces dinámicas basadas en componentes
+\item TypeScript 5.8.3 para tipado estático y detección temprana de errores
+\item Tailwind CSS 3.4.17 como framework CSS utilitario para diseño responsivo
+\item Vite 5.4.19 como herramienta de desarrollo rápida para compilación y optimización
+\item Node.js 20.19.0 como entorno de ejecución para desarrollo y gestión de dependencias
+\item Fetch API nativa para comunicación HTTP con el backend
+\item LocalStorage/SessionStorage para persistencia de sesión y datos temporales
+\item JSON como formato estándar de intercambio de datos
+\end{itemize}
 
 La arquitectura frontend opera bajo principios de separación de responsabilidades: las vistas (pages) utilizan componentes reutilizables (components), la lógica se encapsula en hooks personalizados, y la comunicación con APIs se gestiona desde servicios centralizados. Las rutas privadas pasan por componentes de protección (ProtectedRoute, ProtectedLayout) que validan autenticación y permisos.
 
 La IA fue fundamental en el desarrollo del frontend, contribuyendo al 75\% del código implementado. Sus aportes incluyeron:
-- Generación de componentes funcionales con hooks personalizados (useState, useEffect, useContext) para gestión de estado complejo
-- Implementación de formularios con validación robusta utilizando React Hook Form y Zod para schemas de validación
-- Creación de tablas de datos con funcionalidades avanzadas usando TanStack Table para filtrado, paginación y ordenamiento
-- Desarrollo de dashboards administrativos con gráficos interactivos utilizando Chart.js o D3.js
-- Optimización de rendimiento mediante React.memo, useMemo, useCallback y lazy loading con React.lazy
-- Implementación de navegación protegida con React Router v6 y guards de autenticación
-- Creación de servicios API con interceptores para manejo automático de tokens JWT y refresh
-- Desarrollo de componentes reutilizables siguiendo el patrón de diseño atómico (átomos, moléculas, organismos)
+\begin{itemize}
+\item Generación de componentes funcionales con hooks personalizados (useState, useEffect, useContext) para gestión de estado complejo
+\item Implementación de formularios con validación robusta utilizando React Hook Form y Zod para schemas de validación
+\item Creación de tablas de datos con funcionalidades avanzadas usando TanStack Table para filtrado, paginación y ordenamiento
+\item Desarrollo de dashboards administrativos con gráficos interactivos utilizando Chart.js o D3.js
+\item Optimización de rendimiento mediante React.memo, useMemo, useCallback y lazy loading con React.lazy
+\item Implementación de navegación protegida con React Router v6 y guards de autenticación
+\item Creación de servicios API con interceptores para manejo automático de tokens JWT y refresh
+\item Desarrollo de componentes reutilizables siguiendo el patrón de diseño atómico (átomos, moléculas, organismos)
+\end{itemize}
 
 La IA también asistió en la resolución de problemas complejos de UI/UX, sugiriendo mejoras de accesibilidad WCAG 2.1, implementando diseños responsive con CSS Grid y Flexbox, y proponiendo arquitecturas de estado eficientes con Context API o Redux Toolkit.
 
-\subsection{Desarrollo de la Aplicación Móvil con .NET MAUI}
+\section{Desarrollo de la Aplicación Móvil con .NET MAUI}
 
 La aplicación móvil se reestructuró usando .NET MAUI 9.0 con C\# 12, siguiendo el patrón Model-View-ViewModel (MVVM) que ayuda a separar responsabilidades, mantener el código y hacer pruebas. La app se enfocó primero en Android, pero puede funcionar en Windows después. Tomamos una aplicación móvil básica existente y la transformamos completamente con una arquitectura moderna y mejores funcionalidades.
 
-\textbf{Tecnologías de la aplicación móvil:}
-- .NET MAUI 9.0 como framework para desarrollo en múltiples plataformas
-- C\# 12 como lenguaje principal para lógica y interfaces
-- XAML como lenguaje para diseñar las pantallas
-- Visual Studio 2022 17.8+ como entorno de desarrollo
-- CommunityToolkit.Mvvm para implementar el patrón MVVM
-- HttpClient para conectar con APIs
+Tecnologías de la aplicación móvil:
+\begin{itemize}
+\item .NET MAUI 9.0 como framework para desarrollo en múltiples plataformas
+\item C\# 12 como lenguaje principal para lógica y interfaces
+\item XAML como lenguaje para diseñar las pantallas
+\item Visual Studio 2022 17.8+ como entorno de desarrollo
+\item CommunityToolkit.Mvvm para implementar el patrón MVVM
+\item HttpClient para conectar con APIs
+\end{itemize}
 
 El patrón MVVM divide la app en tres partes:
-- Modelo: Capa de datos con objetos de transferencia y servicios para APIs
-- Vista: Capa de interfaz con archivos XAML y poco código adicional
-- ViewModel: Conexión entre vista y modelo con propiedades y acciones
+\begin{itemize}
+\item Modelo: Capa de datos con objetos de transferencia y servicios para APIs
+\item Vista: Capa de interfaz con archivos XAML y poco código adicional
+\item ViewModel: Conexión entre vista y modelo con propiedades y acciones
+\end{itemize}
 
 En el desarrollo móvil, la IA representó el 65\% del código. Sus aportes principales fueron:
-- Crear ViewModels con propiedades que cambian y acciones asíncronas
-- Conectar vistas XAML con lógica usando CommunityToolkit.Mvvm
-- Hacer diseños adaptables con diferentes tipos de layout para pantallas Android
-- Manejar navegación entre páginas con parámetros
-- Crear servicios para APIs con manejo de errores
-- Hacer validaciones de formularios con mensajes visuales
-- Crear componentes reutilizables como menús
+\begin{itemize}
+\item Crear ViewModels con propiedades que cambian y acciones asíncronas
+\item Conectar vistas XAML con lógica usando CommunityToolkit.Mvvm
+\item Hacer diseños adaptables con diferentes tipos de layout para pantallas Android
+\item Manejar navegación entre páginas con parámetros
+\item Crear servicios para APIs con manejo de errores
+\item Hacer validaciones de formularios con mensajes visuales
+\item Crear componentes reutilizables como menús
+\end{itemize}
 
 La IA ayudó al equipo a pasar del desarrollo web al móvil, dando ejemplos de XAML, explicando conceptos de .NET MAUI y resolviendo problemas de compatibilidad.
 
-\subsection{Integración y Despliegue con Docker}
+\section{Integración y Despliegue con Docker}
 
 El sistema se recontenerizó utilizando Docker para garantizar consistencia entre entornos de desarrollo, staging y producción. La configuración incluyó múltiples servicios interconectados con redes personalizadas, volúmenes persistentes para bases de datos, y variables de entorno para configuración segura.
 
-\textbf{Arquitectura de Contenedores:}
-- Contenedor backend: Django con Gunicorn como servidor, disponible en puerto 8000
-- Contenedor frontend: Nginx sirviendo archivos de React, disponible en puerto 80
-- Contenedor base de datos: MySQL 8.x con datos guardados permanentemente
-- Contenedor caché: Redis 6.x para guardar datos temporales y mensajes
-- Contenedor trabajador: Procesos de Celery para tareas en segundo plano
-- Contenedor proxy: Nginx como intermediario con balanceo de carga
+Arquitectura de Contenedores:
+\begin{itemize}
+\item Contenedor backend: Django con Gunicorn como servidor, disponible en puerto 8000
+\item Contenedor frontend: Nginx sirviendo archivos de React, disponible en puerto 80
+\item Contenedor base de datos: MySQL 8.x con datos guardados permanentemente
+\item Contenedor caché: Redis 6.x para guardar datos temporales y mensajes
+\item Contenedor trabajador: Procesos de Celery para tareas en segundo plano
+\item Contenedor proxy: Nginx como intermediario con balanceo de carga
+\end{itemize}
 
 La configuración de docker-compose incluye revisiones de salud para servicios importantes, reinicios automáticos y dependencias para que todo arranque en orden. Los volúmenes nombrados mantienen los datos de MySQL y Redis.
 
 La IA ayudó mucho en el despliegue, siendo responsable del 80\% de la configuración. Esto incluyó:
-- Crear archivos Dockerfile optimizados en varias etapas
-- Configurar docker-compose con redes y servicios conectados
-- Usar variables de entorno para diferentes ambientes
-- Estrategias de despliegue con revisiones de salud y reinicios
-- Configurar Nginx como intermediario con límites de velocidad y seguridad
-
 \begin{itemize}
-\item \textbf{Modelos y Serializadores}: Se definieron modelos para las entidades principales (Usuario, Instructor, Aprendiz, AsignacionInstructor, VisitaSeguimiento) con validaciones personalizadas y serializadores para la transformación de datos JSON.
-\item \textbf{Autenticación y Autorización}: Implementación de JWT (JSON Web Tokens) para autenticación stateless, con permisos basados en roles (Administrador-Coordinador, Instructor, Aprendiz, Operador Sofia Plus).
-\item \textbf{Endpoints Principales}:
-  \begin{itemize}
-  \item \texttt{POST /api/auth/login}: Autenticación de usuarios
-  \item \texttt{GET /api/instructores}: Listado de instructores disponibles
-  \item \texttt{POST /api/asignaciones}: Creación de asignaciones instructor-aprendiz
-  \item \texttt{GET /api/visitas}: Seguimiento de visitas de seguimiento
-  \end{itemize}
-\item \textbf{Base de Datos MySQL}: Configuración con índices optimizados para consultas de asignación y reporting.
+\item Crear archivos Dockerfile optimizados en varias etapas
+\item Configurar docker-compose con redes y servicios conectados
+\item Usar variables de entorno para diferentes ambientes
+\item Estrategias de despliegue con revisiones de salud y reinicios
+\item Configurar Nginx como intermediario con límites de velocidad y seguridad
 \end{itemize}
-
-\subsubsection{Frontend React + TypeScript}
-La interfaz web se desarrolló con React 18 y TypeScript, utilizando Vite como bundler para desarrollo rápido:
-
-\begin{itemize}
-\item \textbf{Gestión de Estado}: Implementación de Context API para manejo de estado global de autenticación y datos de usuario.
-\item \textbf{Componentes Principales}:
-  \begin{itemize}
-  \item Dashboard administrativo con métricas en tiempo real
-  \item Formularios de asignación con validación en tiempo real
-  \item Tablas de datos con filtrado y paginación
-  \item Perfiles de usuario con gestión de roles
-  \end{itemize}
-\item \textbf{UI/UX}: Diseño responsivo con Tailwind CSS, siguiendo principios de accesibilidad WCAG 2.1.
-\item \textbf{Integración API}: Cliente HTTP personalizado con interceptores para manejo de tokens JWT y errores.
-\end{itemize}
-
-\subsubsection{Aplicación Móvil .NET MAUI}
-La aplicación móvil multiplataforma se desarrolló con .NET MAUI para Android e iOS:
-
-\begin{itemize}
-\item \textbf{Arquitectura MVVM}: Patrón Model-View-ViewModel para separación de responsabilidades.
-\item \textbf{Funcionalidades Móviles}:
-  \begin{itemize}
-  \item Consulta de asignaciones activas
-  \item Registro de visitas de seguimiento con geolocalización
-  \item Notificaciones push para nuevas asignaciones
-  \item Modo offline con sincronización automática
-  \end{itemize}
-\item \textbf{Integración Nativa}: Acceso a GPS, cámara y notificaciones del dispositivo.
-\end{itemize}
-
-\subsubsection{Despliegue con Docker}
-La contenerización se implementó con Docker Compose para entornos de desarrollo y producción:
-
-\begin{itemize}
-\item \textbf{Servicios Contenedorizados}:
-  \begin{itemize}
-  \item \texttt{web}: Aplicación Django + Gunicorn
-  \item \texttt{db}: MySQL 8.0 con volúmenes persistentes
-  \item \texttt{frontend}: Servidor Nginx para archivos estáticos de React
-  \end{itemize}
-\item \textbf{Orquestación}: Docker Compose para desarrollo local con hot-reload.
-\item \textbf{Configuración}: Variables de entorno para diferentes entornos (desarrollo, staging, producción).
-\end{itemize}
-
-\subsection{Generación de recursos y reproducibilidad}
-Todas las gráficas y tablas incluidas en este artículo se generan mediante el script \texttt{code/generate\_figures.py}. Para reproducir las gráficas:
-\begin{enumerate}
-	\item Instalar dependencias del proyecto: \texttt{pip install -r requirements.txt}.
-	\item Ejecutar: \texttt{python code/generate\_figures.py}.
-\end{enumerate}
-Los archivos se almacenan en la carpeta \texttt{graphics/} y la tabla en \texttt{tables/frameworks\_comparison.tex}.
-
-
-
