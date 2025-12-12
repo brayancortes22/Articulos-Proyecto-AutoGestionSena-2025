@@ -1,13 +1,78 @@
 \section{Introducción}
 
-Nuestro equipo desarrolló el proyecto “Autogestión SENA”, una aplicación completa que incluye versión web y móvil, con el objetivo central de simplificar y agilizar el proceso de asignación de instructores en los centros de formación del SENA. El proceso tradicional dependía de correos, hojas de cálculo y llamadas telefónicas, lo que causaba errores, pérdida de trazabilidad y retrasos en las asignaciones. Frente a estas ineficiencias, diseñamos una solución que reduce la carga administrativa y mejora la experiencia de instructores y coordinadores.
+\subsection{Contexto y Problema}
 
-El desarrollo se llevó a cabo mediante un proceso por etapas: recolección de requisitos (SRS, historias de usuario), prototipado y pruebas de usabilidad, desarrollo del back-end y front-end y despliegue en un entorno reproducible (Docker). Para la implementación adoptamos tecnologías modernas:
+El Servicio Nacional de Aprendizaje (SENA) de Colombia es la entidad líder en formación técnica y tecnológica del país, atendiendo anualmente a más de 500.000 aprendices en diversos programas de formación profesional. Uno de los procesos administrativos críticos en esta institución es la asignación de instructores a los diferentes centros de formación y programas académicos.
+
+Tradicionalmente, este proceso se realizaba mediante métodos manuales que incluían:
 \begin{itemize}
-	\item Back-end: Python con Django.
-	\item Front-end: React con Vite y Tailwind CSS.
-	\item Móvil: .NET MAUI para generar una app multiplataforma (Android e iOS).
-	\item Base de datos: MySQL.
+\item Comunicación por correo electrónico entre coordinadores regionales y nacionales
+\item Gestión de hojas de cálculo compartidas para seguimiento de disponibilidad
+\item Llamadas telefónicas y reuniones presenciales para coordinación
+\item Actualización manual de bases de datos institucionales
 \end{itemize}
 
-La Inteligencia Artificial (IA) se integró como herramienta de apoyo a lo largo del ciclo de desarrollo: generación de esqueletos y endpoints, sugerencias de diseño y accesibilidad para UI, asistencia en depuración, y apoyo en el diseño de pruebas y documentación.
+Estos métodos generaban múltiples ineficiencias: pérdida de información, duplicación de esfuerzos, errores en la asignación, falta de trazabilidad histórica y demoras significativas en la respuesta a necesidades urgentes de formación.
+
+\subsection{Solución Propuesta}
+
+Frente a estas problemáticas, nuestro equipo desarrolló "Autogestión SENA", una plataforma digital integral que automatiza y optimiza el proceso de asignación de instructores. La solución consta de tres componentes principales:
+
+\begin{enumerate}
+\item \textbf{Aplicación Web}: Interfaz principal para coordinadores y administradores, con paneles de control, reportes en tiempo real y gestión de asignaciones.
+\item \textbf{Aplicación Móvil}: Herramienta para instructores, permitiendo consulta de asignaciones, actualización de disponibilidad y comunicación directa con coordinadores.
+\item \textbf{API RESTful}: Backend que integra todos los componentes y proporciona servicios para futuras expansiones del sistema.
+\end{enumerate}
+
+\subsection{Metodología de Desarrollo}
+
+El proyecto se ejecutó bajo una metodología ágil (Scrum) durante un periodo total de cuatro meses. A continuación se detallan las actividades principales realizadas durante la planificación y diseño:
+
+\subsubsection{Diseño de base de datos y modelo del dominio}
+Se diseñaron las entidades principales del dominio: Usuario, Persona, Rol, Aprendiz, Instructor, Ficha, Programa, Centro/Regional, Empresa, Jefe, TalentoHumano, SolicitudAsignacion, AsignacionInstructor, VisitaSeguimiento. Las relaciones se modelaron siguiendo principios de normalización y se consultó IA para identificar redundancias, sugerir índices y mejorar la integridad referencial.
+
+\subsubsection{Prototipado UX/UI}
+Los mockups y flujos de navegación se elaboraron en Figma, incorporando cinco roles de usuario claramente diferenciados: Administrador-Coordinador, Instructor, Aprendiz, Operador Sofia Plus y Usuario Anónimo. La IA se empleó para generar variaciones visuales, recomendaciones de accesibilidad WCAG 2.1 y propuestas de interacción adaptadas a cada perfil de usuario.
+
+\subsubsection{Planificación y decisiones arquitectónicas}
+La arquitectura Cliente-Servidor distribuida fue seleccionada, con frontend desacoplado en React + TypeScript consumiendo API REST en Django. Se contrastaron alternativas como microservicios vs monolito modular, priorizando la escalabilidad institucional. La IA contribuyó a documentar decisiones técnicas y evaluar trade-offs entre tecnologías.
+
+\subsubsection{Marco de trabajo y cadencia}
+El equipo trabajó con sprints de 2 semanas, reuniones diarias (daily standup), revisiones y retrospectivas. En total se ejecutaron 7 sprints durante el periodo del proyecto, con una cadencia aproximada de 2 sprints por mes. Se priorizaron funcionalidades críticas como asignación automática de instructores y seguimiento de visitas.
+
+\subsection{Tecnologías Implementadas}
+
+La arquitectura tecnológica se seleccionó considerando escalabilidad, mantenibilidad y alineación con estándares modernos de desarrollo:
+
+\begin{itemize}
+\item \textbf{Backend}: Python con Django Framework, proporcionando robustez, seguridad y rapidez en el desarrollo de APIs.
+\item \textbf{Frontend Web}: React con Vite como bundler y Tailwind CSS para estilos, garantizando una experiencia de usuario moderna y responsiva.
+\item \textbf{Móvil}: .NET MAUI para desarrollo multiplataforma nativo en Android e iOS.
+\item \textbf{Base de Datos}: MySQL con diseño optimizado para consultas complejas y reporting.
+\item \textbf{Despliegue}: Contenedorización con Docker para entornos reproducibles y escalables.
+\end{itemize}
+
+\subsection{Rol de la Inteligencia Artificial}
+
+La Inteligencia Artificial se integró como socio colaborativo a lo largo de todo el ciclo de desarrollo, no como reemplazo sino como amplificador de las capacidades humanas. Las aplicaciones principales incluyeron:
+
+\begin{itemize}
+\item \textbf{Generación de Código}: Creación automática de esqueletos de modelos, vistas y controladores en Django.
+\item \textbf{Diseño de Interfaces}: Sugerencias de layouts y componentes de UI optimizados para usabilidad.
+\item \textbf{Depuración Asistida}: Análisis de errores y propuestas de soluciones.
+\item \textbf{Documentación}: Generación automática de documentación técnica y guías de usuario.
+\item \textbf{Pruebas}: Creación de casos de prueba y escenarios de testing.
+\end{itemize}
+
+\subsection{Contribuciones del Artículo}
+
+Este trabajo contribuye al campo de la ingeniería de software educativa de las siguientes maneras:
+
+\begin{enumerate}
+\item \textbf{Caso de Estudio Detallado}: Documentación completa de un proyecto real de desarrollo full-stack en contexto colombiano.
+\item \textbf{Metodología de Colaboración Humano-IA}: Marco práctico para integrar herramientas de IA en procesos de desarrollo de software educativo.
+\item \textbf{Lecciones Aprendidas}: Análisis de desafíos encontrados y soluciones implementadas en entornos de formación técnica.
+\item \textbf{Guía Reproducible}: Recursos y procedimientos que permiten replicar el enfoque en otros contextos institucionales.
+\end{enumerate}
+
+El resto del artículo se estructura como sigue: la Sección~\ref{sec:literatura} revisa trabajos relacionados; la Sección~\ref{sec:metodologia} detalla la metodología empleada; la Sección~\ref{sec:implementacion} describe la implementación técnica; la Sección~\ref{sec:resultados} presenta los resultados obtenidos; la Sección~\ref{sec:discusion} analiza los hallazgos; finalmente, la Sección~\ref{sec:conclusiones} resume las contribuciones y direcciones futuras.

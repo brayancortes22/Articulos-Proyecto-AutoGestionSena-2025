@@ -1,0 +1,226 @@
+
+
+
+Documentación del análisis
+ del software 
+Proyecto: Autogestión Sena
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Introducción
+Alcance del proyecto 
+El software “Autogestión SENA” será una aplicación web diseñada para mejorar la gestión académica y administrativa de los aprendices en el SENA. Esta nueva versión reemplazará un sistema anterior desarrollado en PHP, modernizando la interfaz y optimizando la experiencia del usuario.
+Este sistema estará disponible para web y móvil. Podrá ejecutarse en navegadores como Chrome y Firefox. Se desarrollará con Python, React y MySql, implementando una arquitectura Cliente–Servidor distribuida, con un frontend desacoplado (React + TypeScript) que consume una API REST desarrollada en Django. El backend implementa el patrón MVC adaptado al enfoque REST mediante Models, Serializers y ViewSets. La base de datos MySQL almacena la información estructurada, para garantizar seguridad y eficiencia en el manejo de datos personales.
+Usuarios y Roles
+El acceso al sistema estará basado en roles asignados por el administrador, lo que determinará los permisos y funcionalidades disponibles para cada usuario.
+Roles disponibles:
+Usuario anónimo: Es el usuario antes de registrarse, o que apenas está iniciando sesión.
+Administrador-Coordinador : Tiene acceso completo, gestiona todos los módulos como el de administración y registro masivo, asigna roles, evalúa vistas finales y visualiza el historial de seguimientos. Recibe notificaciones sobre el estado de sus trámites a través de correo electrónico. Puede visualizar su perfil y editar su contraseña.
+Instructor: Realiza seguimiento práctico de los aprendices, da una valoración previa a solicitudes diferentes a contrato de aprendizaje y visualiza el historial de seguimiento. Recibe notificaciones sobre el estado de sus trámites a través de correo electrónico. Puede visualizar su perfil y editar su contraseña.
+Aprendiz : Accede al sistema de autogestión. Puede ver el estado de sus trámites. Envía formularios. Recibe notificaciones sobre el estado de sus trámites a través de correo electrónico. Puede visualizar su perfil y editar su contraseña.
+Operador Sofia plus: Accede al sistema de autogestión. Entra a registrar EP, visualiza los seguimientos y deja su mensaje. Puede visualizar su perfil y editar su contraseña.
+Módulos Principales
+1. Usuario
+Registro y gestión de usuarios.
+Asignación de roles por parte del administrador.
+Acceso a la información personal según el rol asignado.
+3. Seguridad
+Administra todo el módulo de seguridad y las tablas parametrizadas del sistema.
+2. Asignar Seguimiento
+Solicitud de seguimiento de prácticas
+Visualización y gestión de solicitudes
+Asignación y reasignación de solicitudes
+Recordatorio por parte del instructor
+Seguimiento del proceso por parte del instructor
+Evaluación de los seguimientos por parte del coordinador
+Reportes e informes
+Historial de seguimientos
+Valoración previas del instructor a solicitudes
+Registro EP por parte del operador de sofia plus
+
+Objetivo del proyecto
+Este software de gestión denominado “Autogestión Sena” se ha diseñado con el objetivo de diseñar una herramienta interactiva que facilite el sistema de autogestión de aprendices, enfocándose en la optimización de procesos administrativos y de recursos humanos para la institución del Sena. Busca ofrecer una experiencia intuitiva y agradable que permita a los usuarios realizar sus gestiones de forma rápida, eficiente y organizada, mejorando la satisfacción y productividad en el entorno institucional.
+
+Audiencia
+Este documento está dirigido a los miembros del equipo de desarrollo, incluyendo diseñadores y  programadores, así también a las partes interesadas en los aspectos técnicos del software.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Descripción general del sistema 
+
+Visión general del software
+“Autogestión SENA” será una aplicación web y móvil orientada a optimizar la gestión académica y administrativa de los aprendices. Estará disponible para computadoras y accesible a través de navegadores modernos como Chrome y Firefox. Facilitando procesos como la gestión de usuarios, seguimiento de solicitudes, control de prácticas, garantizando eficiencia, seguridad y facilidad de uso para todos los roles involucrados.
+       Gestión de usuarios
+Registro: Permite que nuevos usuarios (aprendices) se registren mediante formularios validados, garantizando la integridad y veracidad de la información proporcionada.
+Inicio de sesión: Autenticación segura con verificación de credenciales (solo correos sena), permitiendo acceso según el rol asignado (Coordinador, instructor, administrador, aprendiz).
+Cierre de sesión: Posibilidad de cerrar sesión de forma segura para proteger la información personal y del sistema.
+Recuperación de contraseña: Funcionalidad para recuperar el acceso en caso de olvido de la contraseña.
+Asignación y modificación de roles: El administrador puede asignar y modificar los roles de los usuarios según sus funciones dentro de la institución.
+Visualización y edición de datos personales: Los usuarios pueden consultar y actualizar ciertos datos conforme a los permisos otorgados por su rol.
+Asignación de seguimiento
+Asignación de instructores a aprendices para realizar seguimiento académico y formativo.
+Visualización de los seguimientos de los aprendices en su etapa práctica por parte de instructores y directivos.
+Visualización de historial de solicitudes según estados
+Solicitud de asignación por parte de aprendices.
+Evaluación de visitas finales del instructor por parte del coordinador.
+Valoración previas del instructor a solicitudes
+Registro EP por parte del operador de sofia plus
+
+
+Modelo de dominio y arquitectura del software
+
+Modelo de datos 
+El modelo de datos de Autogestión SENA define la estructura lógica mediante la cual el sistema almacena, organiza y relaciona la información. Está diseñado bajo principios de normalización, consistencia e integridad referencial, lo que garantiza una administración fiable de los datos y una correcta interacción entre los distintos módulos del sistema.
+El dominio del sistema se estructura a partir de varias entidades clave que representan los elementos esenciales del negocio, tales como usuarios, aprendices, instructores, empresas y solicitudes de asignación. Estas entidades se relacionan entre sí mediante asociaciones uno-a-uno, uno-a-muchos y muchos-a-muchos, permitiendo modelar los procesos de manera precisa y flexible.
+Entidades y Relaciones Principales
+A continuación se describen las principales entidades del dominio y su papel dentro del sistema:
+ 1. Seguridad (Autenticación y Control de Acceso)
+User: almacena las credenciales y permisos de acceso.
+Person: contiene los datos personales del usuario.
+Role: define los roles del sistema (Administrador, Coordinador, Instructor, Aprendiz).
+Permission: permite gestionar el control de acceso basado en permisos.
+2. Gestión General (Base del Sistema Académico y Administrativo)
+Apprentice: identifica al aprendiz y lo asocia a una ficha académica.
+Instructor: almacena información contractual y académica del instructor.
+Ficha: representa la ficha académica del aprendiz.
+Program: describe los programas de formación.
+Center / Sede / Regional: definen la estructura geográfica del SENA.
+ 3. Asignación y Seguimiento
+Enterprise: empresa donde el aprendiz realizará la etapa productiva.
+Boss: jefe inmediato del aprendiz en la empresa.
+HumanTalent: responsable del talento humano en la empresa.
+RequestAsignation: solicitud formal del aprendiz para la asignación.
+AsignationInstructor: asignación del instructor encargado del seguimiento.
+VisitFollowing: visitas realizadas por el instructor durante la etapa productiva.
+
+Diagrama de arquitectura 
+Fronted:
+
+https://drive.google.com/file/d/14y2pP9Pt1LgwEj8QESz0WWGhfqYziigv/view?usp=drive_link
+Backend:
+
+https://drive.google.com/file/d/1qedVp_LWIkxIO0DNUO-XCXKPdF5azNNj/view?usp=drive_link
+Móvil:
+
+https://drive.google.com/file/d/1CBFQVyaOdLxoZ3OJTCQxXy_Y9CHvsZRG/view?usp=drive_link
+
+Diagrama de dominio 
+El diagrama de dominio del sistema Autogestión SENA representa las entidades principales del negocio y sus relaciones fundamentales. Este diagrama no describe aspectos técnicos, sino los elementos conceptuales que intervienen en los procesos de gestión de aprendices, instructores, asignación de prácticas, seguimiento y administración.
+Su objetivo es ofrecer una visión clara del funcionamiento del sistema, identificando los actores clave, los objetos del dominio y la manera en que se vinculan entre sí.
+
+
+	
+
+
+
+
+
+
+
+
+Especificaciones de interfaces
+Interfaz de usuario (UI):
+La interfaz de usuario de Autogestión SENA está diseñada bajo el enfoque de SPA (Single Page Application) utilizando React + TypeScript.
+ Su objetivo principal es ofrecer una experiencia fluida, rápida y fácil de usar para aprendices, instructores, coordinadores y administradores.
+ Características principales
+Diseño responsive y adaptable a diferentes dispositivos.
+Implementación visual basada en TailwindCSS.
+Navegación dinámica mediante React Router.
+Validación de formularios con React Hook Form + Zod.
+Componentes reutilizables organizados por características (feature-based architecture).
+Manejo de estado del servidor mediante React Query.
+Acceso controlado por roles y permisos (RBAC).
+Gestión visual de:
+Login, registro y recuperación de contraseña
+Dashboard por rol
+Módulos del sistema (seguridad, general, asignación, seguimiento)
+ Estructura general de la UI
+Layouts: estructura base, navegación lateral, encabezado, rutas protegidas.
+Pages: pantallas principales por módulo.
+Components: botones, tablas, formularios, modales, tarjetas y gráficos.
+UI Primitives: alertas, toasts, tooltips, loaders, etc.
+Interfaz de (Back-end):
+El back-end está desarrollado en Django + Django REST Framework, exponiendo una arquitectura basada en API RESTful.
+ Su función es gestionar la lógica del sistema, validar reglas de negocio y proporcionar los datos consumidos por el front y la app móvil.
+Características principales
+API estructurada en módulos (Security, General, Assign, Core).
+Autenticación por token (JWT o Email + Código según tu implementación).
+Serializadores para control de entrada/salida de datos.
+Control de permisos a nivel de vistas y endpoints.
+Modelo de datos totalmente relacional basado en MySQL.
+Enrutamiento para operaciones CRUD y flujos funcionales.
+Gestión de archivos: carga de PDFs, imágenes, reportes.
+Validaciones reales:
+asignación de instructores
+historial de cambios
+estados de solicitudes
+seguridad y roles
+ Tipos de Interfaces expuestas por el Back-End
+Endpoints REST públicos (solo login / registro si aplica).
+Respuestas estandarizadas en JSON.
+Códigos de estado HTTP para manejo de errores (200, 400, 401, 403, 500).
+Validación de integridad en base de datos (relaciones, unicidad, restricciones).
+
+
+
+
+
+
+Diagrama de flujo del sistema
+Los diagramas de flujo representan la lógica operativa del sistema Autogestión SENA.
+ En ellos se muestran los pasos secuenciales que sigue el software para ejecutar procesos clave, como autenticación, gestión de usuarios, asignación de instructores, registro de solicitudes y flujos administrativos.
+Sirven para visualizar de manera clara:
+El camino que sigue la información.
+Las decisiones dentro de cada proceso.
+La interacción entre módulos.
+Las acciones que el sistema automatiza.
+Estos diagramas ayudan a comprender rápidamente el funcionamiento interno del sistema antes de pasar a la codificación.
+
+Diagramas:
+	En cada pagina del sisgueitne draw.io se encuentra cada diagrama de flujo
+	https://drive.google.com/file/d/12k8EjRydY2GY14UYReQjgSc1KVL3Rsr4/view?usp=sharing
+
+
+

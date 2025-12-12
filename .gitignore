@@ -173,5 +173,9 @@ Thumbs.db
 .vagrant/
 .vagrant.d/
 
-# --- Personaliza según el stack del proyecto ---
-# Agregue o elimine reglas según los lenguajes y herramientas que utilice el repositorio.
+# ignorar documentos que no son necesarios
+
+./Articulos investigados.txt
+./info.txt
+./manual.txt
+./propuestatecnica.txt

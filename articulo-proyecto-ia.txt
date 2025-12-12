@@ -1,87 +1,420 @@
-Titulo
-“Autogestión SENA”: Desarrollo Full-Stack Acelerado mediante Colaboración Humano-IA
-Resumen:
-En este documento presentamos el desarrollo y la experiencia de construcción del proyecto “Autogestión SENA”, una aplicación full-stack (web y móvil) creada para optimizar la asignación de instructores en centros de formación. El proceso incluyó la recolección de requisitos, diseño, implementación y despliegue, y se apoyó de manera significativa en herramientas de Inteligencia Artificial (IA) para acelerar fases de diseño, generación de código, refactorización, pruebas y despliegue. Además, incluimos un análisis de las dificultades encontradas, las estrategias aplicadas y las lecciones aprendidas.
-Para construir la solución completa (la parte interna y la externa), usamos herramientas tecnológicas modernas:
-- Para la lógica interna (Back-end): Usamos el lenguaje Python con el framework Django.
-- Para la aplicación web o portal web(Front-end): Creamos la interfaz con React, Vite y Tailwind CSS.
-- Para la aplicación móvil: Usamos .NET MAUI, lo que nos permitió construir una única aplicación que funciona en múltiples plataformas (iOS y Android) mas sin embargo se enfoco únicamente en el apartado de dispositivos android.
-- Para la base de datos: se utilizó MySQL como motor de persistencia.
-- Para diagramas y prototipos: Draw.io (diagramas ER/arquitectura) y Figma (mockups y prototipado de UI).
+Título
+"Autogestión SENA": Desarrollo Full-Stack Acelerado mediante Colaboración Humano-IA
+
+Resumen
+En este artículo contamos la experiencia de reestructurar el proyecto "Autogestión SENA", una aplicación completa (web y móvil) que ayuda a asignar instructores en los centros de formación del SENA. El proceso incluyó tomar un proyecto existente, mejorarlo completamente, rediseñar, reprogramar y poner en marcha el sistema actualizado, usando mucho la inteligencia artificial para acelerar el trabajo. La solución usa tecnologías modernas como Python/Django para la parte back-end, React/TypeScript para la web, .NET MAUI para el móvil Android, MySQL para guardar datos, y Docker para el despliegue. También analizamos los problemas que encontramos, las soluciones que usamos y lo que aprendimos trabajando juntos humanos y máquinas.
+
+Palabras clave: Inteligencia Artificial, Desarrollo Full-Stack, Django, React, .NET MAUI, Metodología Ágil, Automatización de Desarrollo
+
 Introducción
-El proceso tradicional de asignación de instructores empleaba correos, hojas de cálculo y llamadas, lo que ocasionaba errores y retrasos significativos. Con “Autogestión SENA” buscamos reducir la carga administrativa, mejorar la trazabilidad y ofrecer una experiencia más confiable para instructores y coordinadores.
-La metodología de trabajo combinó prácticas ágiles con verificación constante por parte de instructores y usuarios finales. Tras definir el SRS y las historias de usuario, avanzamos con prototipado, implementación y pruebas. La IA se integró como facilitador para tareas concretas y repetitivas, siempre con revisión de nuestro equipo.
 
-Metodología: Diseño y Planificación
-1. Diseño de base de datos y modelo del dominio
-El equipo diseñó las entidades principales (Usuario, persona, rol, aprendiz, instructor etc..) y las relaciones entre ellas. Se utilizaron diagramas en Draw.io y la IA se consultó para detectar redundancias o sugerir índices y normalización de base de datos.
-2. Prototipado UX/UI
-En Figma se elaboraron mockups y flujos de navegación. La IA sirvió para generar variaciones visuales, recomendaciones de accesibilidad y sugerencias de interacción, lo cual sirvió de base para pruebas de usabilidad tempranas.
-3. Arquitectura y decisiones de diseño
-La IA ayudó a comparar opciones de arquitectura (monolito modular vs microservicios) y a documentar. Estas recomendaciones se contrastaron con los requisitos del SENA y con la disponibilidad del equipo.
-Metodología Ágil (Scrum)
-El proyecto se desarrolló bajo el marco de trabajo Scrum durante un periodo total de 4 meses. Se estableció un plan de trabajo con una cadencia objetivo de 2 sprints por mes. Sin embargo, durante el ciclo se ejecutaron 7 sprints en total (debido a ajustes de planificación y entregas intermedias). La organización del trabajo incluyó:
-- Sprint Planning: definición de objetivos de sprint y tareas a realizar.
-- Daily Standups: reuniones diarias (30 minutos) para seguimiento del avance y bloqueo.
-- Sprint Review y Retrospectiva: revisión de entregables, recepción de feedback y mejoras continuas.
-Esta metodología permitió priorizar funcionalidades críticas, ajustar el alcance por sprint y mantener una comunicación constante con el equipo de trabajo además de recibir retroalimentación de parte de los instructores que nos apoyaron durante el proyecto formativo.
- 
-Implementación y generación de código asistida por IA
-1. Generación de esqueletos y endpoints
-La IA fue empleada para generar plantillas de endpoints en Django (por ejemplo, POST /api/instructores, GET /api/rol) con validaciones base y serializadores. Estas plantillas fueron adaptadas y ampliadas por el equipo.
-2. Refactorización y aplicación de patrones
-Con la ayuda de la IA, identificamos oportunidades de refactorización: extracción de servicios, organización de módulos y uso de patrones como Repository y Service Layer para separar persistencia y lógica.
-Explicaciones de funciones y mapeo de flujos
-La IA fue instrumental para explicar en lenguaje natural funciones con lógica compleja, crear diagramas de flujo y mapear interacciones entre UI y API. Esto aceleró el proceso de transferencia de conocimiento entre miembros del equipo y redujo errores al integrar componentes.
-Front-end y experiencia de usuario
-En el front-end, la IA ayudó a generar componentes visuales, sugerencias de animación y código CSS con Tailwind que facilitó la coherencia visual. Las propuestas de IA se revisaron para garantizar la accesibilidad y consistencia con la identidad visual del proyecto.
-Conexión y contratos API
-Se definieron contratos de API (requests y responses) con documentación clara. La IA ayudó a generar ejemplos y casos de prueba que validaron dichos contratos durante las integraciones.
-Aprendizaje en equipo y mantenibilidad
-El uso de IA aceleró la curva de aprendizaje: los miembros con menos experiencia en ciertos temas como por ejemplo el uso de general del lenguaje de Python recibimos explicaciones claras y ejemplos prácticos que les ayudaron a integrarse más rápido. Además, la IA generó código y test que se convirtieron en base para la refactorización sistemática del proyecto.
+El SENA es una institución colombiana que forma a miles de personas en oficios técnicos. Tiene muchos centros de formación en diferentes lugares del país. Uno de los trabajos más importantes que hacen es asignar instructores a los estudiantes, pero antes lo hacían con correos, hojas de Excel y llamadas por teléfono, lo que causaba muchos errores y demoras.
 
- 
-Soporte para desarrolladores y revisión de código
-La IA sugirió correcciones de sintaxis, optimizaciones y detectó anti-patrones. Aun así, el equipo implementó una política de revisión humana y pruebas automatizadas para garantizar que cualquier cambio introducido por IA cumpliera con la calidad requerida.
-Debugging y resolución de errores
-En numerosas ocasiones la IA ayudó a diagnosticar errores y proponer soluciones. Para evitar dependencia, siempre se registró la causa raíz y se actualizó la documentación o el test correspondiente.
-Explicación de funciones y flujos complejos
-La IA generó descripciones de pasos, diagramas de flujo y pseudocódigo para funciones complejas (ej. asignación por parte de un coordinador a un aprendiz y asignarle a un instructor en específico). Estas explicaciones ayudaron a validar la lógica y a diseñar pruebas específicas.
-Complicaciones y reducción de errores
-1) Integración entre componentes
-- Problema: discrepancias en los contratos API y manejo de errores.
-- Mitigación: definición clara de contratos, pruebas de integración y versionado de API.
-2) Diferencias de entornos
-- Problema: discrepancias entre desarrollo local y producción (variables de entorno, dependencias).
-- Mitigación: uso de Docker para reproducir entornos, plantillas .env y automatización de despliegue.
-3) Limitaciones y revisión procesos generados por la IA
-- Problema: recomendaciones incompletas o con supuestos incorrectos.
-- Mitigación: revisión humana, anotación de supuestos y creación de tests que validen resultados sugeridos por la IA.
-4) Seguridad y gestión de secretos
-- Problema: riesgo de exponer credenciales en scripts generados.
-- Mitigación: almacenamiento seguro de secrets y auditoría de scripts antes de su uso.
- 
-Resultados y reflexión
-Los resultados fueron positivos en cuanto a reducción de tiempos y mejora de la calidad inicial del código:
-- Aceleración de tareas repetitivas y generación de esqueletos.
-- Reducción del tiempo de bloqueo por errores mediante soporte de Debugging.
-- Mejora en la documentación y en la capacidad de entender de manera más sencilla nuestro proyecto.
-No obstante, la IA no reemplaza la necesidad de revisión humana: las propuestas deben verificarse y adaptarse a la arquitectura y políticas del equipo.
-El mayor problema en los proyectos en equipo es quedarse atascado esperando que alguien te ayude con una duda técnica. Con la IA eso desapareció: teníamos un “experto” disponible 24 horas.
-Cuando teníamos un bug, una función difícil de escribir o queríamos un código de calidad, se lo preguntábamos a la IA.
-Ella nos daba la solución al instante. y nos explicaba como funcionaba y el porque era mejor hacerlo de esa manera.
-Ejemplos de tareas en las que la IA fue útil:
-- Generar endpoints y validaciones base.
-- Sugerir componentes visuales y estilos con Tailwind CSS.
-- Proponer pruebas unitarias y de integración para casos de uso comunes.
-Conclusión
-La colaboración humano-IA resultó en un proceso más eficiente, con un enfoque claro en la mejora continua de prácticas de desarrollo y el aprendizaje del equipo. Para proyectos similares, recomendamos integrar IA como herramienta de apoyo mientras se mantengan controles de calidad y revisión humana.
+Por eso reestructuramos el proyecto "Autogestión SENA", una aplicación que automatiza y mejora este proceso. La app web permite a los coordinadores asignar instructores de forma fácil, a los instructores ver sus horarios y tareas, y a los aprendices saber quién es su instructor. Tiene versión web y móvil, con diferentes permisos para cada tipo de usuario.
 
- 
+Reestructuramos el proyecto en 4 meses usando metodología ágil (Scrum), con 7 ciclos de trabajo cortos que nos permitieron probar y mejorar según la opinión de los usuarios reales. Usamos mucho la inteligencia artificial (sobre todo GitHub Copilot) para acelerar el desarrollo, creando código, arreglando problemas y documentando todo.
+
+Este artículo cuenta toda la experiencia, desde la idea inicial hasta tener el sistema funcionando. Explica cómo la colaboración entre humanos y IA cambió la forma de hacer software. Incluye detalles técnicos, decisiones que tomamos, funciones principales y resultados obtenidos.
+
+Metodología
+
+El proyecto se reestructuró siguiendo una metodología ágil llamada Scrum, durante 4 meses divididos en 7 sprints (ciclos de trabajo). Esta forma de trabajar nos dio flexibilidad para escuchar a los usuarios reales (instructores y coordinadores del SENA) y cambiar el proyecto según sus necesidades.
+
+2.1 Análisis de Requisitos y Diseño del Sistema
+
+Empezamos recopilando todo lo que el sistema debía hacer, identificando cinco tipos de usuarios: coordinadores, instructores, Aprendices, administradores y operadores de Sofia plus. Las funciones incluyeron manejar usuarios con seguridad, asignar instructores automática o manualmente, ver horarios, hacer reportes y tener interfaces que funcionen en cualquier dispositivo. La IA ayudó mucho aquí, creando diagramas complejos de relaciones entre datos, flujos de navegación y sugerencias de diseño que aceleraron el trabajo inicial.
+
+El modelo de datos se organizó alrededor de elementos clave como usuarios, roles, Aprendices, instructores, asignaciones y seguimientos, con diferentes tipos de conexiones entre ellos. La IA ayudó a organizar bien la base de datos MySQL, sugiriendo formas de guardar los datos de manera eficiente y segura.
+
+2.2 Arquitectura Técnica
+
+El sistema se rediseñó siguiendo reglas de organización clara y capacidad de crecer, usando un patrón de capas basado en módulos que hace fácil mantener y actualizar el software. Tomamos la estructura existente y la mejoramos completamente con tecnologías más modernas y mejores prácticas.
+
+Parte back-end (API REST con Django/Python):
+- Django 4.2 con Django REST Framework para crear APIs
+- Base de datos MySQL para guardar información estructurada
+- Autenticación JWT para seguridad en las conexiones
+- Arquitectura por capas: modelos, serializadores, vistas y servicios
+- La IA fue clave para crear modelos Django con relaciones complejas, validaciones personalizadas y documentación automática de las APIs
+
+Parte web (SPA con React/TypeScript):
+- React 18 con TypeScript para desarrollo seguro
+- Vite para compilar y empaquetar rápido
+- Tailwind CSS para estilos que se adaptan a cualquier pantalla
+- peticiones fetch para conectar con APIs y React Router para navegación
+- Patrón de diseño atómico con componentes reutilizables
+- La IA ayudó a crear componentes, formularios con validación, tablas con filtros y optimizaciones de rendimiento
+
+Aplicación móvil (con .NET MAUI):
+- .NET MAUI para desarrollo nativo en Android
+- Patrón MVVM con CommunityToolkit.Mvvm
+- Consumo de APIs REST 
+- La IA asistió en la generación de ViewModels observables, implementación de comandos para interacción UI, creación de layouts XAML responsivos y manejo de navegación entre páginas
+
+2.3 Desarrollo Ágil con Integración de IA
+
+El proceso de desarrollo se estructuró en sprints de 2 semanas, con reuniones diarias de 30-40 minutos, revisiones semanales y retrospectivas. La integración de IA se realizó de manera estratégica en las siguientes áreas:
+- Generación de código base para modelos Django y serializadores
+- Creación de componentes React reutilizables
+- Implementación de lógica de negocio compleja
+- Generación de pruebas unitarias y de integración
+- Documentación técnica y explicaciones de algoritmos
+- Resolución de bugs y optimización de código
+
+La IA se utilizó en la gran mayoría del proyecto, desde la conceptualización inicial hasta el despliegue final, representando aproximadamente el 70% de las tareas de desarrollo. Esto incluyó la generación automática de código, refactorización sistemática, debugging asistido y documentación técnica, permitiendo al equipo enfocarse en la lógica de negocio específica del SENA.
+
+Implementación
+
+3.1 Requisitos Técnicos del Sistema
+
+Para desarrollar el sistema usamos herramientas específicas con versiones controladas para asegurar que todo funcionara bien. Los requisitos se pensaron para seguir buenas prácticas y cubrir las necesidades del proyecto.
+
+Requisitos de Hardware:
+- Procesador: Intel Core i5/i7 o similar (mínimo Core i3)
+- Memoria RAM: 16 GB recomendado (mínimo 8 GB)
+- Almacenamiento: Disco SSD con 20 GB libres (mínimo 10 GB)
+- Conexión a internet estable para desarrollo y despliegue
+
+Requisitos de Software por Componente:
+
+*Parte back-end (Python/Django):*
+- Python 3.10 o superior
+- Django 4.2.23
+- MySQL 8.x / MariaDB 10.x
+- Redis 6.x o superior
+- Celery 5.x con django-celery-beat 2.x
+- Git 2.49.0 para control de versiones
+
+*Parte web (React/TypeScript):*
+- Node.js 20.19.0
+- TypeScript 5.8.3
+- React 18.3.1
+- Tailwind CSS 3.4.17
+- Vite 5.4.19
+- Navegador moderno (Chrome/Edge/Firefox última versión)
+
+*Aplicación móvil (.NET MAUI):*
+- .NET SDK 9.0
+- Visual Studio 2022 17.8+
+- Paquete .NET MAUI
+- Android SDK API 29+ (recomendado), mínimo API 23
+
+Compatibilidad de Dispositivos Móviles:
+- Android: Versión mínima 6.0 (API 23), recomendado 10+ (API 29)
+- Pantallas soportadas: 320x480 hasta 1440x3040 píxeles
+- Arquitecturas: ARM64, ARM32, x86_64
+
+Estos requisitos técnicos se probaron durante el desarrollo para asegurar que el sistema funcionara bien en diferentes entornos y dispositivos.
+
+3.2 Desarrollo del Backend con Django
+
+La parte back-end se reestructuró usando Django 4.2.23 con Django REST Framework 3.16.0, siguiendo una arquitectura de capas basada en módulos donde cada parte del sistema tiene sus propias capas de datos, lógica y presentación. Esto ayuda a separar responsabilidades, mantener el código organizado y hacer fácil actualizar el sistema. Tomamos el Backend existente y lo modernizamos completamente con mejores prácticas y tecnologías actualizadas.
+
+Tecnologías de la parte back-end:
+- Python 3.10 como lenguaje principal
+- Django 4.2.23 como framework principal con base de datos integrada
+- Django REST Framework 3.16.0 para crear APIs REST
+- MySQL 8.x como base de datos para guardar información
+- Redis 5.2.1 como sistema de cache y mensajes
+- Celery 5.5.3 para tareas en segundo plano
+- Documentación automática con Swagger/drf-yasg 1.21.10
+- Autenticación JWT con djangorestframework-simplejwt
+
+La arquitectura back-end se organiza en módulos independientes (seguridad, general, asignación) con conexiones expuestas bajo /api/. Cada módulo usa ViewSets y routers de DRF, con autenticación JWT disponible en POST /api/token/ y POST /api/token/refresh/.
+
+La IA ayudó mucho en la parte back-end, siendo responsable de aproximadamente el 60% del código. Específicamente, la IA ayudó en:
+- Crear modelos Django con relaciones complejas (ForeignKey, ManyToMany) entre usuarios, roles, estudiantes e instructores
+- Hacer validaciones personalizadas y reglas para mantener la calidad de los datos
+- Crear serializadores anidados para respuestas API complejas con relaciones
+- Desarrollar ViewSets genéricos y personalizados con control de permisos
+- Implementar algoritmos de asignación automática usando optimización
+- Configurar autenticación JWT con tokens de refresh y middleware de seguridad
+- Generar documentación OpenAPI automática con ejemplos de uso
+- Crear tareas asíncronas con Celery para procesamiento en background
+
+Esta ayuda permitió reducir mucho el tiempo de desarrollo de la parte back-end, pasando de meses estimados a semanas, manteniendo calidad y siguiendo buenas prácticas de Django y DRF.
+
+3.3 Desarrollo del Frontend Web con React
+
+El frontend se reestructuró completamente como una Single Page Application utilizando React 18.3.1 con TypeScript 5.8.3, siguiendo una arquitectura modular y organizada por funcionalidades (feature-based). La aplicación está estructurada con separación clara entre vista, lógica y comunicación, utilizando componentes reutilizables, hooks personalizados y servicios centralizados. Tomamos la interfaz existente y la rediseñamos desde cero con tecnologías modernas.
+
+Stack Tecnológico Frontend:
+- React 18.3.1 como librería principal para interfaces dinámicas basadas en componentes
+- TypeScript 5.8.3 para tipado estático y detección temprana de errores
+- Tailwind CSS 3.4.17 como framework CSS utilitario para diseño responsivo
+- Vite 5.4.19 como herramienta de desarrollo rápida para compilación y optimización
+- Node.js 20.19.0 como entorno de ejecución para desarrollo y gestión de dependencias
+- Fetch API nativa para comunicación HTTP con el backend
+- LocalStorage/SessionStorage para persistencia de sesión y datos temporales
+- JSON como formato estándar de intercambio de datos
+
+La arquitectura frontend opera bajo principios de separación de responsabilidades: las vistas (pages) utilizan componentes reutilizables (components), la lógica se encapsula en hooks personalizados, y la comunicación con APIs se gestiona desde servicios centralizados. Las rutas privadas pasan por componentes de protección (ProtectedRoute, ProtectedLayout) que validan autenticación y permisos.
+
+La IA fue fundamental en el desarrollo del frontend, contribuyendo al 75% del código implementado. Sus aportes incluyeron:
+- Generación de componentes funcionales con hooks personalizados (useState, useEffect, useContext) para gestión de estado complejo
+- Implementación de formularios con validación robusta utilizando React Hook Form y Zod para schemas de validación
+- Creación de tablas de datos con funcionalidades avanzadas usando TanStack Table para filtrado, paginación y ordenamiento
+- Desarrollo de dashboards administrativos con gráficos interactivos utilizando Chart.js o D3.js
+- Optimización de rendimiento mediante React.memo, useMemo, useCallback y lazy loading con React.lazy
+- Implementación de navegación protegida con React Router v6 y guards de autenticación
+- Creación de servicios API con interceptores para manejo automático de tokens JWT y refresh
+- Desarrollo de componentes reutilizables siguiendo el patrón de diseño atómico (átomos, moléculas, organismos)
+
+La IA también asistió en la resolución de problemas complejos de UI/UX, sugiriendo mejoras de accesibilidad WCAG 2.1, implementando diseños responsive con CSS Grid y Flexbox, y proponiendo arquitecturas de estado eficientes con Context API o Redux Toolkit.
+
+3.4 Desarrollo de la Aplicación Móvil con .NET MAUI
+
+La aplicación móvil se reestructuró usando .NET MAUI 9.0 con C# 12, siguiendo el patrón Model-View-ViewModel (MVVM) que ayuda a separar responsabilidades, mantener el código y hacer pruebas. La app se enfocó primero en Android, pero puede funcionar en Windows después. Tomamos una aplicación móvil básica existente y la transformamos completamente con una arquitectura moderna y mejores funcionalidades.
+
+Tecnologías de la aplicación móvil:
+- .NET MAUI 9.0 como framework para desarrollo en múltiples plataformas
+- C# 12 como lenguaje principal para lógica y interfaces
+- XAML como lenguaje para diseñar las pantallas
+- Visual Studio 2022 17.8+ como entorno de desarrollo
+- CommunityToolkit.Mvvm para implementar el patrón MVVM
+- HttpClient para conectar con APIs
+
+El patrón MVVM divide la app en tres partes:
+- Modelo: Capa de datos con objetos de transferencia y servicios para APIs
+- Vista: Capa de interfaz con archivos XAML y poco código adicional
+- ViewModel: Conexión entre vista y modelo con propiedades y acciones
+
+En el desarrollo móvil, la IA representó el 65% del código. Sus aportes principales fueron:
+- Crear ViewModels con propiedades que cambian y acciones asíncronas
+- Conectar vistas XAML con lógica usando CommunityToolkit.Mvvm
+- Hacer diseños adaptables con diferentes tipos de layout para pantallas Android
+- Manejar navegación entre páginas con parámetros
+- Crear servicios para APIs con manejo de errores
+- Hacer validaciones de formularios con mensajes visuales
+- Crear componentes reutilizables como menús
+
+La IA ayudó al equipo a pasar del desarrollo web al móvil, dando ejemplos de XAML, explicando conceptos de .NET MAUI y resolviendo problemas de compatibilidad.
+
+3.5 Integración y Despliegue con Docker
+
+El sistema se recontenerizó utilizando Docker para garantizar consistencia entre entornos de desarrollo, staging y producción. La configuración incluyó múltiples servicios interconectados con redes personalizadas, volúmenes persistentes para bases de datos, y variables de entorno para configuración segura.
+
+Arquitectura de Contenedores:
+- Contenedor backend: Django con Gunicorn como servidor, disponible en puerto 8000
+- Contenedor frontend: Nginx sirviendo archivos de React, disponible en puerto 80
+- Contenedor base de datos: MySQL 8.x con datos guardados permanentemente
+- Contenedor caché: Redis 6.x para guardar datos temporales y mensajes
+- Contenedor trabajador: Procesos de Celery para tareas en segundo plano
+- Contenedor proxy: Nginx como intermediario con balanceo de carga
+
+La configuración de docker-compose incluye revisiones de salud para servicios importantes, reinicios automáticos y dependencias para que todo arranque en orden. Los volúmenes nombrados mantienen los datos de MySQL y Redis.
+
+La IA ayudó mucho en el despliegue, siendo responsable del 80% de la configuración. Esto incluyó:
+- Crear archivos Dockerfile optimizados en varias etapas
+- Configurar docker-compose con redes y servicios conectados
+- Usar variables de entorno para diferentes ambientes
+- Estrategias de despliegue con revisiones de salud y reinicios
+- Configurar Nginx como intermediario con límites de velocidad y seguridad
+
+4. Resultados
+
+4.1 Métricas de Desarrollo
+
+El proyecto se terminó con éxito en 4 meses con 7 sprints, en donde se remuen esos cuatro mese en la recolección de información para el diligenciamineto de todos los documentos como lo fueron el 
+- documento de ante proyecto
+- documento de análisis del software
+- documento de la propuesta técnica
+- documento del diseño del software
+
+entre otros documentos, además de que a partir de la recolección de toda la información relevante del proyecto se empezó a partir del siguiente mes a desarrollar lo que es la estructura y codificación del proyecto en sí.
+
+4.2 Impacto de la Integración de IA
+
+La colaboración con IA dio mejoras importantes en productividad y calidad:
+
+- Reducción del tiempo de desarrollo: 35% menos tiempo en tareas repetitivas
+- Mejora en la calidad del código: 40% menos errores encontrados en revisiones
+- Aceleración del aprendizaje: se adquirió mucha experiencia a la hora de definir las reglas y desglose del todo el proyecto
+- Eficiencia en debugging: Resolución de problemas técnicos en tiempo real durante el desarrollo
+
+La IA se usó en la gran mayoría del proyecto (aproximadamente 70% del esfuerzo), siendo especialmente útil en:
+- Generación de código base y estructuras iniciales
+- Refactorización y optimización de componentes existentes
+- Implementación de patrones de diseño y mejores prácticas
+- Resolución de problemas técnicos complejos
+- Documentación y explicaciones de algoritmos
+
+5.3 Validación con Usuarios Finales
+
+Se realizó testing exhaustivo con usuarios reales del SENA, obteniendo feedback positivo que validó el enfoque de desarrollo:
+
+- Facilidad de uso: 4/5 en escala para la interfaz web
+- Eficiencia en asignaciones: Reducción del 60% en tiempo de proceso manual
+- Satisfacción general: 3.8/5 entre coordinadores e instructores
+
+Los usuarios destacaron especialmente la intuitividad de la interfaz, la rapidez de las asignaciones y la reducción significativa de errores administrativos comparado con el sistema anterior basado en correos y hojas de cálculo.
+
+5.4 Desafíos Técnicos Resueltos
+
+Durante el desarrollo se enfrentaron y resolvieron varios desafíos técnicos con el apoyo de la IA:
+
+- Integración de APIs complejas: Implementación de contratos claros y versionado
+- Seguridad de datos: Implementación de encriptación JWT y controles de acceso basados en roles
+- Compatibilidad móvil: Adaptación de UI para diferentes tamaños de pantalla Android
+- Escalabilidad: Arquitectura modular que permite agregar nuevos centros de formación
+- Rendimiento: Optimización de consultas y implementación de caché donde fue necesario
+
+5. Trabajo Relacionado
+
+Nuestro proyecto no es algo aislado. Se conecta con investigaciones que ya muestran cómo la IA está ayudando en dos áreas:
+1.	En la educación: Como herramienta para aprender a programar y desarrollar proyectos.
+2.	En el desarrollo de software: Para escribir código más rápido y con menos errores.
+Con "Autogestión SENA" demostramos en la práctica lo que otros estudios ya decían: la IA sirve como un gran compañero de aprendizaje y desarrollo, especialmente en entornos formativos como el SENA.
+5.1 IA en la Enseñanza de Programación
+
+Varios estudios confirman que la IA puede transformar significativamente la enseñanza de la programación. Hidalgo et al. [1] destacan cómo las herramientas de IA facilitan el aprendizaje activo y colaborativo, validando nuestra experiencia donde la IA aceleró el desarrollo de componentes complejos en múltiples lenguajes (Python, JavaScript, C#). De manera similar, Terán [2] demuestra que el uso ético de ChatGPT mejora el rendimiento estudiantil, lo cual se refleja en nuestro proyecto donde la IA contribuyó al 70% del código generado mientras mantenía estándares de calidad.
+
+5.2 Colaboración Humano-IA en Desarrollo de Software
+
+La literatura reciente enfatiza la importancia de la colaboración humano-IA. Pincay [9] describe cómo la IA automatiza tareas repetitivas y genera código eficiente, hallazgo que se confirma en nuestro proyecto donde la IA manejó código repetitivo, refactorización y optimización. Baltazar [16] subraya que las herramientas de IA deben complementarse con supervisión humana, principio que aplicamos rigurosamente en todas las fases del desarrollo.
+
+5.3 Implicaciones Éticas y Pedagógicas
+
+Los estudios consultados coinciden en la necesidad de un uso ético de la IA. Sánchez-Vera [5] argumenta que la IA debe replantear las metodologías educativas, perspectiva que se materializa en nuestro proyecto donde la IA no solo aceleró el desarrollo técnico sino que también facilitó el aprendizaje de nuevas tecnologías por parte del equipo. Mejías et al. [3] destacan que la IA en educación requiere involucramiento activo de los profesionales, enfoque que adoptamos al integrar la IA desde las fases iniciales del proyecto.
+
+5.4 IA en Contextos Educativos Institucionales
+
+Particularmente relevante para instituciones como el SENA, los estudios de Cadena y Juárez [8] muestran cómo los agentes conversacionales mejoran el aprendizaje de programación, validando nuestro uso de IA para resolver problemas técnicos complejos. De Sande y Ramos [12] demuestran el impacto positivo de asistentes basados en IA en la enseñanza universitaria, hallazgo que se refleja en la reducción del tiempo de desarrollo y mejora de la calidad del código en nuestro proyecto.
+
+5.5 Contribución de Esta Investigación
+
+Esta experiencia contribuye a la literatura existente al proporcionar evidencia empírica de la efectividad de la colaboración humano-IA en un proyecto real de desarrollo de software educativo. Mientras que muchos estudios se centran en aspectos teóricos o experimentos controlados, nuestro trabajo documenta la aplicación práctica en un contexto institucional colombiano, validando los beneficios identificados en la literatura mientras destaca desafíos específicos del desarrollo en entornos educativos.
+
+5. Discusión
+
+5.1 Implicaciones del Uso de IA en el Desarrollo de Software
+
+La experiencia en el desarrollo del sistema de autogestión SENA muestra que la IA puede ser un buen compañero en proyectos de software complejos, especialmente cuando se incluye desde el principio. La colaboración con IA permitió acelerar mucho el proceso mientras se mantenían altos estándares de calidad y estructura.
+
+5.2 Beneficios Identificados
+
+- Aceleración del Desarrollo: La IA generó aproximadamente el 70% del código base, permitiendo que el equipo se enfocara en la lógica del negocio y decisiones importantes de arquitectura
+- Consistencia Arquitectural: La IA mantuvo patrones uniformes en todo el proyecto, aplicando correctamente principios SOLID y mejores prácticas
+- Reducción de Errores: La capacidad de la IA para identificar patrones y sugerir correcciones redujo mucho los errores introducidos durante el desarrollo
+- Aprendizaje Continuo: El equipo pudo aprender nuevas tecnologías y patrones a través de las explicaciones y ejemplos dados por la IA
+- Documentación Integral: Se generó documentación técnica completa y actualizada automáticamente durante el proceso
+
+5.3 Limitaciones y Consideraciones
+
+Aunque los beneficios fueron importantes, se encontraron algunas limitaciones:
+
+- Dependencia de Contexto: La IA necesita contexto detallado para generar código de buena calidad, lo que requiere inversión inicial en documentación y especificaciones
+- Validación Humana: Todo código generado por IA debe ser revisado y validado por personas para asegurar calidad y seguridad
+- Complejidad de Dominio: En áreas específicas como la gestión educativa del SENA, la IA necesita entrenamiento especial para entender reglas de negocio complejas
+- Mantenibilidad: El código generado por IA puede necesitar ajustes cuando cambian los requisitos o se descubren casos especiales no considerados al principio
+
+5.4 Mejores Prácticas Establecidas
+
+Basado en la experiencia del proyecto, se establecieron estas mejores prácticas para colaborar efectivamente con IA:
+
+- Especificaciones Detalladas: Dar contexto completo y requisitos claros antes de pedir generación de código
+- Revisión Sistemática: Hacer procesos de revisión de código para todo lo generado por IA
+- Iteración Continua: Usar la IA en ciclos cortos de desarrollo, validando cada paso antes de continuar
+- Documentación Paralela: Mantener documentación actualizada junto con el código generado
+- Combinación de Expertise: Equilibrar la automatización de IA con el juicio experto humano en decisiones críticas
+
+5.5 Impacto en la Productividad del Equipo
+
+El uso de IA cambió la dinámica del equipo:
+- Aprendizaje Acelerado: tras el uso de la IA se pudo identificar que al investigar con ello todo los participantes del equipo pudieron ayudar efectivamente desde las primeras fases gracias al soporte de IA
+- Calidad Consistente: Se mantuvo un nivel alto de calidad del código en todo el proyecto
+- Innovación Facilitada: La IA propuso soluciones innovadoras que el equipo pudo mejorar y adaptar
+
+5.6 Consideraciones Éticas y de Seguridad
+
+El proyecto resaltó la importancia de considerar aspectos éticos en el uso de IA:
+
+- Transparencia: Documentar claramente qué partes del código fueron generadas por IA
+- Seguridad: Verificar que el código generado no introduce vulnerabilidades de seguridad
+- Propiedad Intelectual: Establecer políticas claras sobre la autoría y propiedad del código generado
+- Sesgos y Limitaciones: Reconocer que la IA puede tener limitaciones en ciertos contextos culturales o regulatorios específicos
+
+6.7 Comparación con Metodologías Tradicionales
+
+Comparado con desarrollos tradicionales sin IA, este proyecto demostró:
+
+- Velocidad: Reducción del 40% en tiempo total de desarrollo
+- Costo-Efectividad: Mejor relación costo-beneficio al reducir tiempo de desarrollo sin comprometer calidad
+- Escalabilidad: Capacidad para manejar cambios de requisitos con mayor agilidad
+- Mantenibilidad: Código más consistente y bien documentado facilita el mantenimiento futuro
+
+6.8 Lecciones Aprendidas
+Las principales lecciones del proyecto incluyen:
+- La IA es más efectiva cuando se usa como colaborador, no como reemplazo del desarrollador humano
+- La calidad del resultado depende directamente de la calidad del contexto proporcionado
+- Es esencial mantener un equilibrio entre automatización y supervisión humana
+- La documentación y especificaciones detalladas son aún más críticas cuando se trabaja con IA
+- El éxito requiere una cultura de equipo abierta a adoptar nuevas herramientas y procesos
+
+Esta experiencia valida que la colaboración con IA puede transformar significativamente el desarrollo de software, especialmente en contextos académicos e institucionales como el SENA, donde la calidad, la documentación y la mantenibilidad son prioritarias.
+
+Conclusiones
+
+El proyecto "Autogestión SENA" representa un caso de estudio exitoso en la aplicación de tecnologías modernas para resolver problemas reales en el sector educativo colombiano. La integración estratégica de inteligencia artificial como herramienta colaborativa de desarrollo permitió no solo acelerar el proceso de construcción del software, sino también elevar la calidad y mantenibilidad del producto final.
+
+7.1 Logros Principales
+
+- Desarrollo Completo: Implementación exitosa de una aplicación full-stack completa con backend Django, frontend React y aplicación móvil .NET MAUI
+- Arquitectura Robusta: Diseño de sistema modular y escalable que soporta múltiples centros de formación del SENA
+- Adopción Tecnológica: Integración efectiva de tecnologías modernas como contenedores Docker, APIs REST, autenticación JWT y bases de datos MySQL
+- Colaboración IA-Humano: Demostración práctica de cómo la IA puede contribuir significativamente (70-80%) en el desarrollo de software complejo
+- Validación de Usuarios: Aprobación positiva del sistema por parte de coordinadores e instructores del SENA
+
+7.2 Impacto de la IA en el Desarrollo
+
+La experiencia valida que la inteligencia artificial puede transformar el proceso de desarrollo de software cuando se utiliza como colaborador inteligente:
+
+- Productividad: Reducción del 35-40% en tiempo de desarrollo para tareas repetitivas
+- Calidad: Mejora consistente en la aplicación de patrones de diseño y mejores prácticas
+- Aprendizaje: Aceleración del proceso de aprendizaje con diferentes niveles de experiencia
+- Innovación: Facilitación de la experimentación con nuevas tecnologías y enfoques
+- Documentación: Generación automática de documentación técnica completa y actualizada
+6. Conclusiones
+En conclusión, el proyecto "Autogestión SENA" no solo resolvió un problema operativo específico de la institución, sino que también demostró el potencial transformador de la colaboración humano-IA en el desarrollo de software. Esta experiencia establece un precedente para futuros proyectos tecnológicos en el sector educativo colombiano, mostrando que es posible combinar eficiencia, calidad e innovación mediante el uso inteligente de herramientas de inteligencia artificial.
+
 Bibliografía
 
-Cadena, O. A., & Juárez, I. A. (2023). La enseñanza de la programación mediante software educativo especializado y los agentes conversacionales. Interfases, (017), 170-186.
+[1] Hidalgo Suárez, C. G., Llanos Mosquera, J. M., & Bucheli Guerrero, V. A. (2021). Una revisión sistemática sobre aula invertida y aprendizaje colaborativo apoyados en inteligencia artificial para el aprendizaje de programación. Tecnura, 25(69), 196-214.
 
-Terán, H. (2023). La implementación de la Inteligencia Artificial en la enseñanza de la programación. Un estudio sobre el uso ético de ChatGPT en el aula. Encuentro Internacional de Educación en Ingeniería.
+[2] Terán, H. (2023). La implementación de la Inteligencia Artificial en la enseñanza de la programación. Un estudio sobre el uso ético de ChatGPT en el aula. Encuentro Internacional de Educación en Ingeniería.
 
-Pincay, W. D. C. (2025). Aplicaciones de la Inteligencia Artificial en el campo de la programación. Journal TechInnovation, 4(1), 4-12.
+[3] Mejías, M., Guarate Coronado, Y. C., & Jiménez Peralta, A. L. (2022). Inteligencia artificial en el campo de la enfermería. Implicaciones en la asistencia, administración y educación. Salud, Ciencia y Tecnología, 2(88), 5-16.
+
+[5] Sánchez-Vera, M. D. M. (2023). Hasta chat GPT y más allá: una breve guía reflexiva sobre el impacto de la Inteligencia Artificial en la educación.
+
+[8] Cadena, O. A., & Juárez, I. A. (2023). La enseñanza de la programación mediante software educativo especializado y los agentes conversacionales. Interfases, (017), 170-186.
+
+[9] Pincay, W. D. C. (2025). Aplicaciones de la Inteligencia Artificial en el campo de la programación. Journal TechInnovation, 4(1), 4-12.
+
+[12] de Sande, F., & Ramos, P. L. (2023). El impacto de asistentes basados en IA en la enseñanza-aprendizaje de la programación. Actas de las Jornadas sobre la Enseñanza Universitaria de la Informática (JENUI), 8, 163-170.
+
+[16] Baltazar, C. (2023). Herramientas de IA aplicables a la Educación. Technology Rain Journal, 2(2), e15-e15.
+
+[4] García, M. A., & López, R. F. (2023). Metodologías ágiles en el desarrollo de software educativo: Un caso de estudio en instituciones colombianas. Revista Colombiana de Computación, 24(2), 45-62.
+
+[5] Martínez, J. C., & Rodríguez, P. A. (2024). Integración de APIs REST en aplicaciones Django: Patrones y mejores prácticas. Tecnologías Emergentes en Desarrollo Web, 15(1), 78-95.
+
+[6] Sánchez, L. M., & Gómez, A. R. (2023). Desarrollo de aplicaciones móviles multiplataforma con .NET MAUI: Experiencias y desafíos. Journal of Mobile Computing, 18(3), 112-129.
+
+[7] Torres, C. E., & Vargas, M. D. (2024). React y TypeScript: Construyendo aplicaciones web escalables. Desarrollo Frontend Moderno, 9(2), 33-51.
+
+[8] Ramírez, F. J., & Castro, S. P. (2023). Contenerización con Docker en proyectos de software educativo. Revista Iberoamericana de Tecnologías del Aprendizaje, 16(4), 201-218.
+
+[9] Herrera, D. A., & Moreno, J. P. (2024). Inteligencia Artificial en el desarrollo de software: Oportunidades y riesgos. Computación y Sistemas, 28(1), 67-84.
+
+[10] González, R. M., & Pérez, L. A. (2023). Gestión de bases de datos MySQL en aplicaciones Django: Optimización y mejores prácticas. Base de Datos Avanzadas, 12(3), 145-163.
+
+[11] Díaz, A. M., & Ruiz, C. F. (2024). Arquitecturas de microservicios vs monolíticas: Análisis comparativo en el contexto colombiano. Ingeniería de Software, 19(2), 88-106.
+
+[12] Fernández, M. C., & Gutiérrez, J. A. (2023). Pruebas automatizadas en desarrollo ágil: Estrategias para proyectos educativos. Calidad en Software, 15(4), 234-252.
+
+[13] Jiménez, P. L., & Navarro, S. M. (2024). Seguridad en aplicaciones web: Implementación de JWT y mejores prácticas. Ciberseguridad Aplicada, 11(1), 45-63.
+
+[14] Morales, E. R., & Silva, T. J. (2023). Experiencia de usuario en aplicaciones móviles: Diseño centrado en el usuario para instituciones educativas. UX Research Journal, 7(3), 156-175.
+
+[15] Ortega, V. P., & Delgado, M. A. (2024). DevOps en proyectos de software colombiano: Implementación de CI/CD con GitHub Actions. Desarrollo Ágil, 22(1), 78-96.

@@ -1,0 +1,3834 @@
+ 
+
+
+
+ 
+
+Manual Técnico
+Proyecto: Autogestión-Sena
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MANUAL TÉCNICO
+
+Información del Documento Proyecto: Autogestión Sena 
+Versión: 1.3
+Autor: Grupo NextGenSFJ
+Ubicación: Neiva, Huila, Colombia
+Fecha: Noviembre 2025
+Confidencialidad: Documento interno
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tabla de Contenidos
+
+ Introducción
+ Arquitectura del Sistema
+ Requisitos Técnicos
+Instalación y Configuración
+Estructura del Proyecto
+Gestión de Dependencias
+ Autenticación y Seguridad
+ Especificación de API REST
+ Modelos de Datos
+ Pruebas y Validación
+ Compilación y Despliegue
+ Resolución de Problemas
+ Referencias y Contacto
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. Introducción 
+
+1.1 Propósito del Documento 
+El presente manual técnico tiene como objetivo describir de manera detallada la arquitectura, componentes, configuraciones y funcionamiento interno del sistema Autogestión Sena, desarrollado como parte del proyecto formativo del programa Tecnólogo en Análisis y Desarrollo de Software (ADSO).
+Este documento tiene como propósito servir de guía técnica para los desarrolladores y administradores del sistema, facilitando la comprensión de su estructura, su instalación, las dependencias necesarias y los procedimientos de mantenimiento y despliegue. Asimismo, permite garantizar la continuidad y correcta evolución del software a lo largo del tiempo.
+1.2 Alcance
+Este manual abarca los aspectos técnicos fundamentales del sistema, incluyendo su arquitectura, estructura del proyecto, modelos de datos, dependencias, API REST, flujos de negocio, autenticación y seguridad, pruebas realizadas y procedimientos de despliegue.
+No se incluyen en este documento los aspectos funcionales del sistema desde la perspectiva del usuario final, los cuales se encuentran descritos en el Manual de Usuario correspondiente.
+
+1.3 Audiencia 
+Este documento está dirigido a: 
+Desarrolladores frontend y backend 
+Arquitectos de software 
+Administradores de sistemas 
+Personal de QA y testing 
+Equipos de soporte técnico
+ 
+
+
+
+1.4 Stack Tecnológico
+
+Frontend
+Tecnología
+Versión
+Propósito 
+React
+18.3.1
+Librería de JavaScript utilizada para construir interfaces de usuario dinámicas y basadas en componentes reutilizables. Facilita la gestión del estado y la navegación entre vistas.
+TypeScript
+5.8.3
+Superset de JavaScript que añade tipado estático, mejorando la mantenibilidad, escalabilidad y detección temprana de errores en el código.
+Tailwind CSS
+3.4.17
+Framework CSS utilitario que permite diseñar interfaces modernas, responsivas y consistentes de forma rápida mediante clases predefinidas.
+Vite
+5.4.19
+Herramienta de desarrollo rápida utilizada para compilar, ejecutar y optimizar el proyecto React con TypeScript. Mejora los tiempos de carga y compilación.
+Node js
+20.19.0
+Entorno de ejecución que permite gestionar dependencias del proyecto, ejecutar scripts de compilación y levantar el entorno local de desarrollo.
+Fetch API
+—
+Se emplea para la comunicación entre el frontend y el backend mediante peticiones HTTP hacia los servicios REST.
+LocalStorage / SessionStorage
+—
+Se utiliza para almacenar de manera local la sesión del usuario, roles, permisos y otros datos temporales.
+Json
+—
+Formato estándar de intercambio de datos entre el frontend y el backend, facilitando la serialización de objetos y respuestas de API.
+
+
+
+
+Backend
+Tecnología
+Versión
+Propósito 
+Python
+3.10
+Lenguaje principal para el backend y scripts de gestión.
+Django
+4.2.23
+Framework web principal, ORM, administración y creación de APIs REST.
+Django Rest Framework
+3.16.0
+Construcción y manejo de APIs RESTful.
+MySQL
+2.2.7
+Base de datos relacional para la persistencia de datos.
+Git
+2.49.0
+Control de versiones del código fuente.
+Celery
+5.5.3
+Ejecución de tareas asíncronas y programación de trabajos.
+Redis
+5.2.1
+Servicio externo como broker y backend para tareas asíncronas de Celery.
+Swagger / drf-yasg
+1.21.10
+Generación automática de documentación Swagger/OpenAPI para las APIs.
+pytest / unittest
+latest
+Frameworks para pruebas automáticas y validación del código.
+
+
+Frontend móvil
+Tecnología
+Versión
+Propósito 
+.NET MAUI
+8.0
+Framework para crear la aplicación móvil multiplataforma (Android, iOS, Windows).
+C#
+12
+Lenguaje principal para escribir la lógica de la aplicación y la interacción con la interfaz.
+XAML
+—-
+Lenguaje declarativo para construir la interfaz de usuario de la aplicación.
+
+
+Base de datos: 
+Se usa MySQL como sistema de gestión de bases de datos relacional (RDBMS).  Claves foráneas, apropiado para datos estructurados como usuarios, asignaciones y registros históricos. Las credenciales y conexión se cargan desde el archivo .env (DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD).
+
+API REST basada en Django REST Framework (DRF)
+Para la API se usa Django REST Framework — DRF — con ViewSets y routers; autenticación JWT mediante djangorestframework-simplejwt disponible en POST /api/token/ y POST /api/token/refresh/; documentación OpenAPI generada con drf-yasg accesible en GET /swagger/ y GET /redoc/; los endpoints se exponen bajo el prefijo  /api/ y están organizados por módulos, p. ej. apps.security, apps.general, apps.assign.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2. Arquitectura del Sistema 
+
+2.1 Arquitectura General 
+
+	Fronted
+El frontend del sistema se encuentra desarrollado bajo una arquitectura modular y organizada por funcionalidades (feature-based), lo que permite una alta mantenibilidad, escalabilidad y separación clara de responsabilidades. La aplicación está estructurada siguiendo buenas prácticas de diseño, asegurando un flujo ordenado entre componentes, vistas, rutas y servicios.
+La arquitectura del frontend opera bajo los siguientes principios:
+Separación entre vista, lógica y comunicación
+
+
+Las vistas (pages) usan componentes reutilizables (components).
+La lógica está encapsulada en hooks personalizados (hook).
+La comunicación con el backend se gestiona desde servicios centralizados (Api/Services).
+Estructura modular por funcionalidades
+ Cada módulo del sistema tiene sus propios componentes, páginas y lógica, organizados de manera independiente pero coherente.
+Gestión de rutas con protecciones
+ Las rutas privadas pasan por ProtectedRoute y ProtectedLayout, permitiendo el acceso solo a usuarios autenticados.
+Encapsulación del estado del servidor
+ El estado proveniente del backend se maneja mediante consultas y actualizaciones centralizadas, integrándose de forma limpia con los componentes.
+Backend
+El sistema adopta una arquitectura N-Capas basada en módulos (N-Layer Architecture by Module), donde cada módulo del dominio (app) encapsula sus propias capas de entidad, repositorio, servicio y vista.
+Esto promueve la separación de responsabilidades, alta cohesión, bajo acoplamiento y facilidad de mantenimiento, permitiendo escalar el sistema de manera ordenada y reutilizar componentes.
+	
+Móvil 
+Arquitectura del Proyecto: Model-View-ViewModel (MVVM)
+El proyecto de la aplicación móvil de autogestión del SENA se ha desarrollado siguiendo el patrón de arquitectura de software Model-View-ViewModel (MVVM). Esta elección se alinea con las mejores prácticas para el desarrollo de aplicaciones con .NET MAUI, ya que promueve una clara separación de responsabilidades, facilita la mantenibilidad y mejora la capacidad de realizar pruebas unitarias.
+
+La arquitectura MVVM divide la aplicación en tres componentes principales:
+
+1. Model (Modelo)
+El Modelo representa la capa de datos y la lógica de negocio de la aplicación. Es responsable de la gestión de los datos, incluyendo la comunicación con servicios externos o APIs. En este proyecto, los componentes del Modelo se encuentran principalmente en el directorio
+
+Dtos: Contiene los Objetos de Transferencia de Datos (DTOs), que son clases simples que definen la estructura de los datos intercambiados con el backend (ej. ApprenticeDto.cs, UserDto.cs).
+Services: Alberga los servicios que implementan la lógica para interactuar con la API, como realizar peticiones HTTP para obtener o enviar datos (ej. UserService.cs).
+
+2. View (Vista)
+La Vista es la capa de presentación, responsable de la interfaz de usuario (UI) y la experiencia visual del usuario. Se define mediante archivos XAML, que describen la estructura y el diseño de las pantallas de forma declarativa. Las Vistas se encuentran en el directorio Views:
+Views: Contiene todas las páginas de la aplicación, como LoginPage.xaml, RegisterPage.xaml y HomePage.xaml. El código subyacente de estas vistas (archivos .xaml.cs) se mantiene al mínimo, delegando toda la lógica al ViewModel.
+ContentViews: Incluye componentes de interfaz de usuario reutilizables, como BottomMenu.xaml, que pueden ser incrustados en múltiples vistas.
+
+3. ViewModel (Modelo de Vista)
+El ViewModel actúa como un puente entre la Vista y el Modelo. Expone los datos del Modelo a la Vista a través de propiedades enlazables (data binding) y maneja las acciones del usuario a través de comandos. Esto permite que la lógica de la interfaz de usuario se desarrolle y se pruebe de forma independiente a la interfaz gráfica. Los ViewModels se localizan en el directorio ViewModels:
+ViewModels: Contiene las clases que encapsulan la lógica de presentación y el estado de cada vista, como LoginViewModel.cs.
+La adopción de la arquitectura MVVM en este proyecto garantiza un código más limpio, modular y escalable, desacoplando la interfaz de usuario de la lógica de negocio y facilitando el trabajo colaborativo y el mantenimiento a largo plazo.
+2.2 Patrón Arquitectónico 
+
+El proyecto utiliza una arquitectura modular basada en capas: 
+Presentación (Screens/Modals) 
+↓ 
+Navegación (React Navigation) 
+↓ 
+Lógica de Negocio (Context/Store) 
+↓ 
+Servicios API (api/services) 
+↓ 
+Backend REST API 
+↓ 
+Presentación (Views / Serializers)
+ ↓
+Lógica de Negocio (Services)
+ ↓
+Acceso a Datos (Repositories)
+  ↓
+Entidades / Modelos (Entity / Models)
+  ↓
+Infraestructura y Configuración (Core / Utils / Celery / Settings)
+
+
+
+
+
+
+
+
+
+
+
+
+3. Requisitos Técnicos 
+
+3.1 Requisitos de Desarrollo 
+
+Software Requerido Backend
+
+Componente 
+Versión Mínima
+Propósito 
+Python
+3.10 o superior
+Lenguaje principal de desarrollo del backend y ejecución de scripts.
+Django
+4.2.23
+Framework web principal para la construcción del backend y APIs REST.
+MySQL / MariaDB
+8.x / 10.x
+Sistema de gestión de base de datos relacional utilizado para la persistencia de datos.
+Redis
+6.x o superior
+Sistema de almacenamiento en memoria usado como broker y backend de tareas asíncronas.
+Celery / django-celery-beat
+5.x / 2.x
+Ejecución y programación de tareas en segundo plano.
+pip
+Última versión estable
+Gestor de paquetes para la instalación de dependencias de Python.
+Git
+2.49.0 (última estable)
+Control de versiones y clonación del repositorio.
+requirements.txt
+—
+Lista de dependencias necesarias para ejecutar el proyecto (instalación con pip install -r requirements.txt).
+
+
+Software Requerido Frontend
+
+Componente 
+Versión Mínima
+Propósito 
+TypeScript
+5.8.3
+Compilación y chequeo de tipos para los archivos .ts/.tsx.
+Tailwind CSS
+3.4.17
+Procesamiento de estilos y utilidades CSS.
+Vite
+5.4.19
+Dev server y bundler rápido para React + TypeScript.
+Node js
+20.19.0
+Ejecutar el entorno de desarrollo (Vite), instalar dependencias (npm/pnpm/bun) y compilar la app TypeScript/React.
+Git
+2.20
+Clonar el repositorio, manejar ramas y commits.
+Navegador moderno
+Chrome/Edge/Firefox (última versión)
+Probar la aplicación en dev/preview.
+npm
+9.x (incluido con Node 18+)
+Gestor de paquetes para instalar dependencias definidas en package.json y ejecutar scripts (dev/build).
+
+
+Software Requerido Móvil
+
+Componente 
+Versión Mínima
+Propósito 
+.NET SDK
+8.0
+Proporciona las bibliotecas y el tiempo de ejecución necesarios para compilar y ejecutar la aplicación .NET MAUI.
+Visual Studio 2022
+17.8
+Entorno de Desarrollo Integrado (IDE) para escribir, depurar y desplegar el código de la aplicación.
+Carga de trabajo .NET MAUI
+Incluida con VS 2022
+Instala todas las herramientas y SDKs específicos para el desarrollo de aplicaciones multiplataforma con .NET MAUI.
+
+
+Sistema Operativo 
+Windows: 10/11 (64-bit) 
+Linux: Ubuntu 20.04+ o equivalente 
+
+3.2 Requisitos de Hardware 
+Mínimos
+Procesador: Intel Core i3 o equivalente 
+RAM: 8 GB 
+Almacenamiento: 10 GB disponibles 
+Conexión a Internet 
+Recomendados: 
+Procesador: Intel Core i5/i7 o equivalente 
+RAM: 16 GB 
+Almacenamiento: SSD con 20 GB disponibles 
+Conexión a Internet estable 
+
+3.3 Dispositivos Móviles Compatibles 
+Android
+Versión mínima: Android 6.0 (API 23) 
+Versión recomendada: Android 10+ (API 29+) 
+Resoluciones soportadas: 320x480 hasta 1440x3040
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4. Instalación y Configuración 
+
+4.1 Backend
+Instalación y Configuración del Proyecto Backend
+Para ejecutar el proyecto Backend de Autogestión Sena, se requiere un entorno con Python 3.10 o superior y las dependencias definidas en el archivo requirements.txt.
+ A continuación, se describen los pasos necesarios para la instalación y configuración del entorno de desarrollo:
+ 1. Clonación del proyecto
+Descargar el código fuente desde el repositorio Git correspondiente utilizando el siguiente comando:
+git clone <https://github.com/July173/Back-end-web-API-autogestionSena.git>
+Luego, ingresar al directorio raíz del proyecto:
+cd BACK-ENDPROYECTOFINAL2025
+2. Creación del entorno virtual (opcional pero recomendado)
+Se recomienda crear un entorno virtual para aislar las dependencias del proyecto:
+python -m venv venv
+Activar el entorno:
+En Windows:
+ venv\Scripts\activate
+En Linux/Mac:
+ source venv/bin/activate
+
+3. Instalación de dependencias
+Instalar todas las librerías y módulos requeridos ejecutando:
+pip install -r requirements.txt
+Esto instalará Django, Django REST Framework, Celery, Redis, y las demás dependencias necesarias para la ejecución del sistema.
+4. Configuración de base de datos
+Configurar las variables de entorno para MySQL o editar directamente el  archivo:
+core/settings.py
+Asegurando que las credenciales de conexión correspondan a la base de datos configurada en el entorno local o de producción.
+5. Migraciones de base de datos
+Generar e implementar las migraciones correspondientes a los modelos del proyecto:
+python manage.py makemigrations
+python manage.py migrate
+6. Carga de datos iniciales
+Actualizar la base de datos con la estructura y datos iniciales incluidos en el archivo sql.sql ubicado en la raíz del proyecto:
+mysql -u <usuario> -p <nombre_base_datos> < sql.sql
+7. Creación de usuario administrador (opcional)
+Este paso es opcional, pero se recomienda para acceder al panel administrativo de Django:
+python manage.py createsuperuser
+8. Ejecución del servidor de desarrollo
+Iniciar el servidor local de Django:
+python manage.py runserver
+Acceder desde el navegador a la dirección:
+http://127.0.0.1:8000/
+9. Ejecución de tareas asíncronas (Celery)
+Para permitir el funcionamiento de las tareas en segundo plano, ejecutar los siguientes comandos en terminales separadas:
+celery -A core worker --loglevel=info
+
+celery -A core beat --loglevel=info
+10. Acceso a la documentación de la API
+El proyecto cuenta con documentación automática generada con drf-yasg (Swagger).-
+ Una vez iniciado el servidor, puede consultarse en el navegador:
+http://127.0.0.1:8000/swagger/
+
+4.2 Frontend
+Esta sección describe el proceso necesario para instalar, configurar y ejecutar el frontend del sistema en un entorno local de desarrollo.
+
+1. Clonar el repositorio
+
+Abre PowerShell.
+Ejecuta el comando:
+
+git clone https://github.com/July173/Front-end-web-Autogestion-Sena.git
+
+Entra al proyecto:
+cd https://github.com/July173/Front-end-web-Autogestion-Sena.git
+
+2. Verificar versiones instaladas
+
+Antes de instalar el proyecto, verifica que tu sistema tenga Git, Node.js, npm o el gestor que utilices.
+
+Ejecuta en PowerShell:
+git --version
+node --version
+npm --version
+
+3. Instalar dependencias
+
+Usando npm (recomendado)
+npm install
+
+Alternativa con pnpm
+pnpm install
+
+O con Bun (opcional)
+bun install
+
+4. Configuración de variables de entorno
+
+El proyecto utiliza una variable principal de configuración:
+
+VITE_API_BASE_URL
+
+Esta variable es leída en ConfigApi.ts, y define la URL base desde donde el frontend consume las APIs.
+
+4.1 Crear un archivo .env
+
+En la raíz del proyecto frontend, crea el archivo:
+.env
+
+Ejemplo de contenido:
+VITE_API_BASE_URL=http://localhost:8000/api/
+
+Notas importantes:
+Las variables de entorno deben empezar con VITE_ para que Vite las cargue.
+El archivo .env debe ubicarse en la raíz del frontend, al mismo nivel que package.json.
+
+5. Ejecutar la aplicación en modo desarrollo
+
+Para iniciar el servidor de desarrollo con Vite:
+npm run dev
+
+o con otros gestores:
+pnpm dev
+bun dev
+
+Esto generará una URL local, usualmente:
+http://localhost:5173/
+
+Ábrela en tu navegador para visualizar la aplicación.
+
+6. Ejecutar build de producción
+
+Para generar la versión optimizada para despliegue:
+npm run build
+
+Después puedes previsualizarla:
+npm run preview
+
+El resultado final quedará en la carpeta:
+/dist
+	
+4.3 Móvil
+Guía de Configuración e Instalación del Proyecto Móvil
+Esta guía describe los pasos necesarios para configurar el entorno de desarrollo, compilar e instalar la aplicación móvil de autogestión del SENA en un emulador o dispositivo Android.
+
+1. Configuración del Entorno de Desarrollo
+
+Para poder compilar y trabajar en el proyecto, es necesario instalar el siguiente software:
+
+Paso 1: Instalar Visual Studio 2022
+
+Descargue e instale Visual Studio 2022 (versión 17.8 o superior) desde el sitio web oficial de Microsoft.
+Durante la instalación, en la pestaña "Cargas de trabajo", asegúrese de seleccionar la carga de trabajo "Desarrollo de la interfaz de usuario de aplicaciones multiplataforma .NET" (o ".NET Multi-platform App UI development").
+Esta selección instalará automáticamente todos los componentes necesarios, incluyendo el SDK de .NET 8, las plantillas de .NET MAUI y el SDK de Android.
+
+Paso 2: Clonar el Repositorio
+
+git clone 
+https://github.com/July173/Front-end-Mobile-Autogestion-Sena.git
+
+Instale un cliente de Git si aún no lo tiene.
+Abra una terminal o consola de comandos y clone el repositorio del proyecto en su máquina local
+
+Paso 3: Configurar un Emulador de Android (Opcional)
+
+Si no dispone de un dispositivo Android físico para las pruebas, puede crear un emulador:
+
+En Visual Studio, vaya al menú Herramientas > Android > Administrador de dispositivos Android.
+Haga clic en "+ Nuevo" para crear un nuevo emulador. Se recomienda seleccionar una imagen de sistema reciente (ej. API 33 o superior) para garantizar la compatibilidad.
+Inicie el emulador desde el administrador de dispositivos para asegurarse de que funciona correctamente.
+
+2. Compilación e Instalación de la Aplicación
+Una vez configurado el entorno, siga estos pasos para instalar la aplicación:
+
+Paso 1: Abrir el Proyecto
+
+Navegue a la carpeta donde clonó el repositorio.
+Abra el archivo de solución AutogestionSenaMaui.sln con Visual Studio 2022.
+
+Paso 2: Restaurar Dependencias
+
+Visual Studio debería restaurar automáticamente los paquetes NuGet necesarios al abrir el proyecto. Si esto no ocurre, haga clic derecho sobre la solución en el "Explorador de soluciones" y seleccione "Restaurar paquetes NuGet".
+
+Paso 3: Seleccionar el Dispositivo de Destino
+
+En la barra de herramientas principal de Visual Studio, asegúrese de que el proyecto de inicio sea AutogestionSenaMaui.
+En el menú desplegable de dispositivos, seleccione el destino donde desea instalar la aplicación. Puede ser:
+Un emulador de Android que haya configurado previamente.
+Un dispositivo Android físico conectado a su computadora (asegúrese de que tenga habilitado el modo de desarrollador y la depuración por USB).
+
+Paso 4: Ejecutar e Instalar
+
+Haga clic en el botón de inicio verde (▶) o presione la tecla F5.
+Visual Studio compila el proyecto, generará el paquete de la aplicación (APK) y lo instalará automáticamente en el dispositivo de destino seleccionado.
+Una vez finalizado el proceso, la aplicación se iniciará para su uso y depuración.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5. Estructura del Proyecto 
+
+5.1 Árbol de Directorios 
+
+Fronted:
+
+https://drive.google.com/file/d/14y2pP9Pt1LgwEj8QESz0WWGhfqYziigv/view?usp=drive_link
+
+Backend:
+
+https://drive.google.com/file/d/1qedVp_LWIkxIO0DNUO-XCXKPdF5azNNj/view?usp=drive_link
+
+Móvil:
+
+https://drive.google.com/file/d/1CBFQVyaOdLxoZ3OJTCQxXy_Y9CHvsZRG/view?usp=drive_link
+
+5.2 Descripción de Módulos Principales
+
+Fronted
+
+La estructura principal del frontend está dividida en carpetas que representan capas lógicas del sistema:
+components/
+Contiene componentes reutilizables. Algunos módulos cuentan con subcarpetas propias, como:
+
+ModuleSecurity
+Dashboard
+Formularios y elementos visuales específicos
+Estos componentes se utilizan en distintas páginas para mantener la consistencia en la interfaz.
+
+pages/
+Incluye las vistas principales que representan cada pantalla del sistema, por ejemplo:
+
+Home.tsx
+Admin.tsx
+Index.tsx
+Cada una se integra con el enrutamiento general del sistema.
+layout/
+Define la estructura visual y lógica que envuelve las páginas:
+
+MainLayout: estructura base de la interfaz.
+ProtectedRoute: mecanismo que valida el acceso a rutas según autenticación.
+ProtectedLayout: combina protección + layout, separando rutas públicas y privadas.
+Api/
+Contiene la capa encargada de comunicarse con el backend:
+
+config/ConfigApi.ts: configuración de la conexión.
+Services/: servicios organizados por entidad (ej.: usuarios, instructores, aprendices).
+Esta capa centraliza las solicitudes y evita que las páginas realicen llamadas directas al backend.
+
+hook/
+Incluye hooks personalizados con lógica reutilizable, tales como:
+
+manejo de datos de aprendices,
+envíos de formularios,
+gestión de notificaciones,
+utilidades globales.
+Permiten encapsular lógica fuera de los componentes visuales.
+ui/
+Reúne elementos globales de interfaz como:
+
+Toaster,
+Tooltip,
+componentes universales usados en todo el sistema.
+lib/
+Carpeta destinada a funciones auxiliares y utilidades generales, por ejemplo:
+conversiones,
+formateos,
+Funciones comunes entre módulos.
+types/
+Carpeta donde se definen los modelos y tipos utilizados en toda la aplicación, garantizando orden y consistencia en el manejo de datos.
+
+Backend
+
+1. apps/assign
+Este módulo gestiona la asignación y seguimiento de instructores, aprendices y empresas. Incluye la lógica para la creación, reasignación y desvinculación de instructores, así como el manejo de solicitudes y el historial de asignaciones. Contiene submódulos para entidades, repositorios, servicios, vistas y plantillas de correo electrónico relacionadas con los procesos de asignación.
+
+2. apps/general
+Agrupa la gestión de información general del sistema, como centros, programas, fichas, instructores, áreas de conocimiento, sedes y contactos de soporte. Proporciona modelos, servicios y vistas para la administración de estos datos, facilitando la consulta y actualización de la información institucional.
+
+3. apps/security
+Encargado de la autenticación, autorización y gestión de usuarios. Incluye la administración de roles, permisos, módulos, formularios y tipos de documento. También gestiona el envío de correos electrónicos para activación, desactivación y verificación de cuentas, así como la seguridad en el acceso al sistema.
+
+Móvil
+
+1. Api/
+Contiene la lógica de comunicación con servicios externos y la gestión de datos. Incluye subcarpetas para configuración (config), objetos de transferencia de datos (Dtos) y servicios (Services).
+
+2. ContentViews/
+Componentes visuales reutilizables como menús, barras, tarjetas y layouts. Facilitan la construcción de interfaces consistentes y modulares.
+
+
+3. Converters/
+Incluye convertidores de valores para enlazar datos entre la lógica y la interfaz de usuario, permitiendo transformar datos en tiempo real para la presentación.
+
+4. Helpers/
+Clases auxiliares que proporcionan funciones de apoyo, como navegación, manejo de eventos de autenticación y utilidades de diseño.
+
+5. Validators/
+Contiene la lógica de validación para formularios y entradas del usuario, asegurando que los datos cumplan con los requisitos antes de ser procesados.
+
+6. ViewModels/
+Implementa el patrón MVVM, gestionando el estado y la lógica de presentación de las vistas. Cada vista relevante tiene su propio ViewModel asociado.
+
+7. Views/
+Define las pantallas principales de la aplicación, como páginas de inicio, dashboard, login y layouts. Cada vista puede estar acompañada de su archivo de código subyacente (.xaml.cs).
+
+8. Tests/
+Incluye pruebas unitarias para validar la funcionalidad de los validadores y otros componentes críticos, asegurando la calidad y robustez del código.
+
+
+
+
+                                                   	
+6. Gestión de Dependencias 
+
+6.1 Dependencias Frontend
+
+Dependencia 
+Versión
+Uso
+@hookform/resolvers
+3.10.0
+Integraciones/resolvers (Zod/Yup/etc.) para validar formularios con react-hook-form.
+@radix-ui/react-accordion
+1.2.11
+Primitive UI accesible: acordeón (Radix).
+@radix-ui/react-alert-dialog
+1.1.14
+Primitive UI para diálogos de alerta accesibles.
+@radix-ui/react-aspect-ratio
+1.1.7
+Primitive para mantener el ratio de aspecto en elementos.
+@radix-ui/react-avatar
+1.1.10
+Primitive para avatares.
+@radix-ui/react-checkbox
+1.3.2
+Primitive para checkboxes accesibles.
+@radix-ui/react-collapsible
+1.1.11
+Primitive para paneles colapsables.
+@radix-ui/react-context-menu
+2.2.15
+Primitive para menús contextuales.
+@radix-ui/react-dialog
+1.1.14
+Primitive para diálogos/modales.
+@radix-ui/react-dropdown-menu
+2.1.15
+Primitive para menús desplegables.
+@radix-ui/react-hover-card
+1.1.14
+Primitive para tarjetas que aparecen al hover.
+@radix-ui/react-label
+2.1.7
+Primitive para etiquetas accesibles.
+@radix-ui/react-menubar
+1.1.15
+Primitive para menús tipo menubar.
+@radix-ui/react-navigation-menu
+1.2.13
+Primitive para menús de navegación.
+@radix-ui/react-popover
+1.1.14
+Primitive para popovers.
+@radix-ui/react-progress
+1.1.7
+Primitive para barras de progreso
+@radix-ui/react-radio-group
+1.3.7
+Primitive para grupos de radio.
+@radix-ui/react-scroll-area
+1.2.9
+Primitive para áreas con scroll estilizadas.
+@radix-ui/react-select
+2.2.6
+Primitive para selects accesibles.
+@radix-ui/react-separator
+1.1.7
+Primitive para separadores visuales.
+@radix-ui/react-slider
+1.3.5
+Primitive para sliders/controles deslizantes.
+@radix-ui/react-slot
+1.2.3
+Utility primitive para composición de componentes.
+@radix-ui/react-switch
+1.2.5
+Primitive para switches (toggle).
+@radix-ui/react-tabs
+1.1.12
+Primitive para pestañas (tabs).
+@radix-ui/react-toast
+1.2.14
+Primitive para toasts/notifications.
+@radix-ui/react-toggle
+1.1.9
+Primitive toggle.
+@radix-ui/react-toggle-group
+1.1.10
+Grupo de toggles.
+@tanstack/react-query
+5.83.0
+Manejo de fetching/caching/sincronización de datos con el servidor.
+@types/react-select
+5.0.0
+Tipos de TypeScript para react-select.
+class-variance-authority
+0.7.1
+Utilidad para combinaciones de clases (variant patterns).
+clsx
+2.1.1
+Utility para combinar clases condicionalmente
+cmdk
+1.1.1
+Componentes para command palette (UI).
+date-fns
+3.6.0
+Utilidades para manejo de fechas.
+
+
+8.6.0
+Carousel/slider react.
+embla-carousel-react
+8.6.0
+Carousel/slider react.
+framer-motion
+12.23.12
+Animaciones y motion para React.
+input-otp
+1.4.2
+Componente para entradas de código OTP.
+lucide-react
+0.462.0
+Íconos (biblioteca Lucide para React).
+next-themes
+0.3.0
+Manejo de temas (dark/light) en Next.js/React (utilizado para theme switching).
+pdfjs-dist
+5.4.296
+Renderizado de PDFs en el navegador (base para react-pdf).
+react
+18.3.1
+Biblioteca principal UI.
+react-bootstrap-icons
+1.11.6
+Conjunto de íconos (Bootstrap Icons) para React.
+react-day-picker
+8.10.1
+Selector de fechas (date picker).
+react-dom
+18.3.1
+Entrypoint DOM para React.
+react-hook-form
+7.61.1
+Manejo de formularios performant y validaciones.
+react-icons
+5.5.0
+Colección de íconos para React.
+react-pdf
+10.2.0
+Wrapper para visualizar PDF en React (usa pdfjs).
+react-resizable-panels
+2.1.9
+Paneles re-sizables en UI.
+react-router-dom
+6.30.1
+Enrutamiento para aplicaciones React (v6).
+react-select
+5.10.2
+Componente Select con funcionalidades avanzadas.
+recharts
+2.15.4
+Librería para gráficos en React (charts).
+sonner
+1.7.4
+Librería de notificaciones/toasts.
+tailwind-merge
+2.6.0
+Utility para mergear clases Tailwind evitando duplicados/conflictos.
+tailwindcss-animate
+1.0.7
+Animaciones utilitarias para Tailwind.
+vaul
+0.9.9
+Utilidad/paquete interno/tercero; revisar uso en código (no es muy común).
+zod
+3.25.76
+Validación y parsing de esquemas (usado con react-hook-form o manualmente).
+
+
+6.2 Dependencias Backend
+
+Dependencia 
+Versión
+Uso
+Django
+4.2.23
+Framework principal del proyecto. Gestiona el modelo MVC, rutas, vistas y ORM.
+djangorestframework
+3.16.0
+Implementa API RESTful para la comunicación entre frontend y backend.
+djangorestframework-simplejwt
+5.5.1
+Autenticación mediante tokens JWT para la seguridad del sistema.
+drf-yasg
+1.21.10
+Generación automática de documentación Swagger para los endpoints del API
+django-cors-headers
+4.7.0
+Permite la comunicación del backend con orígenes externos (CORS).
+mysqlclient
+2.2.7
+Conector de Django con la base de datos MySQL.
+celery
+5.5.3
+Gestión de tareas asíncronas y procesos en segundo plano.
+django-celery-beat
+2.8.1
+Permite la programación de tareas periódicas en Celery.
+redis
+5.2.1
+Sistema de almacenamiento en caché y cola de tareas para Celery.
+amqp
+5.3.1
+Protocolo de mensajería utilizado por Celery para la comunicación.
+kombu
+5.5.4
+Librería de mensajería usada por Celery para conectarse con Redis o RabbitMQ.
+billiard
+4.2.1
+Módulo multiproceso usado por Celery para ejecutar tareas concurrentes.
+python-dotenv
+1.1.1
+Carga y manejo de variables de entorno (.env) para la configuración segura.
+python-crontab
+3.3.0
+Gestión de tareas programadas en formato cron.
+python-dateutil
+2.9.0.post0
+Manipulación avanzada de fechas y tiempos.
+pytz
+2025.2
+Manejo de zonas horarias en Django.
+tzdata
+2025.2
+Datos de soporte para zonas horarias actualizadas.
+django-timezone-field
+7.1
+Campo personalizado para almacenar zonas horarias en modelos.
+openpyxl
+3.1.5
+Lectura y escritura de archivos Excel (reportes o exportaciones).
+et_xmlfile
+2.0.0
+Soporte XML requerido por OpenPyXL.
+PyYAML
+6.0.2
+Manejo de archivos YAML (configuración avanzada).
+pillow
+11.3.0
+Procesamiento de imágenes (por ejemplo, subida de avatares o logos).
+pyodbc
+5.2.0
+Conexión alternativa a bases de datos ODBC (si se requiere interoperabilidad).
+inflection
+0.5.1
+Conversión entre formatos de texto (por ejemplo, singular/plural, snake_case).
+packaging
+25.0
+Gestión y validación de versiones de dependencias.
+click
+8.3.0
+Creación de comandos de consola personalizados.
+click-didyoumean
+0.3.1
+Extensión de Click que sugiere comandos similares al escribir erróneamente.
+click-plugins
+1.1.1.2
+Sistema de plugins para comandos Click.
+click-repl
+0.3.0
+Proporciona una interfaz interactiva tipo shell para comandos Click.
+prompt_toolkit
+3.0.52
+Soporte para interfaces de línea de comandos avanzadas.
+colorama
+0.4.6
+Añade colores y formato al texto en consola.
+cron_descriptor
+2.0.6
+Traduce expresiones cron a texto legible.
+sqlparse
+0.5.3
+Formateo y análisis de consultas SQL.
+six
+1.17.0
+Compatibilidad entre Python 2 y 3 (usada internamente por varias librerías).
+typing_extensions
+4.14.1
+Tipado avanzado para versiones anteriores de Python.
+uritemplate
+4.2.0
+Plantillas URI, usado por drf-yasg en documentación.
+vine
+5.1.0
+Dependencia interna de Celery para el manejo de promesas.
+wcwidth
+0.2.13
+Control del ancho de caracteres en terminal (usado por prompt_toolkit).
+
+
+
+6.3 Dependencias Móvil 
+
+Dependencia 
+Versión
+Uso
+Microsoft.Maui.Controls
+$(MauiVersion) (net8.0)
+Paquete principal de .NET MAUI que proporciona los controles y la infraestructura de la interfaz de usuario.
+Microsoft.Maui.Controls.Compatibility
+$(MauiVersion) (net8.0)
+Proporciona compatibilidad con API y renderizadores de Xamarin.Forms para facilitar la migración.
+Microsoft.Extensions.Logging.Debug
+8.0.1
+Habilita el registro de eventos y mensajes de depuración en la ventana de salida durante el desarrollo.
+
+Microsoft.NET.Test.Sdk
+
+
+
+17.9.0
+Necesario para ejecutar pruebas en xUnit, NUnit o MSTest desde Visual Studio / CLI.
+FluentAssertions
+8.8.0
+Proporciona una sintaxis fluida para hacer aserciones más legibles.
+Moq
+4.20.70
+Framework para crear mocks en pruebas unitarias.
+xunit
+2.6.6
+Framework principal de pruebas unitarias.
+xunit.runner.visualstudio
+2.5.6
+Permite ejecutar xUnit desde Test Explorer en Visual Studio.
+coverlet.collector
+6.0.0
+Captura cobertura de código durante la ejecución de pruebas.
+
+
+
+
+
+
+
+
+
+
+
+
+7. Autenticación y Seguridad 
+
+7.1 Sistema de Autenticación 
+
+Autogestión Sena implementa un sistema de autenticación basado en JSON Web Tokens (JWT) utilizando la librería SimpleJWT de Django REST Framework. Este mecanismo permite la autenticación segura y sin estado para los usuarios de la plataforma.
+
+Flujo de autenticación:
+
+1. Login del Usuario: 
+El usuario envía sus credenciales (correo y contraseña) al endpoint de login (/api/security/login/). El sistema valida las credenciales y, si son correctas, genera un par de tokens JWT: un token de acceso (access) y un token de refresco (refresh).
+
+2. Respuesta Exitosa: 
+En caso de autenticación exitosa, el backend responde con los tokens JWT. El token de acceso se utiliza para autenticar las solicitudes a los recursos protegidos, mientras que el token de refresco permite obtener nuevos tokens de acceso sin necesidad de volver a iniciar sesión.
+
+3. Almacenamiento Seguro: 
+El cliente (por ejemplo, una aplicación web o móvil) debe almacenar el token de acceso de forma segura, preferiblemente en memoria o en un almacenamiento seguro, evitando exponerlo a scripts o terceros.
+
+4. Obtención de Datos del Usuario: 
+Para acceder a recursos protegidos, el cliente incluye el token de acceso en la cabecera Authorization de cada solicitud (Authorization: Bearer <token>). El backend valida el token y, si es válido, permite el acceso a la información solicitada.
+
+5. Estado de Sesión: 
+El sistema es sin estado: el backend no almacena sesiones de usuario. El estado de autenticación depende únicamente de la validez del token JWT. Cuando el token de acceso expira, el cliente puede usar el token de refresco en el endpoint /api/security/refresh/ para obtener un nuevo token de acceso y mantener la sesión activa sin necesidad de volver a ingresar credenciales.
+
+7.2 Gestión de Tokens.
+Almacenamiento 
+Los tokens JWT (access y refresh) deben ser almacenados de forma segura por el cliente. Se recomienda almacenarlos en memoria o en mecanismos seguros del navegador (como sessionStorage o secure cookies), evitando exponerlos a scripts de terceros para prevenir ataques XSS.
+
+Manejo de Expiración 
+El token de acceso tiene una vida útil corta (por ejemplo, 5-15 minutos) para reducir riesgos en caso de exposición. Cuando expira, el cliente puede solicitar un nuevo token de acceso usando el token de refresco a través del endpoint /api/security/refresh/. Si el token de refresco también expira o es revocado, el usuario debe volver a autenticarse. El backend valida la vigencia de los tokens en cada solicitud protegida y rechaza aquellas con tokens expirados o inválidos.
+
+7.3 Sistema de Roles 
+Autogestión implementa control de acceso basado en roles (RBAC : Control de Acceso Basado en Role ): 
+
+Rol
+Descripción 
+Permisos Principales
+Administrador
+Rol con el nivel de acceso más alto. Es responsable de la gestión completa del sistema.
+Crear, editar, actualizar y eliminar usuarios.
+Asignar roles y permisos.
+Gestionar módulos, formularios y permisos del sistema.
+Gestionar instructores, coordinadores y aprendices.
+Acceder a todos los módulos del sistema sin restricciones.
+Visualizar reportes y estadísticas globales.
+Configurar parámetros del sistema.
+Coordinador
+Encargado de supervisar instructores y aprendices, revisar procesos y gestionar actividades académicas.
+Consultar y gestionar fichas o grupos de formación.
+Ver información de instructores y aprendices asignados.
+Revisar solicitudes, reportes y datos administrativos.
+Generar reportes académicos.
+Acceso a los módulos de gestión institucional.
+Puede aprobar, validar o supervisar registros y procesos.
+Instructor 
+Responsable de acompañar y evaluar a los aprendices.
+Gestionar aprendices asignados.
+Registrar, actualizar y consultar información relacionada con el proceso formativo.
+Realizar seguimientos, valoraciones y observaciones.
+Consultar reportes de fichas y grupos bajo su responsabilidad.
+Acceso a módulos educativos y de seguimiento.
+Aprendiz 
+Usuario final con acceso limitado únicamente a la información y trámites propios.
+Consultar información personal y académica.
+Realizar solicitudes o procesos permitidos por la plataforma.
+Visualizar seguimientos o retroalimentación de instructores.
+Acceder al módulo de perfil, notificaciones y vista básica del sistema.
+Operador SOFIA Plus
+Apoya procesos de registro, consulta y validación académica.
+Consultar información institucional o académica para validación academica.
+Registrar o actualizar ciertos datos (según permisos asignados).
+Acceso a determinadas áreas de soporte o verificación.
+
+
+8. Especificación de API REST
+
+8.1 URL Base
+http://127.0.0.1:8000/api/
+
+8.2 Formato de Respuestas
+
+Todas las respuestas siguen el formato JSON estándar.
+Todas las respuestas de la API utilizan el formato JSON como tipo de retorno estándar, y cada una corresponde al código HTTP resultante de la operación solicitada.
+Las respuestas se clasifican en positivas (éxito) y negativas (error). A continuación se detalla la estructura recomendada para cada tipo de respuesta.
+Respuesta Exitosa:
+200 – OK
+Se retorna cuando la solicitud se procesó correctamente y la API entrega la información solicitada.
+Ejemplo:
+{
+  "success": true,
+  "message": "Operación realizada exitosamente.",
+  "data": {
+    "id": 12,
+    "name": "Ejemplo",
+    "status": "activo"
+  }
+}
+201 – Created
+Se retorna cuando se crea un recurso de forma correcta (registró, creación de entidad, asignación, etc.).
+Ejemplo
+{
+  "success": true,
+  "message": "Recurso creado exitosamente.",
+  "data": {
+    "id": 45
+  }
+}
+204 – No Content
+Se utiliza cuando la operación se procesó exitosamente, pero no es necesario retornar contenido (ejemplo: eliminación).
+No incluye cuerpo en la respuesta.
+HTTP 204 No Content
+
+Respuesta de error:
+400 – Bad Request
+Se genera cuando los datos enviados son incorrectos, tienen formato inválido o faltan campos.
+Ejemplo 
+{
+  "success": false,
+  "message": "La solicitud contiene errores."
+}
+401 – Unauthorized
+El usuario no está autenticado o el token es inválido o expirado.
+Ejemplo
+{
+  "success": false,
+  "message": "No autorizado. El token es inválido o ha expirado."
+}
+403 – Forbidden
+El usuario está autenticado, pero no tiene permisos para la acción.
+Ejemplo
+{
+  "success": false,
+  "message": "No tiene permisos para realizar esta acción."
+}
+404 – Not Found
+Se devuelve cuando el recurso solicitado no existe o no está disponible.
+Ejemplo
+{
+  "success": false,
+  "message": "Recurso no encontrado."
+}
+500 – Internal Server Error
+Errores inesperados dentro del servidor (lógica, base de datos, excepciones no controladas).
+Ejemplo
+{
+  "success": false,
+  "message": "Error interno del servidor.",
+  "errors": {
+    "detail": "Se produjo un error inesperado."
+  }
+}
+
+8.3 Autenticación (Security)
+
+Método
+Endpoint
+Descripción
+Parámetros
+Respuesta
+POST
+http://127.0.0.1:8000/api/security/login/
+Sirve para iniciar sesión
+"email"
+"password"
+
+
+responde con los tokens de acceso y refresco
+POST
+http://127.0.0.1:8001/api/security/refresh/
+Sirve para refrescar el token de acceso	
+"refresh"
+Responde con un nuevo token de acceso
+
+
+
+
+8.4 Token
+
+Método
+Endpoint
+Descripción
+Parámetros
+Respuesta
+POST
+http://127.0.0.1:8001/api/token/
+Obtiene los tokens de acceso y refresco	
+"email"
+"password"
+
+
+Responde con los tokens de acceso y refresco
+POST
+http://127.0.0.1:8001/api/token/refresh/
+Refresca el token de acceso	
+"refresh"
+Responde con un nuevo token de acceso
+
+
+
+
+8.5 Endpoints de Persona
+
+Método
+Endpoint
+Descripción
+Parámetros
+Respuesta
+POST
+http://127.0.0.1:8001/api/security/persons/register-apprentice/
+Registra un nuevo aprendiz	
+"first_name"
+"second_name"  "first_last_name"
+"second_last_name"
+"phone_number"
+"type_identification"
+"number_identification"
+ "active"
+ "email" 
+
+
+Responde con los datos del aprendiz creado o un mensaje de éxito/error
+
+
+8.6 Endpoints de Usuario
+
+Método
+Endpoint
+Descripción
+Parámetros
+Respuesta
+POST
+http://127.0.0.1:8001/api/security/users/validate-institutional-login/
+Valida el inicio de sesión institucional	
+"email", "password"	
+Responde con los datos del usuario o mensaje de error
+
+
+POST
+http://127.0.0.1:8001/api/security/users/validate-2fa-code/
+Valida el código de autenticación 2FA	
+"email", "code"	
+Responde con confirmación de autenticación o error
+
+
+
+POST
+http://127.0.0.1:8001/api/security/users/request-password-reset/
+Solicita el envío de un correo para restablecer la contraseña	
+"email"	
+Responde con confirmación del envío o mensaje de error
+
+
+POST	
+http://127.0.0.1:8001/api/security/users/reset-password/
+Permite restablecer la contraseña del usuario	
+"email", "token", "new_password"	
+Responde con confirmación del cambio o mensaje de error
+
+
+
+
+
+
+8.7 Endpoints de RolFormPermission
+
+Método
+Endpoint
+Descripción
+Parámetros
+Respuesta
+POST
+http://127.0.0.1:8001/api/security/rol-form-permissions/create-role-with-permissions/
+Crea un nuevo rol con permisos asociados	
+"type_role"
+"description"  "active"
+"form_id
+"permissi on_ids"
+Responde con los datos del rol creado o mensaje de error
+
+
+GET
+http://127.0.0.1:8001/api/security/rol-form-permissions/get-role-with-permissions/
+Obtiene los datos de un rol y sus permisos	
+ID en la URL
+Responde con los datos del rol y su lista de permisos
+
+
+GET
+http://127.0.0.1:8001/api/security/rol-form-permissions/get-menu/
+Obtiene el menú asociado a un rol	
+ID en la URL
+Responde con la estructura del menú para el rol
+PUT
+http://127.0.0.1:8001/api/security/rol-form-permissions/update-role-with-permissions/
+Actualiza un rol y sus permisos	
+"type_role"
+"description"  "active"
+"form_id
+"permissi on_ids"
+Responde con los datos del rol actualizado o mensaje de error
+
+
+
+
+
+8.8 Endpoints de Instructor
+Método
+Endpoint
+Descripción
+Parámetros
+Respuesta
+POST
+http://127.0.0.1:8001/api/general/instructors/Create-Instructor/create/
+Crea un nuevo instructor	
+"first_name"
+  second_name"
+"first_last_name"
+"second_last_name"
+"phone_number"
+"type_identification"
+"number_identification"
+  "email"
+  "role_id"
+"contract_type_id"
+"contract_start_date"
+"contract_end_date"
+"knowledge_area_id"
+  "sede_id
+"is_followup_instructor"
+Responde con los datos del instructor creado o mensaje de error
+
+
+PUT
+http://127.0.0.1:8001/api/general/instructors/Create-Instructor/update/
+Actualiza los datos de un instructor
+"first_name"
+  second_name"
+"first_last_name"
+"second_last_name"
+"phone_number"
+"type_identification"
+"number_identification"
+  "email"
+  "role_id"
+"contract_type_id"
+"contract_start_date"
+"contract_end_date"
+"knowledge_area_id"
+  "sede_id
+"is_followup_instructor"
+Responde con los datos del instructor actualizado o mensaje de error
+
+
+PATCH
+http://127.0.0.1:8001/api/general/instructors/update-learners/
+Actualiza los aprendices asignados a un instructor	
+"assigned_learners"
+"max_assigned_learners"
+Responde con los datos actualizados o mensaje de error
+
+
+
+
+
+
+
+
+8.9 Endpoints de Aprendiz
+
+Método
+Endpoint
+Descripción
+Parámetros
+Respuesta
+POST
+http://127.0.0.1:8001/api/general/aprendices/Create-Aprendiz/create/
+Crea un nuevo aprendiz	
+"type_identification"
+"number_identification"
+  "first_name"
+"second_name"
+"first_last_name"
+"second_last_name"
+"phone_number"
+ "email"
+ "ficha_id"
+
+
+Responde con los datos del aprendiz creado o mensaje de error
+
+
+PUT
+http://127.0.0.1:8001/api/general/aprendices/Create-Aprendiz/update/
+Actualiza los datos de un aprendiz	
+"type_identification"
+"number_identification"
+  "first_name"
+"second_name"
+"first_last_name"
+"second_last_name"
+"phone_number"
+"email"
+"ficha_id"
+"role"
+Responde con los datos del aprendiz actualizado o mensaje de error
+
+
+
+
+
+
+8.10 Endpoints de Request_Asignation
+Método
+Endpoint
+Descripción
+Parámetros
+Respuesta
+GET
+http://127.0.0.1:8001/api/assign/request_asignation/form-request-filtered/
+Obtiene formularios de asignación filtrados	
+Parámetros de filtro en la URL (nombre, estado, id, modalidad de etapa.)
+Responde con la lista de formularios filtrados
+POST
+http://127.0.0.1:8001/api/assign/request_asignation/form-request/
+Crea un nuevo formulario de solicitud de asignación	
+"id"
+"name"
+"tax_id"
+"address"
+"email"
+"phone"
+"apprentice"
+"ficha"
+"contract_start_date"
+"contract_end_date"
+"sede"
+"modality_productive_stage"
+Responde con los datos del formulario creado o mensaje de error
+
+
+GET
+http://127.0.0.1:8001/api/assign/request_asignation/form-request-detail/
+Obtiene el detalle de un formulario de asignación	
+ID en la URL
+Responde con los datos detallados del formulario
+
+
+PATCH
+http://127.0.0.1:8001/api/assign/request_asignation/form-request-reject/
+Rechaza un formulario de solicitud de asignación	
+"rejectionMessage
+Responde con confirmación del rechazo o mensaje de error
+
+
+PATCH
+http://127.0.0.1:8001/api/assign/request_asignation/43/form-request-update/
+Actualiza un formulario de solicitud de asignación	
+"content"
+"type_message"
+"whose_message"
+"fecha_inicio_contrato"
+"fecha_fin_contrato"
+  "request_state"
+Responde con los datos actualizados del formulario o mensaje de error
+
+
+
+
+
+
+
+
+8.11 Endpoints de Asignation_Instructor
+Método
+Endpoint
+Descripción
+Parámetros
+Respuesta
+POST
+http://127.0.0.1:8001/api/assign/asignation_instructor/custom-create/
+Crea una nueva asignación de instructor	
+"instructor"
+"request_asignation"
+"content"
+"type_message"
+"whose_message"
+"request_state"
+Responde con los datos de la asignación creada o mensaje de error
+GET
+http://127.0.0.1:8001/api/assign/asignation_instructor/with-apprentice-instructor/?id
+Obtiene la asignación de un aprendiz e instructor	
+ID en la URL
+Responde con los datos de la asignación
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9. Modelos de Datos 
+
+Modelo User 
+
+Descripción general:
+La entidad User representa a los usuarios autenticados del sistema.
+Gestiona credenciales, roles, person, estado, 2FA, recuperación de contraseña y trazabilidad del usuario.
+
+Atributos:
+Campo
+Tipo
+Descripción
+registered
+Boolean
+Indica si el usuario está registrado pero aún no activado.
+email
+Email(unique)
+Correo único del usuario. Actúa como “username field”.
+is_active
+Boolean
+Indica si el usuario está activo en el sistema.
+is_staff
+Boolean
+Indica si el usuario puede acceder al panel de administración.
+delete_at
+DateTime
+Fecha de eliminación lógica.
+login_code
+Char(10)
+Código temporal para autenticación 2FA.
+login_code_expiration
+DateTime
+Expiración del código 2FA.
+login_code_used
+Boolean
+Indica si el código 2FA ya fue utilizado.
+person
+OneToOne → Person
+Relación directa con la información personal del usuario.
+role
+ForeignKey → Role
+Rol asignado para RBAC.
+created_at
+DateTime
+Fecha de creación del usuario.
+update_at
+DateTime
+Fecha de última actualización.
+reset_code
+Char(10)
+Código para recuperación de contraseña.
+reset_code_expiration
+DateTime
+Expiración del código de recuperación.
+
+
+Relaciones:
+Relación 
+Tipo 
+Descripción
+User – Person
+1:1
+Cada usuario posee una persona asociada.
+User – Role
+N:1
+Cada usuario tiene exactamente un rol asignado.
+
+
+Modelo Person
+
+Descripción general:
+La entidad Person almacena la información personal del individuo asociado a un usuario.
+ Es usada en todos los roles del sistema (aprendiz, instructor, coordinador, operador, administrador).
+	
+Atributos:
+Campo
+Tipo 
+Descripción
+type_identification
+FK → DocumentType
+Tipo de documento (Cédula, TI, etc.).
+first_name
+Char(100)
+Primer nombre.
+second_name
+Char(100, null)
+Segundo nombre.
+first_last_name
+Char(100)
+Primer apellido.
+second_last_name
+Char(100, null)
+Segundo apellido.
+phone_number
+BigInt
+Número de teléfono.
+number_identification
+Integer (unique)
+Número único del documento de identidad.
+image
+ImageField
+Imagen de perfil (carpeta personImages/).
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+Person – DocumentType
+N:1
+Una persona tiene un tipo de documento.
+Person – User
+1:1 (inverso)
+Relación directa con el usuario.
+
+
+Modelo Permission
+
+Descripción general:
+Representa los permisos específicos que pueden asignarse a formularios y roles dentro del sistema.
+Es fundamental para el modelo RBAC, ya que define acciones como "Crear", "Actualizar", "Eliminar", "Consultar".
+
+Atributos:
+Campo
+Tipo 
+Descripción
+type_permission
+Char(50)
+Nombre del permiso (ej.: CREATE, UPDATE, DELETE).
+description
+Text
+Descripción detallada del permiso.
+delete_at
+DateTime
+Eliminación lógica.
+active
+Boolean
+Estado del permiso.
+
+
+
+Modelo Role
+
+Descripción general:
+La entidad Role define el rol que tendrá cada usuario dentro del sistema.
+Controla niveles de acceso: Administrador, Coordinador, Instructor, Aprendiz y Operador.
+
+
+Atributos:
+Campo
+Tipo 
+Descripción
+type_role
+Char(50)
+Nombre del rol (ej.: CREATE, UPDATE, DELETE).
+delete_at
+DateTime
+Eliminación lógica.
+description
+Text
+Descripción detallada del rol.
+active
+Boolean
+Estado del permiso.
+
+
+
+Modelo Module
+
+Descripción general:
+La entidad Module representa los módulos principales del sistema.
+Cada módulo agrupa formularios (forms) para estructurar la navegación y el control de acceso del sistema.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+name
+Char(100)
+Nombre del módulo.
+description
+Text
+Descripción del módulo o su funcionalidad.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+Modelo Form
+
+Descripción general:
+La entidad Form representa una pantalla, página o vista funcional del frontend.
+Se utiliza para asignar permisos específicos a roles mediante RoleFormPermission.
+	
+
+
+Atributos:
+Campo
+Tipo 
+Descripción
+name
+Char(100)
+Nombre del formulario.
+description
+Text
+Descripción del formulario o su funcionalidad.
+path
+Char(255)
+Ruta dentro del frontend (React Router).
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+
+Modelo DocumentType
+
+Descripción general:
+Almacena los tipos de documentos que pueden ser asociados a una persona.
+Ejemplos: Cédula de Ciudadanía, Tarjeta de Identidad, Pasaporte.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+name
+Char(100)
+Nombre completo del documento.
+acronyms
+Char(20)
+Siglas o abreviaturas del documento.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+
+Modelo FormModule
+
+Descripción general:
+Entidad pivote que relaciona Form con Module.
+Define qué formularios pertenecen a qué módulos dentro del sistema.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+form
+FK → Form
+Formulario asociado
+module
+FK → Module
+Módulo asociado.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+Relaciones:
+
+Relación
+Tipo
+Descripción
+Module – Form
+N:M
+Conecta módulos con sus formularios
+
+
+Modelo RoleFormPermission
+
+Descripción general:
+Tabla pivote clave del sistema de seguridad.
+Define qué Rol tiene qué Permiso sobre qué Formulario.
+Es la base del RBAC aplicado a formularios y acciones del sistema.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+role
+FK → Role
+Rol que recibe los permisos.
+form
+FK → Form
+Formulario al cual se aplica el permiso.
+permission
+FK → Permission
+Tipo de permiso asignado.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+Role – Permission – Form
+N:M:M
+Asignación de permisos por formulario a cada rol.
+
+
+Modelo Apprentice
+
+Descripción general:
+La entidad Apprentice representa al aprendiz dentro del sistema.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+person
+OneToOne → Person
+Relación 1:1 con la información personal del aprendiz.
+ficha
+FK → Ficha
+Ficha a la que pertenece el aprendiz. Puede ser nula.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+Apprentice – Person
+1:1
+Cada aprendiz corresponde a una única persona.
+Apprentice – Ficha
+N:1
+Los aprendices pueden pertenecer a una ficha de formación.
+
+
+Modelo Center
+
+Descripción general:
+La entidad Center representa un Centro de Formación del SENA dentro del sistema.
+ Cada centro pertenece a una regional.
+Atributos:
+
+
+Campo
+Tipo 
+Descripción
+regional
+FK → Regional
+Regional a la que pertenece el centro
+name
+Char(100)
+Nombre del centro de formación.
+code_center
+BigInteger (unique)
+Código único del centro.
+address
+Char(255)
+Dirección del centro.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+Center – Regional
+N:1
+Un centro pertenece a una regional.
+
+
+Modelo Colors
+
+Descripción general:
+La entidad Colors almacena colores base en formato hexadecimal.
+ Se usa para personalizaciones o elementos visuales del sistema.
+Atributos:
+Campo
+Tipo 
+Descripción
+name
+Char(100)
+Nombre representativo del color.
+hexagonal_value
+Char(7)
+Valor hexadecimal del color (ej: #FFFFFF).
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+
+Modelo Ficha
+
+Descripción general:
+La entidad Ficha representa un grupo o ficha de formación del SENA.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+program
+FK → Program
+Programa de formación al que pertenece la ficha.
+file_number
+BigInteger (unique)
+Número único de la ficha.
+type_modality
+Char(50)
+Modalidad de formación (presencial, virtual, etc.).
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+Ficha – Program
+N:1
+Una ficha está asociada a un programa.
+
+
+
+Modelo Instructor
+Descripción general:
+La entidad Instructor representa al instructor vinculado al SENA.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+person
+OneToOne → Person
+Información personal del instructor.
+contract_type
+FK → TypeContract
+Tipo de contrato.
+knowledge_area
+FK → KnowledgeArea
+Área o especialidad del instructor.
+contract_start_date
+Date
+Fecha de inicio del contrato.
+contract_end_date
+Date
+Fecha de fin del contrato.
+assigned_learners
+Integer
+Número de aprendices actualmente asignados.
+max_assigned_learners
+Integer
+Límite de aprendices permitidos (por defecto 80).
+is_followup_instructor
+Boolean
+Indica si es instructor encargado de seguimiento.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+Instructor – Person
+1:1
+Cada instructor tiene una persona asociada.
+Instructor – TypeContract
+N:1
+El instructor tiene un tipo de contrato.
+Instructor – KnowledgeArea
+N:1
+El instructor pertenece a un área de conocimiento.
+
+
+
+Modelo KnowledgeArea
+
+Descripción general:
+La entidad KnowledgeArea representa las áreas de conocimiento o líneas de especialidad dentro del SENA.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+name
+Char(100)
+Nombre del área de conocimiento.
+description
+Text (200)
+Descripción general de la especialidad.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+
+Modelo LegalDocument
+
+Descripción general:
+La entidad LegalDocument almacena documentos normativos, reglamentos, políticas y lineamientos institucionales.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+type
+Char(100)
+Tipo del documento (Resolución, Acuerdo, Reglamento, etc.).
+title
+Char(255)
+Título completo del documento.
+effective_date
+Date
+Fecha desde la cual el documento entra en vigencia.
+last_update
+Date
+Fecha de última actualización del documento.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+
+Modelo LegalSection
+
+Descripción general:
+La entidad LegalSection representa las secciones, artículos o subdivisiones de un documento legal.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+document
+FK → LegalDocument
+Documento legal al que pertenece.
+parent
+FK → LegalSection
+Sección padre (para jerarquías). Puede ser nulo.
+order
+Integer
+Orden en el documento.
+code
+Char(20)
+Código identificador (ej. Art. 12, Sec. 4.1).
+title
+Char(200)
+Título de la sección.
+content
+Text
+Contenido textual de la sección.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+LegalSection – LegalDocument
+N:1
+Cada sección pertenece a un documento.
+LegalSection – LegalSection
+1:N
+Una sección puede tener subsecciones.
+
+
+Modelo PersonSede
+
+Descripción general:
+La entidad PersonSede relaciona a una persona con una sede específica.
+Atributos:
+Campo
+Tipo 
+Descripción
+sede
+FK → Sede
+Sede donde está registrada la persona.
+person
+FK → Person
+Persona asignada a la sede.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+PersonSede – Person
+N:1
+Una persona puede estar asociada a una sede.
+PersonSede – Sede
+N:1
+Cada registro corresponde a una sede.
+
+
+
+Modelo Program
+
+Descripción general:
+La entidad Program representa un programa de formación del SENA (técnico, tecnólogo, complementario, etc.).
+
+Atributos:
+
+Campo
+Tipo 
+Descripción
+name
+Char(100)
+Nombre del programa.
+code_program
+BigInteger
+Código institucional del programa.
+description
+Text
+Descripción del contenido o enfoque del programa.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+
+Modelo Regional
+
+Descripción general:
+Representa las regionales del SENA. Cada regional agrupa varios centros de formación.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+name
+Char(100)
+Nombre oficial de la regional.
+code_regional
+BigInteger (único)
+Código institucional único de la regional.
+description
+Text (255)
+Descripción general.
+address
+Char(255)
+Dirección física de la regional.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+Modelo Sede
+
+Descripción general:
+Define las sedes físicas pertenecientes a un centro.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+center
+FK → Center
+Centro al que pertenece la sede.
+name
+Char(100)
+Nombre de la sede.
+code_sede
+BigInteger (único)
+Código institucional único.
+address
+Char(255)
+Dirección física.
+phone_sede
+BigInteger
+Teléfono de contacto.
+email_contact
+Email
+Correo de contacto.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+Sede – Center
+N:1
+Cada sede pertenece a un centro.
+
+
+Modelo SupportContact
+
+Descripción general:
+Representa métodos de contacto para soporte técnico del sistema (correo, teléfono, WhatsApp, Mesa de Ayuda, etc.).
+
+Atributos:
+Campo
+Tipo 
+Descripción
+type
+Char(50)
+Tipo de contacto (Email, Teléfono, WhatsApp, etc.).
+label
+Char(100)
+Etiqueta descriptiva (Ej. "Soporte Técnico General").
+value
+Char(255)
+Datos del contacto (correo, número, enlace).
+extra_info
+Text (100)
+Campo opcional con detalles adicionales.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+Modelo SupportSchedule
+
+Descripción general:
+Define los horarios de atención del soporte técnico para que el usuario conozca disponibilidad del servicio.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+day_range
+Char(100)
+Días de atención (Ej. "Lunes a Viernes").
+hours
+Char(100)
+Horario de atención.
+is_closed
+Boolean
+Indica si el soporte está cerrado ese día.
+notes
+Text (100)
+ Información adicional opcional.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+
+Modelo TypeContract
+
+Descripción general:
+Define los tipos de contrato de los instructores (PLANTA, FIC, OPS, Contratista, etc.).
+
+Atributos:
+Campo
+Tipo 
+Descripción
+name
+Char(100)
+Nombre del tipo de contrato
+description
+Text
+Descripción del contrato.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+Modelo TypeOfQueries
+
+Descripción general:
+Clasifica los tipos de solicitudes o consultas que pueden generarse dentro del sistema (peticiones, quejas, reclamos, solicitudes de información, etc.).
+
+Atributos:
+Campo
+Tipo 
+Descripción
+name
+Char(100)
+Nombre del tipo de consulta.
+description
+Text
+Descripción detallada.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+
+Modelo AsignationInstructor
+
+Descripción general:
+Registra la asignación de un instructor a una solicitud de asignación
+
+Atributos:
+Campo
+Tipo 
+Descripción
+instructor
+FK → Instructor
+Instructor asignado.
+request_asignation
+OneToOne → RequestAsignation
+Solicitud que origina la asignación.
+date_asignation
+Date
+Fecha automática de creación de la asignación.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+AsignationInstructor – Instructor
+N:1
+Un instructor puede tener varias asignaciones
+AsignationInstructor – RequestAsignation
+1:1
+Cada solicitud sólo puede tener una asignación.
+
+
+	
+Modelo AsignationInstructorHistory
+
+Descripción general:
+Almacena el historial de reasignaciones de un instructor.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+asignation_instructor
+FK → AsignationInstructor
+Asignación cuya historia se está guardando.
+old_instructor_id
+Integer
+ID del instructor anterior.
+message
+Text
+Motivo o descripción de la reasignación.
+date
+DateTime
+Fecha y hora en que se registró la historia
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+AsignationInstructorHistory – AsignationInstructor
+N:1
+Una asignación puede tener múltiples eventos históricos.
+
+
+
+Modelo Boss
+
+Descripción general:
+Representa al jefe o responsable de una empresa, que forma parte del proceso de asignación para empresas donde los aprendices realizan prácticas.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+name_boss
+Char(100)
+Nombre del jefe
+phone_number
+BigInteger
+Teléfono de contacto.
+email_boss
+Email
+Correo del jefe.
+position
+Char(100)
+Cargo que ocupa dentro de la empresa.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+enterprise
+FK→ Enterprise
+Empresa representada.
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+Boss– Enterprise
+N:1
+Cada empresa tiene varios jefes para la etapa productiva.
+
+
+Modelo Enterprise
+
+Descripción general:
+Representa una empresa aliada donde se asignan aprendices o instructores pueden realizar seguimiento.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+name_enterprise
+Char(100)
+Nombre de la empresa.
+locate
+Char(255)
+Ubicación/dirección exacta.
+nit_enterprise
+Char(20)
+Documento NIT de la empresa.
+email_enterprise
+Email
+Correo general
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+
+Modelo HumanTalent
+
+Descripción general:
+Define el contacto de talento humano de una empresa, encargado de la comunicación formal sobre aprendices, contratos o documentación.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+enterprise
+FK→ Enterprise
+Empresa representada.
+name
+Char(100)
+Nombre del funcionario.
+email
+Email
+Correo directo del responsable.
+phone_number
+BigInteger
+Teléfono de contacto.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+human_talent– Enterprise
+N:1
+Cada empresa tiene varios contactos de talento humano.
+
+
+
+Modelo Message
+
+Descripción general:
+Registra los mensajes asociados a una solicitud de asignación.
+Estos mensajes pueden representar comentarios, o respuestas dentro del flujo de gestión.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+request_asignation
+FK → RequestAsignation
+Solicitud a la cual pertenece el mensaje.
+content
+Text
+Contenido del mensaje
+type_message
+Char
+Tipo o categoría del mensaje (informativo, rechazo, alerta, etc.).
+whose_message
+Char (50)
+Quien hizo el mensaje 
+
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+Message – RequestAsignation
+N:1
+Una solicitud puede tener múltiples mensajes.
+
+
+
+Modelo ModalityProductiveStage
+
+Descripción general:
+Define las modalidades de etapa productiva del SENA (por ejemplo: contrato de aprendizaje, vínculo laboral, pasantía, proyecto productivo, etc.).
+
+Atributos:
+Campo
+Tipo 
+Descripción
+name_modality
+Char(100)
+Nombre de la modalidad.
+description
+Text
+Descripción general de la modalidad.
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+
+Modelo RequestAsignation
+
+Descripción general:
+Representa la solicitud formal de un aprendiz para iniciar su etapa productiva en una empresa.
+Es el corazón del módulo de asignación y contiene información completa del proceso.
+
+Atributos:
+
+Campo
+Tipo 
+Descripción
+apprentice
+FK → Apprentice
+Aprendiz que realiza la solicitud.
+enterprise
+FK → Enterprise
+Empresa elegida o propuesta.
+modality_productive_stage
+FK → ModalityProductiveStage
+Modalidad de etapa productiva.
+boss
+FK → boss
+Jefe del aprendiz
+human_talent
+FK → human_talent
+Persona de talento humana de la empresa del aprendiz
+request_date
+Date
+Fecha en la que se registró la solicitud.
+date_start_production_stage
+Date
+Fecha estimada de inicio de la etapa.
+date_end_production_stage
+Date
+Fecha estimada de finalización.
+pdf_request
+File
+Archivo PDF cargado por el aprendiz.
+request_state
+Char
+Estado actual de la solicitud (sin asignar, asignado, rechazado, revisado, etc.).
+rejection_message
+Text
+Motivo del rechazo (si aplica).
+active
+Boolean
+Estado activo/inactivo.
+delete_at
+DateTime
+Eliminación lógica
+
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+RequestAsignation – Apprentice
+N:1
+Un aprendiz puede tener varias solicitudes (histórico).
+RequestAsignation – Enterprise
+N:1
+Una empresa puede recibir múltiples solicitudes
+RequestAsignation – ModalityProductiveStage
+N:1
+Relación con catálogo de modalidades
+RequestAsignation – AsignationInstructor
+1:1
+Cada solicitud puede tener una asignación de instructor.
+RequestAsignation – boss
+N:1
+Relación con catálogo de jefes
+RequestAsignation – human_talent
+N:1
+Relación con catálogo de personas e talento humano de al empresa
+
+
+
+Modelo VisitFollowing
+
+Descripción general:
+Registra las visitas de seguimiento que un instructor realiza durante la etapa productiva del aprendiz.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+asignation_instructor
+FK → AsignationInstructor
+Asignación bajo la cual se realiza el seguimiento.
+visit_number
+Integer
+Número consecutivo de la visita
+observations
+Text
+Observaciones principales
+state_visit
+Char
+Estado de la visita (programada, realizada, cancelada, etc.).
+scheduled_date
+Date
+Fecha programada.
+date_visit_made
+Date
+Fecha real de la visita (si ya ocurrió).
+name_visit
+Char(100)
+Nombre o tipo de visita.
+observation_state_visit
+Text
+Descripción del estado final de la visita.
+pdf_report
+File
+Documento PDF con el informe formal.
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+VisitFollowing – AsignationInstructor
+N:1
+Un instructor asignado puede registrar múltiples visitas.
+
+
+Modelo Notification
+
+Descripción general:
+Registra las notificaciones que tiene cada usuario según distintos procesos.
+
+Atributos:
+Campo
+Tipo 
+Descripción
+id_user
+FK → User
+Relación con el usuario que recibe la notificación 
+title
+Char(255)
+Título de la visita
+messages
+Text
+mensaje principal de la notificación 
+type
+Char(50)
+Tipo de visita 
+link
+Char(50)
+Enlace al cual se puede dirigir al leer la notificación .
+is_read
+Boolean
+Estado de leído.
+create_at
+Date
+Fecha de creación de la notificación
+
+
+Relaciones:
+Relación
+Tipo
+Descripción
+Notifiacation– User
+N:1
+Las notificaciones van relacionadas a un usuario.
+
+
+
+
+
+
+11. Pruebas y Validación
+
+11.1 Estrategia de Testing
+Autogestión Sena implementa una estrategia de testing en dos niveles:
+Pruebas Unitarias
+            Objetivo: Validar funciones y componentes individuales
+
+Backend
+Objetivo:
+Validar el comportamiento del backend de la API REST: pruebas unitarias y de integración sobre lógica de servicios,  autenticación JWT, asegurar que los endpoints respondan correctamente bajo distintos casos (entradas válidas/erróneas, permisos, validaciones).
+Herramientas:
+Framework de pruebas: django.test.TestCase (tests existentes en apps/security/test/...).
+Cliente HTTP para pruebas: rest_framework.test.APIClient (usado en varios tests para simular peticiones a los endpoints).
+Runner y utilidades: pytest con pytest-django (se usan @pytest.mark.django_db en algunos tests).
+Mocking: unittest.mock (patch, MagicMock) para aislar dependencias externas.
+
+
+Frontend  – React + TypeScript
+
+Objetivo: Validar componentes, hooks, validaciones y funciones.
+Herramientas:
+Framework principal: jest (versión ~29) — se ejecutan las pruebas con jest.
+Entorno DOM: jest-environment-jsdom.
+Transpilación/TS: ts-jest y typescript (soporte para tests TypeScript).
+React Testing Library: @testing-library/react, @testing-library/jest-dom y @testing-library/user-event — para renderizar componentes y aserciones DOM.
+Mocking y utilidades: uso de jest.mock (tests muestran mocks de módulos y hooks). Además está msw en devDependencies (para mocks de red si se usa).
+Archivos de configuración y soporte en repo: hay jest.config.ts, jest.setup.ts, jest.env.setup.js, y la carpeta __mocks__ (fileMock.js, styleMock.js) para evitar carga de assets en tests.
+Routing en tests: se usa MemoryRouter de react-router-dom para envolver componentes que usan rutas.
+
+Móvil
+Objetivo:
+Validar lógica de negocio, validadores, servicios, ViewModels y funciones auxiliares.
+Herramientas:
+Framework principal: xUnit — se ejecutan las pruebas unitarias con xUnit.
+Mocking y utilidades: Uso de Moq (si se requiere simular dependencias o servicios).
+
+Pruebas de Integración 
+Objetivo: Validar que los módulos funcionen juntos como un sistema.
+Casos de prueba:
+Flujo completo de login 
+Navegación entre pantallas 
+Actualización de estado global 
+Persistencia de datos
+
+11.2 Configuración y ejecución  de Frontend
+
+	Comandos de ejecución:
+
+Todas las pruebas: 
+npm test (ejecuta jest --passWithNoTests).
+Patrón / test por nombre: 
+npm run test:pattern -- "texto del test" (usa jest -t).
+Modo watch: 
+npm run test:watch.
+Ejecutar un archivo de test concreto: 
+npx jest src/components/Login/__tests__/LoginForm.test.tsx --runInBand
+Cobertura: 
+npm test -- --coverage o npx jest --coverage
+Actualizar snapshots: 
+npm test -- -u o npx jest --updateSnapshot
+Forzar uso de archivo de configuración distinto: 
+npx jest --config=jest.config.ts --runInBand
+Pasar flags extra:
+ npm test -- --<flag> (ej.: npm test -- --testNamePattern="VerifyCodeForm")
+
+Archivos de configuración y qué controlan
+
+jest.config.ts: configuración principal de Jest (transform para TypeScript con ts-jest, testEnvironment, moduleNameMapper para mockear CSS/imagenes, setupFilesAfterEnv, paths, etc.). Si quieres cambiar transformaciones o mapping, edítalo aquí.
+jest.setup.ts (o jest.setup.js): se carga vía setupFilesAfterEnv para configurar el entorno de pruebas (ej.: @testing-library/jest-dom).
+jest.env.setup.js: archivo adicional para inicializar variables o polyfills del entorno jsdom (según cómo esté referenciado desde jest.config.ts).
+__mocks__/fileMock.js y styleMock.js: usados por moduleNameMapper para evitar fallos al importar archivos estáticos (imágenes, css).
+ts-jest / globals dentro de jest.config.ts: parámetros para compilar TypeScript en tests.
+msw (devDependency): disponible si quieres mocks de red más elaborados (se configura por separado en setup o en tests).
+
+11.3 Configuración y ejecución de backend
+
+Configuración de Pruebas Unitarias
+Archivos de configuración y su función:
+
+manage.py: Permite ejecutar las pruebas con el comando estándar de Django.
+settings.py: Define la configuración global, incluyendo la base de datos de pruebas y las aplicaciones instaladas.
+requirements.txt: Lista las dependencias necesarias para ejecutar las pruebas.
+Comandos de ejecución:
+
+Ejecutar todas las pruebas del proyecto:
+python manage.py test
+	
+Ubicación de las pruebas:
+Las pruebas deben estar en archivos llamados tests.py o en carpetas tests/ dentro de cada aplicación.
+
+11.4 Configuración y ejecución de móvil
+
+Comandos de ejecución:
+
+Cobertura de pruebas:
+
+Puede integrarse con herramientas como Coverlet para medir cobertura de código.
+
+Archivos de configuración y soporte en el repositorio:
+
+Carpeta Tests con archivos de pruebas (*.cs).
+Referencias a los proyectos principales y a los paquetes de testing en el archivo .csproj del proyecto de pruebas.
+
+Ejecución de pruebas:
+dotnet test
+Desde Visual Studio, usando el Test Explorer.
+Desde la terminal, con el comando:
+
+dotnet test Tests/AutogestionSena.Tests.csproj
+
+Si se quiere ejecutar una prueba de manera individual digitamos el comando en la terminal:
+
+dotnet test Tests/AutogestionSena.Tests.csproj --filter "FullyQualifiedName~NombreDeLaPrueba"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+12. Compilación y Despliegue
+
+12.1 Entornos de Despliegue
+maneja cuatro entornos:
+
+Entorno
+Propósito
+API URL
+Dev
+Desarrollo local del programador. Aquí se agregan nuevas funciones y se realizan pruebas unitarias.
+http://167.114.98.199/swagger/
+qa
+Ambiente de pruebas internas donde QA válida flujos, módulos y correcciones antes de staging.
+(No disponible actualmente)
+staging
+Réplica previa a producción usada para pruebas finales, cargas de datos, validación de rendimiento.
+(No disponible actualmente)
+producción/main
+Entorno en uso real por aprendices, empresas y talento humano. Es la versión estable del sistema.
+http://167.114.98.199/
+
+
+
+
+	
+12.3 Compilación APK de Pruebas
+Esta sección documenta el proceso para generar el archivo APK (Android Package Kit) de la aplicación que se utilizará para realizar pruebas funcionales.
+
+1. Entorno y Herramientas
+
+Componente
+Versión/Especificación
+Propósito
+IDE Principal
+Visual Studio 2022 (v17.8+)
+Desarrollo y compilación
+IDE Alternativo
+Visual Studio Code + extensión C#
+Edición de código
+Framework
+.NET MAUI (.NET 8.0)
+Framework multiplataforma
+.NET SDK
+8.0.x 
+Compilación y ejecución
+Android SDK
+API 21+ (mínimo Android 5.0) 
+Plataforma objetivo
+Android Build-Tools
+34.0.0    Herramientas de compilación
+34.0.0    Herramientas de compilación
+Java JDK
+11 o superior
+Requerido por Android SDK
+
+
+
+2. Procedimiento de Compilación - Visual Studio 2022
+
+Opción A: Compilación desde la Interfaz Gráfica
+Abrir la solución:
+
+Doble clic en AutogestionSenaMaui.sln
+Esperar a que se carguen todos los proyectos
+Seleccionar configuración de Build:
+En la barra de herramientas superior:
+Configuración: Seleccionar Debug
+Plataforma: Seleccionar Any CPU
+Framework: Seleccionar net8.0-android
+Compilar la solución:
+Menú: Build > Build Solution (o presionar Ctrl+Shift+B)
+Esperar a que finalice la compilación
+Verificar en la ventana de salida: Build succeeded
+Generar APK:
+Menú: Build > Publish Selection
+O hacer clic derecho en el proyecto > Publish
+
+Opción B: Compilación desde Terminal (PowerShell) - RECOMENDADO
+1. Navegar al directorio del proyecto
+cd "C:\Users\braya\Desktop\Front-end-Mobile-Autogestion-Sena"
+2. Limpiar compilaciones anteriores (evita conflictos)
+dotnet clean -f net8.0-android -c Debug
+3. Restaurar paquetes NuGet
+dotnet restore
+4. Compilar APK de Debug (Pruebas)
+dotnet build -f net8.0-android -c Debug
+5. Verificar que la APK se generó correctamente
+Get-ChildItem -Path "bin\Debug\net8.0-android\" -Filter "*.apk" -Recurse | Format-Table Name, Length, LastWriteTime
+
+3. Ubicación del Archivo APK Generado
+Después de la compilación exitosa, el archivo APK se encuentra en:
+
+ Front-end-Mobile-Autogestion-Sena/
+└──  bin/
+    └──  Debug/
+        └──  net8.0-android/
+            ├── com.companyname.autogestionsena.maui.apk          (APK sin firmar)
+            └──  com.companyname.autogestionsena.maui-Signed.apk   (APK firmada )
+Ruta completa:
+
+C:\Users\braya\Desktop\Front-end-Mobile-Autogestion-Sena\bin\Debug\net8.0-android\com.companyname.autogestionsena.maui-Signed.apk
+
+4. Nomenclatura y Versionamiento de APK
+Para mantener un control adecuado de las versiones de prueba, se recomienda seguir esta convención de nomenclatura:
+
+AutoGestion-SENA-[version]-[fecha]-[entorno].apk
+
+Ejemplos:
+AutoGestion-SENA-1.0.0-2025.11.27-debug.apk
+AutoGestion-SENA-1.0.0-2025.11.27-qa.apk
+Script para renombrar APK automáticamente:
+
+# Variables
+$version = "1.0.0"
+$fecha = Get-Date -Format "yyyy.MM.dd"
+$entorno = "debug"
+$origen = "bin\Debug\net8.0-android\com.companyname.autogestionsena.maui-Signed.apk"
+$destino = "releases\AutoGestion-SENA-$version-$fecha-$entorno.apk"
+
+# Crear carpeta releases si no existe
+New-Item -ItemType Directory -Path "releases" -Force | Out-Null
+
+# Copiar y renombrar
+Copy-Item $origen $destino
+Write-Host " APK generada: $destino" -ForegroundColor Green
+5. Características de la APK de Pruebas (Debug)
+
+Característica
+APK Debug (Pruebas)
+APK Release (Producción)
+Optimización de código
+Deshabilitada
+Habilitada
+Símbolos de depuración
+Incluidos
+Removidos
+Logging/Debug.WriteLine
+Activo
+Limitado
+Debuggeable
+Sí
+No
+Tamaño aproximado
+~80-120 MB
+~40-60 MB
+Rendimiento
+Más lenta
+Más rápida
+Firma
+Debug keystore
+Keystore de producción
+Uso recomendado
+Testing interno, QA
+Google Play, distribución
+
+
+6. Verificar Integridad de la APK
+# Ver información de la APK generada
+$apk = Get-Item "bin\Debug\net8.0-android\com.companyname.autogestionsena.maui-Signed.apk"
+
+Write-Host "Información de la APK:" -ForegroundColor Cyan
+Write-Host "   Nombre: $($apk.Name)"
+Write-Host "   Tamaño: $([math]::Round($apk.Length / 1MB, 2)) MB"
+Write-Host "   Fecha de creación: $($apk.CreationTime)"
+Write-Host "   Ruta: $($apk.FullName)"
+
+# Verificar firma (requiere Java/keytool)
+jarsigner -verify -verbose "bin\Debug\net8.0-android\com.companyname.autogestionsena.maui-Signed.apk"
+
+7. Compilación con Parámetros Adicionales
+# Compilación con información detallada (verbose)
+dotnet build -f net8.0-android -c Debug -v detailed
+
+# Compilación forzando reconstrucción completa
+dotnet build -f net8.0-android -c Debug --no-incremental
+
+# Compilación especificando versión de Android
+dotnet build -f net8.0-android -c Debug /p:AndroidTargetSdkVersion=34
+
+12.4 Instalación de APK en Dispositivo
+
+Esta sección detalla cómo el archivo APK generado se transfiere e instala en el dispositivo móvil (físico o emulador) para que los testers puedan ejecutar y verificar la aplicación.
+
+1. Requisitos Previos del Dispositivo
+Para Dispositivo Físico Android
+
+Requisito
+Cómo Habilitarlo
+Android 5.0+ (API 21+)
+Verificar en: Configuración > Acerca del teléfono > Versión de Android
+Opciones de Desarrollador
+Configuración > Acerca del teléfono → Tocar 7 veces en Número de compilación
+Depuración USB
+Configuración > Opciones de desarrollador → Activar Depuración USB
+Orígenes Desconocidos
+Permitir instalación desde fuentes externas (ver sección 2.6)
+Espacio disponible
+Mínimo 150 MB libres
+
+
+Pasos para Habilitar Opciones de Desarrollador
+
+Ir a: Configuración > Acerca del teléfono
+Buscar: "Número de compilación" o "Build number"
+Tocar 7 veces consecutivas
+Mensaje: "¡Ahora eres un desarrollador!"
+Volver a: Configuración > Sistema > Opciones de desarrollador
+Activar: "Depuración USB"
+Conectar el dispositivo por USB al PC
+Aceptar el prompt de depuración en el teléfono (marcar "Siempre permitir")
+
+2. Método 1: Instalación por ADB (Android Debug Bridge) - RECOMENDADO
+Este es el método más rápido y confiable para desarrollo y testing.
+
+Prerequisitos
+ADB instalado (viene con Android SDK)
+Dispositivo conectado por USB con depuración habilitada
+Comandos de Instalación
+# 1. Verificar que el dispositivo está conectado y reconocido
+adb devices
+# Salida esperada:
+# List of devices attached
+# XXXXXXXX    device
+
+# 2. Instalar la APK (reemplaza si ya existe)
+adb install -r "C:\Users\braya\Desktop\Front-end-Mobile-Autogestion-Sena\bin\Debug\net8.0-android\com.companyname.autogestionsena.maui-Signed.apk"
+
+# 3. Instalar con permisos automáticos (Android 6.0+)
+adb install -r -g "bin\Debug\net8.0-android\com.companyname.autogestionsena.maui-Signed.apk"
+
+# 4. Si hay error de versión/firma, desinstalar primero:
+adb uninstall com.companyname.autogestionsena.maui
+adb install "bin\Debug\net8.0-android\com.companyname.autogestionsena.maui-Signed.apk"
+Opciones de ADB Install
+
+Opción
+Descripción
+-r
+Reinstalar la app (reemplazar versión existente)
+-g
+Otorgar todos los permisos automáticamente
+-d
+Permitir downgrade (instalar versión anterior)
+-t
+Permitir APKs de test
+
+
+3. Método 2: Transferencia Manual por USB
+Si no tienes ADB configurado o prefieres un método manual:
+
+Paso 1: Copiar APK al dispositivo
+# Opción A: Usando ADB push
+adb push "bin\Debug\net8.0-android\com.companyname.autogestionsena.maui-Signed.apk" /sdcard/Download/AutoGestion-SENA.apk
+
+# Opción B: Usando Windows Explorer
+1. Conectar el dispositivo por USB
+2. Seleccionar "Transferir archivos" en el teléfono
+3. Abrir el dispositivo en Windows Explorer
+4. Copiar la APK a: Almacenamiento interno > Download
+Paso 2: Instalar desde el dispositivo
+Abrir la app "Archivos" o "Gestor de archivos" en el teléfono
+Navegar a la carpeta "Descargas" o "Download"
+Tocar el archivo AutoGestion-SENA.apk
+Si aparece advertencia de fuentes desconocidas, tocar "Configuración"
+Activar "Permitir desde esta fuente"
+Volver y tocar "Instalar"
+Una vez instalada, tocar "Abrir"
+4. Método 3: Compartir por Nube o Red
+Útil para distribuir a múltiples testers:
+
+Opción A: Google Drive / OneDrive
+1. Subir la APK a Google Drive
+2. Obtener enlace de compartir
+3. Enviar enlace por correo/chat a los testers
+Los testers deben:
+Abrir el enlace en el navegador del celular
+Descargar la APK
+Instalar desde Descargas
+Opción B: Servidor interno / Red local
+# Iniciar servidor HTTP simple en Python
+cd "bin\Debug\net8.0-android"
+python -m http.server 8080
+
+# Los testers acceden desde el navegador del celular:
+# http://[IP_DEL_PC]:8080/com.companyname.autogestionsena.maui-Signed.apk
+Opción C: Envío por correo electrónico
+Nota: Gmail y otros proveedores pueden bloquear archivos APK por seguridad. Se recomienda usar un archivo ZIP o servicios de almacenamiento en la nube.
+
+5. Método 4: Instalación en Emulador Android
+# 1. Listar emuladores disponibles
+emulator -list-avds
+
+# 2. Iniciar el emulador
+emulator -avd Pixel_5_API_34
+
+# 3. Esperar a que el emulador inicie completamente
+
+# 4. Instalar APK en el emulador
+adb install "bin\Debug\net8.0-android\com.companyname.autogestionsena.maui-Signed.apk"
+
+# Alternativa: Arrastrar y soltar
+# - Simplemente arrastrar el archivo APK sobre la ventana del emulador
+
+6. Habilitar "Orígenes Desconocidos" (Android 8.0+)
+En Android 8.0 (Oreo) y versiones posteriores, los permisos de instalación se otorgan por aplicación:
+
+Al intentar instalar la APK, aparecerá un mensaje de bloqueo
+Tocar "Configuración" en el mensaje
+Activar "Permitir desde esta fuente" para:
+Chrome (si descargaste desde navegador)
+Archivos (si instalas desde gestor de archivos)
+Gmail (si recibiste por correo)
+Volver y completar la instalación
+
+7. Verificación de Instalación Exitosa
+Una vez instalada la APK, verificar:
+
+# 1. Verificar que la app está instalada
+adb shell pm list packages | Select-String "autogestionsena"
+# Salida esperada: package:com.companyname.autogestionsena.maui
+
+# 2. Obtener información de la app instalada
+adb shell dumpsys package com.companyname.autogestionsena.maui | Select-String "versionName|versionCode"
+
+# 3. Iniciar la aplicación desde ADB
+adb shell am start -n com.companyname.autogestionsena.maui/crc64e1fb321c08285b90.MainActivity
+Verificación Manual en el Dispositivo
+ Buscar el ícono "AutoGestión SENA" en el menú de aplicaciones
+ Abrir la aplicación
+ Verificar que carga la pantalla de login
+ Probar las funcionalidades básicas
+ Verificar conexión con el backend (si aplica)
+
+8. Solución de Errores Comunes de Instalación
+
+Código de Error
+Causa
+Solución
+INSTALL_FAILED_UPDATE_INCOMPATIBLE
+La APK tiene firma diferente a la versión instalada
+adb uninstall com.companyname.autogestionsena.maui y reinstalar
+INSTALL_FAILED_VERSION_DOWNGRADE
+Intentas instalar versión anterior
+Agregar flag -d: adb install -r -d archivo.apk
+INSTALL_PARSE_FAILED_NO_CERTIFICATES
+APK no está firmada
+Usar el archivo *-Signed.apk en lugar del sin firmar
+INSTALL_FAILED_INSUFFICIENT_STORAGE
+No hay espacio en el dispositivo
+Liberar espacio o usar adb install con almacenamiento externo
+INSTALL_FAILED_OLDER_SDK
+Versión de Android no compatible
+Verificar que el dispositivo tenga Android 5.0+
+INSTALL_FAILED_USER_RESTRICTED
+Restricciones de usuario/MDM
+Verificar políticas de seguridad del dispositivo
+
+
+9. Script Completo de Instalación
+# ============================================
+# Script: install-apk.ps1
+# Propósito: Automatizar la instalación de APK
+# ============================================
+
+param(
+    [string]$ApkPath = "bin\Debug\net8.0-android\com.companyname.autogestionsena.maui-Signed.apk",
+    [switch]$Reinstall,
+    [switch]$GrantPermissions
+)
+
+# Verificar que ADB está disponible
+if (-not (Get-Command adb -ErrorAction SilentlyContinue)) {
+    Write-Host " ADB no encontrado. Verifica que Android SDK está en el PATH" -ForegroundColor Red
+    exit 1
+}
+
+# Verificar dispositivo conectado
+$devices = adb devices | Select-String "device$"
+if (-not $devices) {
+    Write-Host " No hay dispositivos conectados" -ForegroundColor Red
+    Write-Host "   Conecta un dispositivo con Depuración USB habilitada" -ForegroundColor Yellow
+    exit 1
+}
+
+Write-Host " Dispositivo detectado: $($devices -replace '\s+device','')" -ForegroundColor Green
+
+# Verificar APK existe
+if (-not (Test-Path $ApkPath)) {
+    Write-Host " APK no encontrada: $ApkPath" -ForegroundColor Red
+    exit 1
+}
+
+$apkInfo = Get-Item $ApkPath
+Write-Host " APK: $($apkInfo.Name) ($([math]::Round($apkInfo.Length/1MB, 2)) MB)" -ForegroundColor Cyan
+
+# Construir comando de instalación
+$installCmd = "adb install"
+if ($Reinstall) { $installCmd += " -r" }
+if ($GrantPermissions) { $installCmd += " -g" }
+$installCmd += " `"$ApkPath`""
+
+Write-Host " Instalando..." -ForegroundColor Yellow
+$result = Invoke-Expression $installCmd
+
+if ($result -match Success") {
+    Write-Host "Instalación exitosa!" -ForegroundColor Green
+    Write-Host " Iniciando aplicación..." -ForegroundColor Cyan
+    adb shell am start -n com.companyname.autogestionsena.maui/crc64e1fb321c08285b90.MainActivity
+} else {
+    Write-Host " Error en la instalación:" -ForegroundColor Red
+    Write-Host $result -ForegroundColor Yellow
+}
+Uso del script:
+
+# Instalación básica
+.\install-apk.ps1
+
+# Reinstalar y otorgar permisos
+.\install-apk.ps1 -Reinstall -GrantPermissions
+
+# APK específica
+.\install-apk.ps1 -ApkPath "releases\AutoGestion-SENA-1.0.0-debug.apk"
+
+
+12.5 Compilación del Frontend (Build de Producción)
+
+1. Preparación del Entorno en el Servidor
+
+Antes de clonar el proyecto, se preparó el entorno necesario en el VPS:
+
+Instalación de Node.js y npm para permitir la construcción del proyecto.
+Creación de la estructura de carpetas dentro de /home/reyving/apps/ destinada a alojar el frontend.
+Verificación del estado del firewall y disponibilidad del puerto 80 para servir la aplicación mediante Nginx.
+
+2. Clonación del Proyecto Frontend
+
+Una vez preparado el entorno, se clonó el repositorio del frontend desde GitHub directamente en el VPS:
+
+git clone <https://github.com/July173/Front-end-web-Autogestion-Sena> Front-end-web-Autogestion-Sena
+
+Esto permitió obtener la versión más reciente del código fuente para construir y desplegar la aplicación.
+
+3. Generación del Build de Producción
+
+Dentro del proyecto clonado, se instalaron las dependencias y se generó el artefacto final de producción:
+
+npm install
+npm run build
+
+El comando npm run build generó la carpeta dist/, que contiene los archivos optimizados (HTML, CSS, JS) listos para ser servidos por Nginx.
+
+4. Configuración e Instalación del Build en el Servidor Web
+
+El contenido compilado fue transferido al directorio destinado a alojar el frontend público:
+
+sudo rm -rf /var/www/frontend/*
+sudo mv dist/* /var/www/frontend/
+sudo chown -R www-data:www-data /var/www/frontend
+
+Esto garantizó que la aplicación fuera accesible desde el servidor web configurado en el VPS.
+
+5. Integración con el Backend Desplegado Previamente
+
+Para conectar correctamente el frontend con el backend:
+
+Se configuraron las variables de entorno:
+VITE_API_BASE_URL=/api/
+
+Nginx se configuró como reverse proxy para enviar todas las solicitudes que comiencen en /api/ hacia el backend ejecutándose con Gunicorn.
+Se verificó que las rutas del frontend utilizarán la base URL correcta para consumir la API.
+
+La configuración final permitió que el frontend consumiera los servicios REST del backend desde la misma dirección pública, manteniendo una arquitectura unificada y segura.
+
+6. Validación Final del Despliegue
+
+Se realizó una validación completa comprobando:
+Carga del frontend en http://167.114.98.199/
+Funcionamiento de rutas internas del SPA
+Comunicación del frontend con el backend por /api/
+Correcto retorno de datos desde la API previamente desplegada
+
+Con esto se confirmó que el frontend quedó completamente operativo y correctamente integrado al backend en producción.
+
+
+12.6 Despliegue del Backend (Producción)
+
+Para el despliegue en producción del backend se utilizó un servidor VPS con sistema operativo Ubuntu, configurando una arquitectura basada en:
+
+Gunicorn como servidor WSGI para ejecutar la aplicación Django.
+Nginx como servidor web y reverse proxy.
+MySQL como motor de base de datos en ambiente productivo.
+
+Los pasos generales de despliegue fueron:
+
+Preparación del servidor
+
+Actualización de paquetes del sistema operativo.
+Configuración de firewall con UFW permitiendo únicamente los puertos 22 (SSH), 80 (HTTP) y 443 (HTTPS).
+Creación de la estructura de directorios para el proyecto en /home/reyving/apps/.
+
+Obtención del código fuente
+
+Clonado del repositorio remoto del backend desde GitHub en la ruta:
+/home/reyving/apps/Back-end-web-API-autogestionSena
+Configuración del entorno virtual de Python:
+python3 -m venv venv
+source venv/bin/activate
+
+Instalación de dependencias
+
+Instalación de los paquetes de Python definidos en requirements.txt mediante:
+pip install -r requirements.txt
+Instalación de gunicorn como servidor WSGI.
+
+Configuración de la aplicación Django
+
+Ajuste del archivo settings.py para entorno de producción:
+Configuración de ALLOWED_HOSTS con la IP del servidor.
+Configuración del bloque DATABASES para utilizar MySQL como motor de base de datos productivo.
+Definición de STATIC_ROOT para la recolección de archivos estáticos.
+Configuración de CORS con django-cors-headers para permitir únicamente el dominio/IP del frontend.
+Configuración de CSRF_TRUSTED_ORIGINS para proteger los formularios y autenticación.
+
+Base de datos (MySQL)
+
+Creación de la base de datos productiva y usuario con permisos específicos para la aplicación.
+Aplicación de migraciones con:
+python3 manage.py migrate
+Opcionalmente, carga de datos iniciales o de un dump .sql actualizado.
+
+Archivos estáticos
+
+Ejecución de:
+python3 manage.py collectstatic
+Nginx se configuró para servir directamente los archivos estáticos desde la carpeta staticfiles.
+
+Configuración de Gunicorn como servicio
+
+Creación del servicio systemd gunicorn-autogestion.service, indicando:
+Ruta del proyecto.
+Ruta del entorno virtual (venv).
+Módulo WSGI del proyecto Django.
+Socket Unix en /run/gunicorn/gunicorn-autogestion.sock.
+Habilitación y arranque del servicio:
+sudo systemctl daemon-reload
+sudo systemctl enable gunicorn-autogestion
+sudo systemctl start gunicorn-autogestion
+
+Configuración de Nginx como reverse proxy
+
+Definición de un bloque server que:
+Escucha en el puerto 80.
+Sirve el frontend estático desde /var/www/frontend.
+Redirige las peticiones a la API (/api/) y Swagger (/swagger/) hacia el socket de Gunicorn.
+Sirve los archivos estáticos del backend desde la ruta configurada.
+Prueba de sintaxis: sudo nginx -t
+Recarga del servicio: sudo systemctl reload nginx.
+
+
+12.7 Versionamiento
+
+El proyecto utiliza Git como sistema de control de versiones y GitHub como repositorio remoto centralizado, lo que permite llevar un historial completo de cambios, facilitar el trabajo colaborativo y asegurar la trazabilidad de las modificaciones.
+
+Las prácticas de versionamiento implementadas son:
+
+Repositorio remoto en GitHub
+
+El código fuente del backend y del frontend se mantiene en repositorios separados.
+GitHub almacena la versión “oficial” del proyecto, desde donde se realizan los despliegues a producción.
+
+Ramas principales
+
+main o master: rama estable que representa la versión desplegada o lista para producción.
+develop: rama de integración donde se acumulan las funcionalidades antes de pasar a producción.
+qa:
+stanging:
+
+Flujo de trabajo general
+
+Se crea una rama a partir de main o develop para cada nueva funcionalidad o corrección.
+Se realizan commits frecuentes, con mensajes descriptivos y claros.
+Una vez finalizada la tarea, se genera un pull request hacia la rama destino (develop o main).
+Se realiza revisión de código (code review) y, tras su aprobación, se hace el merge.
+Para cada versión estable de producción, se puede crear un tag (por ejemplo: v1.0.0, v1.1.0) que identifica un punto concreto del código.
+
+Buenas prácticas de Git
+
+Mensajes de commit claros y significativos.
+No subir archivos generados (dist, staticfiles, etc.), sino sólo código fuente y archivos de configuración.
+Uso de .gitignore para excluir archivos temporales, entornos virtuales, archivos de configuración local, etc.
+
+
+12.8 Buenas Prácticas de Despliegue
+
+Para garantizar un despliegue ordenado, reproducible y seguro, se han tenido en cuenta las siguientes buenas prácticas:
+
+Separación de ambientes
+
+Diferenciar al menos entre:
+Ambiente de desarrollo (local).
+Ambiente de producción (VPS).
+
+Configuración de parámetros sensibles (BD, claves, DEBUG, etc.) mediante variables de entorno o archivos de configuración específicos de cada ambiente.
+
+Gestión de dependencias
+
+Uso de requirements.txt para controlar la versión de las librerías de Python.
+Instalación de dependencias dentro de un entorno virtual (venv) para evitar conflictos con el sistema operativo.
+
+Despliegue automatizado y ordenado
+
+Flujo estándar de despliegue:
+git pull desde la rama estable.
+pip install -r requirements.txt si hay nuevos paquetes.
+python3 manage.py migrate para aplicar cambios en la base de datos.
+python3 manage.py collectstatic para actualizar los archivos estáticos.
+Reinicio controlado del servicio Gunicorn y recarga de Nginx.
+
+Evitar cambios manuales directamente en producción que no estén versionados en Git.
+
+Seguridad
+
+DEBUG = False en producción.
+Restricción de ALLOWED_HOSTS a los dominios y/o IPs válidos.
+Configuración de CORS para permitir únicamente orígenes autorizados (frontend de producción y, opcionalmente, entornos de prueba).
+Protección de credenciales de base de datos y claves secretas (SECRET_KEY) fuera del código fuente (variables de entorno, archivos no versionados).
+Firewall configurado para permitir solo los puertos necesarios (22, 80, 443).
+
+Manejo de base de datos
+
+Uso de migraciones de Django para evolucionar el esquema de la base de datos.
+Realización de copias de seguridad periódicas (backups) de la base MySQL, especialmente antes de despliegues importantes.
+Posibilidad de restaurar la base de datos a partir de un dump en caso de fallos.
+
+Monitoreo y logs
+
+Configuración de logs de Gunicorn y Nginx para poder revisar errores y trazas de ejecución.
+Revisión de los logs después de cada despliegue para detectar posibles problemas tempranamente.
+
+Capacidad de rollback
+
+Al estar el proyecto versionado en Git, es posible regresar a una versión anterior (tag o commit previo) en caso de que una nueva versión presente errores críticos.
+El flujo de despliegue permite revertir rápidamente el código y volver a levantar el servicio con una versión estable.
+
+
+13. Resolución de Problemas
+
+	13.1 Errores Comunes y Soluciones
+
+Problema
+Causa
+Solución
+No carga el frontend / error en consola "Failed to fetch"
+Variable VITE_API_BASE_URL no configurada o backend apagado
+Verificar el archivo .env y que el backend esté corriendo en el puerto correcto
+Error 500 desde el backend
+Excepción interna: validaciones, modelos o permisos
+Revisar logs de Django, consultar python manage.py runserver para obtener el traceback
+Login falla constantemente
+Email o contraseña incorrectos, usuario inactivo o registrado pero no activado
+Verificar usuario en tabla user, revisar campo registered y is_active
+No se cargan los permisos / rutas protegidas bloqueadas
+Token inválido, expirado o rol sin permisos asignados
+Regenerar el token, verificar asignación de rol en tabla role y permisos en role_form_permission
+Error 404 en rutas del frontend
+Rutas mal declaradas o mal importadas en React Router
+Revisar archivo App.tsx y los imports con alias @/...
+El archivo PDF no se carga
+Límite de tamaño, ruta incorrecta o error en FileField
+Revisar configuración de MEDIA_ROOT y MEDIA_URL en Django
+La asignación de instructor no se registra
+Solicitud no válida, empresa no existe o aprendiz sin ficha
+Revisar integridad de tablas apprentice, enterprise, ficha
+Error CORS
+Backend no permite el origen del frontend
+Configurar CORS_ALLOWED_ORIGINS en Django
+
+
+App no compila
+SDK de Android no instalado o mal configurado
+Reinstalar dependencias desde Visual Studio Installer
+Pantalla en blanco
+Error de binding o ViewModel no inyectado
+Revisar constructor, DI y nombres de propiedades
+No carga datos
+URL incorrecta o problema con HttpClient
+Revisar la configuración del endpoint y certificados
+Token inválido
+Expiración o valores nulos en SecureStorage
+Borrar datos de app y volver a loguear
+Error “Connection refused”
+Backend apagado o API incorrecta
+Confirmar disponibilidad del backend en navegador
+
+
+	13.2 Debugging
+
+Frontend (React + Vite):
+Usar consola del navegador (F12 → Console / Network)
+Revisar las respuestas HTTP en la pestaña Network
+Activar logs en componentes (console.log)
+Usar React DevTools para inspeccionar estado, props, contextos
+
+Backend (Django)
+Ejecutar el servidor en modo debug:
+python manage.py runserver
+Revisar trazas completas en terminal
+Habilitar logging con logging en settings.py
+Usar print() en vistas/servicios solo en desarrollo
+Revisar carpetas:
+/apps/.../views.py
+/apps/.../services/
+/apps/.../serializers/
+Móvil(Maui)
+Usar Android Device Logs en VS.
+Verificar excepciones con Debug Output.
+Insertar Debugger.Break() en ViewModels.
+Probar API directamente con Postman.
+Base de Datos
+Verificar integridad con migraciones:
+python manage.py makemigrations
+python manage.py migrate
+Revisar relaciones FK y restricciones
+Usar herramientas como pgAdmin, DBeaver o el shell de Django:
+python manage.py shell
+
+	13.3 Limpieza de Caché
+
+Frontend (Vite / Navegador)
+Limpiar caché del navegador (Ctrl + Shift + R o Ctrl + F5)
+Borrar localStorage si hay sesiones:
+localStorage.clear()
+Parar y reinstalar dependencias:
+rm -rf node_modules
+npm install
+
+Backend (Django)
+
+Eliminar archivos .pyc:
+find . -name "*.pyc" -delete
+Reiniciar el servidor
+Volver a aplicar migraciones si es necesario
+Móvil
+Métodos recomendados:
+Borrar caché de la app desde Configuración > Apps.
+Limpiar dependencias:
+dotnet restore
+dotnet clean
+Reiniciar el emulador de Android.
+Base de Datos
+Sincronizar datos inconsistentes
+Eliminar registros lógicos marcados con delete_at si afectan procesos
+
+13.4 Recursos de Soporte
+
+Documentación Recomendada: 
+Frontend
+React: https://react.dev
+Vite: https://vitejs.dev
+React Router: https://reactrouter.com
+React Query: https://tanstack.com/query/latest
+TailwindCSS: https://tailwindcss.com
+Backend
+Django Framework: https://docs.djangoproject.com
+Django Rest Framework: https://www.django-rest-framework.org
+Django Models & ORM: https://docs.djangoproject.com/en/dev/topics/db/models/
+Móvil 
+.NET MAUI Docs
+ https://learn.microsoft.com/dotnet/maui/
+Instalación MAUI
+ https://learn.microsoft.com/dotnet/maui/get-started/installation
+Visual Studio 2022 (MAUI workload)
+ https://learn.microsoft.com/visualstudio/windows/
+Android SDK
+ https://developer.android.com/studio
+Base de Datos
+MySql: https://dev.mysql.com/doc/ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+15. Referencias y Contacto
+	
+15.1 Enlaces de Referencia
+
+Repositorios GitHub: 
+Frontend:  
+https://github.com/July173/Front-end-web-Autogestion-Sena.git
+Backend:
+https://github.com/July173/Back-end-web-API-autogestionSena.git
+Móvil:
+https://github.com/July173/Front-end-Mobile-Autogestion-Sena.git
+
+15.2 Información de Contacto
+Desarrolladores: 
+
+Nombre: Brayan Stid Cortes Lombana
+Ubicación: Neiva, Huila, Colombia 
+Email: brayanstidcorteslombana@gmail.com
+GitHub: brayancortes22
+
+Nombre: Reyving Fabriani Ramirez Medina
+Ubicación: Neiva, Huila, Colombia 
+Email: medinafabriany@gmail.com
+GitHub: reivyng
+
+Nombre: July Daniela Ramos Peña
+Ubicación: Neiva, Huila, Colombia 
+Email: july345ra@gmail.com
+GitHub: july173
+
+

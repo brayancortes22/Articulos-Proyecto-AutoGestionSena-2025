@@ -1,0 +1,560 @@
+Articulo 1
+Una revisión sistemática sobre aula invertida y aprendizaje colaborativo apoyados en inteligencia artificial para el aprendizaje de programación
+Resumen:
+Trata sobre una revisión sistemática del estado actual de las tecnologías, estrategias y herramientas basadas en el aprendizaje activo y colaborativo, con el apoyo de la inteligencia artificial, para la enseñanza de la programación de computadores.
+El objetivo es analizar cómo la inteligencia artificial ha contribuido a mejorar la educación en este campo, destacando aplicaciones como:
+Sistemas de recomendación y plataformas virtuales de aprendizaje.
+Herramientas para la formación de grupos y la colaboración.
+Identificación de perfiles de estudiantes.
+Sistemas de evaluación y retroalimentación automática.
+También señala que la tendencia actual se inclina hacia la implementación de arquitecturas basadas en la nube que mejoran el aprendizaje a través de técnicas como la gamificación y la colaboración distribuida.
+Grafico:
+ 
+ 
+Reflexión:
+El documento ofrece una visión exhaustiva y bien estructurada sobre cómo la combinación del aula invertida (AI) y el aprendizaje colaborativo (AC), potenciados por la inteligencia artificial (IA), está transformando la enseñanza de la programación.
+ permitiendo a las personas aprender más rápido sin la necesidad de pasar horas buscando en la web ya que la agilidad de buscar o apoyarse en las inteligencias artificiales es muy progresiva ya que a cualquier dudad o inquietud se la podemos preguntar directamente de varias maneras y lograr entender el tema.
+Bibliografía:
+Hidalgo Suárez, C. G., Llanos Mosquera, J. M., & Bucheli Guerrero, V. A. (2021). Una revisión sistemática sobre aula invertida y aprendizaje colaborativo apoyados en inteligencia artificial para el aprendizaje de programación. Tecnura, 25(69), 196-214.
+ 
+
+	Articulo 2
+La implementación de la Inteligencia Artificial en la enseñanza de la programación. Un estudiosobre el uso ético de ChatGPT en el aula
+ Resumen:
+Un estudio sobre el uso ético de ChatGPT en el aula
+ El texto es un estudio sobre el uso de la inteligencia artificial (IA), específicamente ChatGPT, en la enseñanza de la programación. El autor argumenta que, aunque el uso de la IA en la educación genera preocupaciones, puede ser una herramienta muy beneficiosa si se usa de manera ética.
+Para demostrarlo, se implementó una experiencia en un curso de programación, donde se establecieron reglas claras y se promovió un uso responsable de la herramienta. Los estudiantes usaron ChatGPT para resolver ejercicios, comparar sus soluciones, depurar código y aclarar dudas.
+Los resultados mostraron que el uso de ChatGPT mejoró significativamente el rendimiento y la motivación de los estudiantes, aumentando el número de ejercicios resueltos correctamente sin ayuda. La conclusión principal es que la IA tiene el potencial de transformar positivamente el aprendizaje, actuando como un tutor personal que democratiza la tutoría académica. No obstante, se destaca la necesidad de seguir investigando para encontrar las mejores estrategias y mitigar los posibles impactos negativos.
+Grafico:
+  
+Reflexión:
+ Este artículo aborda temas relacionados con el aprendizaje colaborativo, destacando el papel de las herramientas de inteligencia artificial como facilitadoras de un aprendizaje más ágil y eficiente. Gracias a estas tecnologías, el proceso de estudio se asemeja a tener un tutor personalizado que supervisa, valida y guía cada paso, asegurando que la persona esté comprendiendo correctamente. Además, al ofrecer respuestas inmediatas a cualquier duda, se evita la distracción y se mantiene el enfoque en el contenido, lo que representa un beneficio significativo para el aprendizaje individual
+Bibliografía:
+ Terán, H. (2023). La implementación de la Inteligencia Artificial en la enseñanza de la programación. Un estudio sobre el uso ético de ChatGPT en el aula. Encuentro Internacional de Educación en Ingeniería. 
+Articulo 3
+Inteligencia artificial en el campo de la enfermería: implicaciones en la asistencia, administración y educación
+ Resumen:
+ La IA ya no es solo ciencia ficción; está revolucionando muchos campos, y la salud no es una excepción. En la enfermería, la tecnología ha llegado para ayudar en tareas diarias como el control de equipos médicos, la toma de signos vitales o el traslado de pacientes, haciendo el trabajo más eficiente y seguro.
+Esta investigación, basada en una revisión de varios artículos, encontró que la mayoría de los estudios sobre IA en enfermería se centran en el desarrollo de prototipos para el cuidado del paciente, como robots o aplicaciones que ayudan en la asistencia. También se vio que la IA es útil en la administración (para la toma de decisiones y la gestión) y en la educación (usando simuladores o pacientes virtuales para la formación de estudiantes).
+El estudio concluye que, para que la IA sea realmente efectiva, las enfermeras deben involucrarse más en su diseño y desarrollo, no solo en su uso. Es fundamental que adquieran conocimientos tecnológicos para poder trabajar en equipo con otros profesionales y asegurarse de que la tecnología complemente, en lugar de reemplazar, la esencia del cuidado humano.
+ Grafico:
+  
+Reflexión:
+ Este artículo nos permite comprender que el uso de la inteligencia artificial y otras tecnologías en el ámbito de la salud representa una herramienta poderosa, aunque delicada. Su implementación permite gestionar procesos médicos con mayor precisión y, en muchos casos, realizar un seguimiento más riguroso de los datos clínicos de los pacientes. La autora de la investigación destaca que los profesionales del sector deberían incorporar estas tecnologías no solo para agilizar procedimientos, sino también para contar con un contexto más completo al momento de evaluar situaciones médicas. Por ejemplo, podrían analizar con mayor detalle el progreso en la recuperación de un paciente con fractura, lo que facilitaría la toma de decisiones informadas y oportunas.
+Bibliografia:
+Mejías, M., Guarate Coronado, Y. C., & Jiménez Peralta, A. L. (2022). Inteligencia artificial en el campo de la enfermería. Implicaciones en la asistencia, administración y educación. Salud, Ciencia y Tecnología, 2(88), 5-16.
+
+
+ 
+ Articulo 4
+impacto de la inteligencia artificial en el aprendizaje de la programación informática en los estudiantes universitarios impact of artificial intelligence on computer programming learning in university students
+ El documento es una revisión de literatura sobre el impacto de la inteligencia artificial (IA), como ChatGPT, en la enseñanza de la programación en estudiantes universitarios. El estudio concluye que el uso de la IA mejora el rendimiento y la eficiencia de los estudiantes, pero también advierte sobre los riesgos de la dependencia y la falta de comprensión profunda de los conceptos. Por ello, el artículo sugiere que los educadores deben equilibrar el uso de estas herramientas con estrategias que fomenten el pensamiento crítico y rediseñar las evaluaciones para adaptarse a este nuevo panorama tecnológico y puntos como:
+·         dependencia excesiva
+·         integrarla de manera estratégica y ética
+
+ Grafico:
+ 
+Reflexión:
+Este artículo aborda una perspectiva interesante sobre la dependencia que pueden desarrollar los estudiantes al utilizar la inteligencia artificial para aumentar su productividad. Se comparan dos perfiles: aquellos que recurren a la IA como herramienta de apoyo constante, y quienes prefieren resolver problemas sin ella, fomentando así un pensamiento crítico más profundo.
+La investigación se centró en el uso de la IA en el ámbito de la programación, y se identificó que su aplicación resulta útil hasta cierto punto. Los resultados muestran que, aunque los estudiantes sienten que tienen el control al resolver problemas con ayuda de la IA, cuando se enfrentan a desafíos más complejos que requieren razonamiento crítico, tienden a estancarse. Esto se debe a que la IA, en ocasiones, mezcla conceptos o genera respuestas confusas, lo que puede dificultar la comprensión real del problema.
+Este análisis es valioso porque evidencia que, si bien la IA permite avanzar rápidamente, es fundamental detenerse a reflexionar sobre lo que realmente se quiere lograr. Lo menciono también desde mi experiencia personal: en varias ocasiones dependí completamente de lo que la IA me ofrecía, sin entender por qué lo hacía de esa manera. Esto me llevó a reconocer la importancia de combinar el uso de estas herramientas con una actitud crítica y reflexiva.
+Bibliografia:
+Paredes, D. A. V., Arias, O. O. F., & Martínez, L. C. C. (2025). Impacto de la inteligencia artificial en el aprendizaje de la programación informática en los estudiantes universitarios. Ciencia y Educación, 6(3), 33-50.
+ 
+Articulo 5
+Hasta chat GPT y más allá: una breve guía reflexiva sobre el impacto de la Inteligencia Artificial en la educación
+ Resumen:
+El texto de María del Mar Sánchez Vera es una guía reflexiva sobre el impacto de la inteligencia artificial (IA) en la educación, con un enfoque particular en herramientas como ChatGPT. La autora argumenta que, aunque la IA no es una tecnología nueva, su versión generativa es disruptiva porque permite a los usuarios interactuar y crear contenido de manera más evidente, al igual que las herramientas de la Web 2.0 lo hicieron con Internet. La guía enfatiza que el verdadero desafío no es prohibir estas herramientas, sino entender cómo funcionan y replantear las metodologías educativas y de evaluación. Se subraya que el papel del docente sigue siendo crucial, ya no como transmisor de información, sino como un guía que fomenta el pensamiento crítico y la ética. Finalmente, el documento concluye que la IA debe verse como una oportunidad para transformar la educación, mejorando la forma en que se enseña y se evalúa, y promoviendo una alfabetización digital que prepare a los estudiantes para un futuro incierto.
+Grafico:
+ 
+Reflexión:
+En este artículo se menciona algo muy importante: muchos profesores y evaluadores se preocupan porque los estudiantes usan la inteligencia artificial para hacer sus trabajos. Sin embargo, a lo largo de los años, las metodologías de enseñanza siempre han cambiado, y el uso de nuevas herramientas es parte de esa evolución. A pesar de eso, sigue siendo necesario que los estudiantes tengan una guía que les indique el camino para alcanzar sus objetivos.
+Estoy muy de acuerdo con la autora del artículo, quien señala que ahora es necesario adaptar la forma en que se evalúa y se le enseñan a los estudiantes. Por ejemplo, se debería valorar más su capacidad para resolver problemas, no solo si entregan un trabajo bien hecho.
+En conclusión, este artículo es muy valioso porque muestra que el uso de la IA y otras herramientas puede ayudar mucho en el aprendizaje. Pero también nos recuerda que es fundamental usar estas tecnologías de forma ética y responsable. No sirve de nada que un estudiante use la IA si no entiende por qué se llegó a esa solución.
+Bibliografía:
+Sánchez-Vera, M. D. M. (2023). Hasta chat GPT y más allá: una breve guía reflexiva sobre el impacto de la Inteligencia Artificial en la educación.
+  
+ 
+Articulo 6
+Integración de la Inteligencia Artificial en la Enseñanza de la Arquitectura: Impacto en las Competencias de Presupuesto y Programación
+ Resumen:
+El texto detalla cómo la inteligencia artificial (IA) está transformando la sociedad y, en particular, la educación en arquitectura. Se argumenta que la IA es una herramienta crucial para abordar problemas sociales y mejorar la enseñanza, ya que optimiza los procesos de presupuesto y programación en proyectos arquitectónicos, reduce costos y minimiza errores. El documento resalta que esta integración requiere un cambio en las metodologías de enseñanza hacia enfoques más activos y humanistas, donde los docentes guíen a los estudiantes a desarrollar habilidades tecnológicas sin perder el sentido crítico, la ética y el control humano sobre las decisiones.
+Grafico:
+  
+Reflexión:
+Este artículo aborda varios temas relevantes, como la incorporación de la inteligencia artificial en las metodologías educativas tradicionales. Se destaca cómo estas herramientas pueden hacer que los procesos de enseñanza sean más eficaces y dinámicos, permitiendo una renovación en la forma de aprender y enseñar.
+Además, se menciona el papel que podrían tener los nuevos y futuros arquitectos al integrar la IA en la resolución de problemas, logrando soluciones más ágiles y precisas. Sin embargo, el texto también advierte sobre la necesidad de establecer límites en el uso de estas tecnologías. Al manejar grandes cantidades de información con IA, se corre el riesgo de perder la capacidad crítica humana.
+Reforzando esta idea, estoy de acuerdo con la autora: la decisión final ante cualquier problema debe ser tomada por la persona, no por la IA. Estas herramientas deben verse como un apoyo, no como un reemplazo del pensamiento humano.
+Bibliografía:
+Serrano, V. O. M., García, E. T. A., & Ruiz, L. K. C. (2025). Integración de la Inteligencia Artificial en la Enseñanza de la Arquitectura: Impacto en las Competencias de Presupuesto y Programación. Mundo FESC, 15(31).
+ 
+Articulo 7
+La inteligencia artificial aplicada a la optimización de programas informáticos
+Resumen:
+El documento detalla los principales conceptos de la Inteligencia Artificial (IA) aplicados a la optimización de programas informáticos. Explica que la IA utiliza tres tipos de aprendizaje principales: supervisado, con datos etiquetados para predecir; no supervisado, para encontrar patrones en datos sin etiquetar; y por refuerzo, que mejora la toma de decisiones. Además, describe métodos de optimización como los algoritmos genéticos, las redes neuronales y los algoritmos de búsqueda local y de enjambre.
+El texto también menciona las herramientas más populares en este campo, como plataformas de desarrollo, bibliotecas de código abierto y herramientas de visualización de datos. A pesar de los grandes avances y casos de éxito en áreas como el procesamiento de imágenes y voz, la IA enfrenta retos importantes. El documento subraya la escasez de datos de alta calidad para entrenar modelos, la falta de transparencia en la forma en que los modelos toman decisiones y la dificultad para transferir modelos a diferentes contextos sin un nuevo entrenamiento.
+Grafico:
+ 
+ Reflexión:
+En este artículo nos dice que a pesar de los avances impresionantes en aprendizaje supervisado, no supervisado y por refuerzo, la IA no es una solución mágica para todos los problemas. El artículo mismo lo señala: la falta de datos, la dificultad para interpretar los resultados y la limitada transferibilidad de los modelos son obstáculos significativos, evidenciando que la IA es un complemento, no un sustituto. Aunque puede optimizar procesos, predecir comportamientos y mejorar la eficiencia a una escala que el ser humano no podría, su éxito depende de nuestra capacidad para proveerla con datos de calidad, interpretar sus resultados con juicio crítico y adaptarla a diferentes contextos. La IA es una herramienta que amplifica nuestras capacidades, pero la responsabilidad, la ética y el entendimiento profundo del problema a resolver siguen recayendo en la inteligencia humana.
+Bibliografía:
+Erazo-Luzuriaga, A. F., Ramos-Secaira, F. M., Galarza-Sánchez, P. C., & Boné-Andrade, M. F. (2023). La inteligencia artificial aplicada a la optimización de programas informáticos. Journal of Economic and Social Science Research, 3(1), 48-63.
+ 
+Artículo 8
+La enseñanza de la programación mediante software educativo especializado y los agentes conversacionales
+Resumen:
+El texto describe los desafíos de enseñar a programar a estudiantes universitarios en México, donde muchos no tienen experiencia previa en pensamiento algorítmico. Argumenta que las estrategias de enseñanza tradicionales son a menudo ineficaces y que es necesario adoptar herramientas y métodos innovadores para motivar a los alumnos y mejorar sus resultados.
+Para abordar este problema, el artículo explora el uso de software educativo y agentes conversacionales (chatbots). Clasifica el software educativo en cinco categorías: programas de resolución de problemas, práctica y simulación, tutoriales, juegos serios y trazadores de código. Destaca que estos programas, especialmente los tutoriales, tienen un gran potencial para integrar la inteligencia artificial y analizar el comportamiento de los estudiantes.
+Grafico:
+ 
+Reflexión:
+En este artículo 
+La idea central que se desprende es que la tecnología, por sí sola, no es la solución. Aunque el software educativo y los chatbots son herramientas poderosas para enseñar programación, su éxito depende de un cambio fundamental en el enfoque del docente. Ya no se trata solo de transmitir conocimientos, sino de acompañar y motivar al estudiante.
+En este sentido, el documento destaca la importancia de fomentar la autogestión y la resiliencia en el alumno. La programación es una disciplina que inevitablemente conlleva errores y frustración, y una herramienta como un chatbot puede ser el apoyo constante que los estudiantes necesitan para superar esos obstáculos y no desmotivarse. Esta reflexión es clave, porque nos recuerda que el verdadero reto es empoderar a los alumnos para que aprendan a aprender, convirtiendo los errores en oportunidades y la tecnología en un aliado en su desarrollo.
+Bibliografia:
+Cadena, O. A., & Juárez, I. A. (2023). La enseñanza de la programación mediante software educativo especializado y los agentes conversacionales. Interfases, (017), 170-186.
+
+
+ 
+Articulo 9
+Aplicaciones de la Inteligencia Artificial en el campo de la programación
+Resumen:
+El estudio examina la relevancia de la inteligencia artificial (IA) en el campo de la programación, destacando su impacto en la automatización del desarrollo de software, la optimización de código y los procesos de depuración y prueba. La investigación, que utilizó una metodología documental-descriptiva con enfoque cualitativo, se propuso analizar cómo estas herramientas han transformado las prácticas tradicionales y las implicaciones éticas de su implementación.
+Como resultado, el estudio evidenció que la IA ha permitido automatizar tareas repetitivas y generar código eficiente, lo que ha aumentado la productividad y la calidad del software. Específicamente, herramientas como GPT-4 y GitHub Copilot pueden generar código a partir de lenguaje natural, y la IA también se utiliza para optimizar el rendimiento y detectar vulnerabilidades. 
+Grafico:
+ 
+
+Reflexión:
+El artículo destaca una reflexión fundamental sobre la inteligencia artificial (IA) en la programación: aunque es una herramienta transformadora que automatiza y optimiza el desarrollo de software, no es una solución exenta de dilemas éticos. La IA eleva el rol del programador de un simple codificador a un diseñador estratégico que colabora con la máquina. Sin embargo, este avance exige una supervisión humana constante, ya que el programador debe ser el garante de la transparencia, la responsabilidad y la equidad, asegurándose de que el poder de la IA se utilice de manera justa y beneficiosa para todos.
+Bibliografia:
+Pincay, W. D. C. (2025). Aplicaciones de la Inteligencia Artificial en el campo de la programación. Journal TechInnovation, 4(1), 4-12.
+ 
+Articulo 10
+Inteligencia Artificial y Machine Learning como recurso educativo desde la perspectiva de docentes en distintas etapas educativas no universitarias
+Resumen:
+El estudio se enfoca en la relevancia de las aplicaciones actuales y emergentes de la
+inteligencia artificial (IA) en el campo de la programación. A través de una metodología cualitativa y documental, el artículo analiza cómo estas herramientas han transformado las prácticas tradicionales del desarrollo de software, evaluando su impacto en la automatización de tareas, la optimización del código y la depuración. Como resultado, se concluyó que la IA permite automatizar procesos repetitivos, generar código eficiente y reducir los tiempos de prueba y de detección de errores.
+Grafico:
+ 
+Reflexión:
+Este artículo subraya una realidad crucial en el avance tecnológico: la inteligencia artificial está redefiniendo el papel del programador, transformándolo de un simple codificador a un diseñador estratégico que colabora con la máquina. No obstante, el mayor desafío no es solo técnico, sino ético. Delegar tareas a algoritmos opacos plantea serias preguntas sobre la responsabilidad de los errores y los posibles sesgos. La reflexión fundamental es que, si bien la IA amplifica nuestra capacidad, la supervisión humana y la ética no pueden ser automatizadas; son la piedra angular para asegurar que esta tecnología beneficie a toda la sociedad y no solo a unos pocos.
+Bibliografia:
+Terrón, P. D., Guerrero, A. J. M., Belmonte, J. L., & Marín, J. A. M. (2023). Inteligencia Artificial y Machine Learning como recurso educativo desde la perspectiva de docentes en distintas etapas educativas no universitarias. RiiTE Revista interuniversitaria de investigación en tecnología educativa, 58-78.
+ 
+Articulo 11
+Implicancia De La Inteligencia Artificial En Las Aulas Virtuales Para La Educación Superior
+Resumen:
+El artículo examina la integración de la inteligencia artificial (IA) en el ámbito del desarrollo de software, describiendo cómo ha transformado los procesos de programación. El estudio, basado en una metodología de revisión documental, analiza las principales aplicaciones de la IA, como la
+automatización de tareas repetitivas, la generación de código eficiente y la optimización de los procesos de depuración y pruebas. La investigación concluye que estas herramientas han incrementado la productividad y la calidad del software, liberando a los programadores para que se enfoquen en aspectos más creativos del trabajo.
+
+Grafico:
+ 
+Reflexión:
+Este artículo nos ofrece una perspectiva clara y equilibrada sobre el papel de la IA en la programación. La reflexión más importante que nos deja es que la IA no viene a reemplazar al programador, sino a redefinir su rol. En lugar de simplemente escribir líneas de código, el desarrollador moderno se convierte en un arquitecto de soluciones que colabora con la inteligencia artificial.
+No obstante, esta nueva dinámica exige una vigilancia constante. La tecnología nos provee de herramientas poderosas, pero la responsabilidad de su correcto funcionamiento, la transparencia de sus decisiones y la equidad en su aplicación siguen siendo responsabilidades exclusivamente humanas. El gran desafío es cómo podemos maximizar los beneficios de la IA mientras gestionamos de manera proactiva los riesgos éticos que trae consigo
+Bibliografia:
+Villarroel, J. J. G. (2021). Implicancia de la inteligencia artificial en las aulas virtuales para la educación superior. Orbis Tertius-UPAL, 5(10), 31-52.
+
+ 
+Articulo 12
+El impacto de asistentes basados en IA en la enseñanza-aprendizaje de la programación
+Resumen:
+El estudio se enfoca en el diseño, desarrollo e implementación de un agente conversacional (chatbot) llamado "Eva" para mejorar el rendimiento académico y reducir la deserción en el curso de Diseño de Sistemas de la Carrera de Ingeniería en Sistemas de la Universidad de Guayaquil. La investigación se llevó a cabo con una muestra de 50 estudiantes y 4 docentes, utilizando una metodología de estudio de caso con enfoque mixto, combinando un pretest y un postest, encuestas y entrevistas. El objetivo era evaluar la efectividad de Eva como apoyo didáctico para la resolución de problemas en el ámbito universitario.
+Grafico:
+ 
+Reflexión:
+Este artículo plantea una reflexión crucial sobre el papel de la tecnología en la educación superior. Nos muestra que las herramientas de inteligencia artificial, como el chatbot "Eva", no son solo innovaciones teóricas, sino soluciones prácticas a problemas reales como la baja de notas y el abandono universitario. El éxito de esta herramienta reside en su capacidad para ofrecer un acompañamiento constante y personalizado, rompiendo con el modelo de aprendizaje tradicional y promoviendo la autonomía del estudiante. En un mundo donde la disponibilidad de información es inmediata, la educación debe adaptarse para proveer un soporte que esté a la misma altura, transformando el rol del docente en un facilitador y al estudiante en un gestor activo de su propio conocimiento.
+Bibliografia:
+de Sande, F., & Ramos, P. L. (2023). El impacto de asistentes basados en IA en la enseñanza-aprendizaje de la programación. Actas de las Jornadas sobre la Enseñanza Universitaria de la Informática (JENUI), 8, 163-170.
+ 
+Articulo 13
+Inteligencia Artificial O La Algoritmización De La Vida Y De La Justicia: ¿Solución O Problema?
+Resumen:
+El artículo plantea un debate fundamental sobre el impacto de la inteligencia artificial (IA) en el ámbito jurídico y judicial, cuestionando si su llegada es una solución o un problema. Señala que la incorporación de la IA, los algoritmos y el software en el mundo de la justicia es una realidad imparable que promete mayor eficiencia y, en algunos casos, más garantías. No obstante, advierte sobre la inquietante posibilidad de que la "máquina inteligente" o el "robot judicial" puedan llegar a sustituir a los jueces, lo que transformaría el paradigma tradicional de la justicia.
+El documento concluye que la era digital ha llegado para quedarse y que el futuro de la justicia depende de cómo utilicemos la IA. La decisión de si esta tecnología nos llevará a un mundo con más igualdad y solidaridad, o si profundizará las desigualdades, recae en las manos de la sociedad y en la forma en que se diseñen y regulen estos sistemas.
+Grafico:
+ 
+Reflexión:
+Este artículo nos obliga a reflexionar sobre uno de los dilemas más profundos de la inteligencia artificial: su aplicación en la justicia. La promesa de eficiencia y objetividad que ofrecen los algoritmos es seductora, pero el riesgo de delegar decisiones cruciales a una máquina es inmenso. La justicia, en su esencia, no es solo un cálculo de datos; es un proceso humano que requiere empatía, criterio y la capacidad de entender el contexto y las complejidades de cada caso. Entregar el juicio a una IA podría deshumanizar un sistema que ya de por sí es complejo. La reflexión principal es que, aunque la tecnología puede ser una herramienta invaluable para optimizar procesos legales, la responsabilidad y la ética del juicio deben seguir siendo un pilar innegociable de la inteligencia humana. La IA debe servir a la justicia, no convertirse en ella.
+Bibliografia:
+Barona Vilar, S. (2019). INTELIGENCIA ARTIFICIAL O LA ALGORITMIZACIÓN DE LA VIDA Y DE LA JUSTICIA:¿ SOLUCIÓN O PROBLEMA?(Artificial Intelligence or the Algorithmization of Life and Justice: Solution or Problem?). Artificial Intelligence or the Algorithmization of Life and Justice: Solution or Problem, 18-49.
+
+
+ 
+Articulo 14
+La influencia de la inteligencia artificial en el futuro del marketing
+Resumen:
+El artículo examina la influencia de la inteligencia artificial (IA) en el futuro del marketing. A través de una revisión de la producción científica, el estudio tiene como objetivo comprender cómo la IA está transformando los contenidos y procesos virtuales de esta disciplina.
+El documento concluye que el desarrollo continuo de la IA tendrá un impacto significativo en el marketing, mejorando la eficiencia, la velocidad y la reducción de costos. La IA permite a las empresas resolver las necesidades de los clientes de manera más eficaz, lo que se traduce en una relación más sólida y consolidada entre el marketing y el consumidor.
+Grafico:
+ 
+Reflexión:
+Este artículo nos invita a reflexionar sobre una idea central: la IA en el marketing no es solo una moda, sino una revolución que está redefiniendo la relación entre las marcas y los clientes. Nos muestra cómo el marketing, impulsado por la IA, se mueve de un modelo de comunicación masiva a uno de interacción personalizada.
+Sin embargo, esta transformación plantea un desafío ético fundamental. La reflexión principal es que, al usar la IA para analizar datos y comportamientos del cliente, las empresas deben asegurar la privacidad y la confianza. La verdadera inteligencia en el marketing no reside solo en la capacidad de la máquina para predecir lo que un cliente quiere, sino en la capacidad de la marca para usar esa información de manera ética, transparente y respetuosa.
+Bibliografia:
+Bravo, J. C. C. (2021). La influencia de la inteligencia artificial en el futuro del marketing. Big Bang Faustiniano, 10(3).
+ 
+Articulo 15
+Integración de la Inteligencia artificial en la formulación de pro-yectos: Oportunidades, desafíos y perspectivas futuras
+Resumen:
+El artículo aborda la integración de la inteligencia artificial (IA) en la formulación de proyectos, un campo que ha evolucionado significativamente con las nuevas tecnologías. La investigación, que se basa en una revisión bibliográfica, explora las oportunidades, desafíos y perspectivas futuras de esta integración. Se destaca que la IA ofrece la capacidad de simular el pensamiento humano para resolver problemas complejos, mejorando la precisión y la eficiencia de los proyectos en comparación con las metodologías tradicionales.
+machine learning y deep learning, el texto subraya la importancia de una nueva alfabetización digital en la sociedad actual. Se argumenta que las habilidades tradicionales de lectura y escritura ya no son suficientes para navegar en un mundo globalizado. El artículo concluye que la IA es una herramienta poderosa que está revolucionando tanto el ámbito empresarial como el educativo, y su implementación requiere que las personas adquieran competencias digitales para aprovecharla plenamente.
+Grafico:
+ 
+Reflexión:
+Este artículo plantea una reflexión crucial: la integración de la inteligencia artificial en la formulación de proyectos no es solo un avance tecnológico, sino también un desafío educativo y social. El documento subraya que, si bien la IA puede mejorar la eficiencia y la precisión de los proyectos de manera exponencial, su verdadero potencial solo se liberará si la sociedad en general desarrolla las habilidades necesarias para interactuar con ella.
+
+Esto nos lleva a una conclusión más profunda: la tecnología no es el único motor del progreso; la capacidad humana para adaptarse y adquirir nuevas competencias es igual de vital. La alfabetización digital se presenta no como una simple habilidad técnica, sino como una herramienta fundamental para reducir las brechas sociales y económicas. En un futuro cada vez más mediado por la IA, la inteligencia de un sistema no será la única medida de éxito; la capacidad de sus usuarios para comprender, aplicar y mejorar su funcionamiento será la clave.
+Bibliografia:
+García, N. R. P., Parrales, E. M. B., Cantos, M. A. B., & Ponce, M. R. M. (2024). Integración de la Inteligencia artificial en la formulación de proyectos: Oportunidades, desafíos y perspectivas futuras. RECIAMUC, 8(1), 463-477.
+
+ 
+Articulo 16
+Herramientas de IA aplicablesala Educación
+Resumen:
+Este artículo examina el impacto de la inteligencia artificial (IA) en la educación, centrándose en tres herramientas específicas: ChatGPT, los Sistemas de Tutoría Inteligente (ITS) y miMente IA. El estudio describe cómo ChatGPT, un modelo de lenguaje, puede ofrecer respuestas precisas a las consultas de los usuarios, mientras que los ITS están diseñados para enseñar y proporcionar retroalimentación personalizada.
+El texto concluye que estas herramientas tienen un gran potencial para mejorar la educación al complementar la labor de los docentes y facilitar el autoaprendizaje. Sin embargo, también subraya que la adopción de estas tecnologías debe ser cuidadosa, ya que su éxito depende de la capacidad de los educadores para integrarlas de manera efectiva en el proceso de enseñanza y no simplemente como un sustituto de la interacción humana
+Grafico:
+ 
+Reflexión:
+Este artículo nos ofrece una reflexión práctica sobre el uso de la IA en el aula. Nos muestra que la IA, a través de herramientas como ChatGPT y los Sistemas de Tutoría Inteligente, no es una amenaza para la educación, sino una oportunidad para potenciarla. La reflexión clave es que la verdadera innovación no está en la herramienta en sí, sino en cómo la integramos en la pedagogía.
+El desafío para los educadores es dejar de ser los únicos portadores del conocimiento y convertirse en guías que enseñan a los estudiantes a usar estas herramientas de manera crítica y ética. La IA puede automatizar el acceso a la información y ofrecer un apoyo constante, pero el desarrollo de habilidades como el pensamiento crítico, la creatividad y la empatía sigue siendo una tarea intrínsecamente humana. La IA es el nuevo lápiz, pero la mente que lo guía sigue siendo la más importante.
+Bibliografia:
+Baltazar, C. (2023). Herramientas de IA aplicables a la Educación. Technology Rain Journal, 2(2), e15-e15.
+ 
+Articulo 17
+Ética De La Inteligencia Artificial
+Resumen:
+El artículo examina la ética de la inteligencia artificial (IA), señalando que los avances tecnológicos a menudo se adelantan a nuestra comprensión moral sobre cómo utilizarlos. La autora, Adela Cortina Orts, se enfoca en las cuestiones éticas que la IA presenta, reconociendo tanto sus ventajas como los problemas que genera.
+El texto hace un paralelismo con la idea de Kant de que la invención precede a la moral, argumentando que hoy en día el rápido progreso de la IA y las tecnociencias plantea una gran cantidad de preguntas éticas que requieren respuestas urgentes. El documento concluye que la moralidad no es un mapa fijo, sino una brújula que nos ayuda a encontrar el camino en medio de los nuevos descubrimientos tecnológicos, y que es nuestra responsabilidad encontrar las orientaciones éticas necesarias para interactuar con la IA de forma responsable.
+Grafico:
+ 
+Reflexión:
+Este artículo plantea una reflexión profunda y atemporal sobre la relación entre el progreso tecnológico y la ética humana. La metáfora de la brújula es particularmente poderosa: la inteligencia artificial no es inherentemente buena o mala, sino una herramienta cuyo impacto depende de cómo la guiemos. La reflexión principal es que, a medida que la IA se vuelve más omnipresente, no podemos simplemente delegar nuestra responsabilidad moral a los algoritmos.
+La verdadera inteligencia no reside en la capacidad de la máquina para tomar decisiones, sino en nuestra capacidad humana para formular las preguntas éticas correctas y asegurar que la tecnología sirva a fines justos y equitativos. Nos recuerda que, sin una sólida brújula moral, incluso los avances más brillantes pueden llevarnos a un destino que no deseamos.
+Bibliografia:
+Cortina Orts, A. (2019). Ética de la inteligencia artificial. In Anales de la Real Academia de Ciencias Morales y Políticas (pp. 379-394). Ministerio de Justicia.
+ 
+Articulo 18
+¿Es capaz “ChatGPT” de aprobar el examen MIR de 2022? Implicaciones   de   la   inteligencia   artificial   en   la   educaciónmédica en España
+Resumen:
+El artículo evalúa la capacidad de ChatGPT para aprobar el examen MIR 2022 en España, un examen de acceso a la formación sanitaria especializada. Para ello, se introdujeron las 210 preguntas del examen en el modelo de lenguaje, incluyendo preguntas con imágenes asociadas que ChatGPT no podía ver. Los resultados mostraron que ChatGPT acertó el 51.4% de las preguntas, lo que le habría permitido pasar la nota de corte y seleccionar una especialidad. El porcentaje de acierto fue mayor en preguntas de tipo "básicas" y "preventiva", y menor en las de especialidades médicas y casos clínicos complejos.
+El estudio concluye que, si bien ChatGPT demostró un rendimiento prometedor similar a los resultados obtenidos en exámenes de otros países, plantea una serie de riesgos importantes, como la veracidad, la ética y la seguridad de la información. El artículo subraya la necesidad de que los futuros especialistas en medicina sean formados en la realidad de la inteligencia artificial para que puedan utilizar estas herramientas de manera razonada y segura en su práctica profesional
+Grafico:
+ 
+Reflexión:
+Este artículo plantea una reflexión crucial sobre el papel de la inteligencia artificial en campos de alta especialización como la medicina. El hecho de que una herramienta como ChatGPT pueda pasar el examen MIR, aunque sea con una nota por debajo de la media, es un hito que nos obliga a repensar la educación y la formación profesional.
+La reflexión más importante es que la IA no solo sirve para automatizar tareas, sino que se está convirtiendo en un colaborador en procesos de pensamiento y toma de decisiones. El gran desafío es cómo integrar esta tecnología de manera responsable. La IA puede ser una herramienta poderosa para el aprendizaje, la generación de debates y el análisis de razonamiento, pero el juicio, la ética y la seguridad de la información siguen siendo responsabilidades exclusivamente humanas. El futuro de la medicina no será sin IA, sino con especialistas que sepan cómo aprovecharla sin delegar su criterio y moralidad a una máquina
+Bibliografia:
+Carrasco, J. P., García, E., Sánchez, D. A., Porter, E., De La Puente, L., Navarro, J., & Cerame, A. (2023). ¿ Es capaz “ChatGPT” de aprobar el examen MIR de 2022? Implicaciones de la inteligencia artificial en la educación médica en España. Revista española de educación médica, 4(1).
+
+ 
+Articulo 19
+Modelo Conceptual para Definir una Estrategia de SQA de Sistemas Generativos Impulsados por IA
+Resumen:
+El artículo presenta un modelo conceptual para el aseguramiento de la calidad de software (SQA) en sistemas generativos impulsados por inteligencia artificial (IA), como los chatbots. Tradicionalmente, la calidad del software se evalúa según su capacidad para cumplir requisitos funcionales y no funcionales. Sin embargo, el texto señala que los sistemas generativos, que se basan en el aprendizaje automático (ML) y tienen una interacción constante con los usuarios, poseen características que invalidan las técnicas de SQA tradicionales.
+El documento enfatiza que la evaluación de la calidad en estos sistemas debe centrarse en la integridad de los datos y la robustez del modelo. Concluye que la naturaleza dinámica y evolutiva de los chatbots requiere nuevas estrategias de aseguramiento de la calidad, adaptadas a su proceso de aprendizaje continuo para cumplir con las expectativas de los usuarios, quienes buscan interacciones cada vez más cercanas a las humanas.
+Grafico:
+ 
+Reflexión:
+Este artículo nos obliga a repensar lo que significa la "calidad" en el software de la era de la inteligencia artificial. La reflexión principal es que no podemos aplicar viejos estándares a una tecnología que evoluciona constantemente. A diferencia del software tradicional con reglas fijas, la calidad de un sistema generativo no se define solo por lo que fue programado, sino por su capacidad para aprender y adaptarse.
+El desafío radica en cómo garantizar la fiabilidad de un sistema que está en constante cambio. Esto implica un cambio de enfoque: de verificar un producto final a monitorear un proceso de aprendizaje continuo. En última instancia, el valor de estos sistemas no depende de un código perfecto, sino de la confianza que podemos depositar en su capacidad para manejar datos, ser robustos ante errores y, sobre todo, aprender a satisfacer las necesidades dinámicas de los usuarios.
+Bibliografía:
+Da Ponte, F., Pérez, C., & Pérez, M. (2022). Modelo Conceptual para Definir una Estrategia de SQA de Sistemas Generativos Impulsados por IA. In Novena Conferencia Nacional de Computación, Informática y Sistemas/CoNCISa.
+ 
+Artículo 20
+Inteligencia artificial generativa
+Resumen:
+Este editorial examina el fenómeno de la Inteligencia Artificial (IA) Generativa, definida como una IA capaz de crear contenidos (texto, imágenes, software, música, etc.) que emulan la producción humana. El autor destaca la "revolución viral" que esta tecnología ha supuesto, especialmente desde finales de 2022 y durante 2023. El texto hace un breve repaso de los conceptos fundamentales, como el aprendizaje no supervisado y la arquitectura de "transformador", y menciona diversas aplicaciones en campos como la medicina, la educación, el arte y el derecho.
+Grafico:
+ 
+Reflexión:
+Este artículo plantea una reflexión clave sobre la naturaleza imparable de la inteligencia artificial generativa. A pesar de que el autor se excusa por la falta de espacio para abordar los aspectos éticos y sociotécnicos, precisamente esta omisión subraya el punto más importante: la tecnología se está moviendo tan rápido que nuestra capacidad para comprender sus implicaciones morales y sociales no avanza al mismo ritmo. La IA generativa no es solo una herramienta técnica; es un fenómeno que se ha popularizado de manera viral, impactando desde el arte hasta el derecho, y su comprensión ya no es tarea exclusiva de los ingenieros, sino de una sociedad multidisciplinar que debe reflexionar sobre su integración. El editorial nos recuerda que la verdadera tarea, ahora que la IA está aquí, es entender cómo nos afectará en todas las esferas de la vida.
+Bibliografia:
+Corredera, J. C. (2023). Inteligencia artificial generativa. In Anales de la Real academia de Doctores (Vol. 8, No. 3, pp. 475-489).
+ 
+Articulo 21
+Importancia de la Inteligencia Artificial en la educación del siglo XXI.
+Resumen:
+El texto habla sobre cómo la inteligencia artificial (IA) está cambiando la educación en el siglo XXI. Explica que la IA puede ayudar a los estudiantes a aprender mejor, porque permite que cada uno avance a su ritmo y reciba apoyo personalizado. También menciona que los profesores pueden usarla para crear clases más dinámicas y evaluar de forma más rápida.
+Además, se habla de los beneficios como el uso de simulaciones, la accesibilidad para personas con discapacidades, y cómo la IA puede ayudar a desarrollar habilidades como la creatividad o el pensamiento crítico. Pero también se advierte sobre los riesgos, como el plagio, la dependencia de la tecnología y la necesidad de que los docentes estén bien preparados para usarla correctamente.
+Grafico:
+Reflexión:
+La verdad, me pareció interesante ver cómo la IA puede hacer que aprender sea más fácil y divertido. Me gustó que se pueda adaptar a cada estudiante, porque no todos aprendemos igual. Pero también me hizo pensar que no todo es perfecto. Si usamos la IA sin pensar, podríamos dejar de esforzarnos o depender demasiado de ella.
+Bibliografía:
+Numa-Sanjuán, N., Diaz-Guecha, L. Y., & Peñaloza-Tarazona, M. E. (2024). Importancia de la Inteligencia Artificial en la educación del siglo XXI. Aibi revista de investigación, administración e ingeniería, 12(2), 49-62.
+ 
+Articulo 22
+Auditoría del futuro, la prospectiva y la inteligencia artificial para anticipar riesgos en las organizaciones
+Resumen:
+Este texto habla sobre cómo la inteligencia artificial (IA) está cambiando la educación en todo el mundo. Explica que la IA no solo sirve para hacer tareas más rápido, sino que también puede ayudar a los estudiantes a aprender mejor, adaptándose a lo que cada uno necesita. Por ejemplo, puede dar clases personalizadas, ayudar a los profes a crear guías más creativas, y hasta detectar si un estudiante necesita apoyo extra.
+También se menciona que, en países como Noruega o Japón, ya usan la IA en las aulas para hacer el aprendizaje más dinámico y divertido. Además, se habla de cómo la IA puede ayudar a personas con discapacidades, mejorar la seguridad de la información, y facilitar el acceso a contenidos educativos por medio de videos, audios y mapas conceptuales.
+Grafico:
+
+Reflexión:
+Después de leer esto, me di cuenta de que la inteligencia artificial puede ser una súper herramienta para aprender. Me parece genial que se puedan hacer clases más personalizadas y que los profes tengan más tiempo para ayudar a los estudiantes. También me gustó que se piense en los estudiantes que tienen dificultades, porque todos merecen aprender bien.
+Pero también me preocupa que algunos estudiantes usen la IA solo para copiar y pegar sin entender nada. Creo que lo importante es usarla para aprender de verdad, no para hacer trampa. Además, los profes deben estar preparados para enseñar con estas nuevas tecnologías, porque si no, se pueden quedar atrás.
+Bibliografía:
+Erazo-Castillo, J. (2023). Auditoría del futuro, la prospectiva y la inteligencia artificial para anticipar riesgos en las organizaciones. Revista Digital Novasinergia, 6(1), 105-119.
+
+
+ 
+Articulo 23
+El impacto de la inteligencia artificial generativa en educación superior: una mirada desde la ética y la integridad académica
+Resumen:
+El artículo trata sobre cómo la Inteligencia Artificial Generativa (IAG), como ChatGPT, está cambiando la educación superior. Por un lado, estas herramientas ofrecen beneficios como retroalimentación rápida, generación de contenido educativo y aprendizaje personalizado. Pero también traen riesgos: plagio, pérdida de pensamiento crítico, falta de transparencia y problemas éticos.
+Grafico:
+Reflexión:
+La verdad, este tema me hizo pensar bastante. Yo uso herramientas como ChatGPT para estudiar, pero nunca me había puesto a pensar en lo que eso significa para la educación. Si solo copio lo que me da la IA, ¿realmente estoy aprendiendo? Me parece que lo más importante es usar estas herramientas como apoyo, no como reemplazo de nuestro esfuerzo.
+También me llamó la atención cómo los profesores y las universidades tienen que adaptarse. No es justo que solo nos pidan a nosotros ser honestos si ellos también usan la IA sin decirlo. Creo que todos deberíamos aprender a usarla bien, con reglas claras y con respeto por el trabajo de los demás.
+
+Bibliografía:
+Gallent-Torres, C., Zapata-González, A., & Ortego-Hernando, J. L. (2023). El impacto de la inteligencia artificial generativa en educación superior: una mirada desde la ética y la integridad académica. RELIEVE. Revista Electrónica de Investigación y Evaluación Educativa, 29(2), 1-21.
+ 
+Articulo 24
+Programa de capacitación para la actualización sobre Inteligencia Artificial como herramienta didáctica en los docentes
+Resumen: 
+Este artículo presenta un programa de capacitación para docentes sobre el uso de la Inteligencia Artificial (IA), especialmente ChatGPT, como herramienta didáctica. El objetivo fue actualizar a los profesores para que puedan integrar la IA en sus clases de forma ética y efectiva.
+Se diseñó un curso virtual con cuatro módulos:
+1.	Introducción a ChatGPT
+2.	Estrategias de enseñanza
+3.	Aplicación práctica en el aula
+4.	Uso de prompts
+Los resultados mostraron que los docentes mejoraron sus conocimientos a medida que avanzaban en el curso. Las estadísticas reflejan una buena aceptación de la IA, y se concluye que la formación continua es clave para aprovechar esta tecnología en la educación.
+Grafico:
+ 
+Reflexión:
+Este artículo me hizo pensar en lo importante que es que los profes también aprendan cosas nuevas. A veces uno cree que los docentes ya lo saben todo, pero la verdad es que la tecnología avanza tan rápido que todos necesitamos actualizarnos.
+Me gustó que el curso fuera paso a paso, empezando por lo básico y luego aplicando lo aprendido. Eso me recordó cómo aprendemos nosotros también: primero entendemos, luego practicamos. Además, el uso de ChatGPT como herramienta educativa me parece súper útil, pero también hay que tener cuidado de no usarlo solo para copiar.
+Bibliografía:
+Guamán-Inga, L. E., Quezada-Ureña, S. E., López-Fernández, R., & Gómez-Rodríguez, V. G. (2023). Programa de capacitación para la actualización sobre Inteligencia Artificial como herramienta didáctica en los docentes. MQRInvestigar, 7(4), 1721-1738.
+ 
+Articulo 25
+Rueda de la Pedagogía para la Inteligencia Artificial: adaptación de la Rueda de Carrington
+Resumen:
+Este artículo propone una versión adaptada de la famosa “Rueda de la Pedagogía” de Allan Carrington, pero enfocada en la integración de la Inteligencia Artificial (IA) en la educación. La idea es crear una herramienta visual que ayude a los docentes a usar la IA de forma pedagógica, ética y efectiva.
+La nueva rueda combina tres elementos clave:
+• 	Taxonomía de Bloom: niveles cognitivos como recordar, comprender, aplicar, analizar, evaluar y crear.
+• 	Modelo SAMR: niveles de integración tecnológica (sustitución, ampliación, modificación y redefinición).
+• 	Nivel reflexivo-metacognitivo: para pensar críticamente sobre el uso ético y responsable de la IA.
+Grafico:
+ 
+Reflexión:
+Este artículo me pareció súper interesante porque no solo habla de usar tecnología en clase, sino de hacerlo con cabeza. A veces uno piensa que usar IA es solo para hacer tareas más rápido, pero aquí te muestran que también se puede usar para aprender mejor, pensar más profundo y hasta reflexionar sobre lo que estamos haciendo.
+Me gustó mucho que incluyeran el nivel “reflexivo-metacognitivo”. Es como decir: “No solo uses la IA, piensa en cómo la estás usando”. Eso me hizo pensar en cómo muchas veces usamos herramientas sin preguntarnos si realmente nos están ayudando o solo nos están haciendo flojos.
+Bibliografía:
+García, E. J., Orenes-Martínez, N., & López-Fraile, L. A. (2024). Rueda de la Pedagogía para la Inteligencia Artificial: adaptación de la Rueda de Carrington. RIED-Revista Iberoamericana de Educación a Distancia, 27(1), 87-113.
+ 
+Articulo 26
+Recursos digitales con Inteligencia Artificial para mejorar el Aprendizaje de los Estudiantes de Primaria
+Resumen:
+El artículo presenta los resultados de una investigación sobre cómo los docentes universitarios perciben el uso de la Inteligencia Artificial Generativa (como ChatGPT) en sus prácticas educativas. Se aplicó una encuesta a profesores de distintas áreas para conocer sus opiniones, preocupaciones y expectativas.
+Los hallazgos principales fueron:
+•	Muchos docentes reconocen el potencial de la IAG para mejorar el aprendizaje, especialmente en tareas como redacción, investigación y retroalimentación.
+•	Sin embargo, también hay preocupaciones éticas: plagio, dependencia tecnológica, desinformación y pérdida de habilidades cognitivas.
+•	La mayoría cree que es necesario capacitarse y establecer normas claras para su uso responsable.
+Grafico:
+Reflexión:
+Este artículo me hizo pensar en cómo los profes también están aprendiendo a vivir con la IA, igual que nosotros. A veces creemos que ellos ya lo saben todo, pero en realidad también tienen dudas, miedos y ganas de entender cómo usar estas herramientas sin perder lo que hace especial la educación.
+Me pareció muy justo que quieran reglas claras. Si nosotros como estudiantes tenemos que aprender a usar la IA sin hacer trampa, ellos también necesitan saber cómo enseñarnos con ella sin que se vuelva una muleta. Me gustó que muchos estén abiertos a capacitarse, porque eso demuestra que les importa enseñar bien, no solo repetir lo de siempre.
+Bibliografía:
+Echeverría, G. S. G., Alvarez, A. F. Y., Espinosa, M. J. A., Aguayo, E. M. L., & Rodriguez, P. M. L. (2023). Recursos digitales con Inteligencia Artificial para mejorar el Aprendizaje de los Estudiantes de Primaria. Ciencia Latina Revista Científica Multidisciplinar, 7(4), 1463-1481.
+ 
+Articulo 27
+Inteligencia artificial y sostenibilidad: El compromiso de una Institución de educación superior
+Resumen:
+El artículo describe cómo una universidad colombiana está integrando la Inteligencia Artificial (IA) en sus procesos educativos y administrativos, con un enfoque claro en la sostenibilidad. La idea no es solo usar tecnología por moda, sino hacerlo de forma responsable, ética y alineada con los Objetivos de Desarrollo Sostenible (ODS).
+Se destacan tres grandes líneas de acción:
+1. 	Formación ética en IA: capacitar a docentes y estudiantes para usar la IA con conciencia.
+2. 	Transformación institucional: aplicar IA en procesos internos para mejorar eficiencia y reducir impacto ambiental.
+3. 	Compromiso con los ODS: usar la IA como herramienta para promover educación inclusiva, equitativa y sostenible.
+La universidad propone que la IA no debe ser vista como una amenaza, sino como una aliada si se usa con valores humanos, reflexión crítica y responsabilidad social.
+Grafico:
+ 
+Reflexión:
+Este artículo me pareció muy inspirador. A veces uno piensa que la IA solo sirve para hacer tareas más rápido o para crear cosas en internet, pero aquí muestran que también puede ayudar a cuidar el planeta y mejorar la educación.
+También me llamó la atención cómo conectan la IA con los ODS. Nunca lo había pensado así, pero tiene sentido: si usamos la tecnología para reducir el desperdicio, mejorar la inclusión y enseñar mejor, estamos ayudando a construir un futuro más humano.
+Bibliografía:
+Pintado, L. S., Prado, R. S., Peláez, C. O., & Aguilar, W. Á. (2023). Inteligencia artificial y sostenibilidad: El compromiso de una institución de educación superior. Magazine De Las Ciencias: Revista De Investigación E Innovación, 8(4), 12-28.
+ 
+Articulo 28
+Contenido generado por inteligencia artificial: oportunidades y amenazas
+Resumen:
+El artículo analiza cómo la inteligencia artificial (IA) está revolucionando la creación de contenido: textos, imágenes, voces y videos. Franganillo presenta tanto las oportunidades como las amenazas que surgen de esta tecnología.
+Oportunidades destacadas:
+• 	Generación automática de textos (GPT-3)
+• 	Creación de imágenes a partir de texto (DALL·E, Craiyon)
+• 	Clonación de voz para audiolibros y entornos inmersivos
+• 	Videos deepfake para entretenimiento y publicidad
+Amenazas importantes:
+• 	Desinformación y manipulación de la opinión pública
+• 	Suplantación de identidad (voz, imagen, rostro)
+• 	Pérdida de empleos creativos (ilustradores, redactores)
+• 	Problemas éticos y legales sobre propiedad intelectual
+El autor insiste en que la IA no es buena ni mala por sí sola. Todo depende del uso que se le dé y de si se establecen normas éticas claras para evitar abusos.
+Grafico:
+Reflexión:
+Este artículo me dejó con una mezcla de emoción y preocupación. Por un lado, me parece increíble que una IA pueda escribir textos, crear imágenes o imitar voces. Es como tener superpoderes digitales. Pero también me asusta que se pueda usar para engañar, manipular o incluso reemplazar a personas reales.
+Lo que más me impactó fue el tema de los deepfakes. Imaginar que alguien puede hacer un video donde parezco decir algo que nunca dije… eso da miedo. Y si eso se usa para dañar a alguien, ¿cómo se defiende?
+Bibliografía:
+Franganillo, J. (2022). Contenido generado por inteligencia artificial: oportunidades y amenazas. Anuario ThinkEPI, 16.
+ 
+Articulo 29
+La Inteligencia Artificial y la Enseñanza de lenguas: una aproximación al tema
+Resumen:
+Este artículo habla sobre cómo la inteligencia artificial (IA) está cambiando la forma en que aprendemos idiomas, especialmente el español como lengua extranjera. Antes, los maestros usaban libros, grabadoras y proyectores, pero ahora hay apps, plataformas digitales y hasta robots que ayudan a enseñar.
+La IA puede hacer cosas como corregir textos (como Grammarly), sugerir palabras, y hasta actuar como tutores virtuales. También se menciona algo llamado “aprendizaje adaptativo”, que es cuando una app analiza cómo aprende cada estudiante y le da actividades personalizadas. Además, se habla de herramientas como Linguee, que es un diccionario en línea que aprende de las traducciones anteriores.
+Grafico:
+
+
+Reflexión:
+La verdad, me pareció muy interesante este tema. Nunca me había puesto a pensar en cómo la inteligencia artificial ya está en cosas que usamos todos los días, como los correctores de texto o los asistentes de voz. Me gustó aprender que hay formas de enseñar que se adaptan a cada persona, porque no todos aprendemos igual.
+Creo que, si los maestros usan más estas herramientas, las clases podrían ser más divertidas y fáciles. También me hizo pensar que en el futuro podríamos tener robots que nos ayuden a estudiar o que nos enseñen idiomas como si fueran personas. Aunque da un poco de miedo que las máquinas hagan tanto, también es emocionante ver todo lo que se puede lograr.
+Bibliografía:
+Hernández, J. C. E. (2021). La Inteligencia Artificial y la Enseñanza de lenguas: una aproximación al tema. Decires, 21(25), 29-44.
+ 
+Articulo 30
+Aplicación de la inteligencia artificial en la educación superior
+Resumen:
+Este artículo trata sobre cómo la inteligencia artificial (IA) está cambiando la educación en las universidades. La autora explica que la IA puede ayudar a los estudiantes a aprender de forma personalizada, como si cada uno tuviera su propio tutor virtual. También puede corregir tareas, analizar datos y dar retroalimentación al instante.
+Se mencionan varias herramientas que usan IA, como ChatGPT, Grammarly, Moodle y otras que ayudan a escribir mejor, organizar clases o hacer evaluaciones. Además, se cuenta una experiencia en una clase de programación donde los estudiantes usaron IA para entender mejor el código y resolver problemas.
+Grafico:
+Reflexión:
+Me pareció súper interesante cómo la inteligencia artificial puede ayudar en la educación. Yo he usado cosas como ChatGPT y Grammarly para hacer tareas, pero no sabía que también se usan en las universidades para enseñar programación y otras materias.
+Lo que más me gustó fue la idea de tener un aprendizaje personalizado, como si la computadora supiera exactamente lo que necesito aprender. Pero también me hizo pensar en que no todos tienen acceso a estas herramientas, y que los profes tienen que aprender a usarlas bien para que no se pierda la parte humana de la enseñanza.
+Bibliografía:
+Andrade, E. L. M. (2023). Aplicación de la inteligencia artificial en la educación superior. Docere, (29), 21-25.
+ 
+Articulo 31
+impacto y límites de la inteligencia artificial en la práctica jurídica
+Resumen:
+Este artículo habla sobre cómo la inteligencia artificial (IA) está entrando en el mundo del derecho y qué tan útil (o peligrosa) puede ser. Por un lado, la IA ayuda a los abogados y jueces a tomar decisiones más rápidas, analizar documentos legales, predecir resultados de juicios y hasta valorar pruebas. Por ejemplo, hay programas que pueden decir si una persona podría reincidir en un delito o que ayudan a redactar sentencias.
+Pero también hay riesgos. Como que los algoritmos pueden tener errores o prejuicios, y eso podría afectar los derechos de las personas. Por eso, el artículo dice que hay que tener mucho cuidado y establecer límites para que la IA no se vuelva injusta o peligrosa. Se mencionan principios como la transparencia, la imparcialidad, el respeto a los derechos humanos y que siempre haya supervisión humana.
+Grafico:
+
+Reflexión:
+Este artículo me hizo pensar en cómo la tecnología está cambiando todo, incluso el trabajo de los jueces y abogados. Me parece chévere que la IA pueda ayudar a resolver casos más rápido y evitar errores humanos, pero también da miedo que una máquina pueda decidir cosas importantes sin entender lo que siente una persona.
+Creo que está bien usar la IA como herramienta, pero no como reemplazo de los humanos. Los jueces deben seguir siendo los que toman las decisiones, y la IA solo debería ayudarles. También es importante que los programas sean justos y que no discriminen a nadie.
+Bibliografía:
+Salas, F. L., Perona, R., & de la Rosa, Y. C. (2022). Impacto y límites de la inteligencia artificial en la práctica jurídica. Via Inveniendi Et Iudicandi, 17(2).
+ 
+Articulo 32
+Inteligencia Artificial (IA) Aplicada en el Sistema Judicial en Colombia
+Resumen:
+Esta entrevista es con Antonio Lieto, un experto en inteligencia artificial (IA) que trabaja en Italia. Él explica que la IA está revolucionando la educación porque ahora existen sistemas como ChatGPT que pueden hablar con nosotros, algo que antes parecía imposible. Pero también aclara que estos sistemas no entienden realmente lo que dicen, solo repiten cosas como los loros.
+Lieto trabaja en una parte de la IA que se inspira en cómo pensamos los humanos. Él cree que si entendemos cómo funciona nuestra mente, podemos crear sistemas más útiles para enseñar. Por ejemplo, podríamos usar IA para entender por qué los estudiantes creen cosas incorrectas y cómo ayudarlos a cambiar esas ideas.
+Grafico:
+Reflexión:
+Me gustó mucho esta entrevista porque me hizo pensar en cómo usamos la inteligencia artificial sin saber realmente cómo funciona. Yo he usado ChatGPT para tareas, pero nunca me había preguntado si lo que dice es verdad o no. Ahora entiendo que estos sistemas no piensan como nosotros, solo repiten lo que han aprendido.
+También me pareció interesante que el profesor diga que los maestros deben cambiar la forma de enseñar. Tal vez en el futuro ya no hagamos tareas en casa, sino que todo se haga en clase para que aprendamos de verdad.
+Bibliografía:
+Marí, E. M. C. (2025). La revolución tecnológica de la inteligencia artificial, sus límites y su potencial en la enseñanza. Emerging Trends in Education, 8(15), 140-147.
+ 
+Articulo 33
+Límites éticos de la inteligencia artificial
+Resumen:
+ Este artículo explica cómo la inteligencia artificial (IA) está empezando a usarse en el sistema judicial colombiano para mejorar la eficiencia y rapidez de los procesos legales. Uno de los ejemplos más importantes es Prometea, una herramienta que ayuda a seleccionar las acciones de tutela más urgentes, especialmente en temas de salud. Esta IA puede revisar miles de casos en minutos, algo que a una persona le tomaría días.
+Grafico:
+Reflexión:
+Me pareció muy chévere ver cómo la tecnología puede ayudar a que la justicia sea más rápida y justa. A veces uno escucha que los procesos legales se demoran mucho, y que la gente se queda esperando una respuesta por meses o años. Con la IA, eso podría cambiar.
+Lo que más me gustó fue saber que hay programas como Prometea que pueden ayudar a identificar los casos más urgentes, como los de salud. Eso puede salvar vidas. Pero también me preocupó que la IA pueda tener errores o ser injusta si no se usa bien. Por eso es importante que siempre haya personas revisando lo que hace la máquina.
+Bibliografía:
+Gutiérrez Ossa, J. A., & Hernández, I. C. F. (2020). Inteligencia Artificial aplicada en el sistema judicial en Colombia.
+ 
+Articulo 34
+Ética(S) De La Inteligencia Artificial Y Derecho Consideraciones A Propósito De Los Límites Y La Contención Del Desarrollo Tecnológico
+Resumen:
+Este artículo trata sobre los problemas éticos que pueden surgir cuando usamos inteligencia artificial (IA). Aunque la IA tiene muchos beneficios, como ayudar en la medicina, la educación o el transporte, también puede causar daños si no se usa bien.
+Por ejemplo, hay sistemas que toman decisiones sin que sepamos cómo lo hacen, lo que puede afectar los derechos de las personas. También puede haber discriminación si los datos que usa la IA tienen prejuicios. Otro problema es que algunas empresas usan IA para manipular lo que vemos en redes sociales o para vigilar a la gente sin permiso.
+Grafico:
+	Reflexión:
+Este artículo me hizo pensar en que la inteligencia artificial no es solo algo cool que hace cosas por nosotros, también puede tener consecuencias graves si no se controla. Me sorprendió saber que puede discriminar a personas solo por cómo están hechos los datos, o que puede influir en lo que pensamos al mostrarnos solo ciertas cosas en redes.
+Creo que es súper importante que haya reglas claras para que la IA no se use mal. No se trata de tenerle miedo, sino de usarla con responsabilidad. Me gustó que el artículo diga que siempre debe haber humanos supervisando, porque las máquinas no tienen valores ni emociones.
+	Bibliografía:
+de Cuadra, F. (2001). Límites éticos de la inteligencia artificial. Razón y fe, 243(1231), 498-508.
+ 
+articulo 34
+Ética en la Inteligencia Artificial
+Resumen:
+Este artículo analiza cómo la inteligencia artificial (IA) está transformando la educación superior, especialmente en universidades. Se habla de que la IA no solo sirve para automatizar tareas, sino que también puede ayudar a personalizar el aprendizaje, mejorar la evaluación de los estudiantes y apoyar a los docentes en su trabajo.
+Se mencionan herramientas como ChatGPT, que pueden responder preguntas, ayudar a redactar textos y resolver dudas. También se habla de plataformas que usan IA para adaptar los contenidos según el ritmo de cada estudiante. Además, se destaca que la IA puede analizar grandes cantidades de datos para entender mejor cómo aprenden los alumnos.
+Grafico:
+ 
+Reflexión:
+Este artículo me hizo pensar en cómo la inteligencia artificial ya está cambiando la forma en que aprendemos. Yo he usado ChatGPT para hacer tareas o entender temas difíciles, pero no me había dado cuenta de todo lo que puede hacer en las universidades.
+Me gustó que la IA pueda ayudar a los profes a entender cómo aprendemos mejor, y que se puedan adaptar las clases a cada estudiante. Pero también me preocupa que algunos se acostumbren a que la máquina les dé todo y no se esfuercen por pensar por sí mismos.
+Bibliografía:
+Alonso, F. H. L. (2024). Ética (s) de la inteligencia artificial y derecho. Consideraciones a propósito de los límites y la contención del desarrollo tecnológico. DERECHOS Y LIBERTADES: Revista de Filosofía del Derecho y derechos humanos, (51), 177-199.
+ 
+Articulo 35
+Ética La Inteligencia Artificial
+Resumen:
+Este artículo trata sobre los dilemas éticos que surgen cuando usamos inteligencia artificial (IA). Aunque la IA puede hacer cosas increíbles como ayudar en la medicina, la educación o el transporte, también puede causar problemas si no se usa con cuidado.
+Se habla de que muchas decisiones que antes tomaban los humanos ahora las toman algoritmos, y eso puede ser peligroso si no entendemos cómo funcionan. Por ejemplo, una IA puede decidir si alguien recibe un crédito, si es culpable en un juicio, o qué contenido ve en redes sociales. Si esos algoritmos tienen errores o prejuicios, pueden afectar injustamente a las personas
+Grafico:
+ 
+Reflexión:
+Este artículo me hizo pensar en que la inteligencia artificial no es solo una herramienta tecnológica, también tiene que ver con valores humanos. Me sorprendió saber que una IA puede tomar decisiones importantes que afectan la vida de las personas, y que si no se diseña bien, puede ser injusta.
+Creo que es súper importante que los que crean estas tecnologías piensen en la ética desde el principio. No se trata solo de que funcione, sino de que sea justa, segura y respetuosa. También me pareció clave que siempre haya humanos supervisando, porque las máquinas no tienen sentimientos ni conciencia.
+Bibliografía:
+Verona, J. (2022). La ética de la inteligencia artificial. Bioquímica y Patología Clínica, 86(3), 20-21.
+ 
+Articulo 36
+Algor-ética: la ética en la inteligencia artificial
+Resumen:
+Este artículo habla sobre algo que se llama algor-ética, que es como juntar los algoritmos (que son las reglas que siguen las máquinas para tomar decisiones) con la ética (que son los valores humanos como la justicia, la igualdad y el respeto). El autor explica que, aunque la inteligencia artificial (IA) puede ayudar mucho en cosas como la medicina, la educación o el transporte, también puede causar problemas si no se usa bien.
+Grafico:
+ 
+Reflexión:
+Este artículo me hizo pensar en que la inteligencia artificial no es solo una cosa tecnológica, también tiene que ver con lo que es justo o injusto. Me sorprendió saber que una IA puede tomar decisiones que afectan a las personas, como si reciben un crédito o si son culpables en un juicio. Y si los datos que usa están mal, puede ser muy injusta.
+Bibliografía:
+Villalba, J. F. (2020). Algor-ética: la ética en la inteligencia artificial. Anales de la Facultad de Ciencias Juridicas y Sociales de la Universidad Nacional de La Plata, (50), 062-062.
+ 
+Articulo 37
+Inteligencia artificial y problemas de decisión: la necesidad de un contexto ético
+Resumen:
+Este artículo trata sobre cómo la inteligencia artificial (IA) está empezando a tomar decisiones que antes solo hacían los humanos, y por qué eso puede ser un problema si no se tiene en cuenta la ética. La autora explica que los sistemas de IA pueden parecer muy inteligentes, pero en realidad no entienden el contexto ni las emociones humanas. Por eso, cuando toman decisiones (como en salud, justicia o educación), pueden cometer errores graves si no están bien diseñados.
+Grafico:
+ 
+Reflexión:
+Este artículo me hizo pensar en que la inteligencia artificial no es tan “inteligente” como parece. Puede hacer cálculos rápidos y analizar datos, pero no entiende lo que sentimos ni lo que es justo. Me pareció muy importante que se diga que la IA no debe tomar decisiones sola, porque eso puede afectar a personas reales.
+También me llamó la atención que los algoritmos pueden tener prejuicios, como si fueran personas con ideas equivocadas. Eso me hace pensar que no podemos confiar ciegamente en la tecnología, y que siempre debe haber alguien que revise lo que hace.
+Bibliografía:
+Verdegay, J. L., Lamata, M., Pelta, D., & Cruz, C. (2021). Inteligencia artificial y problemas de decisión: la necesidad de un contexto ético. Suma de Negocios, 12(27), 104-114.
+ 
+Articulo 38
+Subjetividades e inteligencia artificial: desafíos para ‘lo humano’
+Resumen:
+Este artículo reflexiona sobre cómo la inteligencia artificial (IA) está afectando lo que entendemos por “ser humano”. La autora analiza que, aunque la IA puede imitar muchas cosas que hacemos —como escribir, hablar o tomar decisiones—, no tiene emociones, conciencia ni experiencias personales. Por eso, no puede tener una “subjetividad” como nosotros.
+Se habla de que vivimos en una época donde las máquinas parecen más inteligentes que nunca, pero eso nos obliga a preguntarnos qué nos hace realmente humanos. ¿Es pensar? ¿Sentir? ¿Tener memoria y cultura? El texto propone que la IA nos desafía a defender lo humano, no solo como algo biológico, sino como algo ético, emocional y relacional.
+Grafico:
+ 
+Reflexión:
+Este artículo me hizo pensar en que la inteligencia artificial no solo cambia cómo hacemos las cosas, también cambia cómo nos vemos a nosotros mismos. Me pareció muy interesante que se diga que la IA no tiene subjetividad, porque aunque puede escribir como nosotros, no siente ni vive lo que escribe.
+Bibliografía:
+Barrios Tao, H., Díaz Pérez, V., & Guerra, Y. (2020). Subjetividades e inteligencia artificial: desafíos para ‘lo humano’. Veritas, (47), 81-107.
+ 
+Articulo 39
+La llegada de la inteligencia artificial a la educación
+Resumen:
+Este artículo analiza cómo la inteligencia artificial (IA) está entrando en el mundo de la educación y plantea una pregunta importante: ¿es algo bueno o puede ser peligroso? Por un lado, la IA puede ayudar a personalizar el aprendizaje, hacer que los estudiantes avancen a su propio ritmo, y facilitar el trabajo de los profesores. Por ejemplo, hay sistemas que corrigen tareas automáticamente o que recomiendan contenidos según lo que necesita cada estudiante.
+Grafico:
+ 
+Reflexión:
+Este artículo me hizo pensar en que la inteligencia artificial puede mejorar mucho la educación, pero también puede traer problemas si no se usa bien. Me gustó que se hable de personalizar el aprendizaje, porque cada estudiante tiene su propio ritmo y forma de entender las cosas. Eso puede hacer que aprender sea más justo y efectivo.
+Pero también me preocupa que se pierda el contacto humano. Los profes no solo enseñan, también nos escuchan, nos motivan y nos entienden. Una máquina no puede hacer eso. Además, no todos los colegios tienen acceso a estas tecnologías, y eso puede hacer que algunos estudiantes se queden atrás.
+
+Bibliografía:
+Padilla, R. D. M. (2019). La llegada de la inteligencia artificial a la educación. Revista de Investigación en Tecnologías de la Información: RITI, 7(14), 260-270.
+ 
+Articulo 40
+La perspectiva ética y jurídica de la Inteligencia Artificial en México
+Resumen:
+Este artículo analiza cómo la inteligencia artificial (IA) está avanzando en México y por qué es importante pensar en sus implicaciones éticas y legales. Se explica que la IA puede traer muchos beneficios, como mejorar servicios públicos, facilitar procesos judiciales y hacer más eficiente el trabajo en diferentes sectores. Pero también puede generar riesgos si no se regula bien.
+Grafico:
+ 
+Reflexión:
+Este artículo me hizo pensar en que la inteligencia artificial no solo es una herramienta tecnológica, también tiene que ver con la justicia y los derechos de las personas. Me gustó que se hable de cómo México puede aprovechar la IA, pero también de que necesita reglas claras para que no se use mal.
+Creo que es muy importante que los gobiernos se adelanten a los problemas, y que no esperen a que algo salga mal para actuar. También me pareció clave que se diga que la IA debe ser ética, porque no se trata solo de que funcione rápido, sino de que respete a todos.
+Bibliografía:
+	Nakamura, L. A. C., & Madrigal, J. A. G. (2023). La perspectiva ética y jurídica de la Inteligencia Artificial en México. Misión Jurídica, 16(25), 199-214.

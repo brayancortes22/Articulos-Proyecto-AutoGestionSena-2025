@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 set -euo pipefail
 
 # Add TeX Live to PATH (ensure we point to the installed TeX Live bin)

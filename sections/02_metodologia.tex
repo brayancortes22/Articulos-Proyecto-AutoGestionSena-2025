@@ -1,17 +1,116 @@
-\section{Metodología: Diseño y Planificación}
+\section{Metodología}
+\label{sec:metodologia}
 
-El proyecto se ejecutó bajo una metodología ágil (Scrum) durante un periodo total de cuatro meses. A continuación se detallan las actividades principales realizadas durante la planificación y diseño:
+Este estudio empleó un enfoque mixto que combina métodos cualitativos y cuantitativos, integrando investigación aplicada con desarrollo de software. La metodología se fundamenta en el paradigma de investigación-acción, donde el proceso de desarrollo del software se convierte en el medio para investigar y mejorar prácticas institucionales.
 
-\subsection{Diseño de base de datos y modelo del dominio}
-Se diseñaron las entidades principales (Usuario, Persona, Rol, Aprendiz, Instructor, etc.) y las relaciones entre ellas utilizando diagramas en Draw.io. Además, se consultó IA para identificar redundancias, sugerir índices y mejorar la normalización.
+\subsection{Diseño de Investigación}
 
-\subsection{Prototipado UX/UI}
-Los mockups y flujos de navegación se elaboraron en Figma. La IA se empleó para generar variaciones visuales, recomendaciones de accesibilidad y propuestas de interacción, lo cual ayudó a generar pruebas de usabilidad tempranas.
+Se adoptó un diseño de estudio de caso instrumental \cite{stake1995case}, donde el desarrollo de "Autogestión SENA" sirve como instrumento para explorar la colaboración humano-IA en contextos de formación técnica colombiana. El estudio combina elementos de investigación aplicada con desarrollo de producto software.
 
-\subsection{Planificación y decisiones arquitectónicas}
-La IA contribuyó a comparar alternativas de arquitectura (monolito modular vs microservicios) y a documentar decisiones de diseño. Se contrastaron estas recomendaciones con los requisitos del SENA y la disponibilidad del equipo.
+\subsubsection{Participantes}
+El estudio involucró múltiples grupos de interés del SENA:
 
-\subsection{Marco de trabajo y cadence}
-El equipo trabajó con sprints y reuniones diarias (daily standup), revisiones y retrospectivas. En total se ejecutaron 7 sprints durante el periodo del proyecto, con una cadencia aproximada de 2 sprints por mes.
+\begin{itemize}
+\item \textbf{Coordinadores Regionales} (n=12): Responsables de asignación de instructores en diferentes regionales.
+\item \textbf{Instructores} (n=25): Profesionales técnicos con experiencia docente entre 2-15 años.
+\item \textbf{Equipo de Desarrollo} (n=4): Estudiantes de ingeniería de sistemas en formación práctica.
+\item \textbf{Directivos Institucionales} (n=3): Representantes de la dirección nacional del SENA.
+\end{itemize}
 
-Se priorizaron funcionalidades críticas, y la planificación se ajustó iterativamente para integrar retroalimentación de los instructores y usuarios finales.
+\subsubsection{Instrumentos de Recolección de Datos}
+Se emplearon múltiples instrumentos para triangulación de datos:
+
+\begin{enumerate}
+\item \textbf{Entrevistas Semiestructuradas}: 15 entrevistas individuales con coordinadores e instructores, con duración promedio de 45 minutos. El protocolo incluyó preguntas sobre procesos actuales, dolor points y expectativas del sistema.
+\item \textbf{Encuestas Cualitativas}: Aplicadas a 40 potenciales usuarios, enfocadas en requerimientos funcionales y no funcionales.
+\item \textbf{Observación Participante}: El equipo de desarrollo participó en reuniones de coordinación reales durante 8 semanas.
+\item \textbf{Análisis Documental}: Revisión de procedimientos institucionales, reportes de asignación y estadísticas históricas.
+\end{enumerate}
+
+\subsection{Metodología de Desarrollo}
+
+\subsubsection{Enfoque Ágil Adaptado}
+Se implementó Scrum adaptado al contexto educativo, con las siguientes modificaciones:
+
+\begin{itemize}
+\item \textbf{Sprints de 3 semanas}: Tiempo extendido para permitir aprendizaje profundo de tecnologías.
+\item \textbf{Daily Standups Educativos}: Incluían componentes de mentoría técnica.
+\item \textbf{Revisiones con Stakeholders}: Sesiones semanales con usuarios finales para validación.
+\item \textbf{Retrospectivas de Aprendizaje}: Enfoque en lecciones técnicas y pedagógicas.
+\end{itemize}
+
+\subsubsection{Integración de IA en el Proceso}
+La IA se incorporó como herramienta colaborativa en todas las fases:
+
+\begin{itemize}
+\item \textbf{Planificación}: Generación de historias de usuario y criterios de aceptación.
+\item \textbf{Diseño}: Creación de diagramas UML y mockups de interfaz.
+\item \textbf{Desarrollo}: Generación de código boilerplate y sugerencias de implementación.
+\item \textbf{Pruebas}: Creación de casos de prueba y análisis de cobertura.
+\item \textbf{Documentación}: Generación automática de documentación técnica.
+\end{itemize}
+
+\subsection{Diseño Técnico}
+
+\subsubsection{Arquitectura del Sistema}
+Se adoptó una arquitectura de tres capas con separación clara de responsabilidades:
+
+\begin{enumerate}
+\item \textbf{Capa de Presentación}: Aplicaciones web y móvil como interfaces de usuario.
+\item \textbf{Capa de Aplicación}: API RESTful que implementa lógica de negocio.
+\item \textbf{Capa de Datos}: Base de datos relacional con diseño optimizado.
+\end{enumerate}
+
+\subsubsection{Selección Tecnológica}
+La selección de tecnologías se basó en criterios objetivos:
+
+\begin{itemize}
+\item \textbf{Madurez y Comunidad}: Tecnologías con amplio soporte y documentación.
+\item \textbf{Alineación Institucional}: Compatibilidad con infraestructura existente del SENA.
+\item \textbf{Curva de Aprendizaje}: Tecnologías accesibles para estudiantes en formación.
+\item \textbf{Escalabilidad}: Capacidad para crecer con las necesidades institucionales.
+\end{itemize}
+
+\subsection{Validación y Evaluación}
+
+\subsubsection{Estrategia de Testing}
+Se implementó una pirámide de testing completa:
+
+\begin{itemize}
+\item \textbf{Pruebas Unitarias}: Cobertura >80\% en código backend.
+\item \textbf{Pruebas de Integración}: Validación de flujos completos.
+\item \textbf{Pruebas de Aceptación}: Validación con usuarios finales.
+\item \textbf{Pruebas de Rendimiento}: Simulación de carga institucional.
+\end{itemize}
+
+\subsubsection{Métricas de Evaluación}
+Se definieron métricas cuantitativas y cualitativas:
+
+\begin{enumerate}
+\item \textbf{Eficiencia}: Reducción en tiempo de asignación (meta: 60\%).
+\item \textbf{Satisfacción}: Encuestas de usabilidad (escala Likert 1-5).
+\item \textbf{Calidad}: Tasa de errores en asignaciones (meta: <5\%).
+\item \textbf{Adopción}: Porcentaje de usuarios activos (meta: 80\%).
+\end{enumerate}
+
+\subsection{Consideraciones Éticas}
+
+El estudio siguió principios éticos de investigación:
+\begin{itemize}
+\item Consentimiento informado de todos los participantes.
+\item Anonimización de datos personales en reportes.
+\item Transparencia en el uso de datos para desarrollo.
+\item Confidencialidad en información institucional sensible.
+\end{itemize}
+
+\subsection{Limitaciones Metodológicas}
+
+Se reconocen las siguientes limitaciones:
+\begin{itemize}
+\item Alcance geográfico limitado a una regional del SENA.
+\item Tiempo de estudio restringido a 4 meses.
+\item Dependencia de disponibilidad de participantes.
+\item Posible sesgo de selección en participantes voluntarios.
+\end{itemize}
+
+Estas limitaciones se mitigaron mediante triangulación de métodos y validación cruzada de hallazgos.

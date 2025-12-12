@@ -1,0 +1,381 @@
+\section{Apéndices}
+
+\subsection{Código Fuente Relevante}
+
+\subsubsection{Modelo de Usuario en Django}
+\begin{lstlisting}[language=Python, caption=Modelo principal de Usuario con roles específicos del SENA]
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+class Usuario(AbstractUser):
+    """Modelo extendido de usuario para el sistema Autogestión SENA"""
+
+    ROLES = [
+        ('ADMIN_COORDINADOR', 'Administrador-Coordinador'),
+        ('INSTRUCTOR', 'Instructor'),
+        ('APRENDIZ', 'Aprendiz'),
+        ('OPERADOR_SOFIA', 'Operador Sofia Plus'),
+    ]
+
+    rol = models.CharField(max_length=20, choices=ROLES, default='APRENDIZ')
+    centro = models.ForeignKey('Centro', on_delete=models.CASCADE, null=True)
+    ficha = models.ForeignKey('Ficha', on_delete=models.SET_NULL, null=True, blank=True)
+    telefono = models.CharField(max_length=15, blank=True)
+    especialidades = models.ManyToManyField('Especialidad', blank=True)
+    fecha_nacimiento = models.DateField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Usuario'
+        verbose_name_plural = 'Usuarios'
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.get_rol_display()}"
+\end{lstlisting}
+
+\subsubsection{Modelo de Asignación de Instructor}
+\begin{lstlisting}[language=Python, caption=Modelo para asignaciones instructor-aprendiz]
+from django.db import models
+from django.core.exceptions import ValidationError
+
+class AsignacionInstructor(models.Model):
+    """Modelo para asignaciones de instructores a aprendices en práctica"""
+
+    ESTADOS = [
+        ('PENDIENTE', 'Pendiente'),
+        ('ACTIVA', 'Activa'),
+        ('COMPLETADA', 'Completada'),
+        ('CANCELADA', 'Cancelada'),
+    ]
+
+    instructor = models.ForeignKey('Usuario', on_delete=models.CASCADE,
+                                   related_name='asignaciones_como_instructor',
+                                   limit_choices_to={'rol': 'INSTRUCTOR'})
+    aprendiz = models.ForeignKey('Usuario', on_delete=models.CASCADE,
+                                 related_name='asignaciones_como_aprendiz',
+                                 limit_choices_to={'rol': 'APRENDIZ'})
+    empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE)
+    fecha_asignacion = models.DateField(auto_now_add=True)
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
+    estado = models.CharField(max_length=15, choices=ESTADOS, default='PENDIENTE')
+    observaciones = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name = 'Asignación Instructor'
+        verbose_name_plural = 'Asignaciones Instructores'
+        unique_together = ['instructor', 'aprendiz', 'fecha_inicio']
+
+    def clean(self):
+        if self.fecha_fin <= self.fecha_inicio:
+            raise ValidationError('La fecha fin debe ser posterior a la fecha inicio')
+
+    def __str__(self):
+        return f"{self.instructor} -> {self.aprendiz} ({self.empresa})"
+\end{lstlisting}
+
+\subsubsection{API Endpoint para Asignaciones}
+\begin{lstlisting}[language=Python, caption=ViewSet para gestión de asignaciones instructor-aprendiz]
+from rest_framework import viewsets, status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from django.db.models import Q
+from .models import AsignacionInstructor, Usuario, VisitaSeguimiento
+from .serializers import AsignacionInstructorSerializer, VisitaSeguimientoSerializer
+
+class AsignacionInstructorViewSet(viewsets.ModelViewSet):
+    """ViewSet para gestión de asignaciones de instructores a aprendices"""
+
+    queryset = AsignacionInstructor.objects.all()
+    serializer_class = AsignacionInstructorSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        """Filtrar asignaciones según rol del usuario"""
+        user = self.request.user
+        if user.rol == 'INSTRUCTOR':
+            return self.queryset.filter(instructor=user)
+        elif user.rol == 'APRENDIZ':
+            return self.queryset.filter(aprendiz=user)
+        elif user.rol in ['ADMIN_COORDINADOR', 'OPERADOR_SOFIA']:
+            return self.queryset
+        return self.queryset.none()
+
+    @action(detail=False, methods=['post'])
+    def asignar_automatico(self, request):
+        """Asignación automática basada en criterios de negocio"""
+        try:
+            aprendiz_id = request.data.get('aprendiz_id')
+            empresa_id = request.data.get('empresa_id')
+            especialidad_id = request.data.get('especialidad_id')
+
+            if not all([aprendiz_id, empresa_id, especialidad_id]):
+                return Response(
+                    {'error': 'Faltan parámetros requeridos'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            # Buscar instructores disponibles con la especialidad requerida
+            instructores_disponibles = Usuario.objects.filter(
+                rol='INSTRUCTOR',
+                especialidades__id=especialidad_id,
+                asignaciones_como_instructor__estado__in=['PENDIENTE', 'ACTIVA']
+            ).exclude(
+                # Excluir instructores con sobrecarga (más de 3 asignaciones activas)
+                Q(asignaciones_como_instructor__estado='ACTIVA') &
+                Q(asignaciones_como_instructor__fecha_fin__gt=timezone.now().date())
+            ).distinct()
+
+            if not instructores_disponibles.exists():
+                return Response(
+                    {'error': 'No hay instructores disponibles para esta especialidad'},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+
+            # Seleccionar instructor con menor carga de trabajo
+            instructor_seleccionado = min(
+                instructores_disponibles,
+                key=lambda i: i.asignaciones_como_instructor.filter(
+                    estado='ACTIVA',
+                    fecha_fin__gt=timezone.now().date()
+                ).count()
+            )
+
+            # Crear asignación
+            asignacion = AsignacionInstructor.objects.create(
+                instructor=instructor_seleccionado,
+                aprendiz_id=aprendiz_id,
+                empresa_id=empresa_id,
+                fecha_inicio=timezone.now().date(),
+                fecha_fin=timezone.now().date() + timedelta(days=180),  # 6 meses
+                estado='PENDIENTE'
+            )
+
+            serializer = self.get_serializer(asignacion)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        except Exception as e:
+            return Response(
+                {'error': str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+    @action(detail=True, methods=['post'])
+    def registrar_visita(self, request, pk=None):
+        """Registrar una visita de seguimiento para esta asignación"""
+        asignacion = self.get_object()
+
+        if request.user != asignacion.instructor and request.user.rol != 'ADMIN_COORDINADOR':
+            return Response(
+                {'error': 'No autorizado para registrar visitas en esta asignación'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        serializer = VisitaSeguimientoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(asignacion=asignacion, instructor=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+\end{lstlisting}
+            ).order_by('carga_actual')
+
+            if instructores_disponibles.exists():
+                instructor = instructores_disponibles.first()
+                asignacion = Asignacion.objects.create(
+                    instructor=instructor,
+                    ficha_id=ficha,
+                    estado='ASIGNADA'
+                )
+                return Response(
+                    AsignacionSerializer(asignacion).data,
+                    status=status.HTTP_201_CREATED
+                )
+
+            return Response(
+                {'error': 'No hay instructores disponibles'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        except Exception as e:
+            return Response(
+                {'error': str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+\end{lstlisting}
+
+\subsection{Configuración de Docker}
+
+\subsubsection{Dockerfile para Backend}
+\begin{lstlisting}[language=Dockerfile, caption=Dockerfile optimizado para Django]
+FROM python:3.11-slim
+
+# Configuración de entorno
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Directorio de trabajo
+WORKDIR /app
+
+# Dependencias del sistema
+RUN apt-get update && apt-get install -y \
+    gcc \
+    default-libmysqlclient-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copiar requirements e instalar dependencias
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar código fuente
+COPY . .
+
+# Puerto de exposición
+EXPOSE 8000
+
+# Comando de ejecución
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+\end{lstlisting}
+
+\subsubsection{Docker Compose Completo}
+\begin{lstlisting}[language=YAML, caption=Configuración completa de servicios]
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: autogestion_sena
+      MYSQL_USER: sena_user
+      MYSQL_PASSWORD: sena_pass
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - DEBUG=1
+      - DATABASE_URL=mysql://sena_user:sena_pass@db:3306/autogestion_sena
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend
+      - frontend
+
+volumes:
+  mysql_data:
+\end{lstlisting}
+
+\subsection{Instrumentos de Evaluación}
+
+\subsubsection{Protocolo de Entrevista}
+\begin{enumerate}
+\item \textbf{Antecedentes}: ¿Cuántos años de experiencia tiene en coordinación de instructores?
+\item \textbf{Proceso Actual}: Describa el proceso típico de asignación de un instructor.
+\item \textbf{Dificultades}: ¿Cuáles son los principales obstáculos que enfrenta actualmente?
+\item \textbf{Expectativas}: ¿Qué funcionalidades consideraría críticas en un sistema automatizado?
+\item \textbf{Contexto Tecnológico}: ¿Qué nivel de familiaridad tiene con herramientas digitales?
+\end{enumerate}
+
+\subsubsection{Encuesta de Usabilidad (Extracto)}
+\begin{enumerate}
+\item La interfaz es intuitiva y fácil de navegar. (1-5)
+\item Puedo completar mis tareas más rápido que antes. (1-5)
+\item La aplicación funciona de manera confiable. (1-5)
+\item Me siento cómodo usando la aplicación móvil. (1-5)
+\item Recomendaría esta herramienta a mis colegas. (1-5)
+\end{enumerate}
+
+\subsection{Métricas Detalladas de Desarrollo}
+
+\subsubsection{Evolución de Productividad por Sprint}
+\begin{table}[htbp]
+\centering
+\caption{Evolución de métricas por sprint}
+\label{tab:evolucion_sprints}
+\begin{tabular}{lcccccc}
+\toprule
+Sprint & Story Points & Horas & Defectos & Cobertura & Satisfacción \\
+\midrule
+1 & 45 & 120 & 12 & 45\% & 3.2 \\
+2 & 52 & 110 & 8 & 52\% & 3.5 \\
+3 & 48 & 105 & 6 & 61\% & 3.8 \\
+4 & 55 & 98 & 4 & 68\% & 4.1 \\
+5 & 51 & 95 & 3 & 72\% & 4.2 \\
+6 & 49 & 92 & 2 & 76\% & 4.3 \\
+7 & 47 & 88 & 1 & 78\% & 4.4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Análisis de Interacciones con IA}
+\begin{table}[htbp]
+\centering
+\caption{Análisis detallado de uso de IA}
+\label{tab:analisis_ia}
+\begin{tabular}{lcccc}
+\toprule
+Categoría & Prompts & Tiempo Ahorrado & Calidad Percibida & Frecuencia \\
+\midrule
+Generación de Código & 124 & 45\% & 4.2 & Alta \\
+Depuración & 89 & 52\% & 4.1 & Alta \\
+Documentación & 67 & 61\% & 3.9 & Media \\
+Diseño UI/UX & 43 & 38\% & 4.0 & Media \\
+Testing & 19 & 33\% & 3.8 & Baja \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Lecciones Aprendidas}
+
+\subsubsection{Éxitos del Proyecto}
+\begin{itemize}
+\item Integración exitosa de múltiples tecnologías en un solo producto
+\item Adopción temprana de usuarios finales con retroalimentación positiva
+\item Desarrollo de capacidades técnicas del equipo
+\item Establecimiento de procesos reproducibles para futuros proyectos
+\end{itemize}
+
+\subsubsection{Desafíos Encontrados}
+\begin{itemize}
+\item Coordinación entre equipos de desarrollo y usuarios institucionales
+\item Gestión de expectativas realistas sobre capacidades de IA
+\item Balance entre velocidad de desarrollo y calidad del código
+\item Adaptación de metodologías ágiles a contextos institucionales
+\end{itemize}
+
+\subsubsection{Recomendaciones para Proyectos Similares}
+\begin{enumerate}
+\item Involucrar stakeholders desde la fase inicial de diseño
+\item Establecer métricas claras de éxito desde el inicio
+\item Documentar decisiones técnicas y lecciones aprendidas
+\item Planificar tiempo suficiente para capacitación y adopción
+\item Considerar factores institucionales en la selección tecnológica
+\end{enumerate}

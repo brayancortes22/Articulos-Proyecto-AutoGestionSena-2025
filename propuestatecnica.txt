@@ -1,0 +1,674 @@
+Propuesta técnica del software Proyecto: Autogestión Sena Índice Resumen ejecutivo Introducción Descripción del proyecto Planteamiento del problema Objetivos Características Mercado y oportunidades Justificación Alcance Solución propuesta Propósito Arquitectura y tecnologías Mock up Plan de trabajo Entrega 1 — Sprint 1 y 2 Entrega 2 — Sprint 3 y 4 Entrega 3 — Sprint 5 y 6 Entrega Final — Sprint 7 Equipo de trabajo Miembros del equipo Presupuesto Hardware e infraestructura Plan de mantenimiento de soporte Mantenimiento correctivo Mantenimiento preventivo Soporte técnico Cronograma del proyecto Cronograma Resumen ejecutivo El proyecto Autogestión SENA tiene como objetivo desarrollar una plataforma web y móvil destinada a optimizar los procesos académicos y administrativos relacionados con el seguimiento de aprendices en etapa práctica dentro del Servicio Nacional de Aprendizaje (SENA).Actualmente,
+gran parte de la gestión de asignación de instructores,
+seguimiento de prácticas y control de solicitudes se realiza de forma manual o mediante sistemas desactualizados.Esta propuesta técnica plantea el diseño e implementación de una solución moderna,
+escalable y segura,
+que permita automatizar la autogestión de aprendices,
+instructores y coordinadores,
+reduciendo tiempos de respuesta y mejorando la trazabilidad institucional.El sistema estará desarrollado bajo una arquitectura Cliente – Servidor distribuida,
+con un frontend desacoplado (React + TypeScript) que consume una API REST desarrollada en Django.El backend implementa el patrón MVC adaptado al enfoque REST mediante Models,
+Serializers y ViewSets.La base de datos MySQL almacena la información estructurada.Además,
+implementará mecanismos de autenticación segura,
+control de acceso por roles y notificaciones automáticas,
+garantizando la confidencialidad e integridad de la información.La propuesta abarca el ciclo completo de desarrollo de software,
+incluyendo el análisis,
+diseño,
+construcción,
+pruebas,
+despliegue y mantenimiento.El producto final será una herramienta de autogestión institucional que mejore la productividad,
+la comunicación interna y la experiencia de los usuarios dentro del SENA.Introducción El presente documento constituye la Propuesta Técnica del Sistema de Autogestión SENA,
+en la cual se describe la estrategia tecnológica y metodológica para el desarrollo del aplicativo web que modernizará los procesos administrativos y de seguimiento académico de los aprendices en etapa práctica.El proyecto surge como respuesta a la necesidad institucional de contar con una herramienta digital que centralice la información,
+reduzca la carga operativa y optimice la comunicación entre aprendices,
+instructores,
+coordinadores y administradores.La propuesta integra aspectos técnicos,
+metodológicos y operativos,
+definiendo los recursos,
+tecnologías,
+arquitectura y fases de desarrollo necesarias para la implementación exitosa del sistema.Asimismo,
+el documento sirve como guía para el equipo de desarrollo y como referencia para la toma de decisiones técnicas durante el ciclo de vida del software,
+asegurando que el producto final cumpla con los requerimientos funcionales y no funcionales establecidos en la Especificación de Requisitos del Software (SRS).Descripción del proyecto Planteamiento del problema El uso de sistemas de autogestión en las organizaciones es fundamental para optimizar procesos administrativos y mejorar la eficiencia operativa.Estas herramientas permiten que los empleados gestionen de forma autónoma tareas como la consulta de información,
+presentación de solicitudes y seguimiento de procesos,
+lo que reduce la carga de trabajo en áreas administrativas y agiliza la toma de decisiones.Según un estudio reciente sobre gestión sostenible de recursos humanos,
+"la gestión sostenible de recursos humanos considera a los empleados como un recurso muy importante para la organización, prestando especial atención a sus preferencias, necesidades y perspectivas" (Springer, 2023),
+lo que evidencia la importancia de sistemas que empoderen al usuario.Estos sistemas resultan esenciales para promover un entorno organizacional más eficiente,
+transparente y centrado en el usuario.Sin embargo,
+muchas organizaciones enfrentan barreras para optimizar sus procesos administrativos debido a sistemas de autogestión poco eficientes,
+lentos y desactualizados.En el caso del SENA,
+la plataforma actual presenta fallos de rendimiento que ralentizan las tareas,
+genera interrupciones frecuentes y dificulta la gestión adecuada de los procesos.Esta situación no sólo retrasa las actividades de los instructores y directivos,
+sino que también genera inconformidad entre los usuarios debido a la falta de organización y a un diseño visual poco atractivo e intuitivo.Investigaciones recientes en transformación digital empresarial confirman que "la transformación digital de las empresas puede mejorar la eficiencia de la transmisión de información entre empresas" (Li et al., 2023),
+lo cual resalta la necesidad de modernizar y optimizar la plataforma para mejorar la experiencia y la eficiencia operativa en la experiencia del usuario y los resultados del e - learning " (Emerald Publishing, 2021).
+En este contexto, surge la necesidad de desarrollar una aplicación web que optimice el sistema de autogestión para el SENA, con un enfoque específico en el proceso de asignación de instructores de seguimiento a aprendices en etapa práctica. Esta solución busca ofrecer a aprendices, instructores y coordinadores una plataforma organizada, rápida y visualmente atractiva que facilite la solicitud, gestión, asignación y seguimiento de este proceso formativo. La pregunta clave es: ¿Cómo diseñar una aplicación web que optimice la asignación de instructores de seguimiento a aprendices en etapa práctica, mediante una interfaz intuitiva, eficiente y centrada en la experiencia del usuario?
+
+Objetivos
+Objetivo general:
+Diseñar una aplicación web que optimice la asignación de instructores de seguimiento a aprendices en etapa práctica, mediante una interfaz intuitiva, eficiente y centrada en la experiencia del usuario
+Los objetivos específicos son:
+
+Identificar las necesidades y preferencias de los usuarios en la gestión de procesos administrativos y de recursos humanos dentro del SENA.
+Desarrollar el diseño inicial de la aplicación web, priorizando la optimización, organización y una interfaz intuitiva.
+Implementar el desarrollo del software basado en las necesidades identificadas y los procesos clave a mejorar.
+Probar y evaluar la efectividad de la aplicación en términos de funcionalidad, rapidez y satisfacción de los usuarios.
+
+Características 
+El sistema Autogestión SENA integrará las siguientes características clave:
+Gestión de usuarios con autenticación segura, registro y roles personalizados (aprendiz, instructor, coordinador, administrador).
+Módulo de seguimiento de prácticas, donde los aprendices podrán registrar solicitudes y los instructores gestionar las visitas y reportes.
+Asignación de instructores, con control de carga máxima y estado de disponibilidad.
+Notificaciones internas y por correo electrónico para mantener informados a los usuarios sobre cambios en sus procesos.
+Dashboard de estadísticas, que ofrecerá a los coordinadores y administradores indicadores de rendimiento, asignaciones y seguimiento.
+Diseño responsive y adaptable a dispositivos móviles, garantizando acceso desde cualquier ubicación.
+Historial de trámites que permite consultar solicitudes anteriores y su estado, asegurando trazabilidad y transparencia.
+Seguridad de la información, mediante autenticación segura, cifrado de contraseñas y control de accesos basado en permisos.
+
+Mercado y oportunidades
+
+Público Objetivo
+El software está dirigido principalmente a los actores involucrados en el proceso formativo del SENA:
+Aprendices: quienes deben registrar solicitudes de práctica, hacer seguimiento a sus procesos y recibir notificaciones sobre el estado de los mismos.
+Instructores: responsables de realizar el seguimiento a los aprendices asignados y reportar observaciones de visitas parciales y finales.
+Coordinadores o administradores académicos: encargados de supervisar las solicitudes, asignar instructores, aprobar o rechazar procesos y generar reportes institucionales.
+Administradores del sistema: quienes gestionan usuarios, roles, formularios, módulos y permisos dentro de la plataforma.
+Operadores de sofia plus: encargados de validar la prácticas en sofia plus a través de la información del sistema.
+Este público requiere una solución fácil de usar, rápida, segura y confiable, que reduzca la carga operativa y mejore la eficiencia de la gestión institucional.
+Oportunidades
+El desarrollo de Autogestión SENA abre múltiples oportunidades de valor para la institución:
+Transformación digital institucional: fortaleciendo la modernización de los procesos internos y el uso de herramientas tecnológicas de gestión.
+Optimización del tiempo y recursos: mediante la automatización de tareas repetitivas y el acceso centralizado a la información.
+Transparencia y trazabilidad: gracias al registro histórico de cada solicitud y asignación.
+Escalabilidad: la arquitectura modular permitirá integrar nuevos módulos (novedades, actas, reportes institucionales, etc.).
+Replicabilidad: el sistema podrá adaptarse a otros centros de formación o programas del SENA.
+Mejora de la experiencia del usuario: al ofrecer una interfaz moderna, accesible y adaptable a cualquier dispositivo.
+
+
+Justificación 
+La implementación de un sistema de autogestión enfocado en el proceso de asignación de instructores de seguimiento a aprendices en etapa práctica es fundamental por diversas razones:
+Optimiza un proceso clave en la etapa productiva, al permitir la solicitud, gestión y seguimiento de asignaciones de forma ágil y centralizada, evitando el uso de medios informales como correos o formularios físicos.
+Promueve la autonomía de los aprendices e instructores al facilitar el registro de solicitudes y el acceso a información relevante sin depender de terceros.
+Mejora la eficiencia operativa, reduciendo tiempos de espera, errores humanos y la sobrecarga administrativa asociada al manejo manual de este proceso.
+Fortalece la comunicación institucional, permitiendo a los instructores registrar comentarios sobre el seguimiento y a los coordinadores monitorear el estado de cada caso en tiempo real.
+Contribuye a la satisfacción de los usuarios, al ofrecer una interfaz moderna, intuitiva y accesible, que facilita la interacción con el sistema y mejora la experiencia general.
+En resumen, el desarrollo de este módulo específico de autogestión permitirá al SENA optimizar un proceso esencial en la formación práctica, fomentando la eficiencia, la autonomía y una gestión más transparente y estructurada.
+
+Alcance 
+El software “Autogestión SENA” será una aplicación web diseñada para mejorar la gestión académica y administrativa de los aprendices en el SENA. Esta nueva versión reemplazará un sistema anterior desarrollado en PHP, modernizando la interfaz y optimizando la experiencia del usuario.
+Este sistema estará disponible para web y móvil. Podrá ejecutarse en navegadores como Chrome y Firefox. Se desarrollará con Python, React y MySql, implementando una arquitectura Cliente–Servidor distribuida, con un frontend desacoplado (React + TypeScript) que consume una API REST desarrollada en Django. El backend implementa el patrón MVC adaptado al enfoque REST mediante Models, Serializers y ViewSets. La base de datos MySQL almacena la información estructurada para garantizar seguridad y eficiencia en el manejo de datos personales.
+Usuarios y Roles
+El acceso al sistema estará basado en roles asignados por el administrador, lo que determinará los permisos y funcionalidades disponibles para cada usuario.
+Roles disponibles:
+Usuario anónimo: Es el usuario antes de registrarse, o que apenas está iniciando sesión.
+Administrador-Coordinador : Tiene acceso completo, gestiona todos los módulos como el de administración y registro masivo, asigna roles, evalúa vistas finales y visualiza el historial de seguimientos. Recibe notificaciones sobre el estado de sus trámites a través de correo electrónico. Puede visualizar su perfil y editar su contraseña.
+Instructor: Realiza seguimiento práctico de los aprendices, da una valoración previa a solicitudes diferentes a contrato de aprendizaje y visualiza el historial de seguimiento. Recibe notificaciones sobre el estado de sus trámites a través de correo electrónico. Puede visualizar su perfil y editar su contraseña.
+Aprendiz : Accede al sistema de autogestión. Puede ver el estado de sus trámites. Envía formularios. Recibe notificaciones sobre el estado de sus trámites a través de correo electrónico. Puede visualizar su perfil y editar su contraseña.
+Operador Sofia plus: Accede al sistema de autogestión. Entra a registrar EP, visualiza los seguimientos y deja su mensaje. Puede visualizar su perfil y editar su contraseña.
+Módulos Principales
+1. Usuario
+Registro y gestión de usuarios.
+Asignación de roles por parte del administrador.
+Acceso a la información personal según el rol asignado.
+3. Seguridad
+Administra todo el módulo de seguridad y las tablas parametrizadas del sistema.
+2. Asignar Seguimiento
+Solicitud de seguimiento de prácticas
+Visualización y gestión de solicitudes
+Asignación y reasignación de solicitudes
+Recordatorio por parte del instructor
+Seguimiento del proceso por parte del instructor
+Evaluación de los seguimientos por parte del coordinador
+Reportes e informes
+Historial de seguimientos
+Valoración previas del instructor a solicitudes
+Registro EP por parte del operador de sofia plus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Solución propuesta 
+
+Propósito 
+Este software de gestión denominado “Autogestión Sena” se ha diseñado con el propósito de diseñar una herramienta interactiva que facilite el sistema de autogestión de aprendices, enfocándose en la optimización de procesos administrativos y de recursos humanos para la institución del Sena. Busca ofrecer una experiencia intuitiva y agradable que permita a los usuarios realizar sus gestiones de forma rápida, eficiente y organizada, mejorando la satisfacción y productividad en el entorno institucional.
+
+Arquitectura y tecnologías 
+
+1. Arquitectura del Sistema
+
+El software Autogestión SENA utiliza una arquitectura cliente–servidor, compuesta por tres capas principales:
+
+a. Frontend (Cliente Web)
+Desarrollado como una Single Page Application (SPA) utilizando React + TypeScript. La estructura del proyecto sigue parcialmente un enfoque Feature-Based Architecture, donde cada módulo (Seguridad, General, Asignación, Dashboard, etc.) organiza sus propios componentes, servicios, hooks, tipos y vistas.
+
+Esto permite:
+Alta escalabilidad
+Reutilización de componentes
+Flujo claro de responsabilidades
+Menor acoplamiento entre módulos
+Actualizaciones dinámicas sin recargar la página
+
+
+b. Backend (API REST)
+Implementado con Django + Django REST Framework (DRF) bajo arquitectura modular.
+
+Funciones principales:
+Gestión de usuarios, roles y permisos (RBAC)
+Exposición de endpoints REST para consumo del frontend y la app móvil
+Validación y procesamiento de datos
+Manejo de autenticación (login, recuperación, códigos 2FA)
+Gestión de entidades del dominio (aprendices, instructores, solicitudes, visitas, empresas, etc.)
+
+c. Base de Datos
+El sistema utiliza MySQL como motor relacional, garantizando:
+
+Alta disponibilidad
+Buen rendimiento para consultas transaccionales
+Los modelos están normalizados y alineados a cada módulo funcional.
+
+2. Tecnologías Principales Utilizadas
+
+Frontend
+React 18 (SPA)
+TypeScript
+Vite (bundler y dev server)
+Tailwind CSS
+React Router DOM
+React Hook Form + Zod
+TanStack React Query
+Framer Motion
+Shadcn/UI + Radix UI
+Recharts
+Sonner (notificaciones)
+
+Backend
+Django 4+
+Django REST Framework (DRF)
+MySQL Connector
+Simple JWT / autenticación personalizada
+Storage para PDF y archivos
+
+Base de Datos
+MySQL 8
+Con entidades normalizadas por módulos:
+Seguridad (User, Role, Permission, etc.)
+General (Person, Apprentice, Instructor, etc.)
+Asignación
+
+DevOps y Herramientas Complementarias
+Git y GitHub para control de versiones
+Docker para despliegue
+NPM/Pnpm/Bun para manejo de dependencias del frontend
+Swagger para pruebas de API
+
+Aplicación Móvil
+.NET MAUI (solo vista – cliente móvil)
+Arquitectura Model-View-ViewModel (MVVM)
+Consumo directo de la API REST del backend
+
+Mock up 
+
+Enlace de móvil:
+https://www.figma.com/design/mHxV7E2Vxh6g5KNRVOrj0w/Auto-Gestion-Sena?node-id=107-413&t=jK2Po7xNx2KdLqYQ-1
+
+
+Enlace de web:
+https://www.figma.com/design/mHxV7E2Vxh6g5KNRVOrj0w/Auto-Gestion-Sena?node-id=358-1458&t=jK2Po7xNx2KdLqYQ-1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Plan de trabajo 
+
+El proyecto Autogestión SENA se desarrolló utilizando la metodología Scrum, con sprints de 2 semanas, reuniones diarias (Daily), revisiones de sprint, retrospectivas y entregas incrementales.
+El ciclo de desarrollo tuvo una duración aproximada de 3 meses, dividido en 3 entregas principales y una entrega final.
+
+Entrega 1 — Sprint 1 y 2
+Duración: Semana 1 a 4
+ Fechas aproximadas: 15 de agosto — 15 de septiembre 2025
+Objetivos de la entrega: Establecer la base del proyecto, análisis, diseño inicial y estructura fundamental de backend y base de datos.
+Entregables:
+Documento SRS (requerimientos del sistema)
+Modelo conceptual y MER completo
+Diseño base de datos MySQL
+Creación de tablas
+Relaciones
+Script inicial
+Diseño UI/UX en Figma
+Mockups de usuario
+Flujo de navegación
+Configuración inicial del backend (Django + DRF)
+Arquitectura del proyecto
+Configuración de entorno
+Primera versión de modelos
+Configuración inicial del frontend (React + TS + Vite)
+Estructura SPA
+Layout básico
+Diseño de estilos con Tailwind
+
+
+ Entrega 2 — Sprint 3 y 4
+Duración: Semana 5 a 8
+ Fechas aproximadas: 16 de septiembre — 15 de octubre 2025
+Objetivos de la entrega : Desarrollar módulos principales del sistema y validar flujos funcionales iniciales.
+Entregables:
+Módulo de Seguridad
+CRUD de usuarios, roles, permisos
+Autenticación (login y logout)
+Recuperación contraseña
+Verificación por correo
+Protección de rutas (frontend y backend)
+Módulo General
+CRUD de aprendices, instructores, sedes, centros, fichas, programas
+Asociación persona → aprendiz / instructor
+
+
+Primeros endpoints operativos (backend)
+Primeros componentes funcionales del frontend
+Formulario de login
+Registro
+Dashboard básico por rol
+Ajustes UI/UX en Figma
+
+
+Entrega 3 — Sprint 5 y 6
+Duración: Semana 9 a 12
+ Fechas aproximadas: 16 de octubre — 15 de noviembre 2025
+Objetivos de la entrega: Implementar el módulo de asignación y seguimiento, además de optimizaciones generales.
+Entregables:
+Módulo de Asignación
+Solicitud de asignación
+Gestión empresarial (jefes, talento humano)
+Asignación de instructores
+Validaciones automáticas
+Módulo de Seguimiento
+Registro de visitas
+Estados del seguimiento
+Carga de reportes PDF
+Historiales y trazabilidad
+Historial de reasignaciones
+Estados de solicitudes
+Optimizaciones del backend
+Endpoints finalizados
+Validaciones completas
+Pruebas iniciales
+Optimización del frontend
+Pantallas finales
+Protección por permisos (RBAC real)
+App móvil (.NET MAUI) — versión estable visual
+
+Entrega Final — Sprint 7
+Duración: Semana 13
+ Fecha final estimada: 15 — 26 de noviembre 2025
+Objetivos de la entrega: Cierre del proyecto, pruebas finales y entrega 100% funcional.
+Entregables:
+Sistema completamente funcional (web + móvil)
+Pruebas unitarias y de integración
+Documentación completa
+Propuesta técnica
+Manual de usuario
+Manual técnico
+Despliegue y configuración final
+Backend operativo
+Frontend deploy
+Base de datos en entorno final
+Video demostrativo del sistema
+Presentación final del proyecto
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Equipo de trabajo 
+
+Miembros del equipo
+El proyecto fue desarrollado por un equipo de tres personas, todas desempeñándose como desarrolladores full-stack. Aunque cada integrante pudo participar en todos los componentes del sistema, cada uno asumió un rol principal basado en sus fortalezas específicas. El equipo trabajó de manera colaborativa, compartiendo tareas y realizando revisiones cruzadas para asegurar la calidad del producto final.
+1. Brayan Stid Cortes Lombana
+Tareas: 
+Desarrollo del frontend web en conjunto con el equipo.
+Implementación del frontend móvil utilizando .NET MAUI.
+Desarrollo del módulo de autenticación, incluyendo login y registro por archivo Excel.
+Colaboración en funcionalidades de integración general.
+Ejecución de pruebas unitarias del proyecto móvil.
+Elaboración del diseño en figma para mock ups.
+
+2. Reyving Fabriani Ramirez Medina
+Tareas: 
+Diseño y mantenimiento del modelo entidad–relación (MER).
+Creación y optimización de endpoints en el backend.
+Implementación de cambios, ajustes y mejoras en la base de datos.
+Colaboración en la integración del sistema desde la lógica del servidor.
+Ejecución de pruebas unitarias correspondientes al backend
+
+3. July Daniela Ramos Peña	
+Tareas: 
+Coordinación general del equipo y asignación de tareas.
+Supervisión del avance, revisión del trabajo de los demás integrantes y validación de entregables.
+Desarrollo del frontend web como área principal de especialización.
+Elaboración de documentación técnica y funcional del proyecto.
+Participación en el desarrollo de funcionalidades transversales cuando fue necesario.
+Ejecución de pruebas unitarias asociadas al frontend.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Presupuesto 
+
+Hardware, software e infraestructura
+El presupuesto del proyecto Autogestión SENA se ha estimado considerando los recursos humanos, infraestructura tecnológica, servicios externos y herramientas utilizadas durante el desarrollo.
+1. Costos de Personal
+El tiempo de trabajo corresponde a 3 desarrolladores durante 4 meses, bajo una dedicación aproximada de 120 horas por mes por integrante (horas estándar para proyecto académico).
+Se estima un costo referencial académico de:
+ COP $14.000 por hora (o equivalente para proyectos universitarios).
+Cálculo total de horas
+3 integrantes
+4 meses
+120 horas/mes
+Total horas =  3 × 4 × 120 = 1.440 horas
+Costo total de personal
+1.440 h × $14.000 COP = $20.160.000 COP
+Este valor refleja el costo equivalente del esfuerzo humano si el desarrollo se cobrara como un proyecto técnico profesional, aunque se realizó como trabajo académico.
+2. Costos de Hardware
+Los equipos utilizados fueron propios, por lo tanto, no generan costos directos.
+ Sin embargo, se registra su ficha técnica como parte del soporte del proyecto:
+
+
+Recurso
+Descripción
+Costo
+Computadores
+3 equipos personales aproximados a  Intel Core i5, 16GB RAM, SSD 256GB
+$0 COP
+Periféricos
+Mouse, teclado, diademas
+$0 COP
+Energía / mantenimiento
+Asumido por los desarrolladores
+$0 COP
+
+
+Total hardware: $0 COP
+3. Costos de Software
+Todo el software utilizado fue open source o gratuito, por lo que no genera costos de licencias.
+Total software: $0 COP
+
+4. Infraestructura y Servicios
+
+Recurso
+Descripción
+Costo
+Hosting
+Plan básico para despliegue
+USD 10.40 (= $30.000 COP)
+Dominio
+No aplica
+$0 COP
+Cloud adicional
+No aplica
+$0 COP
+
+
+Total infraestructura: $30.000 COP
+
+5. Resumen del Presupuesto
+
+Categoria
+Costo
+Personal
+$20.160.000 COP
+Hardware
+$0 COP
+Software
+$0 COP
+Infraestructura
+ $30.000 COP
+Total general proyecto
+20.190.000
+
+
+El costo estimado del proyecto, considerando el valor equivalente del trabajo del equipo, es de:
+
+Total: $20.190.000 COP
+
+El uso de herramientas open-source y hardware propio permitió mantener costos reales muy bajos, concentrando el valor del proyecto en el esfuerzo de desarrollo y la calidad técnica de la solución entregada.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Plan de mantenimiento de soporte
+ El mantenimiento del software es un proceso continuo que garantiza que Autogestión SENA se mantenga estable, seguro, actualizado y alineado con las necesidades funcionales de los usuarios y de la institución. Se incluyen tres tipos principales de mantenimiento: correctivo, preventivo y soporte técnico.
+
+Mantenimiento del Correctivo
+
+Corresponde a la resolución de fallos detectados después de que el sistema se encuentre en producción. Estos errores pueden surgir debido a situaciones no cubiertas en las pruebas o a condiciones reales de uso.
+
+Actividades:
+Registro y monitoreo de incidencias reportadas por usuarios.
+Corrección de errores en la base de datos, servidor, API o frontend.
+Reparación de fallos en la comunicación entre módulos (frontend ↔ backend ↔ base de datos).
+Ajustes a validaciones, reglas de negocio, permisos y manejo de roles.
+Corrección de bugs en componentes de interfaz o flujos internos.
+
+Mantenimiento Preventivo
+
+Busca evitar fallos futuros mediante revisiones periódicas del sistema, optimización de recursos y actualización de tecnologías.
+
+Actividades:
+Actualización de dependencias en backend (Django, DRF) y frontend (React, Vite, React Query, Tailwind).
+Mantenimiento y optimización de consultas MySQL.
+Revisión del código para mejorar rendimiento, orden y seguridad.
+Monitoreo del uso del servidor y del hosting.
+Optimización del tiempo de respuesta de endpoints.
+Limpieza de logs, archivos temporales y registros obsoletos.
+Revisión de medidas de seguridad (tokens, permisos, roles, políticas CORS).
+
+Soporte técnico
+
+El soporte técnico garantiza que los usuarios del sistema puedan resolver dudas, solicitar ayuda y reportar problemas de manera efectiva.
+
+Actividades:
+Atención a usuarios por correo, teléfono o formulario interno de soporte.
+Asistencia con acceso al sistema (recuperación de contraseña, problemas de login).
+Solución de errores al cargar datos, archivos o reportes.
+Acompañamiento a instructores, coordinadores y aprendices en el uso de nuevas funciones.
+Capacitación básica sobre el funcionamiento del sistema.
+Registro de incidencias para análisis y mejora continua.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Cronograma 
+
+CRONOGRAMA DE ACTIVIDADES
+ACTIVIDAD
+MES 1
+MES 2
+MES 3
+MES 4
+Propuesta del proyecto
+21/08/25
+
+
+
+
+
+
+Desarrollo de documentación (SRS, análisis, propuesta técnica)
+●
+●
+
+
+
+
+Desarrollo de mockups (Figma)
+●
+●
+
+
+
+
+Desarrollo base de datos (MER, modelo físico, scripts MySQL)
+●
+●
+
+
+
+
+Primera entrega
+Fin del mes 1
+
+
+
+
+
+
+Desarrollo backend (API, modelos, endpoints, seguridad)
+
+
+●
+●
+
+
+Desarrollo frontend inicial (estructura, login, dashboard)
+
+
+●
+●
+
+
+Segunda entrega
+
+
+Fin del mes 2
+
+
+
+
+Desarrollo final front y back (módulos completos, asignación, seguimiento)
+
+
+
+
+●
+●
+Desarrollo aplicación móvil (.NET MAUI)
+
+
+●
+●
+Arreglos finales (pruebas, optimización, documentación final)
+
+●
+Entrega final
+
+Fin del mes 4
+
+Durante los cuatro meses de desarrollo, el proyecto siguió una organización basada en iteraciones estilo Scrum, avanzando por entregables incrementales:
+Mes 1: análisis, documentación, diseño visual (Figma), y estructura inicial de BD.
+Mes 2: desarrollo del backend, seguridad, autenticación, y primeras pantallas del frontend.
+Mes 3: completación de módulos principales (asignación, seguimiento), integración full front–back y desarrollo móvil.
+Mes 4: pruebas, correcciones, mejoras, documentación final y preparación para entrega.

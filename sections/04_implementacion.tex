@@ -1,4 +1,5 @@
-\section{Desarrollo}
+\section{Implementación}
+\label{sec:implementacion}
 
 La fase de desarrollo del proyecto "Autogestión SENA" se caracterizó por la implementación constante de herramientas de Inteligencia Artificial (IA) para mejorar la eficiencia y la colaboración del equipo. A continuación, se detallan los pasos clave y la participación de la IA durante los procesos del desarrollo del proyecto:
 
@@ -40,6 +41,69 @@ Este enfoque demostró cómo la IA no solo aceleró la entrega del proyecto sino
 	\item \textbf{Front-end y accesibilidad}: en la parte visual, la IA sugirió componentes, animaciones y estilos con Tailwind; el equipo supervisó las recomendaciones para asegurar accesibilidad y coherencia visual.
 	\item \textbf{Contratos API y pruebas}: se definieron requests y responses con ejemplos y casos de prueba generados por IA para validar integraciones y evitar discrepancias.
 	\item \textbf{Soporte para el aprendizaje y mantenimiento}: los participantes del proyecto adquirimos explicaciones y ejemplos explicativos que facilitaron su incorporación y la mantenibilidad del código a largo plazo.
+\end{itemize}
+
+\subsection{Implementación Técnica Detallada}
+
+\subsubsection{Backend Django REST Framework}
+El backend se implementó utilizando Django 4.2 con Django REST Framework para la construcción de APIs RESTful. Las características principales incluyen:
+
+\begin{itemize}
+\item \textbf{Modelos y Serializadores}: Se definieron modelos para las entidades principales (Usuario, Instructor, Aprendiz, AsignacionInstructor, VisitaSeguimiento) con validaciones personalizadas y serializadores para la transformación de datos JSON.
+\item \textbf{Autenticación y Autorización}: Implementación de JWT (JSON Web Tokens) para autenticación stateless, con permisos basados en roles (Administrador-Coordinador, Instructor, Aprendiz, Operador Sofia Plus).
+\item \textbf{Endpoints Principales}:
+  \begin{itemize}
+  \item \texttt{POST /api/auth/login}: Autenticación de usuarios
+  \item \texttt{GET /api/instructores}: Listado de instructores disponibles
+  \item \texttt{POST /api/asignaciones}: Creación de asignaciones instructor-aprendiz
+  \item \texttt{GET /api/visitas}: Seguimiento de visitas de seguimiento
+  \end{itemize}
+\item \textbf{Base de Datos MySQL}: Configuración con índices optimizados para consultas de asignación y reporting.
+\end{itemize}
+
+\subsubsection{Frontend React + TypeScript}
+La interfaz web se desarrolló con React 18 y TypeScript, utilizando Vite como bundler para desarrollo rápido:
+
+\begin{itemize}
+\item \textbf{Gestión de Estado}: Implementación de Context API para manejo de estado global de autenticación y datos de usuario.
+\item \textbf{Componentes Principales}:
+  \begin{itemize}
+  \item Dashboard administrativo con métricas en tiempo real
+  \item Formularios de asignación con validación en tiempo real
+  \item Tablas de datos con filtrado y paginación
+  \item Perfiles de usuario con gestión de roles
+  \end{itemize}
+\item \textbf{UI/UX}: Diseño responsivo con Tailwind CSS, siguiendo principios de accesibilidad WCAG 2.1.
+\item \textbf{Integración API}: Cliente HTTP personalizado con interceptores para manejo de tokens JWT y errores.
+\end{itemize}
+
+\subsubsection{Aplicación Móvil .NET MAUI}
+La aplicación móvil multiplataforma se desarrolló con .NET MAUI para Android e iOS:
+
+\begin{itemize}
+\item \textbf{Arquitectura MVVM}: Patrón Model-View-ViewModel para separación de responsabilidades.
+\item \textbf{Funcionalidades Móviles}:
+  \begin{itemize}
+  \item Consulta de asignaciones activas
+  \item Registro de visitas de seguimiento con geolocalización
+  \item Notificaciones push para nuevas asignaciones
+  \item Modo offline con sincronización automática
+  \end{itemize}
+\item \textbf{Integración Nativa}: Acceso a GPS, cámara y notificaciones del dispositivo.
+\end{itemize}
+
+\subsubsection{Despliegue con Docker}
+La contenerización se implementó con Docker Compose para entornos de desarrollo y producción:
+
+\begin{itemize}
+\item \textbf{Servicios Contenedorizados}:
+  \begin{itemize}
+  \item \texttt{web}: Aplicación Django + Gunicorn
+  \item \texttt{db}: MySQL 8.0 con volúmenes persistentes
+  \item \texttt{frontend}: Servidor Nginx para archivos estáticos de React
+  \end{itemize}
+\item \textbf{Orquestación}: Docker Compose para desarrollo local con hot-reload.
+\item \textbf{Configuración}: Variables de entorno para diferentes entornos (desarrollo, staging, producción).
 \end{itemize}
 
 \subsection{Generación de recursos y reproducibilidad}
