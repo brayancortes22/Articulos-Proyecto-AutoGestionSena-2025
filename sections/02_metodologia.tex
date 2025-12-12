@@ -1,53 +1,47 @@
-\section{Metodología}
-\label{sec:metodologia}
+El proyecto se reestructuró siguiendo una metodología ágil llamada Scrum, durante 4 meses divididos en 7 sprints (ciclos de trabajo). Esta forma de trabajar nos dio flexibilidad para escuchar a los usuarios reales (instructores y coordinadores del SENA) y cambiar el proyecto según sus necesidades.
 
-Este estudio empleó un enfoque mixto que combina métodos cualitativos y cuantitativos, integrando investigación aplicada con desarrollo de software. La metodología se fundamenta en el paradigma de investigación-acción, donde el proceso de desarrollo del software se convierte en el medio para investigar y mejorar prácticas institucionales.
+\subsection{Análisis de Requisitos y Diseño del Sistema}
 
-\subsection{Diseño de Investigación}
+Empezamos recopilando todo lo que el sistema debía hacer, identificando cinco tipos de usuarios: coordinadores, instructores, Aprendices, administradores y operadores de Sofia plus. Las funciones incluyeron manejar usuarios con seguridad, asignar instructores automática o manualmente, ver horarios, hacer reportes y tener interfaces que funcionen en cualquier dispositivo. La IA ayudó mucho aquí, creando diagramas complejos de relaciones entre datos, flujos de navegación y sugerencias de diseño que aceleraron el trabajo inicial.
 
-Se adoptó un diseño de estudio de caso instrumental \cite{stake1995case}, donde el desarrollo de "Autogestión SENA" sirve como instrumento para explorar la colaboración humano-IA en contextos de formación técnica colombiana. El estudio combina elementos de investigación aplicada con desarrollo de producto software.
+El modelo de datos se organizó alrededor de elementos clave como usuarios, roles, Aprendices, instructores, asignaciones y seguimientos, con diferentes tipos de conexiones entre ellos. La IA ayudó a organizar bien la base de datos MySQL, sugiriendo formas de guardar los datos de manera eficiente y segura.
 
-\subsubsection{Participantes}
-El estudio involucró múltiples grupos de interés del SENA:
+\subsection{Arquitectura Técnica}
 
-\begin{itemize}
-\item \textbf{Coordinadores Regionales} (n=12): Responsables de asignación de instructores en diferentes regionales.
-\item \textbf{Instructores} (n=25): Profesionales técnicos con experiencia docente entre 2-15 años.
-\item \textbf{Equipo de Desarrollo} (n=4): Estudiantes de ingeniería de sistemas en formación práctica.
-\item \textbf{Directivos Institucionales} (n=3): Representantes de la dirección nacional del SENA.
-\end{itemize}
+El sistema se rediseñó siguiendo reglas de organización clara y capacidad de crecer, usando un patrón de capas basado en módulos que hace fácil mantener y actualizar el software. Tomamos la estructura existente y la mejoramos completamente con tecnologías más modernas y mejores prácticas.
 
-\subsubsection{Instrumentos de Recolección de Datos}
-Se emplearon múltiples instrumentos para triangulación de datos:
+\textbf{Parte back-end (API REST con Django/Python):}
+- Django 4.2 con Django REST Framework para crear APIs
+- Base de datos MySQL para guardar información estructurada
+- Autenticación JWT para seguridad en las conexiones
+- Arquitectura por capas: modelos, serializadores, vistas y servicios
+- La IA fue clave para crear modelos Django con relaciones complejas, validaciones personalizadas y documentación automática de las APIs
 
-\begin{enumerate}
-\item \textbf{Entrevistas Semiestructuradas}: 15 entrevistas individuales con coordinadores e instructores, con duración promedio de 45 minutos. El protocolo incluyó preguntas sobre procesos actuales, dolor points y expectativas del sistema.
-\item \textbf{Encuestas Cualitativas}: Aplicadas a 40 potenciales usuarios, enfocadas en requerimientos funcionales y no funcionales.
-\item \textbf{Observación Participante}: El equipo de desarrollo participó en reuniones de coordinación reales durante 8 semanas.
-\item \textbf{Análisis Documental}: Revisión de procedimientos institucionales, reportes de asignación y estadísticas históricas.
-\end{enumerate}
+\textbf{Parte web (SPA con React/TypeScript):}
+- React 18 con TypeScript para desarrollo seguro
+- Vite para compilar y empaquetar rápido
+- Tailwind CSS para estilos que se adaptan a cualquier pantalla
+- peticiones fetch para conectar con APIs y React Router para navegación
+- Patrón de diseño atómico con componentes reutilizables
+- La IA ayudó a crear componentes, formularios con validación, tablas con filtros y optimizaciones de rendimiento
 
-\subsection{Metodología de Desarrollo}
+\textbf{Aplicación móvil (con .NET MAUI):}
+- .NET MAUI para desarrollo nativo en Android
+- Patrón MVVM con CommunityToolkit.Mvvm
+- Consumo de APIs REST 
+- La IA asistió en la generación de ViewModels observables, implementación de comandos para interacción UI, creación de layouts XAML responsivos y manejo de navegación entre páginas
 
-\subsubsection{Enfoque Ágil Adaptado}
-Se implementó Scrum adaptado al contexto educativo, con las siguientes modificaciones:
+\subsection{Desarrollo Ágil con Integración de IA}
 
-\begin{itemize}
-\item \textbf{Sprints de 3 semanas}: Tiempo extendido para permitir aprendizaje profundo de tecnologías.
-\item \textbf{Daily Standups Educativos}: Incluían componentes de mentoría técnica.
-\item \textbf{Revisiones con Stakeholders}: Sesiones semanales con usuarios finales para validación.
-\item \textbf{Retrospectivas de Aprendizaje}: Enfoque en lecciones técnicas y pedagógicas.
-\end{itemize}
+El proceso de desarrollo se estructuró en sprints de 2 semanas, con reuniones diarias de 30-40 minutos, revisiones semanales y retrospectivas. La integración de IA se realizó de manera estratégica en las siguientes áreas:
+- Generación de código base para modelos Django y serializadores
+- Creación de componentes React reutilizables
+- Implementación de lógica de negocio compleja
+- Generación de pruebas unitarias y de integración
+- Documentación técnica y explicaciones de algoritmos
+- Resolución de bugs y optimización de código
 
-\subsubsection{Integración de IA en el Proceso}
-La IA se incorporó como herramienta colaborativa en todas las fases:
-
-\begin{itemize}
-\item \textbf{Planificación}: Generación de historias de usuario y criterios de aceptación.
-\item \textbf{Diseño}: Creación de diagramas UML y mockups de interfaz.
-\item \textbf{Desarrollo}: Generación de código boilerplate y sugerencias de implementación.
-\item \textbf{Pruebas}: Creación de casos de prueba y análisis de cobertura.
-\item \textbf{Documentación}: Generación automática de documentación técnica.
+La IA se utilizó en la gran mayoría del proyecto, desde la conceptualización inicial hasta el despliegue final, representando aproximadamente el 70\% de las tareas de desarrollo. Esto incluyó la generación automática de código, refactorización sistemática, debugging asistido y documentación técnica, permitiendo al equipo enfocarse en la lógica de negocio específica del SENA.
 \end{itemize}
 
 \subsection{Diseño Técnico}

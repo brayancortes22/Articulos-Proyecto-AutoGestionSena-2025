@@ -1,53 +1,10 @@
-\section{Introducción}
+El SENA es una institución colombiana que forma a miles de personas en oficios técnicos. Tiene muchos centros de formación en diferentes lugares del país. Uno de los trabajos más importantes que hacen es asignar instructores a los estudiantes, pero antes lo hacían con correos, hojas de Excel y llamadas por teléfono, lo que causaba muchos errores y demoras.
 
-\subsection{Contexto y Problema}
+Por eso reestructuramos el proyecto "Autogestión SENA", una aplicación que automatiza y mejora este proceso. La app web permite a los coordinadores asignar instructores de forma fácil, a los instructores ver sus horarios y tareas, y a los aprendices saber quién es su instructor. Tiene versión web y móvil, con diferentes permisos para cada tipo de usuario.
 
-El Servicio Nacional de Aprendizaje (SENA) de Colombia es la entidad líder en formación técnica y tecnológica del país, atendiendo anualmente a más de 500.000 aprendices en diversos programas de formación profesional. Uno de los procesos administrativos críticos en esta institución es la asignación de instructores a los diferentes centros de formación y programas académicos.
+Reestructuramos el proyecto en 4 meses usando metodología ágil (Scrum), con 7 ciclos de trabajo cortos que nos permitieron probar y mejorar según la opinión de los usuarios reales. Usamos mucho la inteligencia artificial (sobre todo GitHub Copilot) para acelerar el desarrollo, creando código, arreglando problemas y documentando todo.
 
-Tradicionalmente, este proceso se realizaba mediante métodos manuales que incluían:
-\begin{itemize}
-\item Comunicación por correo electrónico entre coordinadores regionales y nacionales
-\item Gestión de hojas de cálculo compartidas para seguimiento de disponibilidad
-\item Llamadas telefónicas y reuniones presenciales para coordinación
-\item Actualización manual de bases de datos institucionales
-\end{itemize}
-
-Estos métodos generaban múltiples ineficiencias: pérdida de información, duplicación de esfuerzos, errores en la asignación, falta de trazabilidad histórica y demoras significativas en la respuesta a necesidades urgentes de formación.
-
-\subsection{Solución Propuesta}
-
-Frente a estas problemáticas, nuestro equipo desarrolló "Autogestión SENA", una plataforma digital integral que automatiza y optimiza el proceso de asignación de instructores. La solución consta de tres componentes principales:
-
-\begin{enumerate}
-\item \textbf{Aplicación Web}: Interfaz principal para coordinadores y administradores, con paneles de control, reportes en tiempo real y gestión de asignaciones.
-\item \textbf{Aplicación Móvil}: Herramienta para instructores, permitiendo consulta de asignaciones, actualización de disponibilidad y comunicación directa con coordinadores.
-\item \textbf{API RESTful}: Backend que integra todos los componentes y proporciona servicios para futuras expansiones del sistema.
-\end{enumerate}
-
-\subsection{Metodología de Desarrollo}
-
-El proyecto se ejecutó bajo una metodología ágil (Scrum) durante un periodo total de cuatro meses. A continuación se detallan las actividades principales realizadas durante la planificación y diseño:
-
-\subsubsection{Diseño de base de datos y modelo del dominio}
-Se diseñaron las entidades principales del dominio: Usuario, Persona, Rol, Aprendiz, Instructor, Ficha, Programa, Centro/Regional, Empresa, Jefe, TalentoHumano, SolicitudAsignacion, AsignacionInstructor, VisitaSeguimiento. Las relaciones se modelaron siguiendo principios de normalización y se consultó IA para identificar redundancias, sugerir índices y mejorar la integridad referencial.
-
-\subsubsection{Prototipado UX/UI}
-Los mockups y flujos de navegación se elaboraron en Figma, incorporando cinco roles de usuario claramente diferenciados: Administrador-Coordinador, Instructor, Aprendiz, Operador Sofia Plus y Usuario Anónimo. La IA se empleó para generar variaciones visuales, recomendaciones de accesibilidad WCAG 2.1 y propuestas de interacción adaptadas a cada perfil de usuario.
-
-\subsubsection{Planificación y decisiones arquitectónicas}
-La arquitectura Cliente-Servidor distribuida fue seleccionada, con frontend desacoplado en React + TypeScript consumiendo API REST en Django. Se contrastaron alternativas como microservicios vs monolito modular, priorizando la escalabilidad institucional. La IA contribuyó a documentar decisiones técnicas y evaluar trade-offs entre tecnologías.
-
-\subsubsection{Marco de trabajo y cadencia}
-El equipo trabajó con sprints de 2 semanas, reuniones diarias (daily standup), revisiones y retrospectivas. En total se ejecutaron 7 sprints durante el periodo del proyecto, con una cadencia aproximada de 2 sprints por mes. Se priorizaron funcionalidades críticas como asignación automática de instructores y seguimiento de visitas.
-
-\subsection{Tecnologías Implementadas}
-
-La arquitectura tecnológica se seleccionó considerando escalabilidad, mantenibilidad y alineación con estándares modernos de desarrollo:
-
-\begin{itemize}
-\item \textbf{Backend}: Python con Django Framework, proporcionando robustez, seguridad y rapidez en el desarrollo de APIs.
-\item \textbf{Frontend Web}: React con Vite como bundler y Tailwind CSS para estilos, garantizando una experiencia de usuario moderna y responsiva.
-\item \textbf{Móvil}: .NET MAUI para desarrollo multiplataforma nativo en Android e iOS.
+Este artículo cuenta toda la experiencia, desde la idea inicial hasta tener el sistema funcionando. Explica cómo la colaboración entre humanos y IA cambió la forma de hacer software. Incluye detalles técnicos, decisiones que tomamos, funciones principales y resultados obtenidos.
 \item \textbf{Base de Datos}: MySQL con diseño optimizado para consultas complejas y reporting.
 \item \textbf{Despliegue}: Contenedorización con Docker para entornos reproducibles y escalables.
 \end{itemize}

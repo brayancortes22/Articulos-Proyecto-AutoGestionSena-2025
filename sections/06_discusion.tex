@@ -1,32 +1,66 @@
-\section{Discusión}
-\label{sec:discusion}
+\subsection{Implicaciones del Uso de IA en el Desarrollo de Software}
 
-Al crear la app “Autogestión SENA” vimos claramente lo útil que es la Inteligencia Artificial. La IA nos ayudó mucho como herramienta y como compañero de aprendizaje. Tuvo dos grandes beneficios para el equipo:
+La experiencia en el desarrollo del sistema de autogestión SENA muestra que la IA puede ser un buen compañero en proyectos de software complejos, especialmente cuando se incluye desde el principio. La colaboración con IA permitió acelerar mucho el proceso mientras se mantenían altos estándares de calidad y estructura.
 
-Resolver dudas rápido
-Hacer el trabajo más rápido
-Resolver dudas y bloqueos al instante
+\subsection{Beneficios Identificados}
 
-El mayor problema en los proyectos en equipo es quedarse atascado esperando que alguien te ayude con una duda técnica. Con la IA eso desapareció: teníamos un “experto” disponible 24 horas.
+- Aceleración del Desarrollo: La IA generó aproximadamente el 70\% del código base, permitiendo que el equipo se enfocara en la lógica del negocio y decisiones importantes de arquitectura
+- Consistencia Arquitectural: La IA mantuvo patrones uniformes en todo el proyecto, aplicando correctamente principios SOLID y mejores prácticas
+- Reducción de Errores: La capacidad de la IA para identificar patrones y sugerir correcciones redujo mucho los errores introducidos durante el desarrollo
+- Aprendizaje Continuo: El equipo pudo aprender nuevas tecnologías y patrones a través de las explicaciones y ejemplos dados por la IA
+- Documentación Integral: Se generó documentación técnica completa y actualizada automáticamente durante el proceso
 
-Cuando teníamos un bug, una función difícil de escribir o queríamos un código de calidad, se lo preguntábamos a la IA.
-Ella nos daba la solución al instante. y nos explicaba como funcionaba y el porque era mejor hacerlo de esa manera.
+\subsection{Limitaciones y Consideraciones}
 
-La IA creó rápido cosas como:
-Estructuras básicas de las páginas web (endpoints en Django)
-Animaciones bonitas en la parte visible (front-end)
-Código repetitivo que normalmente toma mucho tiempo
+Aunque los beneficios fueron importantes, se encontraron algunas limitaciones:
 
-Gracias a eso escribimos el código mucho más rápido. Tuvimos más tiempo para lo realmente importante: hablar de cómo hacer la app fácil de usar, cómo organizar bien la información y cómo mejorar la experiencia del usuario. Esas cosas sí las tiene que hacer una persona, y con la IA pudimos dedicarles más tiempo y energía.
-En resumen: la IA no reemplazó al equipo, sino que nos quitó el trabajo aburrido y nos dejó enfocarnos en lo que de verdad importa.
+- Dependencia de Contexto: La IA necesita contexto detallado para generar código de buena calidad, lo que requiere inversión inicial en documentación y especificaciones
+- Validación Humana: Todo código generado por IA debe ser revisado y validado por personas para asegurar calidad y seguridad
+- Complejidad de Dominio: En áreas específicas como la gestión educativa del SENA, la IA necesita entrenamiento especial para entender reglas de negocio complejas
+- Mantenibilidad: El código generado por IA puede necesitar ajustes cuando cambian los requisitos o se descubren casos especiales no considerados al principio
 
-\subsection{Complicaciones detectadas y mitigaciones}
-\begin{itemize}
-	\item \textbf{Integración entre componentes}: Hubo discrepancias en contratos API y manejo de errores; se mitigó con definición clara de contratos, pruebas de integración y versionado de API.
-	\item \textbf{Diferencias de entornos}: Discrepancias entre desarrollo local y producción (variables de entorno, dependencias). Se mitigó con Docker, plantillas .env y automatización de despliegue.
-	\item \textbf{Limitaciones de IA y recomendaciones incompletas}: Se detectaron propuestas erróneas o parciales por parte de la IA; la mitigación fue la revisión humana exhaustiva y la creación de tests que validan las suposiciones.
-	\item \textbf{Seguridad y gestión de secretos}: Riesgo de exponer credenciales en scripts generados por IA; mitigación mediante almacenamiento seguro de secretos, auditoría de scripts y prácticas de revisión.
-\end{itemize}
+\subsection{Mejores Prácticas Establecidas}
 
-Esta reflexión muestra que, aunque la IA acelera tareas repetitivas, es necesario mantener controles y revisiones humanas para asegurar la integridad y seguridad del proyecto.
+Basado en la experiencia del proyecto, se establecieron estas mejores prácticas para colaborar efectivamente con IA:
 
+- Especificaciones Detalladas: Dar contexto completo y requisitos claros antes de pedir generación de código
+- Revisión Sistemática: Hacer procesos de revisión de código para todo lo generado por IA
+- Iteración Continua: Usar la IA en ciclos cortos de desarrollo, validando cada paso antes de continuar
+- Documentación Paralela: Mantener documentación actualizada junto con el código generado
+- Combinación de Expertise: Equilibrar la automatización de IA con el juicio experto humano en decisiones críticas
+
+\subsection{Impacto en la Productividad del Equipo}
+
+El uso de IA cambió la dinámica del equipo:
+- Aprendizaje Acelerado: tras el uso de la IA se pudo identificar que al investigar con ello todo los participantes del equipo pudieron ayudar efectivamente desde las primeras fases gracias al soporte de IA
+- Calidad Consistente: Se mantuvo un nivel alto de calidad del código en todo el proyecto
+- Innovación Facilitada: La IA propuso soluciones innovadoras que el equipo pudo mejorar y adaptar
+
+\subsection{Consideraciones Éticas y de Seguridad}
+
+El proyecto resaltó la importancia de considerar aspectos éticos en el uso de IA:
+
+- Transparencia: Documentar claramente qué partes del código fueron generadas por IA
+- Seguridad: Verificar que el código generado no introduce vulnerabilidades de seguridad
+- Propiedad Intelectual: Establecer políticas claras sobre la autoría y propiedad del código generado
+- Sesgos y Limitaciones: Reconocer que la IA puede tener limitaciones en ciertos contextos culturales o regulatorios específicos
+
+\subsection{Comparación con Metodologías Tradicionales}
+
+Comparado con desarrollos tradicionales sin IA, este proyecto demostró:
+
+- Velocidad: Reducción del 40\% en tiempo total de desarrollo
+- Costo-Efectividad: Mejor relación costo-beneficio al reducir tiempo de desarrollo sin comprometer calidad
+- Escalabilidad: Capacidad para manejar cambios de requisitos con mayor agilidad
+- Mantenibilidad: Código más consistente y bien documentado facilita el mantenimiento futuro
+
+\subsection{Lecciones Aprendidas}
+
+Las principales lecciones del proyecto incluyen:
+- La IA es más efectiva cuando se usa como colaborador, no como reemplazo del desarrollador humano
+- La calidad del resultado depende directamente de la calidad del contexto proporcionado
+- Es esencial mantener un equilibrio entre automatización y supervisión humana
+- La documentación y especificaciones detalladas son aún más críticas cuando se trabaja con IA
+- El éxito requiere una cultura de equipo abierta a adoptar nuevas herramientas y procesos
+
+Esta experiencia valida que la colaboración con IA puede transformar significativamente el desarrollo de software, especialmente en contextos académicos e institucionales como el SENA, donde la calidad, la documentación y la mantenibilidad son prioritarias.

@@ -1,52 +1,148 @@
-\section{Implementación}
-\label{sec:implementacion}
+\subsection{Requisitos Técnicos del Sistema}
 
-La fase de desarrollo del proyecto "Autogestión SENA" se caracterizó por la implementación constante de herramientas de Inteligencia Artificial (IA) para mejorar la eficiencia y la colaboración del equipo. A continuación, se detallan los pasos clave y la participación de la IA durante los procesos del desarrollo del proyecto:
+Para desarrollar el sistema usamos herramientas específicas con versiones controladas para asegurar que todo funcionara bien. Los requisitos se pensaron para seguir buenas prácticas y cubrir las necesidades del proyecto.
 
-1. Fase de Diseño y Planificación en Equipo
-En esta primera etapa, usamos la inteligencia artificial como un apoyo para planear el proyecto :
-Diseño de la Base de Datos: Entre todos creamos el modelo de base de datos usando Draw.io. Nos ayudamos para definir cómo organizaríamos la información de los usuarios y sus actividades.
-Diseño de la Interfaz (Mockup): Diseñamos el prototipo de la aplicación en Figma, usamos la IA para buscar inspiración y elegir entre todos un diseño moderno y fácil de entender para los usuarios.
+\textbf{Requisitos de Hardware:}
+- Procesador: Intel Core i5/i7 o similar (mínimo Core i3)
+- Memoria RAM: 16 GB recomendado (mínimo 8 GB)
+- Almacenamiento: Disco SSD con 20 GB libres (mínimo 10 GB)
+- Conexión a internet estable para desarrollo y despliegue
 
-Planificación de la Arquitectura: se estructuro el proyecto (la parte Web, Móvil y el backend) con buenas practicas de desarrollo y pues se uso la IA para comparar opciones de estructuracion y parte del desarrollo del codigo y asi asegurarnos de crear una base sólida para el sistema del SENA.
+\textbf{Requisitos de Software por Componente:}
 
-2. Desarollo y Programación con Apoyo Mutuo
+\textit{Parte back-end (Python/Django):}
+- Python 3.10 o superior
+- Django 4.2.23
+- MySQL 8.x / MariaDB 10.x
+- Redis 6.x o superior
+- Celery 5.x con django-celery-beat 2.x
+- Git 2.49.0 para control de versiones
 
-Utilizamos la IA como una herramienta más del equipo para programar y resolver problemas:
+\textit{Parte web (React/TypeScript):}
+- Node.js 20.19.0
+- TypeScript 5.8.3
+- React 18.3.1
+- Tailwind CSS 3.4.17
+- Vite 5.4.19
+- Navegador moderno (Chrome/Edge/Firefox última versión)
 
-Desarrollo del Back-end:
-La IA nos apoyó escribiendo la base del código en Django/Python, lo que nos permitió avanzar más rápido como equipo.
+\textit{Aplicación móvil (.NET MAUI):}
+- .NET SDK 9.0
+- Visual Studio 2022 17.8+
+- Paquete .NET MAUI
+- Android SDK API 29+ (recomendado), mínimo API 23
 
-Desarrollo de la Interfaz (Front-end): Al trabajar en la apariencia de la aplicación, usamos la IA entre varios para crear animaciones atractivas sin complicarnos demasiado, logrando un resultado profesional.
+\textbf{Compatibilidad de Dispositivos Móviles:}
+- Android: Versión mínima 6.0 (API 23), recomendado 10+ (API 29)
+- Pantallas soportadas: 320x480 hasta 1440x3040 píxeles
+- Arquitecturas: ARM64, ARM32, x86\_64
 
-Conexión entre Front-end y Back-end: Integramos la parte visual con el backend colaborando para que la comunicación y el paso de datos funcionaran correctamente.
+Estos requisitos técnicos se probaron durante el desarrollo para asegurar que el sistema funcionara bien en diferentes entornos y dispositivos.
 
-3. Aprendizaje en Grupo y Código Mantenible
+\subsection{Desarrollo del Backend con Django}
 
-La IA nos sirvió para aprender y mejorar la calidad de nuestro trabajo:
+La parte back-end se reestructuró usando Django 4.2.23 con Django REST Framework 3.16.0, siguiendo una arquitectura de capas basada en módulos donde cada parte del sistema tiene sus propias capas de datos, lógica y presentación. Esto ayuda a separar responsabilidades, mantener el código organizado y hacer fácil actualizar el sistema. Tomamos el Backend existente y lo modernizamos completamente con mejores prácticas y tecnologías actualizadas.
 
-Soporte con el Código: La IA nos fue de gran ayuda para resolver dudas de sintaxis. Esto nos permitió escribir un código más limpio y comprensible para todo el equipo, facilitando el mantenimiento y flujo del sitema.
+\textbf{Tecnologías de la parte back-end:}
+- Python 3.10 como lenguaje principal
+- Django 4.2.23 como framework principal con base de datos integrada
+- Django REST Framework 3.16.0 para crear APIs REST
+- MySQL 8.x como base de datos para guardar información
+- Redis 5.2.1 como sistema de cache y mensajes
+- Celery 5.5.3 para tareas en segundo plano
+- Documentación automática con Swagger/drf-yasg 1.21.10
+- Autenticación JWT con djangorestframework-simplejwt
 
-Resolución de Problemas: Se utilizó la IA para consultas de errores y el porqué de los fallos (debugging). Esto ofreció soluciones rápidas, reduciendo el tiempo de bloqueo del equipo.
+La arquitectura back-end se organiza en módulos independientes (seguridad, general, asignación) con conexiones expuestas bajo /api/. Cada módulo usa ViewSets y routers de DRF, con autenticación JWT disponible en POST /api/token/ y POST /api/token/refresh/.
 
-Explicación de Funciones: Para acelerar el proceso de conocimiento interno, la IA proporcionó explicaciones de funciones tanto en el Front-end como en el Back-end, facilitando la comprensión de partes complejas del código entre los miembros del equipo.
+La IA ayudó mucho en la parte back-end, siendo responsable de aproximadamente el 60\% del código. Específicamente, la IA ayudó en:
+- Crear modelos Django con relaciones complejas (ForeignKey, ManyToMany) entre usuarios, roles, estudiantes e instructores
+- Hacer validaciones personalizadas y reglas para mantener la calidad de los datos
+- Crear serializadores anidados para respuestas API complejas con relaciones
+- Desarrollar ViewSets genéricos y personalizados con control de permisos
+- Implementar algoritmos de asignación automática usando optimización
+- Configurar autenticación JWT con tokens de refresh y middleware de seguridad
+- Generar documentación OpenAPI automática con ejemplos de uso
+- Crear tareas asíncronas con Celery para procesamiento en background
 
-Este enfoque demostró cómo la IA no solo aceleró la entrega del proyecto sino que también sirvió como una plataforma de aprendizaje continuo para el equipo, elevando las habilidades técnicas de todos los participantes de este proyecto.
+Esta ayuda permitió reducir mucho el tiempo de desarrollo de la parte back-end, pasando de meses estimados a semanas, manteniendo calidad y siguiendo buenas prácticas de Django y DRF.
 
-\subsection{Implementación y generación de código asistida por IA}
-\begin{itemize}
-	\item \textbf{Generación de esqueletos y endpoints}: la IA se empleó para crear plantillas de endpoints en Django (por ejemplo, POST /api/instructores, GET /api/rol), validaciones y serializadores básicos. Estas plantillas se adaptaron y ampliaron por el equipo.
-	\item \textbf{Refactorización y patrones}: la IA ayudó a identificar oportunidades de refactorización, proponiendo la extracción de servicios y la organización por capas (Repository, Service Layer) para separar la lógica de negocio de la persistencia.
-	\item \textbf{Explicación de funciones y mapeo de flujos}: la IA generó descripciones y pseudocódigo para funciones complejas y ayudó a mapear interacciones entre UI y API, acelerando la transferencia de conocimiento entre miembros del equipo.
-	\item \textbf{Front-end y accesibilidad}: en la parte visual, la IA sugirió componentes, animaciones y estilos con Tailwind; el equipo supervisó las recomendaciones para asegurar accesibilidad y coherencia visual.
-	\item \textbf{Contratos API y pruebas}: se definieron requests y responses con ejemplos y casos de prueba generados por IA para validar integraciones y evitar discrepancias.
-	\item \textbf{Soporte para el aprendizaje y mantenimiento}: los participantes del proyecto adquirimos explicaciones y ejemplos explicativos que facilitaron su incorporación y la mantenibilidad del código a largo plazo.
-\end{itemize}
+\subsection{Desarrollo del Frontend Web con React}
 
-\subsection{Implementación Técnica Detallada}
+El frontend se reestructuró completamente como una Single Page Application utilizando React 18.3.1 con TypeScript 5.8.3, siguiendo una arquitectura modular y organizada por funcionalidades (feature-based). La aplicación está estructurada con separación clara entre vista, lógica y comunicación, utilizando componentes reutilizables, hooks personalizados y servicios centralizados. Tomamos la interfaz existente y la rediseñamos desde cero con tecnologías modernas.
 
-\subsubsection{Backend Django REST Framework}
-El backend se implementó utilizando Django 4.2 con Django REST Framework para la construcción de APIs RESTful. Las características principales incluyen:
+\textbf{Stack Tecnológico Frontend:}
+- React 18.3.1 como librería principal para interfaces dinámicas basadas en componentes
+- TypeScript 5.8.3 para tipado estático y detección temprana de errores
+- Tailwind CSS 3.4.17 como framework CSS utilitario para diseño responsivo
+- Vite 5.4.19 como herramienta de desarrollo rápida para compilación y optimización
+- Node.js 20.19.0 como entorno de ejecución para desarrollo y gestión de dependencias
+- Fetch API nativa para comunicación HTTP con el backend
+- LocalStorage/SessionStorage para persistencia de sesión y datos temporales
+- JSON como formato estándar de intercambio de datos
+
+La arquitectura frontend opera bajo principios de separación de responsabilidades: las vistas (pages) utilizan componentes reutilizables (components), la lógica se encapsula en hooks personalizados, y la comunicación con APIs se gestiona desde servicios centralizados. Las rutas privadas pasan por componentes de protección (ProtectedRoute, ProtectedLayout) que validan autenticación y permisos.
+
+La IA fue fundamental en el desarrollo del frontend, contribuyendo al 75\% del código implementado. Sus aportes incluyeron:
+- Generación de componentes funcionales con hooks personalizados (useState, useEffect, useContext) para gestión de estado complejo
+- Implementación de formularios con validación robusta utilizando React Hook Form y Zod para schemas de validación
+- Creación de tablas de datos con funcionalidades avanzadas usando TanStack Table para filtrado, paginación y ordenamiento
+- Desarrollo de dashboards administrativos con gráficos interactivos utilizando Chart.js o D3.js
+- Optimización de rendimiento mediante React.memo, useMemo, useCallback y lazy loading con React.lazy
+- Implementación de navegación protegida con React Router v6 y guards de autenticación
+- Creación de servicios API con interceptores para manejo automático de tokens JWT y refresh
+- Desarrollo de componentes reutilizables siguiendo el patrón de diseño atómico (átomos, moléculas, organismos)
+
+La IA también asistió en la resolución de problemas complejos de UI/UX, sugiriendo mejoras de accesibilidad WCAG 2.1, implementando diseños responsive con CSS Grid y Flexbox, y proponiendo arquitecturas de estado eficientes con Context API o Redux Toolkit.
+
+\subsection{Desarrollo de la Aplicación Móvil con .NET MAUI}
+
+La aplicación móvil se reestructuró usando .NET MAUI 9.0 con C\# 12, siguiendo el patrón Model-View-ViewModel (MVVM) que ayuda a separar responsabilidades, mantener el código y hacer pruebas. La app se enfocó primero en Android, pero puede funcionar en Windows después. Tomamos una aplicación móvil básica existente y la transformamos completamente con una arquitectura moderna y mejores funcionalidades.
+
+\textbf{Tecnologías de la aplicación móvil:}
+- .NET MAUI 9.0 como framework para desarrollo en múltiples plataformas
+- C\# 12 como lenguaje principal para lógica y interfaces
+- XAML como lenguaje para diseñar las pantallas
+- Visual Studio 2022 17.8+ como entorno de desarrollo
+- CommunityToolkit.Mvvm para implementar el patrón MVVM
+- HttpClient para conectar con APIs
+
+El patrón MVVM divide la app en tres partes:
+- Modelo: Capa de datos con objetos de transferencia y servicios para APIs
+- Vista: Capa de interfaz con archivos XAML y poco código adicional
+- ViewModel: Conexión entre vista y modelo con propiedades y acciones
+
+En el desarrollo móvil, la IA representó el 65\% del código. Sus aportes principales fueron:
+- Crear ViewModels con propiedades que cambian y acciones asíncronas
+- Conectar vistas XAML con lógica usando CommunityToolkit.Mvvm
+- Hacer diseños adaptables con diferentes tipos de layout para pantallas Android
+- Manejar navegación entre páginas con parámetros
+- Crear servicios para APIs con manejo de errores
+- Hacer validaciones de formularios con mensajes visuales
+- Crear componentes reutilizables como menús
+
+La IA ayudó al equipo a pasar del desarrollo web al móvil, dando ejemplos de XAML, explicando conceptos de .NET MAUI y resolviendo problemas de compatibilidad.
+
+\subsection{Integración y Despliegue con Docker}
+
+El sistema se recontenerizó utilizando Docker para garantizar consistencia entre entornos de desarrollo, staging y producción. La configuración incluyó múltiples servicios interconectados con redes personalizadas, volúmenes persistentes para bases de datos, y variables de entorno para configuración segura.
+
+\textbf{Arquitectura de Contenedores:}
+- Contenedor backend: Django con Gunicorn como servidor, disponible en puerto 8000
+- Contenedor frontend: Nginx sirviendo archivos de React, disponible en puerto 80
+- Contenedor base de datos: MySQL 8.x con datos guardados permanentemente
+- Contenedor caché: Redis 6.x para guardar datos temporales y mensajes
+- Contenedor trabajador: Procesos de Celery para tareas en segundo plano
+- Contenedor proxy: Nginx como intermediario con balanceo de carga
+
+La configuración de docker-compose incluye revisiones de salud para servicios importantes, reinicios automáticos y dependencias para que todo arranque en orden. Los volúmenes nombrados mantienen los datos de MySQL y Redis.
+
+La IA ayudó mucho en el despliegue, siendo responsable del 80\% de la configuración. Esto incluyó:
+- Crear archivos Dockerfile optimizados en varias etapas
+- Configurar docker-compose con redes y servicios conectados
+- Usar variables de entorno para diferentes ambientes
+- Estrategias de despliegue con revisiones de salud y reinicios
+- Configurar Nginx como intermediario con límites de velocidad y seguridad
 
 \begin{itemize}
 \item \textbf{Modelos y Serializadores}: Se definieron modelos para las entidades principales (Usuario, Instructor, Aprendiz, AsignacionInstructor, VisitaSeguimiento) con validaciones personalizadas y serializadores para la transformación de datos JSON.

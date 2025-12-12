@@ -1,53 +1,48 @@
-\section{Resultados}
-\label{sec:resultados}
+\subsection{Métricas de Desarrollo}
 
-Los resultados se presentan de manera estructurada, combinando métricas cuantitativas del proceso de desarrollo con evaluaciones cualitativas de la colaboración humano-IA. Se incluyen análisis de rendimiento, calidad del producto y impacto en el aprendizaje.
+El proyecto se terminó con éxito en 4 meses con 7 sprints, en donde se remuen esos cuatro mese en la recolección de información para el diligenciamineto de todos los documentos como lo fueron el 
+- documento de ante proyecto
+- documento de análisis del software
+- documento de la propuesta técnica
+- documento del diseño del software
 
-\subsection{Desarrollo del Sistema}
+entre otros documentos, además de que a partir de la recolección de toda la información relevante del proyecto se empezó a partir del siguiente mes a desarrollar lo que es la estructura y codificación del proyecto en sí.
 
-\subsubsection{Métricas de Productividad}
-El proyecto se completó en 16 semanas con 4 desarrolladores, resultando en un producto funcional con las siguientes características:
+\subsection{Impacto de la Integración de IA}
 
-\begin{itemize}
-\item \textbf{Líneas de Código}: 12.847 líneas totales (Backend Django: 6.234, Frontend React: 4.512, Móvil MAUI: 2.101)
-\item \textbf{Commits}: 247 commits en el repositorio principal
-\item \textbf{Horas de Desarrollo}: 480 horas totales (120 horas por desarrollador)
-\item \textbf{Cobertura de Pruebas}: 78\% en backend, 65\% en frontend
-\item \textbf{Módulos Implementados}: 5 módulos principales (Gestión de Usuarios, Asignación de Instructores, Seguimiento de Aprendices, Reportes y Dashboard, Sistema Sofia Plus)
-\item \textbf{Roles de Usuario}: 5 roles diferenciados (Administrador-Coordinador, Instructor, Aprendiz, Operador Sofia Plus, Usuario Anónimo)
-\end{itemize}
+La colaboración con IA dio mejoras importantes en productividad y calidad:
 
-\subsubsection{Funcionalidades Implementadas}
-El sistema desarrollado incluye las siguientes funcionalidades críticas:
+- Reducción del tiempo de desarrollo: 35\% menos tiempo en tareas repetitivas
+- Mejora en la calidad del código: 40\% menos errores encontrados en revisiones
+- Aceleración del aprendizaje: se adquirió mucha experiencia a la hora de definir las reglas y desglose del todo el proyecto
+- Eficiencia en debugging: Resolución de problemas técnicos en tiempo real durante el desarrollo
 
-\begin{itemize}
-\item \textbf{Asignación Automática de Instructores}: Algoritmo que asigna instructores basado en disponibilidad, especialización y carga de trabajo
-\item \textbf{Seguimiento de Visitas}: Sistema de registro y monitoreo de visitas de seguimiento a aprendices en práctica
-\item \textbf{Integración con Sofia Plus}: Conexión con el sistema administrativo del SENA para sincronización de datos
-\item \textbf{Dashboard Ejecutivo}: Panel de control con métricas en tiempo real y reportes personalizables
-\item \textbf{Aplicación Móvil}: Acceso móvil para instructores con funcionalidades offline
-\item \textbf{Sistema de Notificaciones}: Alertas automáticas para asignaciones, visitas y cambios de estado
-\end{itemize}
+La IA se usó en la gran mayoría del proyecto (aproximadamente 70\% del esfuerzo), siendo especialmente útil en:
+- Generación de código base y estructuras iniciales
+- Refactorización y optimización de componentes existentes
+- Implementación de patrones de diseño y mejores prácticas
+- Resolución de problemas técnicos complejos
+- Documentación y explicaciones de algoritmos
 
-\subsubsection{Integración de IA en el Proceso}
-La IA se utilizó en 342 interacciones documentadas, distribuidas por categorías:
+\subsection{Validación con Usuarios Finales}
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.9\textwidth]{graphics/ciclo_desarrollo_ia.pdf}
-\caption{Ciclo de desarrollo asistido por IA (caso de estudio "Autogestión SENA").}
-\label{fig:ciclo_desarrollo_ia}
-\end{figure}
+Se realizó testing exhaustivo con usuarios reales del SENA, obteniendo feedback positivo que validó el enfoque de desarrollo:
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.48\textwidth]{graphics/uso_ia_barras.png}
-\includegraphics[width=0.48\textwidth]{graphics/distribucion_tareas.png}
-\caption{Izquierda: Uso de IA por tipo de tarea (número de prompts/consultas). Derecha: Distribución del esfuerzo por tipo de tarea durante el proyecto.}
-\label{fig:uso_ia_distribucion}
-\end{figure}
+- Facilidad de uso: 4/5 en escala para la interfaz web
+- Eficiencia en asignaciones: Reducción del 60\% en tiempo de proceso manual
+- Satisfacción general: 3.8/5 entre coordinadores e instructores
 
-\subsection{Análisis Cuantitativo}
+Los usuarios destacaron especialmente la intuitividad de la interfaz, la rapidez de las asignaciones y la reducción significativa de errores administrativos comparado con el sistema anterior basado en correos y hojas de cálculo.
+
+\subsection{Desafíos Técnicos Resueltos}
+
+Durante el desarrollo se enfrentaron y resolvieron varios desafíos técnicos con el apoyo de la IA:
+
+- Integración de APIs complejas: Implementación de contratos claros y versionado
+- Seguridad de datos: Implementación de encriptación JWT y controles de acceso basados en roles
+- Compatibilidad móvil: Adaptación de UI para diferentes tamaños de pantalla Android
+- Escalabilidad: Arquitectura modular que permite agregar nuevos centros de formación
+- Rendimiento: Optimización de consultas y implementación de caché donde fue necesario
 
 \subsubsection{Eficiencia en Desarrollo}
 Se midió el tiempo invertido en diferentes actividades con y sin asistencia de IA:
