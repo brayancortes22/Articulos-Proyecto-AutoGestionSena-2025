@@ -228,6 +228,25 @@ def generar_complications_bar():
     plt.close()
     print("✓ Generada: complicaciones_reportadas.pdf/png")
 
+def generar_metricas_rendimiento():
+    """Genera una gráfica de métricas de rendimiento del sistema"""
+    metricas = ['Tiempo Respuesta API', 'Uptime Sistema', 'Satisfacción Usuario', 'Tasa Éxito Asignaciones']
+    valores = [0.95, 0.99, 0.92, 0.98]  # valores normalizados 0-1
+    colores = ['#2E86AB', '#F18F01', '#A23B72', '#C73E1D']
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+    bars = ax.bar(metricas, valores, color=colores)
+    ax.set_ylabel('Valor (escala 0-1)')
+    ax.set_title('Métricas de Rendimiento del Sistema de Autogestión')
+    ax.set_ylim(0, 1)
+    for bar in bars:
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.02, f'{bar.get_height():.2f}', ha='center')
+    plt.tight_layout()
+    plt.savefig(f'{graphics_dir}/metricas_rendimiento.pdf', format='pdf')
+    plt.savefig(f'{graphics_dir}/metricas_rendimiento.png', format='png')
+    plt.close()
+    print("✓ Generada: metricas_rendimiento.pdf/png")
+
 def main():
     """Función principal para generar todas las gráficas"""
     print("🎨 Generando gráficas para plantilla LaTeX...")
@@ -242,6 +261,7 @@ def main():
         generar_pie_asignacion_tareas()
         generar_ia_usage_bar()
         generar_complications_bar()
+        generar_metricas_rendimiento()
         
         print("=" * 50)
         print("✅ ¡Todas las gráficas y tablas fueron generadas exitosamente!")

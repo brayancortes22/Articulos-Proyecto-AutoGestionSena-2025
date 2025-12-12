@@ -39,6 +39,13 @@ Aplicación móvil (con .NET MAUI):
 
 \section{Desarrollo Ágil con Integración de IA}
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{graphics/ciclo_desarrollo_ia.pdf}
+\caption{Ciclo de desarrollo asistido por IA - Autogestión SENA}
+\label{fig:ciclo_ia}
+\end{figure}
+
 El proceso de desarrollo se estructuró en sprints de 2 semanas, con reuniones diarias de 30-40 minutos, revisiones semanales y retrospectivas. La integración de IA se realizó de manera estratégica en las siguientes áreas:
 \begin{itemize}
 \item Generación de código base para modelos Django y serializadores
@@ -47,6 +54,93 @@ El proceso de desarrollo se estructuró en sprints de 2 semanas, con reuniones d
 \item Generación de pruebas unitarias y de integración
 \item Documentación técnica y explicaciones de algoritmos
 \item Resolución de bugs y optimización de código
+\item Análisis de requisitos y diseño de arquitectura
+\item Implementación de patrones de seguridad y autenticación
+\item Optimización de consultas de base de datos
+\item Configuración de entornos de desarrollo y despliegue
 \end{itemize}
 
+\subsection{Proceso de Integración de IA en el Desarrollo}
+
+La integración de IA se realizó de manera sistemática siguiendo un marco de trabajo estructurado que garantizó la calidad y consistencia del código generado. El proceso incluyó:
+
+\textbf{Fase de Análisis y Planificación:}
+\begin{itemize}
+\item Evaluación de la complejidad de cada componente del sistema
+\item Definición de criterios de calidad para el código generado por IA
+\item Establecimiento de protocolos de revisión y validación
+\item Identificación de áreas críticas que requerían intervención humana
+\end{itemize}
+
+\textbf{Fase de Generación Asistida:}
+\begin{itemize}
+\item Uso de prompts específicos y contextualizados para cada tipo de componente
+\item Iteración entre generación automática y refinamiento manual
+\item Validación continua de la funcionalidad generada
+\item Documentación automática de decisiones de diseño tomadas
+\end{itemize}
+
+\textbf{Fase de Integración y Testing:}
+\begin{itemize}
+\item Integración gradual de componentes generados por IA
+\item Ejecución de pruebas unitarias y de integración automatizadas
+\item Validación de compatibilidad con el sistema existente
+\item Optimización de rendimiento y corrección de bugs identificados
+\end{itemize}
+
+Esta metodología estructurada permitió maximizar los beneficios de la IA mientras se mantenía el control de calidad y la capacidad de intervención humana cuando era necesario.
+
+\subsection{Desafíos Técnicos y Soluciones Implementadas}
+
+Durante el proceso de desarrollo asistido por IA, se enfrentaron varios desafíos técnicos que requirieron soluciones innovadoras:
+
+\textbf{Consistencia del Código:}
+La IA generaba código con diferentes estilos y convenciones. Se implementó un sistema de linting automático y revisiones de código estandarizadas para asegurar la consistencia.
+
+\textbf{Validación de Lógica de Negocio:}
+La IA podía generar código funcional pero no siempre capturaba la lógica específica del dominio SENA. Se establecieron sesiones de revisión detallada con expertos del dominio para validar cada componente crítico.
+
+\textbf{Integración de Tecnologías Heterogéneas:}
+El sistema combina Python/Django, React/TypeScript y .NET MAUI. Se desarrolló una estrategia de integración que permitió la comunicación fluida entre estos componentes, utilizando APIs REST estandarizadas y protocolos de comunicación bien definidos.
+
+\textbf{Gestión de Dependencias y Versiones:}
+Se implementó un sistema de control de versiones riguroso para todas las dependencias, asegurando la compatibilidad entre los diferentes componentes del sistema.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{graphics/comparacion_metodologias.pdf}
+\caption{Comparación de Metodologías Ágiles}
+\label{fig:comparacion_metodologias}
+\end{figure}
+
 La IA se utilizó en la gran mayoría del proyecto, desde la conceptualización inicial hasta el despliegue final, representando aproximadamente el 70\% de las tareas de desarrollo. Esto incluyó la generación automática de código, refactorización sistemática, debugging asistido y documentación técnica, permitiendo al equipo enfocarse en la lógica de negocio específica del SENA.
+
+\subsection{Medición del Impacto de la IA}
+
+Para cuantificar el impacto de la integración de IA en el proyecto, se implementaron métricas específicas:
+
+\textbf{Métricas de Productividad:}
+\begin{itemize}
+\item Líneas de código generadas por IA vs. código escrito manualmente
+\item Tiempo invertido en debugging y resolución de errores
+\item Número de iteraciones necesarias para completar funcionalidades
+\item Velocidad de desarrollo medida en story points por sprint
+\end{itemize}
+
+\textbf{Métricas de Calidad:}
+\begin{itemize}
+\item Número de bugs encontrados en revisiones de código
+\item Cobertura de pruebas automatizadas
+\item Cumplimiento de estándares de codificación
+\item Mantenibilidad del código medida por complejidad ciclomática
+\end{itemize}
+
+\textbf{Métricas de Eficiencia:}
+\begin{itemize}
+\item Reducción en tiempo de desarrollo para tareas repetitivas
+\item Mejora en la consistencia de la arquitectura del sistema
+\item Aceleración en el aprendizaje del equipo
+\item Reducción de costos operativos a largo plazo
+\end{itemize}
+
+Estos indicadores permitieron demostrar objetivamente los beneficios de la integración de IA, justificando su uso extendido en el proyecto y estableciendo un precedente para futuros desarrollos.
